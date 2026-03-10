@@ -1,0 +1,913 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Zinin Corp — Monthly Dashboard | March 2026</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+  :root {
+    --bg: #faf9f7;
+    --card-bg: #ffffff;
+    --text: #1a1a1a;
+    --text-muted: #6b7280;
+    --accent: #f97316;
+    --accent-light: #fff7ed;
+    --green: #22c55e;
+    --green-light: #f0fdf4;
+    --blue: #3b82f6;
+    --blue-light: #eff6ff;
+    --purple: #8b5cf6;
+    --purple-light: #f5f3ff;
+    --red: #ef4444;
+    --red-light: #fef2f2;
+    --yellow: #eab308;
+    --yellow-light: #fefce8;
+    --border: #e5e7eb;
+    --shadow: 0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
+    --shadow-lg: 0 10px 25px rgba(0,0,0,0.08);
+    --radius: 16px;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.5;
+    min-height: 100vh;
+  }
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 40px 24px;
+  }
+
+  /* Header */
+  .header {
+    text-align: center;
+    margin-bottom: 48px;
+  }
+  .header-badge {
+    display: inline-block;
+    background: var(--accent-light);
+    color: var(--accent);
+    font-size: 13px;
+    font-weight: 600;
+    padding: 6px 14px;
+    border-radius: 20px;
+    margin-bottom: 16px;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+  }
+  .header h1 {
+    font-size: 36px;
+    font-weight: 800;
+    letter-spacing: -0.5px;
+    margin-bottom: 8px;
+  }
+  .header p {
+    font-size: 16px;
+    color: var(--text-muted);
+    max-width: 500px;
+    margin: 0 auto;
+  }
+
+  /* KPI Row */
+  .kpi-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 16px;
+    margin-bottom: 40px;
+  }
+  .kpi-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 24px;
+    box-shadow: var(--shadow);
+    text-align: center;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .kpi-card:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-lg);
+  }
+  .kpi-value {
+    font-size: 42px;
+    font-weight: 800;
+    line-height: 1;
+    margin-bottom: 6px;
+  }
+  .kpi-label {
+    font-size: 13px;
+    color: var(--text-muted);
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  .kpi-value.green { color: var(--green); }
+  .kpi-value.blue { color: var(--blue); }
+  .kpi-value.purple { color: var(--purple); }
+  .kpi-value.orange { color: var(--accent); }
+  .kpi-value.red { color: var(--red); }
+
+  /* Section headers */
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 20px;
+    margin-top: 48px;
+  }
+  .section-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+  }
+  .section-header h2 {
+    font-size: 22px;
+    font-weight: 700;
+  }
+  .section-header .count {
+    background: var(--border);
+    color: var(--text-muted);
+    font-size: 13px;
+    font-weight: 600;
+    padding: 3px 10px;
+    border-radius: 12px;
+  }
+
+  /* Team grid */
+  .team-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 16px;
+    margin-bottom: 40px;
+  }
+  .team-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 20px;
+    box-shadow: var(--shadow);
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    transition: transform 0.2s;
+  }
+  .team-card:hover { transform: translateY(-2px); }
+  .team-avatar {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    flex-shrink: 0;
+  }
+  .team-info h3 {
+    font-size: 15px;
+    font-weight: 600;
+    margin-bottom: 2px;
+  }
+  .team-role {
+    font-size: 12px;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+  }
+  .team-status {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    margin-left: auto;
+  }
+  .team-status.running { background: var(--green); box-shadow: 0 0 6px rgba(34,197,94,0.4); }
+  .team-status.idle { background: var(--border); }
+
+  /* Category cards */
+  .category-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    gap: 20px;
+    margin-bottom: 40px;
+  }
+  .category-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 24px;
+    box-shadow: var(--shadow);
+    transition: transform 0.2s;
+  }
+  .category-card:hover { transform: translateY(-2px); }
+  .category-title {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 17px;
+    font-weight: 700;
+    margin-bottom: 16px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--border);
+  }
+  .category-title .cat-count {
+    margin-left: auto;
+    background: var(--green-light);
+    color: var(--green);
+    font-size: 13px;
+    font-weight: 600;
+    padding: 3px 10px;
+    border-radius: 10px;
+  }
+
+  /* Task items */
+  .task-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 10px 0;
+    border-bottom: 1px solid #f3f4f6;
+  }
+  .task-item:last-child { border-bottom: none; }
+  .task-check {
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    background: var(--green);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+  .task-check svg {
+    width: 12px;
+    height: 12px;
+    fill: white;
+  }
+  .task-text {
+    font-size: 14px;
+    font-weight: 400;
+    color: var(--text);
+    flex: 1;
+  }
+  .task-id {
+    font-size: 12px;
+    color: var(--text-muted);
+    font-weight: 500;
+    font-family: 'SF Mono', 'Fira Code', monospace;
+    white-space: nowrap;
+  }
+  .priority-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    flex-shrink: 0;
+    margin-top: 7px;
+  }
+  .priority-dot.critical { background: var(--red); }
+  .priority-dot.high { background: var(--accent); }
+  .priority-dot.medium { background: var(--yellow); }
+  .priority-dot.low { background: var(--green); }
+
+  /* Summary bar chart */
+  .bar-chart {
+    display: flex;
+    gap: 8px;
+    align-items: flex-end;
+    height: 180px;
+    padding: 20px 0;
+  }
+  .bar-group {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+  }
+  .bar {
+    width: 100%;
+    max-width: 60px;
+    border-radius: 8px 8px 4px 4px;
+    transition: height 0.6s ease-out;
+    position: relative;
+  }
+  .bar-label {
+    font-size: 11px;
+    color: var(--text-muted);
+    font-weight: 500;
+    text-align: center;
+    max-width: 80px;
+    line-height: 1.2;
+  }
+  .bar-value {
+    font-size: 14px;
+    font-weight: 700;
+    text-align: center;
+  }
+
+  /* Spend card */
+  .spend-card {
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+    color: white;
+    border-radius: var(--radius);
+    padding: 32px;
+    margin-bottom: 40px;
+    box-shadow: var(--shadow-lg);
+  }
+  .spend-card h3 {
+    font-size: 14px;
+    font-weight: 500;
+    opacity: 0.7;
+    margin-bottom: 8px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+  .spend-amount {
+    font-size: 48px;
+    font-weight: 800;
+    margin-bottom: 16px;
+  }
+  .spend-detail {
+    font-size: 14px;
+    opacity: 0.6;
+  }
+
+  /* Open tasks section */
+  .open-section {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 24px;
+    box-shadow: var(--shadow);
+    margin-bottom: 40px;
+  }
+  .open-task-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 0;
+    border-bottom: 1px solid #f3f4f6;
+  }
+  .open-task-item:last-child { border-bottom: none; }
+  .status-badge {
+    font-size: 11px;
+    font-weight: 600;
+    padding: 3px 8px;
+    border-radius: 6px;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+    white-space: nowrap;
+  }
+  .status-badge.in_progress { background: var(--blue-light); color: var(--blue); }
+  .status-badge.todo { background: #f3f4f6; color: var(--text-muted); }
+  .status-badge.blocked { background: var(--red-light); color: var(--red); }
+
+  /* Footer */
+  .footer {
+    text-align: center;
+    padding: 32px 0;
+    color: var(--text-muted);
+    font-size: 13px;
+    border-top: 1px solid var(--border);
+    margin-top: 48px;
+  }
+
+  /* Animations */
+  @keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .animate-in {
+    animation: fadeInUp 0.5s ease-out forwards;
+    opacity: 0;
+  }
+  .delay-1 { animation-delay: 0.1s; }
+  .delay-2 { animation-delay: 0.2s; }
+  .delay-3 { animation-delay: 0.3s; }
+  .delay-4 { animation-delay: 0.4s; }
+  .delay-5 { animation-delay: 0.5s; }
+
+  /* Priority legend */
+  .legend {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+  }
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12px;
+    color: var(--text-muted);
+  }
+
+  @media (max-width: 768px) {
+    .container { padding: 24px 16px; }
+    .header h1 { font-size: 28px; }
+    .kpi-value { font-size: 32px; }
+    .category-grid { grid-template-columns: 1fr; }
+    .team-grid { grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); }
+    .bar-chart { height: 120px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+
+  <!-- Header -->
+  <div class="header animate-in">
+    <div class="header-badge">Monthly Report</div>
+    <h1>Zinin Corp</h1>
+    <p>Итоги работы за март 2026. Все выполненные проекты и задачи команды.</p>
+  </div>
+
+  <!-- KPIs -->
+  <div class="kpi-grid animate-in delay-1">
+    <div class="kpi-card">
+      <div class="kpi-value green">29</div>
+      <div class="kpi-label">Задач выполнено</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-value blue">9</div>
+      <div class="kpi-label">Агентов в команде</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-value purple">7</div>
+      <div class="kpi-label">Направлений работы</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-value orange">20</div>
+      <div class="kpi-label">Задач в работе</div>
+    </div>
+  </div>
+
+  <!-- Spend -->
+  <div class="spend-card animate-in delay-2">
+    <h3>AI-расходы за месяц</h3>
+    <div class="spend-amount">$126.18</div>
+    <div class="spend-detail">Стоимость работы всех агентов (inference tokens). Средний чек задачи: ~$4.35</div>
+  </div>
+
+  <!-- Bar Chart: Categories -->
+  <div class="section-header animate-in delay-2">
+    <div class="section-icon" style="background: var(--accent-light);">📊</div>
+    <h2>По направлениям</h2>
+  </div>
+
+  <div style="background: var(--card-bg); border: 1px solid var(--border); border-radius: var(--radius); padding: 24px; box-shadow: var(--shadow); margin-bottom: 40px;" class="animate-in delay-3">
+    <div class="bar-chart">
+      <div class="bar-group">
+        <div class="bar-value" style="color: var(--accent);">7</div>
+        <div class="bar" style="height: 140px; background: linear-gradient(180deg, var(--accent) 0%, #fdba74 100%);"></div>
+        <div class="bar-label">Контент & SMM</div>
+      </div>
+      <div class="bar-group">
+        <div class="bar-value" style="color: var(--blue);">5</div>
+        <div class="bar" style="height: 100px; background: linear-gradient(180deg, var(--blue) 0%, #93c5fd 100%);"></div>
+        <div class="bar-label">Команда</div>
+      </div>
+      <div class="bar-group">
+        <div class="bar-value" style="color: var(--purple);">5</div>
+        <div class="bar" style="height: 100px; background: linear-gradient(180deg, var(--purple) 0%, #c4b5fd 100%);"></div>
+        <div class="bar-label">Управление</div>
+      </div>
+      <div class="bar-group">
+        <div class="bar-value" style="color: var(--green);">5</div>
+        <div class="bar" style="height: 100px; background: linear-gradient(180deg, var(--green) 0%, #86efac 100%);"></div>
+        <div class="bar-label">Инфра</div>
+      </div>
+      <div class="bar-group">
+        <div class="bar-value" style="color: var(--red);">5</div>
+        <div class="bar" style="height: 100px; background: linear-gradient(180deg, var(--red) 0%, #fca5a5 100%);"></div>
+        <div class="bar-label">Saudi Hunter</div>
+      </div>
+      <div class="bar-group">
+        <div class="bar-value" style="color: #0ea5e9;">1</div>
+        <div class="bar" style="height: 20px; background: linear-gradient(180deg, #0ea5e9 0%, #7dd3fc 100%);"></div>
+        <div class="bar-label">MCPHire</div>
+      </div>
+      <div class="bar-group">
+        <div class="bar-value" style="color: #64748b;">1</div>
+        <div class="bar" style="height: 20px; background: linear-gradient(180deg, #64748b 0%, #94a3b8 100%);"></div>
+        <div class="bar-label">Governance</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Team -->
+  <div class="section-header animate-in delay-3">
+    <div class="section-icon" style="background: var(--blue-light);">👥</div>
+    <h2>Команда</h2>
+    <span class="count">9 агентов</span>
+  </div>
+
+  <div class="team-grid animate-in delay-3">
+    <div class="team-card">
+      <div class="team-avatar" style="background: var(--accent-light);">🫡</div>
+      <div class="team-info">
+        <h3>Орки</h3>
+        <div class="team-role">CEO</div>
+      </div>
+      <div class="team-status running"></div>
+    </div>
+    <div class="team-card">
+      <div class="team-avatar" style="background: var(--purple-light);">📝</div>
+      <div class="team-info">
+        <h3>Контент-менеджер</h3>
+        <div class="team-role">CMO</div>
+      </div>
+      <div class="team-status running"></div>
+    </div>
+    <div class="team-card">
+      <div class="team-avatar" style="background: var(--green-light);">📢</div>
+      <div class="team-info">
+        <h3>Маркетолог</h3>
+        <div class="team-role">CMO</div>
+      </div>
+      <div class="team-status running"></div>
+    </div>
+    <div class="team-card">
+      <div class="team-avatar" style="background: var(--blue-light);">⚙️</div>
+      <div class="team-info">
+        <h3>Инженер</h3>
+        <div class="team-role">Engineer</div>
+      </div>
+      <div class="team-status running"></div>
+    </div>
+    <div class="team-card">
+      <div class="team-avatar" style="background: var(--yellow-light);">📋</div>
+      <div class="team-info">
+        <h3>Продакт</h3>
+        <div class="team-role">PM</div>
+      </div>
+      <div class="team-status running"></div>
+    </div>
+    <div class="team-card">
+      <div class="team-avatar" style="background: var(--red-light);">🔍</div>
+      <div class="team-info">
+        <h3>Разведчик</h3>
+        <div class="team-role">Researcher</div>
+      </div>
+      <div class="team-status idle"></div>
+    </div>
+    <div class="team-card">
+      <div class="team-avatar" style="background: #ecfdf5;">💰</div>
+      <div class="team-info">
+        <h3>Финансист</h3>
+        <div class="team-role">CFO</div>
+      </div>
+      <div class="team-status idle"></div>
+    </div>
+    <div class="team-card">
+      <div class="team-avatar" style="background: #fdf4ff;">🎨</div>
+      <div class="team-info">
+        <h3>Дизайнер</h3>
+        <div class="team-role">Designer</div>
+      </div>
+      <div class="team-status idle"></div>
+    </div>
+    <div class="team-card">
+      <div class="team-avatar" style="background: #f0fdf4;">🔧</div>
+      <div class="team-info">
+        <h3>Админ</h3>
+        <div class="team-role">Engineer</div>
+      </div>
+      <div class="team-status idle"></div>
+    </div>
+  </div>
+
+  <!-- Priority Legend -->
+  <div class="legend animate-in delay-3">
+    <div class="legend-item"><div class="priority-dot critical"></div> Critical</div>
+    <div class="legend-item"><div class="priority-dot high"></div> High</div>
+    <div class="legend-item"><div class="priority-dot medium"></div> Medium</div>
+    <div class="legend-item"><div class="priority-dot low"></div> Low</div>
+  </div>
+
+  <!-- Done Tasks by Category -->
+  <div class="section-header animate-in delay-3">
+    <div class="section-icon" style="background: var(--green-light);">✅</div>
+    <h2>Выполненные задачи</h2>
+    <span class="count">29 задач</span>
+  </div>
+
+  <div class="category-grid animate-in delay-4">
+
+    <!-- Контент & SMM -->
+    <div class="category-card">
+      <div class="category-title">
+        <span>📱 Контент & SMM</span>
+        <span class="cat-count">7</span>
+      </div>
+      <div class="task-item">
+        <div class="priority-dot high"></div>
+        <div class="task-check"><svg viewBox="0 0 12 12"><path d="M10 3L4.5 8.5 2 6" stroke="white" stroke-width="2" fill="none" stroke-linecap="round"/></svg></div>
+        <div class="task-text">Скрипт автопостинга в Tumblr через API</div>
+        <div class="task-id">ZINA-3</div>
+      </div>
+      <div class="task-item">
+        <div class="priority-dot high"></div>
+        <div class="task-check"><svg viewBox="0 0 12 12"><path d="M10 3L4.5 8.5 2 6" stroke="white" stroke-width="2" fill="none" stroke-linecap="round"/></svg></div>
+        <div class="task-text">Контент-план Tumblr на неделю 1</div>
+        <div class="task-id">ZINA-4</div>
+      </div>
+      <div class="task-item">
+        <div class="priority-dot high"></div>
+        <div class="task-check"><svg viewBox="0 0 12 12"><path d="M10 3L4.5 8.5 2 6" stroke="white" stroke-width="2" fill="none" stroke-linecap="round"/></svg></div>
+        <div class="task-text">Tumblr: скрипт генерации картинок</div>
+        <div class="task-id">ZINA-16</div>
+      </div>
+      <div class="task-item">
+        <div class="priority-dot high"></div>
+        <div class="task-check"><svg viewBox="0 0 12 12"><path d="M10 3L4.5 8.5 2 6" stroke="white" stroke-width="2" fill="none" stroke-linecap="round"/></svg></div>
+        <div class="task-text">Пост Day 5 с диаграммой Mermaid</div>
+        <div class="task-id">ZINA-24</div>
+      </div>
+      <div class="task-item">
+        <div class="priority-dot high"></div>
+        <div class="task-check"><svg viewBox="0 0 12 12"><path d="M10 3L4.5 8.5 2 6" stroke="white" stroke-width="2" fill="none" stroke-linecap="round"/></svg></div>
+        <div class="task-text">Write.as: первый пост (flagship intro)</div>
+        <div class="task-id">ZINA-25</div>
+      </div>
+      <div class="task-item">
+        <div class="priority-dot medium"></div>
+        <div class="task-check"><svg viewBox="0 0 12 12"><path d="M10 3L4.5 8.5 2 6" stroke="white" stroke-width="2" fill="none" stroke-linecap="round"/></svg></div>
+        <div class="task-text">Исследование новостей Anthropic для контента</div>
+        <div class="task-id">ZINA-59</div>
+      </div>
+      <div class="task-item">
+        <div class="priority-dot medium"></div>
+        <div class="task-check"><svg viewBox="0 0 12 12"><path d="M10 3L4.5 8.5 2 6" stroke="white" stroke-width="2" fill="none" stroke-linecap="round"/></svg></div>
+        <div class="task-text">Агент для поиска информации и обогащения данных</div>
+        <div class="task-id">ZINA-32</div>
+      </div>
+    </div>
+
+    <!-- Команда & Агенты -->
+    <div class="category-card">
+      <div class="category-title">
+        <span>👥 Команда & Агенты</span>
+        <span class="cat-count">5</span>
+      </div>
+      <div class="task-item">
+        <div class="priority-dot high"></div>
+        <div class="task-check"><svg viewBox="0 0 12 12"><path d="M10 3L4.5 8.5 2 6" stroke="white" stroke-width="2" fill="none" stroke-linecap="round"/></svg></div>
+        <div class="task-text">Онбординг CFO: финансовый аудит</div>
+        <div class="task-id">ZINA-62</div>
+      </div>
+      <div class="task-item">
+        <div class="priority-dot medium"></div>
+        <div class="task-check"><svg viewBox="0 0 12 12"><path d="M10 3L4.5 8.5 2 6" stroke="white" stroke-width="2" fill="none" stroke-linecap="round"/></svg></div>
+        <div class="task-text">Создать CMO</div>
+        <div class="task-id">ZINA-47</div>
+      </div>
+      <div class="task-item">
+        <div class="priority-dot medium"></div>
+        <div class="task-check"><svg viewBox="0 0 12 12"><path d="M10 3L4.5 8.5 2 6" stroke="white" stroke-width="2" fill="none" stroke-linecap="round"/></svg></div>
+        <div class="task-text">Создать CFO</div>
+        <div class="task-id">ZINA-58</div>
+      </div>
+      <div class="task-item">
+        <div class="priority-dot medium"></div>
+        <div class="task-check"><svg viewBox="0 0 12 12"><path d="M10 3L4.5 8.5 2 6" stroke="white" stroke-width="2" fill="none" stroke-linecap="round"/></svg></div>
+        <div class="task-text">Создать CPO (Product Officer)</div>
+        <div class="task-id">ZINA-60</div>
+      </div>
+      <div class="task-item">
+        <div class="priority-dot medium"></div>
+        <div class="task-check"><svg viewBox="0 0 12 12"><path d="M10 3L4.5 8.5 2 6" stroke="white" stroke-width="2" fill="none" stroke-linecap="round"/></svg></div>
+        <div class="task-text">Создать Админа</div>
+        <div class="task-id">ZINA-48</div>
+      </div>
+    </div>
+
+    <!-- Saudi Hunter -->
+    <div class="category-card">
+      <div class="category-title">
+        <span>🏜️ Saudi Hunter</span>
+        <span class="cat-count">5</span>
+      </div>
+      <div class="task-item">
+        <div class="priority-dot high"></div>
+        <div class="task-check"><svg viewBox="0 0 12 12"><path d="M10 3L4.5 8.5 2 6" stroke="white" stroke-width="2" fill="none" stroke-linecap="round"/></svg></div>
+        <div class="task-text">v2 Implementation: 6 спринтов</div>
+        <div class="task-id">ZINA-10</div>
+      </div>
+      <div class="task-item">
+        <div class="priority-dot high"></div>
+        <div class="task-check"><svg viewBox="0 0 12 12"><path d="M10 3L4.5 8.5 2 6" stroke="white" stroke-width="2" fill="none" stroke-linecap="round"/></svg></div>
+        <div class="task-text">Email outreach: GMAIL + HUNTER API</div>
+        <div class="task-id">ZINA-11</div>
+      </div>
+      <div class="task-item">
+        <div class="priority-dot high"></div>
+        <div class="task-check"><svg viewBox="0 0 12 12"><path d="M10 3L4.5 8.5 2 6" stroke="white" stroke-width="2" fill="none" stroke-linecap="round"/></svg></div>
+        <div class="task-text">FIX: Groq 429 rate limit (13/101 вакансий)</div>
+        <div class="task-id">ZINA-19</div>
+      </div>
+      <div class="task-item">
+        <div class="priority-dot medium"></div>
+        <div class="task-check"><svg viewBox="0 0 12 12"><path d="M10 3L4.5 8.5 2 6" stroke="white" stroke-width="2" fill="none" stroke-linecap="round"/></svg></div>
+        <div class="task-text">FIX: JobSpy Bayt 403 Forbidden</div>
+        <div class="task-id">ZINA-20</div>
+      </div>
+      <div class="task-item">
+        <div class="priority-dot low"></div>
+        <div class="task-check"><svg viewBox="0 0 12 12"><path d="M10 3L4.5 8.5 2 6" stroke="white" stroke-width="2" fill="none" stroke-linecap="round"/></svg></div>
+        <div class="task-text">Зарегистрировать JOOBLE_API_KEY</div>
+        <div class="task-id">ZINA-13</div>
+      </div>
+    </div>
+
+    <!-- Инфраструктура -->
+    <div class="category-card">
+      <div class="category-title">
+        <span>🔧 Инфраструктура</span>
+        <span class="cat-count">5</span>
+      </div>
+      <div class="task-item">
+        <div class="priority-dot critical"></div>
+        <div class="task-check"><svg viewBox="0 0 12 12"><path d="M10 3L4.5 8.5 2 6" stroke="white" stroke-width="2" fill="none" stroke-linecap="round"/></svg></div>
+        <div class="task-text">Поменять LLM у Инженера</div>
+        <div class="task-id">ZINA-44</div>
+      </div>
+      <div class="task-item">
+        <div class="priority-dot high"></div>
+        <div class="task-check"><svg viewBox="0 0 12 12"><path d="M10 3L4.5 8.5 2 6" stroke="white" stroke-width="2" fill="none" stroke-linecap="round"/></svg></div>
+        <div class="task-text">DNS: SPF/DKIM/DMARC для email домена</div>
+        <div class="task-id">ZINA-23</div>
+      </div>
+      <div class="task-item">
+        <div class="priority-dot high"></div>
+        <div class="task-check"><svg viewBox="0 0 12 12"><path d="M10 3L4.5 8.5 2 6" stroke="white" stroke-width="2" fill="none" stroke-linecap="round"/></svg></div>
+        <div class="task-text">Заменить Firecrawl на бесплатный скрапинг</div>
+        <div class="task-id">ZINA-27</div>
+      </div>
+      <div class="task-item">
+        <div class="priority-dot medium"></div>
+        <div class="task-check"><svg viewBox="0 0 12 12"><path d="M10 3L4.5 8.5 2 6" stroke="white" stroke-width="2" fill="none" stroke-linecap="round"/></svg></div>
+        <div class="task-text">Мониторинг Docker на RUVDS</div>
+        <div class="task-id">ZINA-15</div>
+      </div>
+      <div class="task-item">
+        <div class="priority-dot medium"></div>
+        <div class="task-check"><svg viewBox="0 0 12 12"><path d="M10 3L4.5 8.5 2 6" stroke="white" stroke-width="2" fill="none" stroke-linecap="round"/></svg></div>
+        <div class="task-text">Фильтрация Indeed: SAP, Capgemini</div>
+        <div class="task-id">ZINA-21</div>
+      </div>
+    </div>
+
+    <!-- Управление & Финансы -->
+    <div class="category-card">
+      <div class="category-title">
+        <span>📊 Управление & Финансы</span>
+        <span class="cat-count">5</span>
+      </div>
+      <div class="task-item">
+        <div class="priority-dot medium"></div>
+        <div class="task-check"><svg viewBox="0 0 12 12"><path d="M10 3L4.5 8.5 2 6" stroke="white" stroke-width="2" fill="none" stroke-linecap="round"/></svg></div>
+        <div class="task-text">Баланс средств: что есть, чего нет</div>
+        <div class="task-id">ZINA-64</div>
+      </div>
+      <div class="task-item">
+        <div class="priority-dot medium"></div>
+        <div class="task-check"><svg viewBox="0 0 12 12"><path d="M10 3L4.5 8.5 2 6" stroke="white" stroke-width="2" fill="none" stroke-linecap="round"/></svg></div>
+        <div class="task-text">Полный список проектов</div>
+        <div class="task-id">ZINA-34</div>
+      </div>
+      <div class="task-item">
+        <div class="priority-dot medium"></div>
+        <div class="task-check"><svg viewBox="0 0 12 12"><path d="M10 3L4.5 8.5 2 6" stroke="white" stroke-width="2" fill="none" stroke-linecap="round"/></svg></div>
+        <div class="task-text">Соотнести задачи с проектами</div>
+        <div class="task-id">ZINA-42</div>
+      </div>
+      <div class="task-item">
+        <div class="priority-dot medium"></div>
+        <div class="task-check"><svg viewBox="0 0 12 12"><path d="M10 3L4.5 8.5 2 6" stroke="white" stroke-width="2" fill="none" stroke-linecap="round"/></svg></div>
+        <div class="task-text">Назначить ответственных на все задачи</div>
+        <div class="task-id">ZINA-41</div>
+      </div>
+      <div class="task-item">
+        <div class="priority-dot medium"></div>
+        <div class="task-check"><svg viewBox="0 0 12 12"><path d="M10 3L4.5 8.5 2 6" stroke="white" stroke-width="2" fill="none" stroke-linecap="round"/></svg></div>
+        <div class="task-text">MCPHire: сбор информации и анализ</div>
+        <div class="task-id">ZINA-2</div>
+      </div>
+    </div>
+
+    <!-- Governance & MCPHire -->
+    <div class="category-card">
+      <div class="category-title">
+        <span>🏛️ Governance & Продукт</span>
+        <span class="cat-count">2</span>
+      </div>
+      <div class="task-item">
+        <div class="priority-dot medium"></div>
+        <div class="task-check"><svg viewBox="0 0 12 12"><path d="M10 3L4.5 8.5 2 6" stroke="white" stroke-width="2" fill="none" stroke-linecap="round"/></svg></div>
+        <div class="task-text">CEO HEARTBEAT.md</div>
+        <div class="task-id">ZINA-1</div>
+      </div>
+      <div class="task-item">
+        <div class="priority-dot low"></div>
+        <div class="task-check"><svg viewBox="0 0 12 12"><path d="M10 3L4.5 8.5 2 6" stroke="white" stroke-width="2" fill="none" stroke-linecap="round"/></svg></div>
+        <div class="task-text">Название и позиционирование продукта</div>
+        <div class="task-id">ZINA-57</div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Open Work -->
+  <div class="section-header animate-in delay-4">
+    <div class="section-icon" style="background: var(--blue-light);">🔄</div>
+    <h2>В работе сейчас</h2>
+    <span class="count">20 задач</span>
+  </div>
+
+  <div class="open-section animate-in delay-5">
+    <div class="open-task-item">
+      <span class="status-badge in_progress">in progress</span>
+      <div class="priority-dot high" style="margin-top: 0;"></div>
+      <div class="task-text">Лендинг / TG-бот для записи на консультации</div>
+      <div class="task-id">ZINA-52</div>
+    </div>
+    <div class="open-task-item">
+      <span class="status-badge in_progress">in progress</span>
+      <div class="priority-dot high" style="margin-top: 0;"></div>
+      <div class="task-text">Tumblr: оптимизация профиля + контент + ретроспектива</div>
+      <div class="task-id">ZINA-7</div>
+    </div>
+    <div class="open-task-item">
+      <span class="status-badge in_progress">in progress</span>
+      <div class="priority-dot medium" style="margin-top: 0;"></div>
+      <div class="task-text">Проверка интеграции аналитики в проектах</div>
+      <div class="task-id">ZINA-67</div>
+    </div>
+    <div class="open-task-item">
+      <span class="status-badge in_progress">in progress</span>
+      <div class="priority-dot medium" style="margin-top: 0;"></div>
+      <div class="task-text">Изучение проекта ментальной стабильности</div>
+      <div class="task-id">ZINA-49</div>
+    </div>
+    <div class="open-task-item">
+      <span class="status-badge blocked">blocked</span>
+      <div class="priority-dot medium" style="margin-top: 0;"></div>
+      <div class="task-text">Подготовить анонс в Ботанике</div>
+      <div class="task-id">ZINA-53</div>
+    </div>
+    <div class="open-task-item">
+      <span class="status-badge todo">todo</span>
+      <div class="priority-dot high" style="margin-top: 0;"></div>
+      <div class="task-text">Конверсионные события в Umami на sborka.work</div>
+      <div class="task-id">ZINA-70</div>
+    </div>
+    <div class="open-task-item">
+      <span class="status-badge todo">todo</span>
+      <div class="priority-dot high" style="margin-top: 0;"></div>
+      <div class="task-text">Починить Umami на cryptomarketologi.online</div>
+      <div class="task-id">ZINA-69</div>
+    </div>
+    <div class="open-task-item">
+      <span class="status-badge todo">todo</span>
+      <div class="priority-dot high" style="margin-top: 0;"></div>
+      <div class="task-text">Финализировать ценообразование и оффер</div>
+      <div class="task-id">ZINA-51</div>
+    </div>
+    <div class="open-task-item">
+      <span class="status-badge todo">todo</span>
+      <div class="priority-dot high" style="margin-top: 0;"></div>
+      <div class="task-text">Подписать партнёрский договор с Екатериной</div>
+      <div class="task-id">ZINA-50</div>
+    </div>
+    <div class="open-task-item">
+      <span class="status-badge todo">todo</span>
+      <div class="priority-dot high" style="margin-top: 0;"></div>
+      <div class="task-text">Опубликовать контент об Anthropic</div>
+      <div class="task-id">ZINA-61</div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <div class="footer animate-in delay-5">
+    <p>Zinin Corp Monthly Dashboard &middot; Generated March 11, 2026 &middot; Powered by Paperclip AI</p>
+    <p style="margin-top: 8px; font-size: 12px;">Data source: Paperclip API &middot; Company: ZINA &middot; 49 total issues tracked</p>
+  </div>
+
+</div>
+
+</body>
+</html>
