@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Контент-воронка | Zinin Corp</title>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@300;400;500;600;700&family=Onest:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="zinin-corp.css?v=20260307">
+<style>
+body { padding: 20px; font-family: 'Onest', sans-serif; background: #0a0a0f; color: #e8e8f0; }
+h1 { font-family: 'Unbounded', sans-serif; font-size: 24px; font-weight: 700; margin-bottom: 2px; letter-spacing: -0.5px; }
+.subtitle { color: #8b8ba7; font-size: 12px; margin-bottom: 18px; }
+.kpi-strip { display:grid; grid-template-columns:repeat(5,1fr); gap:10px; margin-bottom:24px; }
+.kpi { background: linear-gradient(145deg, rgba(18,18,26,0.95), rgba(26,26,39,0.8)); border:1px solid rgba(255,255,255,0.06); border-radius:14px; padding:14px 16px; }
+.kpi-label { font-size:10px; text-transform:uppercase; letter-spacing:1.2px; color:#8b8ba7; margin-bottom:4px; }
+.kpi-value { font-family:'Unbounded', sans-serif; font-size:22px; font-weight:700; }
+.kpi-sub { font-size:10px; color:#666680; margin-top:2px; }
+.purple .kpi-value { color:#8b5cf6; }
+.blue .kpi-value { color:#3b82f6; }
+.green .kpi-value { color:#10b981; }
+.amber .kpi-value { color:#f59e0b; }
+.pink .kpi-value { color:#f472b6; }
+.grid { display:grid; grid-template-columns:1.15fr .85fr; gap:14px; margin-bottom:24px; }
+.card { background: linear-gradient(145deg, rgba(18,18,26,0.95), rgba(26,26,39,0.8)); border:1px solid rgba(255,255,255,0.06); border-radius:14px; padding:18px 20px; box-shadow: 0 4px 20px rgba(0,0,0,0.2); }
+.card-title { font-size:12px; font-weight:600; color:#b2b2c7; margin-bottom:14px; text-transform:uppercase; letter-spacing:1px; }
+.pipeline-step { margin-bottom:12px; }
+.pipeline-meta { display:flex; justify-content:space-between; font-size:12px; margin-bottom:6px; color:#cfcfe0; }
+.pipeline-bar { height:14px; background:rgba(255,255,255,0.05); border-radius:999px; overflow:hidden; }
+.pipeline-fill { height:100%; border-radius:999px; }
+.ai-panel { background: linear-gradient(135deg, rgba(139,92,246,0.12), rgba(59,130,246,0.08)); border:1px solid rgba(139,92,246,0.18); border-radius:14px; padding:16px 20px; font-size:12px; line-height:1.6; white-space:pre-line; color:#d7d7e7; }
+.chips { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
+.chip { padding:6px 10px; border-radius:999px; background:rgba(255,255,255,0.05); color:#cfcfe0; font-size:11px; }
+.table-wrap { overflow-x:auto; }
+.table { width:100%; border-collapse:collapse; font-size:12px; }
+.table th { text-align:left; color:#8b8ba7; font-size:10px; text-transform:uppercase; letter-spacing:1px; padding:8px 10px; border-bottom:1px solid rgba(255,255,255,0.08); }
+.table td { padding:10px; border-bottom:1px solid rgba(255,255,255,0.04); color:#d4d4e4; vertical-align:top; }
+.table tr:hover td { background: rgba(139,92,246,0.05); }
+.platform { display:flex; align-items:center; gap:8px; }
+.dot { width:8px; height:8px; border-radius:50%; background:#8b5cf6; box-shadow:0 0 8px rgba(139,92,246,0.6); }
+.muted { color:#7c7c97; }
+.footer-ts { color:#7c7c97; font-size:10px; text-align:center; margin-top:20px; }
+@media (max-width: 1000px) { .grid, .kpi-strip { grid-template-columns:1fr; } }
+</style>
+</head>
+<body>
+<nav class="zc-nav">
+  <span class="zc-nav-brand"><img src="img/avatar.jpg" alt="" class="zc-nav-avatar">Zinin <span class="zc-nav-brand-suffix">Corp</span></span>
+  <a href="overview.html">Обзор</a>
+  <a href="content.html">Календарь</a>
+  <a href="bank.html">Банк контента</a>
+  <a href="analytics.html">Аналитика</a>
+  <a href="connectors.html">Коннекторы</a>
+  <a href="finance.html">Финансы</a>
+  <a href="tasks.html">Задачи</a>
+  <a href="funnel.html" class="active">Воронка</a>
+</nav>
+
+<h1>Контент-воронка</h1>
+<p class="subtitle">Старый dashboard-слой, новые данные из markdown source of truth</p>
+
+<div class="kpi-strip">
+  <div class="kpi purple"><div class="kpi-label">Материалы</div><div class="kpi-value" id="kpi-total">0</div><div class="kpi-sub">всего в наблюдении</div></div>
+  <div class="kpi amber"><div class="kpi-label">Planned</div><div class="kpi-value" id="kpi-planned">0</div><div class="kpi-sub">ещё не расписаны в слот</div></div>
+  <div class="kpi blue"><div class="kpi-label">Scheduled</div><div class="kpi-value" id="kpi-scheduled">0</div><div class="kpi-sub">готовы к размещению</div></div>
+  <div class="kpi green"><div class="kpi-label">Published</div><div class="kpi-value" id="kpi-published">0</div><div class="kpi-sub">подтверждены логом</div></div>
+  <div class="kpi pink"><div class="kpi-label">Платформы</div><div class="kpi-value" id="kpi-platforms">0</div><div class="kpi-sub">в новом контуре</div></div>
+</div>
+
+<div class="grid">
+  <div class="card">
+    <div class="card-title">Pipeline</div>
+    <div id="pipeline"></div>
+  </div>
+  <div class="card">
+    <div class="card-title">Сводка</div>
+    <div class="chips" id="chips"></div>
+    <div class="ai-panel" id="ai-panel">Загрузка...</div>
+  </div>
+</div>
+
+<div class="grid">
+  <div class="card">
+    <div class="card-title">Платформы</div>
+    <div class="table-wrap">
+      <table class="table">
+        <thead>
+          <tr><th>Платформа</th><th>Всего</th><th>Planned</th><th>Scheduled</th><th>Published</th><th>С картинкой</th></tr>
+        </thead>
+        <tbody id="platforms-body">
+          <tr><td colspan="6" class="muted">Нет данных</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-title">Последние 7 дней</div>
+    <div class="table-wrap">
+      <table class="table">
+        <thead>
+          <tr><th>Дата</th><th>Planned</th><th>Published</th></tr>
+        </thead>
+        <tbody id="daily-body">
+          <tr><td colspan="3" class="muted">Нет данных</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<div class="footer-ts" id="footer-ts">Обновлено: —</div>
+
+<script>
+const DATA_URL = '/dashboards/data/funnel_latest.json';
+const COLORS = {
+  planned: '#f59e0b',
+  scheduled: '#3b82f6',
+  published: '#10b981'
+};
+
+function fmt(value) {
+  return Number(value || 0).toLocaleString('ru-RU');
+}
+
+function formatTs(iso) {
+  if (!iso) return '—';
+  const d = new Date(iso);
+  return d.toLocaleDateString('ru-RU', { day: 'numeric', month: 'short' }) + ', ' +
+    d.toLocaleTimeString('ru-RU', { hour: '2-digit', minute: '2-digit' });
+}
+
+function byType(rows) {
+  const result = {};
+  rows.forEach(row => {
+    result[row.type] = (result[row.type] || 0) + row.count;
+  });
+  return result;
+}
+
+function renderPipeline(summary) {
+  const stages = [
+    { key: 'planned', label: 'Planned', color: COLORS.planned },
+    { key: 'scheduled', label: 'Scheduled', color: COLORS.scheduled },
+    { key: 'published', label: 'Published', color: COLORS.published }
+  ];
+  const max = Math.max(summary.planned || 0, summary.scheduled || 0, summary.published || 0, 1);
+  const html = stages.map(stage => {
+    const value = summary[stage.key] || 0;
+    const width = Math.max(Math.round((value / max) * 100), value ? 4 : 0);
+    return `
+      <div class="pipeline-step">
+        <div class="pipeline-meta"><span>${stage.label}</span><strong>${fmt(value)}</strong></div>
+        <div class="pipeline-bar"><div class="pipeline-fill" style="width:${width}%;background:${stage.color}"></div></div>
+      </div>
+    `;
+  }).join('');
+  document.getElementById('pipeline').innerHTML = html;
+}
+
+function renderChips(summary, funnel) {
+  const chips = [
+    `Longform: ${fmt((summary.content_types || {}).Longform || 0)}`,
+    `Image posts: ${fmt((summary.content_types || {})['Image posts'] || 0)}`,
+    `Text posts: ${fmt((summary.content_types || {})['Text posts'] || 0)}`,
+    `Буфер 7 дней: ${fmt(funnel.summary.sessions || 0)}`,
+    `С картинкой: ${fmt(funnel.summary.pageviews || 0)}`
+  ];
+  document.getElementById('chips').innerHTML = chips.map(chip => `<span class="chip">${chip}</span>`).join('');
+}
+
+function renderPlatforms(rows) {
+  if (!rows.length) return;
+  document.getElementById('platforms-body').innerHTML = rows.map(row => `
+    <tr>
+      <td><span class="platform"><span class="dot"></span>${row.channel}</span></td>
+      <td>${fmt(row.starts)}</td>
+      <td>${fmt(row.pdfs)}</td>
+      <td>${fmt(Math.max((row.starts || 0) - (row.pdfs || 0) - (row.payments || 0), 0))}</td>
+      <td>${fmt(row.payments)}</td>
+      <td>${fmt(row.with_image)}</td>
+    </tr>
+  `).join('');
+}
+
+function renderDaily(rows) {
+  const grouped = {};
+  rows.forEach(row => {
+    grouped[row.date] = grouped[row.date] || { planned: 0, published: 0 };
+    grouped[row.date][row.type] = row.count;
+  });
+  const html = Object.entries(grouped).sort((a, b) => a[0].localeCompare(b[0])).map(([date, stats]) => `
+    <tr>
+      <td>${date}</td>
+      <td>${fmt(stats.planned)}</td>
+      <td>${fmt(stats.published)}</td>
+    </tr>
+  `).join('');
+  document.getElementById('daily-body').innerHTML = html || '<tr><td colspan="3" class="muted">Нет данных</td></tr>';
+}
+
+async function loadData() {
+  const resp = await fetch(DATA_URL + '?t=' + Date.now());
+  if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
+  const data = await resp.json();
+  const summary = data.content_summary || {};
+  const rows = (data.bot || {}).funnel_7d || [];
+  const total = data.summary || {};
+
+  document.getElementById('kpi-total').textContent = fmt(total.total_touches);
+  document.getElementById('kpi-planned').textContent = fmt(summary.planned);
+  document.getElementById('kpi-scheduled').textContent = fmt(summary.scheduled);
+  document.getElementById('kpi-published').textContent = fmt(summary.published);
+  document.getElementById('kpi-platforms').textContent = fmt(rows.length);
+  document.getElementById('ai-panel').textContent = data.ai_analysis || 'Нет аналитической сводки';
+  document.getElementById('footer-ts').textContent = 'Обновлено: ' + formatTs(data.generated_at);
+
+  renderPipeline(summary);
+  renderChips(summary, data);
+  renderPlatforms(rows);
+  renderDaily((data.bot || {}).daily_touches || []);
+}
+
+loadData().catch(error => {
+  document.getElementById('ai-panel').textContent = 'Ошибка загрузки: ' + error.message;
+});
+</script>
+</body>
+</html>

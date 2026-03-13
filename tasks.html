@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Задачи | Zinin Corp</title>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;600;700&family=Onest:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="zinin-corp.css?v=20260305">
+<style>
+/* Page-specific: stat grid 5 columns, kanban always 4 cols until 700px */
+.zc-stats--5 {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: var(--zc-space-3);
+  margin-bottom: var(--zc-space-5);
+}
+@media (max-width: 700px) {
+  .zc-stats--5 { grid-template-columns: repeat(3, 1fr); }
+  .zc-kanban { grid-template-columns: 1fr; }
+}
+@media (min-width: 701px) {
+  .zc-kanban { grid-template-columns: repeat(4, 1fr) !important; }
+}
+
+/* Category badge colors (task-specific) */
+.zc-cat-smm     { background: rgba(245,158,11,0.12); color: var(--zc-status-yellow); }
+.zc-cat-product  { background: var(--zc-status-green-dim); color: var(--zc-status-green); }
+.zc-cat-infra    { background: var(--zc-status-blue-dim); color: var(--zc-status-blue); }
+.zc-cat-arch     { background: var(--zc-accent-dim); color: var(--zc-accent-hover); }
+.zc-cat-agents   { background: rgba(255,234,167,0.12); color: #ffeaa7; }
+.zc-cat-quality  { background: var(--zc-status-green-dim); color: #55efc4; }
+
+/* Modal description block */
+.modal-desc {
+  font-size: var(--zc-text-base);
+  line-height: var(--zc-leading-relaxed);
+  color: var(--zc-text-secondary);
+  padding: var(--zc-space-4);
+  border-radius: var(--zc-radius-md);
+  background: var(--zc-bg-base);
+  border: 1px solid var(--zc-border-subtle);
+}
+.modal-meta {
+  display: flex; gap: var(--zc-space-3); flex-wrap: wrap;
+  margin-bottom: var(--zc-space-5);
+}
+.modal-id {
+  font-family: var(--zc-font-display);
+  font-size: var(--zc-text-xs);
+  color: var(--zc-accent);
+  letter-spacing: 1px;
+  margin-bottom: var(--zc-space-2);
+}
+</style>
+</head>
+<body>
+<div class="zc-container--wide">
+
+<nav class="zc-nav">
+  <span class="zc-nav-brand"><img src="img/avatar.jpg" alt="" class="zc-nav-avatar">Zinin <span class="zc-nav-brand-suffix">Corp</span></span>
+  <a href="overview.html">Обзор</a>
+  <a href="content.html">Календарь</a>
+  <a href="bank.html">Банк контента</a>
+  <a href="analytics.html">Аналитика</a>
+  <a href="connectors.html">Коннекторы</a>
+  <a href="finance.html">Финансы</a>
+  <a href="tasks.html" class="active">Задачи</a>
+</nav>
+
+<div class="zc-page-header">
+  <h1>Task Board</h1>
+  <p class="zc-subtitle">Kanban-доска проектов</p>
+</div>
+
+<div class="zc-stats--5" id="stats"></div>
+
+<div class="zc-filters">
+  <div class="zc-filter-row">
+    <span class="zc-filter-label">Категория</span>
+    <button class="zc-filter-btn active" data-value="all">Все</button>
+    <button class="zc-filter-btn" data-value="smm" style="--zc-btn-color:var(--zc-status-yellow);--zc-btn-dim:rgba(245,158,11,0.12)">SMM</button>
+    <button class="zc-filter-btn" data-value="product" style="--zc-btn-color:var(--zc-status-green);--zc-btn-dim:var(--zc-status-green-dim)">Продукт</button>
+    <button class="zc-filter-btn" data-value="infra" style="--zc-btn-color:var(--zc-status-blue);--zc-btn-dim:var(--zc-status-blue-dim)">Инфра</button>
+    <button class="zc-filter-btn" data-value="arch" style="--zc-btn-color:var(--zc-accent);--zc-btn-dim:var(--zc-accent-dim)">Архитектура</button>
+    <button class="zc-filter-btn" data-value="agents" style="--zc-btn-color:#ffeaa7;--zc-btn-dim:rgba(255,234,167,0.12)">Агенты</button>
+  </div>
+</div>
+
+<div class="zc-kanban" id="kanban">
+  <div class="zc-kanban-col" style="--_col-color:var(--zc-col-backlog)">
+    <div class="zc-col-header">
+      <span class="zc-col-title">Бэклог</span>
+      <span class="zc-col-count" id="count-backlog">0</span>
+    </div>
+    <div id="col-backlog"></div>
+  </div>
+  <div class="zc-kanban-col" style="--_col-color:var(--zc-col-wip)">
+    <div class="zc-col-header">
+      <span class="zc-col-title">В работе</span>
+      <span class="zc-col-count" id="count-wip">0</span>
+    </div>
+    <div id="col-wip"></div>
+  </div>
+  <div class="zc-kanban-col" style="--_col-color:var(--zc-col-test)">
+    <div class="zc-col-header">
+      <span class="zc-col-title">Тестирование</span>
+      <span class="zc-col-count" id="count-test">0</span>
+    </div>
+    <div id="col-test"></div>
+  </div>
+  <div class="zc-kanban-col" style="--_col-color:var(--zc-col-done)">
+    <div class="zc-col-header">
+      <span class="zc-col-title">Готово</span>
+      <span class="zc-col-count" id="count-done">0</span>
+    </div>
+    <div id="col-done"></div>
+  </div>
+</div>
+
+</div>
+
+<!-- Modal -->
+<div class="zc-modal-backdrop" id="modal-overlay">
+  <div class="zc-modal" id="modal">
+    <div class="zc-modal-header">
+      <div id="modal-title-area"></div>
+      <button class="zc-modal-close" id="modal-close">&times;</button>
+    </div>
+    <div class="zc-modal-body" id="modal-body"></div>
+  </div>
+</div>
+
+<div class="zc-footer">
+  Zinin Corp &middot; Task Board &middot; 2026
+</div>
+
+<script src="task_data.js?v=20260305"></script>
+<script>
+const PRIORITY_ORDER = { crit: 0, high: 1, med: 2, low: 3 };
+const CAT_LABELS = { arch: "Архитектура", quality: "Качество", smm: "SMM", agents: "Агенты", infra: "Инфра", product: "Продукт" };
+const CAT_CLASS = { arch: "zc-cat-arch", quality: "zc-cat-quality", smm: "zc-cat-smm", agents: "zc-cat-agents", infra: "zc-cat-infra", product: "zc-cat-product" };
+const PRIORITY_LABELS = { crit: "Критич.", high: "Высокий", med: "Средний", low: "Низкий" };
+const PRIORITY_COLORS = { crit: "var(--zc-status-red)", high: "var(--zc-status-yellow)", med: "var(--zc-accent-hover)", low: "var(--zc-text-muted)" };
+const STATUS_LABELS = { backlog: "Бэклог", wip: "В работе", test: "Тестирование", done: "Готово" };
+const STATUS_CLASS = { backlog: "zc-badge--blue", wip: "zc-badge--yellow", test: "zc-badge--red", done: "zc-badge--green" };
+
+let catFilter = "all";
+
+function renderStats() {
+  const total = TASKS.length;
+  const backlog = TASKS.filter(t => t.status === "backlog").length;
+  const wip = TASKS.filter(t => t.status === "wip").length;
+  const test = TASKS.filter(t => t.status === "test").length;
+  const done = TASKS.filter(t => t.status === "done").length;
+  document.getElementById("stats").innerHTML = `
+    <div class="zc-stat"><span class="zc-stat-num">${total}</span><span class="zc-stat-label">Всего</span></div>
+    <div class="zc-stat" style="--zc-stat-accent:var(--zc-col-backlog)"><span class="zc-stat-num">${backlog}</span><span class="zc-stat-label">Бэклог</span></div>
+    <div class="zc-stat" style="--zc-stat-accent:var(--zc-col-wip)"><span class="zc-stat-num">${wip}</span><span class="zc-stat-label">В работе</span></div>
+    <div class="zc-stat" style="--zc-stat-accent:var(--zc-col-test)"><span class="zc-stat-num">${test}</span><span class="zc-stat-label">Тест</span></div>
+    <div class="zc-stat" style="--zc-stat-accent:var(--zc-col-done)"><span class="zc-stat-num">${done}</span><span class="zc-stat-label">Готово</span></div>
+  `;
+}
+
+function cardHTML(t) {
+  const assignee = t.assignee ? `<div class="zc-k-card-assignee">${t.assignee}</div>` : '';
+  const priorityVar = t.priority === 'crit' ? '--zc-status-red' : t.priority === 'high' ? '--zc-status-yellow' : t.priority === 'med' ? '--zc-accent-hover' : '--zc-text-muted';
+  return `<div class="zc-k-card" style="--_card-priority-color:var(${priorityVar})" onclick="openModal(${t.id})">
+    <div class="zc-k-card-id">#${String(t.id).padStart(3,'0')}</div>
+    <div class="zc-k-card-title">${t.task}</div>
+    <div class="zc-k-card-footer">
+      <span class="zc-cat-badge ${CAT_CLASS[t.cat]}">${CAT_LABELS[t.cat] || t.cat}</span>
+      <span class="zc-priority zc-priority--${t.priority}">${PRIORITY_LABELS[t.priority]}</span>
+    </div>
+    ${assignee}
+  </div>`;
+}
+
+function renderKanban() {
+  const filtered = TASKS.filter(t => catFilter === "all" || t.cat === catFilter);
+  const sort = (a, b) => PRIORITY_ORDER[a.priority] - PRIORITY_ORDER[b.priority];
+  const cols = {
+    backlog: filtered.filter(t => t.status === "backlog").sort(sort),
+    wip: filtered.filter(t => t.status === "wip").sort(sort),
+    test: filtered.filter(t => t.status === "test").sort(sort),
+    done: filtered.filter(t => t.status === "done").sort(sort),
+  };
+  for (const [key, tasks] of Object.entries(cols)) {
+    document.getElementById(`col-${key}`).innerHTML = tasks.map(cardHTML).join("");
+    document.getElementById(`count-${key}`).textContent = tasks.length;
+  }
+}
+
+// Modal
+function openModal(id) {
+  const t = TASKS.find(x => x.id === id);
+  if (!t) return;
+  document.getElementById("modal-title-area").innerHTML = `
+    <div class="modal-id">TASK #${String(t.id).padStart(3,'0')}</div>
+    <div class="zc-modal-title">${t.task}</div>
+  `;
+  document.getElementById("modal-body").innerHTML = `
+    <div class="modal-meta">
+      <span class="zc-cat-badge ${CAT_CLASS[t.cat]}">${CAT_LABELS[t.cat] || t.cat}</span>
+      <span class="zc-badge ${STATUS_CLASS[t.status]}">${STATUS_LABELS[t.status]}</span>
+      <span class="zc-priority zc-priority--${t.priority}">${PRIORITY_LABELS[t.priority]}</span>
+    </div>
+    <div class="modal-desc">${t.description || 'Описание не добавлено.'}</div>
+    <div class="zc-modal-divider"></div>
+    <div class="zc-flex-between" style="font-size:var(--zc-text-sm);color:var(--zc-text-muted)">
+      <span>${t.assignee ? 'Исполнитель: ' + t.assignee : 'Не назначен'}</span>
+      <span>${t.project ? 'Проект: ' + t.project : ''}</span>
+    </div>
+  `;
+  document.getElementById("modal-overlay").classList.add("open");
+  document.body.style.overflow = "hidden";
+}
+
+function closeModal() {
+  document.getElementById("modal-overlay").classList.remove("open");
+  document.body.style.overflow = "";
+}
+
+document.getElementById("modal-close").addEventListener("click", closeModal);
+document.getElementById("modal-overlay").addEventListener("click", e => {
+  if (e.target === e.currentTarget) closeModal();
+});
+document.addEventListener("keydown", e => { if (e.key === "Escape") closeModal(); });
+
+// Filters
+document.querySelectorAll(".zc-filter-btn").forEach(btn => {
+  btn.addEventListener("click", () => {
+    catFilter = btn.dataset.value;
+    btn.parentElement.querySelectorAll(".zc-filter-btn").forEach(b => b.classList.remove("active"));
+    btn.classList.add("active");
+    renderKanban();
+  });
+});
+
+renderStats();
+renderKanban();
+</script>
+</body>
+</html>

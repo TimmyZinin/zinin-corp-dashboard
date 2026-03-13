@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Zinin Corp — March 2026 Dashboard</title>
+<style>
+  :root {
+    --bg: #f8f7f4;
+    --card: #ffffff;
+    --text: #1a1a1a;
+    --muted: #6b7280;
+    --accent: #e87b35;
+    --green: #22c55e;
+    --blue: #3b82f6;
+    --yellow: #eab308;
+    --red: #ef4444;
+    --purple: #8b5cf6;
+    --border: #e5e7eb;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: -apple-system, 'SF Pro Display', 'Inter', sans-serif; background: var(--bg); color: var(--text); padding: 2rem; max-width: 1400px; margin: 0 auto; }
+  h1 { font-size: 2rem; font-weight: 700; margin-bottom: 0.25rem; }
+  .subtitle { color: var(--muted); font-size: 0.95rem; margin-bottom: 2rem; }
+  .grid { display: grid; gap: 1.5rem; }
+  .grid-4 { grid-template-columns: repeat(4, 1fr); }
+  .grid-3 { grid-template-columns: repeat(3, 1fr); }
+  .grid-2 { grid-template-columns: 2fr 1fr; }
+  @media (max-width: 900px) { .grid-4, .grid-3, .grid-2 { grid-template-columns: 1fr; } }
+  .card { background: var(--card); border-radius: 12px; padding: 1.5rem; border: 1px solid var(--border); }
+  .card h3 { font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--muted); margin-bottom: 0.75rem; }
+  .stat-big { font-size: 3rem; font-weight: 800; line-height: 1; }
+  .stat-label { font-size: 0.85rem; color: var(--muted); margin-top: 0.25rem; }
+  .stat-accent { color: var(--accent); }
+  .stat-green { color: var(--green); }
+  .stat-blue { color: var(--blue); }
+  .stat-yellow { color: var(--yellow); }
+  .progress-bar { height: 8px; background: var(--border); border-radius: 4px; overflow: hidden; margin-top: 0.75rem; }
+  .progress-fill { height: 100%; border-radius: 4px; transition: width 1s ease; }
+  .agent-row { display: flex; align-items: center; gap: 0.75rem; padding: 0.75rem 0; border-bottom: 1px solid var(--border); }
+  .agent-row:last-child { border-bottom: none; }
+  .agent-avatar { width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1rem; color: white; font-weight: 700; flex-shrink: 0; }
+  .agent-info { flex: 1; }
+  .agent-name { font-weight: 600; font-size: 0.9rem; }
+  .agent-role { font-size: 0.75rem; color: var(--muted); }
+  .agent-count { font-size: 1.5rem; font-weight: 800; }
+  .task-row { display: flex; align-items: center; gap: 0.5rem; padding: 0.5rem 0; border-bottom: 1px solid var(--border); font-size: 0.85rem; }
+  .task-row:last-child { border-bottom: none; }
+  .task-id { font-weight: 600; color: var(--accent); min-width: 70px; }
+  .task-title { flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .badge { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 0.7rem; font-weight: 600; text-transform: uppercase; }
+  .badge-done { background: #dcfce7; color: #166534; }
+  .badge-wip { background: #dbeafe; color: #1e40af; }
+  .badge-blocked { background: #fee2e2; color: #991b1b; }
+  .badge-critical { background: #fef3c7; color: #92400e; }
+  .badge-high { background: #fed7aa; color: #9a3412; }
+  .project-bar { display: flex; align-items: center; gap: 0.75rem; padding: 0.75rem 0; border-bottom: 1px solid var(--border); }
+  .project-bar:last-child { border-bottom: none; }
+  .project-name { font-weight: 600; min-width: 180px; font-size: 0.9rem; }
+  .project-track { flex: 1; display: flex; height: 24px; border-radius: 6px; overflow: hidden; }
+  .track-done { background: var(--green); }
+  .track-wip { background: var(--blue); }
+  .track-todo { background: var(--border); }
+  .track-blocked { background: var(--red); }
+  .section { margin-top: 2rem; }
+  .section h2 { font-size: 1.25rem; font-weight: 700; margin-bottom: 1rem; }
+  .timeline { position: relative; padding-left: 2rem; }
+  .timeline::before { content:''; position: absolute; left: 8px; top: 0; bottom: 0; width: 2px; background: var(--border); }
+  .tl-item { position: relative; margin-bottom: 1rem; }
+  .tl-dot { position: absolute; left: -2rem; top: 4px; width: 16px; height: 16px; border-radius: 50%; background: var(--green); border: 3px solid var(--bg); }
+  .tl-date { font-size: 0.75rem; color: var(--muted); }
+  .tl-title { font-weight: 600; font-size: 0.9rem; }
+  .tl-agent { font-size: 0.8rem; color: var(--muted); }
+  .hero-stat { text-align: center; }
+  .confetti { position: relative; }
+  .confetti::after { content: ''; font-size: 2rem; position: absolute; top: -0.5rem; right: -0.25rem; }
+</style>
+</head>
+<body>
+
+<h1>Zinin Corp</h1>
+<p class="subtitle">March 2026 — Operational Dashboard | Last updated: March 11, 2026</p>
+
+<div class="grid grid-4">
+  <div class="card hero-stat confetti">
+    <h3>Completed</h3>
+    <div class="stat-big stat-green">32</div>
+    <div class="stat-label">tasks done this month</div>
+  </div>
+  <div class="card hero-stat">
+    <h3>In Progress</h3>
+    <div class="stat-big stat-blue">4</div>
+    <div class="stat-label">active right now</div>
+  </div>
+  <div class="card hero-stat">
+    <h3>Backlog</h3>
+    <div class="stat-big stat-yellow">37</div>
+    <div class="stat-label">todo + backlog</div>
+  </div>
+  <div class="card hero-stat">
+    <h3>Blocked</h3>
+    <div class="stat-big stat-accent">4</div>
+    <div class="stat-label">need attention</div>
+  </div>
+</div>
+
+<div class="card" style="margin-top: 1.5rem;">
+  <h3>Overall Progress</h3>
+  <div style="display:flex; justify-content:space-between; font-size:0.85rem; margin-bottom:0.25rem;">
+    <span><strong>32</strong> / 86 tasks completed</span>
+    <span><strong>37%</strong></span>
+  </div>
+  <div class="progress-bar">
+    <div class="progress-fill" style="width:37%; background: linear-gradient(90deg, var(--green), #4ade80);"></div>
+  </div>
+</div>
+
+<div class="section">
+  <h2>Projects</h2>
+  <div class="card">
+    <div class="project-bar">
+      <span class="project-name">General</span>
+      <div class="project-track">
+        <div class="track-done" style="width:44%" title="29 done"></div>
+        <div class="track-wip" style="width:3%" title="2 wip"></div>
+        <div class="track-blocked" style="width:1.5%" title="1 blocked"></div>
+        <div class="track-todo" style="width:51.5%" title="34 todo/backlog"></div>
+      </div>
+      <span style="min-width:60px; text-align:right; font-size:0.85rem; color:var(--muted);">29/66</span>
+    </div>
+    <div class="project-bar">
+      <span class="project-name">Ментальная стабильность</span>
+      <div class="project-track">
+        <div class="track-done" style="width:25%" title="2 done"></div>
+        <div class="track-wip" style="width:25%" title="2 wip"></div>
+        <div class="track-blocked" style="width:12.5%" title="1 blocked"></div>
+        <div class="track-todo" style="width:37.5%" title="3 todo"></div>
+      </div>
+      <span style="min-width:60px; text-align:right; font-size:0.85rem; color:var(--muted);">2/8</span>
+    </div>
+    <div class="project-bar">
+      <span class="project-name">MCPHire</span>
+      <div class="project-track">
+        <div class="track-done" style="width:8%" title="1 done"></div>
+        <div class="track-blocked" style="width:17%" title="2 blocked"></div>
+        <div class="track-todo" style="width:75%" title="9 todo/backlog"></div>
+      </div>
+      <span style="min-width:60px; text-align:right; font-size:0.85rem; color:var(--muted);">1/12</span>
+    </div>
+    <div style="margin-top:1rem; display:flex; gap:1.5rem; font-size:0.75rem;">
+      <span><span style="display:inline-block;width:12px;height:12px;background:var(--green);border-radius:3px;"></span> Done</span>
+      <span><span style="display:inline-block;width:12px;height:12px;background:var(--blue);border-radius:3px;"></span> In Progress</span>
+      <span><span style="display:inline-block;width:12px;height:12px;background:var(--red);border-radius:3px;"></span> Blocked</span>
+      <span><span style="display:inline-block;width:12px;height:12px;background:var(--border);border-radius:3px;"></span> Todo/Backlog</span>
+    </div>
+  </div>
+</div>
+
+<div class="section">
+  <div class="grid grid-2">
+    <div class="card">
+      <h3>Agent Leaderboard</h3>
+      <div class="agent-row">
+        <div class="agent-avatar" style="background:var(--accent);">CEO</div>
+        <div class="agent-info">
+          <div class="agent-name">Орки (CEO)</div>
+          <div class="agent-role">Strategy, delegation, unblocking</div>
+        </div>
+        <div class="agent-count stat-accent">12</div>
+      </div>
+      <div class="agent-row">
+        <div class="agent-avatar" style="background:var(--blue);">ENG</div>
+        <div class="agent-info">
+          <div class="agent-name">Инженер</div>
+          <div class="agent-role">Backend, scripts, infra</div>
+        </div>
+        <div class="agent-count" style="color:var(--blue);">11</div>
+      </div>
+      <div class="agent-row">
+        <div class="agent-avatar" style="background:var(--purple);">CM</div>
+        <div class="agent-info">
+          <div class="agent-name">Контент-менеджер</div>
+          <div class="agent-role">Tumblr, Write.as, content</div>
+        </div>
+        <div class="agent-count" style="color:var(--purple);">3</div>
+      </div>
+      <div class="agent-row">
+        <div class="agent-avatar" style="background:var(--green);">CFO</div>
+        <div class="agent-info">
+          <div class="agent-name">Финансист</div>
+          <div class="agent-role">Audit, P&L, onboarding</div>
+        </div>
+        <div class="agent-count" style="color:var(--green);">2</div>
+      </div>
+      <div class="agent-row">
+        <div class="agent-avatar" style="background:#6366f1;">PM</div>
+        <div class="agent-info">
+          <div class="agent-name">Продакт</div>
+          <div class="agent-role">Sprint planning, analytics</div>
+        </div>
+        <div class="agent-count" style="color:#6366f1;">1</div>
+      </div>
+      <div class="agent-row">
+        <div class="agent-avatar" style="background:#14b8a6;">RES</div>
+        <div class="agent-info">
+          <div class="agent-name">Разведчик</div>
+          <div class="agent-role">Research, intel</div>
+        </div>
+        <div class="agent-count" style="color:#14b8a6;">1</div>
+      </div>
+      <div class="agent-row">
+        <div class="agent-avatar" style="background:#f472b6;">CMO</div>
+        <div class="agent-info">
+          <div class="agent-name">Маркетолог</div>
+          <div class="agent-role">Positioning, announcements</div>
+        </div>
+        <div class="agent-count" style="color:#f472b6;">1</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>Active Blockers</h3>
+      <div style="margin-bottom:1rem;">
+        <div class="task-row">
+          <span class="task-id">ZINA-79</span>
+          <span class="task-title">LinkedIn Company Page MCPHire</span>
+          <span class="badge badge-blocked">blocked</span>
+        </div>
+        <div style="font-size:0.8rem; color:var(--muted); padding:0.25rem 0 0.75rem;">LinkedIn app challenge — Тим должен подтвердить вход</div>
+
+        <div class="task-row">
+          <span class="task-id">ZINA-82</span>
+          <span class="task-title">Контент-план MCPHire (неделя 1-4)</span>
+          <span class="badge badge-blocked">blocked</span>
+        </div>
+        <div style="font-size:0.8rem; color:var(--muted); padding:0.25rem 0 0.75rem;">Ждёт создания аккаунтов на платформах</div>
+
+        <div class="task-row">
+          <span class="task-id">ZINA-50</span>
+          <span class="task-title">Договор с Екатериной (DocuSign)</span>
+          <span class="badge badge-blocked">blocked</span>
+        </div>
+        <div style="font-size:0.8rem; color:var(--muted); padding:0.25rem 0 0.75rem;">Нужны паспортные данные Тима</div>
+
+        <div class="task-row">
+          <span class="task-id">ZINA-86</span>
+          <span class="task-title">Sprint Planning: Инженер простаивает</span>
+          <span class="badge badge-blocked">blocked</span>
+        </div>
+        <div style="font-size:0.8rem; color:var(--muted); padding:0.25rem 0 0.75rem;">CPO ждёт назначения задач инженеру</div>
+      </div>
+
+      <h3 style="margin-top:1.5rem;">Team: 9 Agents</h3>
+      <div style="display:flex; flex-wrap:wrap; gap:0.5rem; margin-top:0.5rem;">
+        <span class="badge" style="background:#fff3e0; color:#e87b35;">Орки CEO</span>
+        <span class="badge" style="background:#e3f2fd; color:#1565c0;">Инженер</span>
+        <span class="badge" style="background:#e8f5e9; color:#2e7d32;">Финансист</span>
+        <span class="badge" style="background:#fce4ec; color:#c62828;">Маркетолог</span>
+        <span class="badge" style="background:#ede7f6; color:#4527a0;">Контент</span>
+        <span class="badge" style="background:#e0f2f1; color:#00695c;">Разведчик</span>
+        <span class="badge" style="background:#f3e5f5; color:#6a1b9a;">Продакт</span>
+        <span class="badge" style="background:#fbe9e7; color:#bf360c;">Дизайнер</span>
+        <span class="badge" style="background:#e8eaf6; color:#283593;">Админ</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="section">
+  <h2>Completed Tasks (32)</h2>
+  <div class="card">
+    <div class="task-row" style="font-weight:700; border-bottom:2px solid var(--border);">
+      <span style="min-width:70px;">ID</span>
+      <span style="flex:1;">Task</span>
+      <span style="min-width:100px;">Agent</span>
+      <span style="min-width:70px;">Priority</span>
+    </div>
+    <div class="task-row"><span class="task-id">ZINA-44</span><span class="task-title">Поменять LLM у инженера</span><span style="min-width:100px; font-size:0.8rem;">Орки</span><span class="badge badge-critical">critical</span></div>
+    <div class="task-row"><span class="task-id">ZINA-51</span><span class="task-title">Финализировать ценообразование и оффер</span><span style="min-width:100px; font-size:0.8rem;">Орки</span><span class="badge badge-high">high</span></div>
+    <div class="task-row"><span class="task-id">ZINA-62</span><span class="task-title">Онбординг CFO: финансовый аудит</span><span style="min-width:100px; font-size:0.8rem;">Финансист</span><span class="badge badge-high">high</span></div>
+    <div class="task-row"><span class="task-id">ZINA-3</span><span class="task-title">Скрипт автопостинга в Tumblr через API</span><span style="min-width:100px; font-size:0.8rem;">Инженер</span><span class="badge badge-high">high</span></div>
+    <div class="task-row"><span class="task-id">ZINA-4</span><span class="task-title">Контент-план Tumblr на неделю 1</span><span style="min-width:100px; font-size:0.8rem;">Контент</span><span class="badge badge-high">high</span></div>
+    <div class="task-row"><span class="task-id">ZINA-16</span><span class="task-title">Tumblr: скрипт генерации картинок</span><span style="min-width:100px; font-size:0.8rem;">Инженер</span><span class="badge badge-high">high</span></div>
+    <div class="task-row"><span class="task-id">ZINA-24</span><span class="task-title">Пост Day 5 с диаграммой (Mermaid → photo)</span><span style="min-width:100px; font-size:0.8rem;">Контент</span><span class="badge badge-high">high</span></div>
+    <div class="task-row"><span class="task-id">ZINA-25</span><span class="task-title">Write.as: flagship intro пост</span><span style="min-width:100px; font-size:0.8rem;">Контент</span><span class="badge badge-high">high</span></div>
+    <div class="task-row"><span class="task-id">ZINA-11</span><span class="task-title">Активировать email outreach</span><span style="min-width:100px; font-size:0.8rem;">Инженер</span><span class="badge badge-high">high</span></div>
+    <div class="task-row"><span class="task-id">ZINA-23</span><span class="task-title">DNS: SPF/DKIM/DMARC для outreach</span><span style="min-width:100px; font-size:0.8rem;">Инженер</span><span class="badge badge-high">high</span></div>
+    <div class="task-row"><span class="task-id">ZINA-27</span><span class="task-title">Заменить Firecrawl на бесплатный скрапинг</span><span style="min-width:100px; font-size:0.8rem;">Инженер</span><span class="badge badge-high">high</span></div>
+    <div class="task-row"><span class="task-id">ZINA-19</span><span class="task-title">FIX: Groq 429 rate limit</span><span style="min-width:100px; font-size:0.8rem;">Инженер</span><span class="badge badge-high">high</span></div>
+    <div class="task-row"><span class="task-id">ZINA-20</span><span class="task-title">FIX: JobSpy Bayt 403 Forbidden</span><span style="min-width:100px; font-size:0.8rem;">Инженер</span><span class="badge badge-high">high</span></div>
+    <div class="task-row"><span class="task-id">ZINA-21</span><span class="task-title">Фильтрация Indeed: SAP internships</span><span style="min-width:100px; font-size:0.8rem;">Инженер</span><span class="badge badge-high">high</span></div>
+    <div class="task-row"><span class="task-id">ZINA-73</span><span class="task-title">Watchdog зависших процессов Paperclip</span><span style="min-width:100px; font-size:0.8rem;">Орки</span><span class="badge" style="background:#f3f4f6;color:#374151;">medium</span></div>
+    <div class="task-row"><span class="task-id">ZINA-60</span><span class="task-title">Создать CPO (Продакт)</span><span style="min-width:100px; font-size:0.8rem;">Орки</span><span class="badge" style="background:#f3f4f6;color:#374151;">medium</span></div>
+    <div class="task-row"><span class="task-id">ZINA-58</span><span class="task-title">Создать CFO (Финансист)</span><span style="min-width:100px; font-size:0.8rem;">Орки</span><span class="badge" style="background:#f3f4f6;color:#374151;">medium</span></div>
+    <div class="task-row"><span class="task-id">ZINA-47</span><span class="task-title">Создать CMO (Маркетолог)</span><span style="min-width:100px; font-size:0.8rem;">Орки</span><span class="badge" style="background:#f3f4f6;color:#374151;">medium</span></div>
+    <div class="task-row"><span class="task-id">ZINA-48</span><span class="task-title">Создать Админа</span><span style="min-width:100px; font-size:0.8rem;">Орки</span><span class="badge" style="background:#f3f4f6;color:#374151;">medium</span></div>
+    <div class="task-row"><span class="task-id">ZINA-32</span><span class="task-title">Создать Разведчика (researcher)</span><span style="min-width:100px; font-size:0.8rem;">Орки</span><span class="badge" style="background:#f3f4f6;color:#374151;">medium</span></div>
+    <div class="task-row"><span class="task-id">ZINA-42</span><span class="task-title">Соотнести задачи с проектами</span><span style="min-width:100px; font-size:0.8rem;">Орки</span><span class="badge" style="background:#f3f4f6;color:#374151;">medium</span></div>
+    <div class="task-row"><span class="task-id">ZINA-41</span><span class="task-title">Разобрать свободные задачи и назначить</span><span style="min-width:100px; font-size:0.8rem;">Орки</span><span class="badge" style="background:#f3f4f6;color:#374151;">medium</span></div>
+    <div class="task-row"><span class="task-id">ZINA-34</span><span class="task-title">Создать полный список проектов</span><span style="min-width:100px; font-size:0.8rem;">Инженер</span><span class="badge" style="background:#f3f4f6;color:#374151;">medium</span></div>
+    <div class="task-row"><span class="task-id">ZINA-2</span><span class="task-title">MCPHire: информация и стратегия</span><span style="min-width:100px; font-size:0.8rem;">Орки</span><span class="badge" style="background:#f3f4f6;color:#374151;">medium</span></div>
+    <div class="task-row"><span class="task-id">ZINA-64</span><span class="task-title">Баланс средств и финотчёт</span><span style="min-width:100px; font-size:0.8rem;">Финансист</span><span class="badge" style="background:#f3f4f6;color:#374151;">medium</span></div>
+    <div class="task-row"><span class="task-id">ZINA-67</span><span class="task-title">Проверка аналитики в проектах</span><span style="min-width:100px; font-size:0.8rem;">Продакт</span><span class="badge" style="background:#f3f4f6;color:#374151;">medium</span></div>
+    <div class="task-row"><span class="task-id">ZINA-59</span><span class="task-title">Anthropic news research</span><span style="min-width:100px; font-size:0.8rem;">Разведчик</span><span class="badge" style="background:#f3f4f6;color:#374151;">medium</span></div>
+    <div class="task-row"><span class="task-id">ZINA-57</span><span class="task-title">Название и позиционирование продукта</span><span style="min-width:100px; font-size:0.8rem;">Маркетолог</span><span class="badge" style="background:#f3f4f6;color:#374151;">medium</span></div>
+    <div class="task-row"><span class="task-id">ZINA-10</span><span class="task-title">v2 Implementation: 6 спринтов</span><span style="min-width:100px; font-size:0.8rem;">—</span><span class="badge" style="background:#f3f4f6;color:#374151;">medium</span></div>
+    <div class="task-row"><span class="task-id">ZINA-15</span><span class="task-title">Мониторинг Docker saudi-hunter</span><span style="min-width:100px; font-size:0.8rem;">Инженер</span><span class="badge" style="background:#f3f4f6;color:#374151;">medium</span></div>
+    <div class="task-row"><span class="task-id">ZINA-1</span><span class="task-title">CEO HEARTBEAT.md</span><span style="min-width:100px; font-size:0.8rem;">Орки</span><span class="badge" style="background:#f3f4f6;color:#374151;">medium</span></div>
+    <div class="task-row"><span class="task-id">ZINA-13</span><span class="task-title">Зарегистрировать JOOBLE_API_KEY</span><span style="min-width:100px; font-size:0.8rem;">Инженер</span><span class="badge" style="background:#f0fdf4;color:#166534;">low</span></div>
+  </div>
+</div>
+
+<div style="text-align:center; margin-top:3rem; padding:2rem; color:var(--muted); font-size:0.8rem;">
+  Zinin Corp Paperclip Dashboard | 9 agents | 7 projects | 86 total issues<br>
+  Generated by Орки (CEO Agent) on March 11, 2026
+</div>
+
+</body>
+</html>

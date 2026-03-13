@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Content Dashboard | Zinin Corp</title>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;600;700&family=Onest:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="zinin-corp.css?v=20260307">
+<style>
+/* Stats */
+.stats { display: flex; gap: 10px; margin-bottom: 20px; flex-wrap: wrap; }
+.stat { background: #141414; border: 1px solid #222; border-radius: 10px; padding: 12px 16px; text-align: center; min-width: 80px; }
+.stat-num { display: block; font-size: 24px; font-weight: 700; color: #fff; }
+.stat-label { font-size: 10px; color: #666; text-transform: uppercase; letter-spacing: 0.5px; }
+
+/* Filters */
+.filters { margin-bottom: 16px; }
+.filter-group { display: flex; gap: 6px; margin-bottom: 8px; flex-wrap: wrap; align-items: center; }
+.filter-title { font-size: 11px; color: #555; text-transform: uppercase; letter-spacing: 0.5px; margin-right: 4px; min-width: 70px; }
+.filter-btn { background: #1a1a1a; border: 1px solid #333; color: #aaa; padding: 4px 10px; border-radius: 6px; font-size: 11px; cursor: pointer; transition: all .15s; }
+.filter-btn:hover { border-color: #555; color: #fff; }
+.filter-btn.active { background: var(--btn-color, #333); border-color: var(--btn-color, #555); color: #fff; }
+
+/* Table */
+table { width: 100%; border-collapse: collapse; font-size: 13px; }
+.date-row td { background: #111; padding: 8px 10px; border-bottom: 2px solid #2a2a2a; }
+.date-label { font-weight: 700; color: #fff; font-size: 14px; }
+.date-stats { color: #555; font-size: 11px; margin-left: 8px; }
+.post-row td { padding: 8px 10px; border-bottom: 1px solid #1a1a1a; vertical-align: middle; }
+.post-row:hover td { background: #141414; }
+.post-row.hidden { display: none; }
+.post-row.collapsed-child { display: none; }
+
+.p-badge { display: inline-block; width: 24px; height: 18px; line-height: 18px; text-align: center; border-radius: 4px; font-size: 9px; font-weight: 700; color: #fff; vertical-align: middle; }
+.p-name { color: #888; font-size: 12px; }
+.a-dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; margin-right: 6px; vertical-align: middle; }
+.topic-cell { color: #ddd; max-width: 500px; }
+.cta { font-size: 11px; color: #60a5fa; margin-top: 2px; word-break: break-all; }
+.s-badge { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 10px; font-weight: 600; color: #fff; text-transform: uppercase; }
+.img-badge { display: inline-block; padding: 1px 5px; border-radius: 3px; font-size: 9px; font-weight: 600; color: #10b981; background: #0d3320; margin-left: 4px; vertical-align: middle; }
+.img-badge.no-img { color: #ef4444; background: #3b1111; }
+
+/* Expandable post preview */
+.post-preview { display: none; margin-top: 10px; background: #111; border-radius: 10px; border: 1px solid #222; overflow: hidden; animation: slideDown 0.2s ease; }
+@keyframes slideDown { from { opacity: 0; max-height: 0; } to { opacity: 1; max-height: 800px; } }
+.post-row.expanded .post-preview { display: block; }
+.post-row { cursor: pointer; }
+
+.preview-content { display: flex; gap: 16px; padding: 14px; }
+.preview-image { flex: 0 0 280px; min-height: 180px; border-radius: 8px; background: #1a1a1a; display: flex; align-items: center; justify-content: center; overflow: hidden; }
+.preview-image img { width: 100%; height: auto; max-height: 240px; object-fit: cover; border-radius: 8px; }
+.preview-image .no-image { color: #555; font-size: 12px; text-align: center; padding: 20px; }
+.preview-text { flex: 1; font-size: 13px; color: #bbb; line-height: 1.6; white-space: pre-wrap; max-height: 300px; overflow-y: auto; padding-right: 8px; }
+
+/* Review bar */
+.review-bar { display: flex; gap: 10px; padding: 10px 14px; background: #0a0a0a; border-top: 1px solid #222; align-items: center; }
+.review-bar .review-status { font-size: 11px; color: #888; margin-left: auto; }
+.btn-regenerate { background: #f59e0b; color: #000; border: none; padding: 6px 18px; border-radius: 6px; font-size: 12px; font-weight: 600; cursor: pointer; transition: all .15s; }
+.btn-regenerate:hover { background: #d97706; }
+.btn-regenerate.loading { opacity: .6; pointer-events: none; }
+.btn-regenerate.loading::after { content: '...'; }
+
+/* Collapsible past dates */
+.date-row { cursor: pointer; user-select: none; }
+.date-row .collapse-icon { font-size: 10px; color: #555; margin-left: 8px; display: inline-block; transition: transform .2s; }
+.date-row.collapsed .collapse-icon { transform: rotate(-90deg); }
+.date-row.past td { opacity: .5; }
+.date-row.past .date-label::after { content: " (past)"; font-size: 11px; color: #555; font-weight: 400; }
+.date-row.today .date-label { color: #10b981; }
+
+.data-source { font-size: 11px; color: #444; margin-bottom: 12px; }
+.data-source span { color: #666; }
+.loading { text-align: center; padding: 40px; color: #555; font-size: 14px; }
+
+/* Responsive */
+@media (max-width: 700px) {
+  body { padding: 10px; }
+  .p-name { display: none; }
+  .topic-cell { max-width: 200px; }
+  .stats { gap: 6px; }
+  .stat { padding: 8px 10px; min-width: 60px; }
+  .stat-num { font-size: 18px; }
+  .preview-content { flex-direction: column; }
+  .preview-image { flex: none; width: 100%; min-height: 120px; }
+}
+</style>
+</head>
+<body>
+<nav class="zc-nav">
+  <span class="zc-nav-brand"><img src="img/avatar.jpg" alt="" class="zc-nav-avatar">Zinin <span class="zc-nav-brand-suffix">Corp</span></span>
+  <a href="overview.html">Overview</a>
+  <a href="content.html" class="active">Content</a>
+  <a href="bank.html">Bank</a>
+  <a href="analytics.html">Analytics</a>
+  <a href="connectors.html">Connectors</a>
+  <a href="finance.html">Finance</a>
+  <a href="tasks.html">Tasks</a>
+  <a href="funnel.html">Funnel</a>
+</nav>
+<div class="zc-container">
+  <div class="zc-page-header">
+    <h1>Content Dashboard</h1>
+    <p class="zc-subtitle">Content calendar with image preview and approval workflow</p>
+  </div>
+
+  <div class="data-source">Source: <span>content_calendar.json</span> | Updated: <span id="lastUpdate">...</span> | Entries: <span id="totalEntries">...</span> | Reviewed: <span id="reviewedCount">0</span></div>
+
+  <div class="stats" id="statsBar"></div>
+  <div class="filters" id="filtersBar"></div>
+  <table><tbody id="tableBody"><tr><td class="loading">Loading data...</td></tr></tbody></table>
+</div>
+
+<script>
+(function() {
+  const PLATFORM_CONFIG = {
+    'linkedin':  { badge: 'in',  color: '#0A66C2', label: 'linkedin' },
+    'threads':   { badge: '@',   color: '#000000', label: 'threads' },
+    'telegram':  { badge: 'TG',  color: '#0088cc', label: 'telegram' },
+    'facebook':  { badge: 'fb',  color: '#1877F2', label: 'facebook' },
+    'vk':        { badge: 'VK',  color: '#4680C2', label: 'vk' },
+    'bluesky':   { badge: 'BS',  color: '#0085FF', label: 'bluesky' },
+    'mastodon':  { badge: 'MA',  color: '#6364FF', label: 'mastodon' },
+    'dev.to':    { badge: 'DEV', color: '#0A0A0A', label: 'dev.to' },
+    'hashnode':  { badge: 'HN',  color: '#2962FF', label: 'hashnode' },
+    'minds':     { badge: 'MI',  color: '#FED12F', label: 'minds' },
+    'write.as':  { badge: 'WA',  color: '#5C6BC0', label: 'write.as' },
+    'tumblr':    { badge: 'TB',  color: '#35465C', label: 'tumblr' },
+    'nostr':     { badge: 'NO',  color: '#8E24AA', label: 'nostr' },
+    'ok.ru':     { badge: 'OK',  color: '#EE8208', label: 'ok.ru' },
+    'vc.ru':     { badge: 'VC',  color: '#1A1A1A', label: 'vc.ru' },
+    'medium':    { badge: 'MD',  color: '#000000', label: 'medium' },
+    'instagram': { badge: 'IG',  color: '#E4405F', label: 'instagram' },
+    'youtube':   { badge: 'YT',  color: '#FF0000', label: 'youtube' },
+    'twitter':   { badge: 'TW',  color: '#1DA1F2', label: 'twitter' },
+    'lemmy':     { badge: 'LM',  color: '#00BC8C', label: 'lemmy' },
+    'hive':      { badge: 'HV',  color: '#E31337', label: 'hive' },
+    'tiktok':    { badge: 'TT',  color: '#000000', label: 'tiktok' }
+  };
+
+  const STATUS_COLORS = {
+    'published': '#10B981', 'done': '#10B981',
+    'planned': '#F59E0B', 'plan': '#F59E0B',
+    'scheduled': '#3B82F6',
+    'blocked': '#EF4444',
+    'draft': '#6B7280',
+    'approved': '#10B981',
+    'rejected': '#EF4444'
+  };
+
+  const STATUS_LABELS = {
+    'published': 'done', 'done': 'done',
+    'planned': 'plan', 'plan': 'plan',
+    'scheduled': 'sched', 'blocked': 'block',
+    'draft': 'draft', 'approved': 'ok', 'rejected': 'rej'
+  };
+
+  const DAY_NAMES = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+  const MONTH_NAMES = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+
+  let entries = [];
+  let activeFilters = { platform: 'all', status: 'all' };
+
+  // Review state — server-backed with localStorage fallback
+  const REVIEWS_KEY = 'zc_content_reviews';
+  let _reviewsCache = {};
+
+  function getReviews() {
+    return _reviewsCache;
+  }
+
+  async function loadReviewsFromServer() {
+    try {
+      const resp = await fetch('/dashboards/api/reviews');
+      if (resp.ok) {
+        _reviewsCache = await resp.json();
+        localStorage.setItem(REVIEWS_KEY, JSON.stringify(_reviewsCache));
+      }
+    } catch {
+      // Fallback to localStorage
+      try { _reviewsCache = JSON.parse(localStorage.getItem(REVIEWS_KEY) || '{}'); } catch { _reviewsCache = {}; }
+    }
+    updateReviewCount();
+  }
+
+  function saveReview(postId, action, feedback) {
+    _reviewsCache[postId] = { action, feedback: feedback || '', ts: new Date().toISOString() };
+    localStorage.setItem(REVIEWS_KEY, JSON.stringify(_reviewsCache));
+    updateReviewCount();
+    // Persist to server
+    fetch('/dashboards/api/review', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ post_id: postId, action, feedback: feedback || '' }),
+    }).catch(err => console.warn('Review save to server failed:', err));
+  }
+
+  function updateReviewCount() {
+    const count = Object.keys(_reviewsCache).length;
+    const el = document.getElementById('reviewedCount');
+    if (el) el.textContent = count;
+  }
+
+  function escapeHtml(s) {
+    if (!s) return '';
+    return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#x27;');
+  }
+
+  function formatDate(dateStr) {
+    const d = new Date(dateStr + 'T00:00:00');
+    return `${String(d.getDate()).padStart(2,'0')}.${String(d.getMonth()+1).padStart(2,'0')} ${DAY_NAMES[d.getDay()]}`;
+  }
+
+  function isPast(dateStr) {
+    const today = new Date(); today.setHours(0,0,0,0);
+    return new Date(dateStr + 'T00:00:00') < today;
+  }
+
+  function isToday(dateStr) {
+    const t = new Date();
+    const s = `${t.getFullYear()}-${String(t.getMonth()+1).padStart(2,'0')}-${String(t.getDate()).padStart(2,'0')}`;
+    return dateStr === s;
+  }
+
+  function resolveImageUrl(url) {
+    if (!url) return '';
+    if (url.startsWith('http')) return url;
+    // Local path relative to dashboards dir
+    return url;
+  }
+
+  function renderStats() {
+    const total = entries.length;
+    const published = entries.filter(e => e.status === 'published' || e.status === 'done').length;
+    const planned = entries.filter(e => e.status === 'planned' || e.status === 'plan').length;
+    const scheduled = entries.filter(e => e.status === 'scheduled').length;
+    const blocked = entries.filter(e => e.status === 'blocked').length;
+    const withImages = entries.filter(e => e.image_url).length;
+
+    document.getElementById('statsBar').innerHTML = `
+      <div class="stat"><span class="stat-num">${total}</span><span class="stat-label">total</span></div>
+      <div class="stat"><span class="stat-num" style="color:#10B981">${published}</span><span class="stat-label">published</span></div>
+      <div class="stat"><span class="stat-num" style="color:#F59E0B">${planned}</span><span class="stat-label">planned</span></div>
+      <div class="stat"><span class="stat-num" style="color:#3B82F6">${scheduled}</span><span class="stat-label">sched</span></div>
+      <div class="stat"><span class="stat-num" style="color:#EF4444">${blocked}</span><span class="stat-label">blocked</span></div>
+      <div class="stat"><span class="stat-num" style="color:#6c5ce7">${withImages}</span><span class="stat-label">with img</span></div>
+    `;
+    document.getElementById('totalEntries').textContent = total;
+  }
+
+  function renderFilters() {
+    const platCounts = {};
+    entries.forEach(e => { platCounts[e.platform] = (platCounts[e.platform] || 0) + 1; });
+    const platforms = Object.keys(platCounts).sort();
+
+    const statusCounts = {};
+    entries.forEach(e => { statusCounts[e.status || 'unknown'] = (statusCounts[e.status || 'unknown'] || 0) + 1; });
+
+    let html = `<div class="filter-group">
+      <span class="filter-title">Platform</span>
+      <button class="filter-btn active" data-filter="platform" data-value="all">All (${entries.length})</button>`;
+    platforms.forEach(p => {
+      const cfg = PLATFORM_CONFIG[p] || { color: '#555', label: p };
+      html += `<button class="filter-btn" data-filter="platform" data-value="${p}" style="--btn-color:${cfg.color}">${cfg.label} (${platCounts[p]})</button>`;
+    });
+    html += `</div>`;
+
+    html += `<div class="filter-group">
+      <span class="filter-title">Status</span>
+      <button class="filter-btn active" data-filter="status" data-value="all">All</button>`;
+    Object.keys(statusCounts).sort().forEach(s => {
+      const color = STATUS_COLORS[s] || '#555';
+      html += `<button class="filter-btn" data-filter="status" data-value="${s}" style="--btn-color:${color}">${STATUS_LABELS[s] || s} (${statusCounts[s]})</button>`;
+    });
+    html += `</div>`;
+
+    document.getElementById('filtersBar').innerHTML = html;
+
+    document.querySelectorAll('.filter-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const filterType = btn.dataset.filter;
+        activeFilters[filterType] = btn.dataset.value;
+        btn.closest('.filter-group').querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        applyFilters();
+      });
+    });
+  }
+
+  function renderTable() {
+    const byDate = {};
+    entries.forEach(e => {
+      const d = e.date || 'unknown';
+      if (!byDate[d]) byDate[d] = [];
+      byDate[d].push(e);
+    });
+    const dates = Object.keys(byDate).sort();
+    const reviews = getReviews();
+
+    let html = '';
+    dates.forEach(date => {
+      const posts = byDate[date];
+      const pubCount = posts.filter(e => e.status === 'published' || e.status === 'done').length;
+      const past = isPast(date);
+      const today = isToday(date);
+
+      html += `<tr class="date-row ${past ? 'past collapsed' : ''} ${today ? 'today' : ''}" data-date="${date}" onclick="toggleDate(this)">
+        <td colspan="5"><span class="date-label">${formatDate(date)}${today ? ' (today)' : ''}</span><span class="date-stats">${pubCount}/${posts.length}</span><span class="collapse-icon">\u25BC</span></td>
+      </tr>`;
+
+      posts.forEach(post => {
+        const cfg = PLATFORM_CONFIG[post.platform] || { badge: '?', color: '#555', label: post.platform };
+        const statusColor = STATUS_COLORS[post.status] || '#555';
+        const statusLabel = STATUS_LABELS[post.status] || post.status;
+        const hasImage = !!post.image_url;
+        const imgUrl = resolveImageUrl(post.image_url || '');
+        const topic = escapeHtml(post.topic || '');
+        const text = escapeHtml(post.text || '');
+        const cta = escapeHtml(post.cta || '');
+        const postId = post.id || '';
+        const review = reviews[postId];
+        const reviewStatus = review ? review.action : '';
+
+        html += `<tr class="post-row ${past ? 'collapsed-child' : ''}" data-platform="${post.platform}" data-status="${post.status}" data-date="${date}" data-id="${postId}" onclick="togglePost(this, event)">
+          <td><span class="p-badge" style="background:${cfg.color}">${cfg.badge}</span> <span class="p-name">${cfg.label}</span></td>
+          <td><span class="a-dot" style="background:#2563EB"></span>Tim${hasImage ? ' <span class="img-badge">img</span>' : (post.image === 'yes' ? ' <span class="img-badge no-img">no img</span>' : '')}</td>
+          <td class="topic-cell">
+            ${topic}${cta ? `<div class="cta">${cta}</div>` : ''}
+            <div class="post-preview" data-post-id="${postId}">
+              <div class="preview-content">
+                <div class="preview-image">
+                  ${imgUrl ? `<img src="${imgUrl}" alt="${topic}" onerror="this.parentElement.innerHTML='<div class=no-image>Image not found</div>'" loading="lazy">` : '<div class="no-image">No image assigned</div>'}
+                </div>
+                <div class="preview-text">${text || '<em style="color:#555">No text content</em>'}</div>
+              </div>
+              <div class="review-bar">
+                <button class="btn-regenerate" onclick="regenerateImage('${postId}', this, event)">Перегенерировать</button>
+                <span class="review-status"></span>
+              </div>
+            </div>
+          </td>
+          <td><span class="s-badge" style="background:${statusColor}">${statusLabel}</span></td>
+        </tr>`;
+      });
+    });
+
+    document.getElementById('tableBody').innerHTML = html;
+    updateReviewCount();
+  }
+
+  function applyFilters() {
+    document.querySelectorAll('.post-row').forEach(row => {
+      const matchPlatform = activeFilters.platform === 'all' || row.dataset.platform === activeFilters.platform;
+      const matchStatus = activeFilters.status === 'all' || row.dataset.status === activeFilters.status;
+      row.classList.toggle('hidden', !(matchPlatform && matchStatus));
+    });
+    document.querySelectorAll('.date-row').forEach(dateRow => {
+      const date = dateRow.dataset.date;
+      const posts = document.querySelectorAll(`.post-row[data-date="${date}"]`);
+      const visible = [...posts].filter(r => !r.classList.contains('hidden'));
+      dateRow.style.display = visible.length === 0 ? 'none' : '';
+    });
+  }
+
+  // Toggle post expand/collapse
+  window.togglePost = function(row, event) {
+    // Don't toggle if clicking buttons
+    if (event.target.closest('.btn-approve, .btn-reject, .btn-send-feedback, textarea')) return;
+    row.classList.toggle('expanded');
+  };
+
+  window.toggleDate = function(dateRow) {
+    const date = dateRow.dataset.date;
+    const isCollapsed = dateRow.classList.toggle('collapsed');
+    document.querySelectorAll(`.post-row[data-date="${date}"]`).forEach(row => {
+      row.classList.toggle('collapsed-child', isCollapsed);
+      if (isCollapsed) row.classList.remove('expanded');
+    });
+  };
+
+  // Regenerate image for a post
+  window.regenerateImage = function(postId, btn, event) {
+    event.stopPropagation();
+    btn.classList.add('loading');
+    btn.textContent = 'Генерирую';
+    fetch('/dashboards/api/regenerate', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ post_id: postId, feedback: 'new unique image' }),
+    })
+      .then(r => r.json())
+      .then(data => {
+        btn.classList.remove('loading');
+        if (data.ok && data.new_image_url) {
+          btn.textContent = 'Перегенерировать';
+          // Update image preview
+          const row = btn.closest('.post-row');
+          const imgContainer = row.querySelector('.preview-image');
+          imgContainer.innerHTML = `<img src="${data.new_image_url}" alt="Regenerated" loading="lazy" onerror="this.parentElement.innerHTML='<div class=no-image>Image not found</div>'">`;
+          const statusEl = btn.closest('.review-bar').querySelector('.review-status');
+          statusEl.textContent = 'Updated';
+          statusEl.style.color = '#10b981';
+          setTimeout(() => { statusEl.textContent = ''; }, 3000);
+          // Update img badge
+          const badge = row.querySelector('.img-badge');
+          if (badge) { badge.className = 'img-badge'; badge.textContent = 'img'; }
+        } else {
+          btn.textContent = 'Ошибка: ' + (data.error || 'unknown');
+          btn.style.background = '#ef4444';
+          setTimeout(() => { btn.textContent = 'Перегенерировать'; btn.style.background = ''; }, 3000);
+        }
+      })
+      .catch(err => {
+        btn.classList.remove('loading');
+        btn.textContent = 'Ошибка сети';
+        btn.style.background = '#ef4444';
+      });
+  };
+
+  // Export reviews as JSON (for Claude to read)
+  window.exportReviews = function() {
+    const reviews = getReviews();
+    const blob = new Blob([JSON.stringify(reviews, null, 2)], {type: 'application/json'});
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = 'content_reviews.json';
+    a.click();
+  };
+
+  // Load data — first reviews from server, then calendar
+  loadReviewsFromServer().then(() => {
+    return fetch('content_calendar.json?t=' + Date.now());
+  })
+    .then(r => r.json())
+    .then(data => {
+      entries = Array.isArray(data) ? data : (data.entries || []);
+      entries.sort((a, b) => (a.date || '').localeCompare(b.date || '') || (a.platform || '').localeCompare(b.platform || ''));
+      document.getElementById('lastUpdate').textContent = new Date().toLocaleString('ru-RU');
+      renderStats();
+      renderFilters();
+      renderTable();
+    })
+    .catch(err => {
+      document.getElementById('tableBody').innerHTML = `<tr><td style="color:#EF4444;padding:20px">Loading error: ${err.message}</td></tr>`;
+    });
+})();
+</script>
+</body>
+</html>

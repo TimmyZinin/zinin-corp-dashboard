@@ -1,0 +1,760 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Analytics | Zinin Corp</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #0a0a0a; color: #e5e5e5; padding: 20px; }
+.container { max-width: 1100px; margin: 0 auto; }
+a { color: inherit; text-decoration: none; }
+
+/* Nav */
+.nav { display: flex; gap: 0; margin-bottom: 24px; border-bottom: 1px solid #222; }
+.nav-brand { font-weight: 700; font-size: 14px; color: #555; padding: 10px 16px 10px 0; margin-right: 8px; }
+.nav a { padding: 10px 16px; font-size: 13px; color: #666; border-bottom: 2px solid transparent; transition: all .15s; }
+.nav a:hover { color: #ccc; }
+.nav a.active { color: #fff; border-bottom-color: #fff; }
+
+h1 { font-size: 24px; font-weight: 700; color: #fff; margin-bottom: 2px; }
+.subtitle { color: #666; font-size: 13px; margin-bottom: 20px; }
+.freshness { display: inline-flex; align-items: center; gap: 6px; font-size: 12px; color: #888; }
+.dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; }
+.dot-fresh { background: #10B981; }
+.dot-aging { background: #F59E0B; }
+.dot-stale { background: #EF4444; }
+.dot-error { background: #6B7280; }
+.dot-pending { background: #6B7280; animation: pulse 2s infinite; }
+@keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.3; } }
+
+/* Stats row */
+.stats { display: flex; gap: 10px; margin-bottom: 20px; flex-wrap: wrap; }
+.stat { background: #141414; border: 1px solid #222; border-radius: 10px; padding: 12px 16px; text-align: center; min-width: 100px; flex: 1; }
+.stat-num { display: block; font-size: 28px; font-weight: 700; color: #fff; }
+.stat-label { font-size: 10px; color: #666; text-transform: uppercase; letter-spacing: 0.5px; }
+
+/* Tabs */
+.tabs { display: flex; gap: 0; margin-bottom: 20px; border-bottom: 1px solid #222; }
+.tab { padding: 8px 16px; font-size: 13px; color: #666; cursor: pointer; border-bottom: 2px solid transparent; transition: all .15s; }
+.tab:hover { color: #ccc; }
+.tab.active { color: #fff; border-bottom-color: #3B82F6; }
+.tab-content { display: none; }
+.tab-content.active { display: block; }
+
+/* Table */
+table { width: 100%; border-collapse: collapse; font-size: 13px; margin-bottom: 16px; }
+th { text-align: left; padding: 8px 10px; color: #555; font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px; border-bottom: 1px solid #222; cursor: pointer; user-select: none; }
+th:hover { color: #aaa; }
+th.sorted-asc::after { content: ' \u2191'; }
+th.sorted-desc::after { content: ' \u2193'; }
+td { padding: 8px 10px; border-bottom: 1px solid #1a1a1a; }
+tr:hover td { background: #141414; }
+.num { text-align: right; font-variant-numeric: tabular-nums; }
+
+/* Platform badge */
+.p-badge { display: inline-block; width: 24px; height: 18px; line-height: 18px; text-align: center; border-radius: 4px; font-size: 9px; font-weight: 700; color: #fff; vertical-align: middle; }
+.p-name { color: #888; font-size: 12px; margin-left: 4px; }
+
+/* Bar chart */
+.bar-wrap { display: flex; align-items: center; gap: 8px; margin-bottom: 6px; }
+.bar-label { width: 80px; font-size: 12px; color: #aaa; text-align: right; flex-shrink: 0; }
+.bar-track { flex: 1; height: 20px; background: #141414; border-radius: 4px; overflow: hidden; }
+.bar-fill { height: 100%; border-radius: 4px; transition: width 0.3s; display: flex; align-items: center; padding-left: 6px; font-size: 10px; color: #fff; font-weight: 600; }
+.bar-value { font-size: 12px; color: #666; width: 60px; flex-shrink: 0; }
+
+/* ER badge */
+.er { display: inline-block; padding: 2px 6px; border-radius: 4px; font-size: 11px; font-weight: 600; }
+.er-excellent { background: #0d3320; color: #10B981; }
+.er-good { background: #1a2e1a; color: #86efac; }
+.er-average { background: #2a2000; color: #F59E0B; }
+.er-poor { background: #2a1010; color: #EF4444; }
+
+/* Author compare */
+.author-card { background: #141414; border: 1px solid #222; border-radius: 10px; padding: 16px; margin-bottom: 12px; display: flex; align-items: center; gap: 16px; }
+.author-dot { width: 12px; height: 12px; border-radius: 50%; flex-shrink: 0; }
+.author-name { font-weight: 600; color: #fff; font-size: 14px; width: 80px; flex-shrink: 0; }
+.author-stats { display: flex; gap: 20px; flex: 1; }
+.author-stat { text-align: center; }
+.author-stat-val { font-size: 18px; font-weight: 700; color: #fff; }
+.author-stat-lbl { font-size: 10px; color: #555; text-transform: uppercase; }
+
+/* Freshness table */
+.freshness-table td { padding: 6px 10px; }
+.freshness-table .platform-col { width: 120px; }
+
+/* Trend bars */
+.trend-row { display: flex; align-items: flex-end; gap: 2px; height: 120px; margin-bottom: 8px; }
+.trend-bar { flex: 1; background: #3B82F6; border-radius: 3px 3px 0 0; min-width: 8px; position: relative; transition: height 0.3s; }
+.trend-bar:hover { opacity: 0.8; }
+.trend-bar::after { content: attr(data-val); position: absolute; top: -18px; left: 50%; transform: translateX(-50%); font-size: 10px; color: #666; white-space: nowrap; display: none; }
+.trend-bar:hover::after { display: block; }
+.trend-labels { display: flex; gap: 2px; }
+.trend-labels span { flex: 1; text-align: center; font-size: 10px; color: #444; min-width: 8px; }
+
+/* Follower card */
+.follower-card { background: #141414; border: 1px solid #222; border-radius: 10px; padding: 16px; display: flex; align-items: center; gap: 12px; margin-bottom: 8px; }
+.follower-card .fc-icon { width: 36px; height: 36px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 14px; font-weight: 700; color: #fff; flex-shrink: 0; }
+.follower-card .fc-name { font-size: 14px; color: #ccc; flex: 1; }
+.follower-card .fc-count { font-size: 24px; font-weight: 700; color: #fff; }
+
+/* Trend metric buttons */
+.trend-btn { background: #1a1a1a; color: #666; border: 1px solid #333; border-radius: 4px; padding: 4px 10px; font-size: 11px; cursor: pointer; transition: all .15s; }
+.trend-btn:hover { color: #ccc; border-color: #555; }
+.trend-btn.active { background: #3B82F6; color: #fff; border-color: #3B82F6; }
+
+/* Date filter */
+.date-filter { display: flex; gap: 8px; align-items: center; margin-bottom: 16px; flex-wrap: wrap; }
+.date-filter label { font-size: 12px; color: #666; }
+.date-filter input[type="date"] { background: #1a1a1a; color: #ccc; border: 1px solid #333; border-radius: 6px; padding: 5px 10px; font-size: 12px; font-family: inherit; }
+.date-filter input[type="date"]::-webkit-calendar-picker-indicator { filter: invert(0.7); }
+.date-filter .date-preset { background: #1a1a1a; color: #666; border: 1px solid #333; border-radius: 4px; padding: 4px 10px; font-size: 11px; cursor: pointer; transition: all .15s; }
+.date-filter .date-preset:hover { color: #ccc; border-color: #555; }
+.date-filter .date-preset.active { background: #3B82F6; color: #fff; border-color: #3B82F6; }
+
+/* Empty state */
+.empty-state { text-align: center; padding: 60px 20px; color: #444; }
+.empty-state h2 { font-size: 18px; color: #555; margin-bottom: 8px; }
+.empty-state p { font-size: 13px; }
+
+/* Data source indicator */
+.data-source { font-size: 10px; color: #444; text-align: right; margin-bottom: 8px; }
+
+/* Responsive */
+@media (max-width: 700px) {
+  body { padding: 10px; }
+  .stat { min-width: 70px; padding: 8px 10px; }
+  .stat-num { font-size: 20px; }
+  .author-card { flex-wrap: wrap; }
+  .author-stats { flex-wrap: wrap; gap: 10px; }
+  .p-name { display: none; }
+  .bar-label { width: 60px; font-size: 11px; }
+}
+</style>
+</head>
+<body>
+<div class="container">
+
+  <div class="nav">
+    <span class="nav-brand">Zinin Corp</span>
+    <a href="overview.html">Обзор</a>
+    <a href="content.html">Календарь</a>
+    <a href="analytics.html" class="active">Аналитика</a>
+    <a href="connectors.html">Коннекторы</a>
+    <a href="tasks.html">Задачи</a>
+  </div>
+
+  <h1>Analytics</h1>
+  <p class="subtitle" id="subtitle">Загрузка данных...</p>
+
+  <div class="stats" id="top-stats"></div>
+
+  <div class="date-filter" id="date-filter">
+    <label>Период:</label>
+    <button class="date-preset active" data-range="all">Всё время</button>
+    <button class="date-preset" data-range="7d">7 дней</button>
+    <button class="date-preset" data-range="30d">30 дней</button>
+    <label style="margin-left:8px">С:</label>
+    <input type="date" id="date-from" value="">
+    <label>По:</label>
+    <input type="date" id="date-to" value="">
+    <button class="date-preset" id="date-apply" style="background:#2563EB;color:#fff;border-color:#2563EB">Применить</button>
+  </div>
+
+  <div class="tabs">
+    <div class="tab active" data-tab="overview">Overview</div>
+    <div class="tab" data-tab="posts">По постам</div>
+    <div class="tab" data-tab="followers">Подписчики</div>
+    <div class="tab" data-tab="trends">Тренды</div>
+    <div class="tab" data-tab="crm">CRM & UTM</div>
+  </div>
+
+  <!-- TAB: Overview -->
+  <div class="tab-content active" id="tab-overview">
+    <div id="platform-bars"></div>
+    <h3 style="color:#fff; font-size:14px; margin: 24px 0 12px;">Платформы</h3>
+    <p class="data-source">* данные рассчитаны из метрик отдельных постов</p>
+    <table id="platform-table">
+      <thead>
+        <tr>
+          <th>Платформа</th>
+          <th class="num">Постов</th>
+          <th class="num">Views</th>
+          <th class="num">Likes</th>
+          <th class="num">Comments</th>
+          <th class="num">Shares</th>
+          <th class="num">ER%</th>
+          <th>Статус</th>
+        </tr>
+      </thead>
+      <tbody id="platform-tbody"></tbody>
+    </table>
+    <h3 style="color:#fff; font-size:14px; margin: 24px 0 12px;">Авторы</h3>
+    <div id="author-compare"></div>
+  </div>
+
+  <!-- TAB: Per Post -->
+  <div class="tab-content" id="tab-posts">
+    <table id="posts-table">
+      <thead>
+        <tr>
+          <th data-sort="date">Дата</th>
+          <th data-sort="platform">Платформа</th>
+          <th data-sort="author">Автор</th>
+          <th>Тема</th>
+          <th class="num" data-sort="views">Views</th>
+          <th class="num" data-sort="likes">Likes</th>
+          <th class="num" data-sort="comments">Cmts</th>
+          <th class="num" data-sort="shares">Shares</th>
+          <th class="num" data-sort="er">ER%</th>
+        </tr>
+      </thead>
+      <tbody id="posts-tbody"></tbody>
+    </table>
+  </div>
+
+  <!-- TAB: Followers -->
+  <div class="tab-content" id="tab-followers">
+    <div class="stats" id="followers-top-stats"></div>
+    <h3 style="color:#fff; font-size:14px; margin: 0 0 12px;">По платформам</h3>
+    <div id="followers-bars"></div>
+    <div id="followers-cards"></div>
+  </div>
+
+  <!-- TAB: Trends -->
+  <div class="tab-content" id="tab-trends">
+    <div style="display:flex;gap:8px;align-items:center;margin-bottom:16px;flex-wrap:wrap">
+      <span style="color:#666;font-size:12px">Метрика:</span>
+      <div id="trend-metric-btns" style="display:flex;gap:4px">
+        <button class="trend-btn active" data-metric="views">Views</button>
+        <button class="trend-btn" data-metric="engagement">Engagement</button>
+        <button class="trend-btn" data-metric="er">ER%</button>
+      </div>
+      <span style="color:#666;font-size:12px;margin-left:12px">Платформа:</span>
+      <select id="trend-platform-filter" style="background:#1a1a1a;color:#ccc;border:1px solid #333;border-radius:4px;padding:4px 8px;font-size:12px">
+        <option value="all">Все</option>
+      </select>
+    </div>
+    <div id="trend-chart"></div>
+    <h3 style="color:#fff; font-size:14px; margin: 24px 0 12px;">Свежесть данных</h3>
+    <table class="freshness-table" id="freshness-table">
+      <thead>
+        <tr>
+          <th class="platform-col">Платформа</th>
+          <th>Последний сбор</th>
+          <th>Статус</th>
+        </tr>
+      </thead>
+      <tbody id="freshness-tbody"></tbody>
+    </table>
+  </div>
+
+  <!-- TAB: CRM -->
+  <div class="tab-content" id="tab-crm">
+    <div id="crm-stats" style="display:flex;gap:10px;margin-bottom:20px;flex-wrap:wrap"></div>
+    <h3 style="color:#fff;font-size:14px;margin-bottom:12px">UTM Sources &rarr; CRM Leads</h3>
+    <table><thead><tr><th>UTM Source</th><th class="num">Leads</th><th>Platform</th><th>Author</th><th>Date</th></tr></thead><tbody id="utm-tbody"></tbody></table>
+    <h3 style="color:#fff;font-size:14px;margin:20px 0 12px">Platform &rarr; Leads (from UTM)</h3>
+    <div id="platform-leads-bars"></div>
+  </div>
+
+</div>
+
+<script>
+(function() {
+  const PLATFORM_COLORS = {
+    // Social networks (19)
+    linkedin: '#0A66C2', threads: '#888', telegram: '#0088cc', facebook: '#1877F2',
+    vk: '#4680C2', bluesky: '#0085FF', 'ok.ru': '#EE8208', 'vc.ru': '#555',
+    'dev.to': '#333', youtube: '#FF0000', mastodon: '#6364FF',
+    instagram: '#E4405F', tiktok: '#010101',
+    nostr: '#8B5CF6', hashnode: '#2962FF', minds: '#FFC107',
+    'write.as': '#4FC3F7', tumblr: '#36465D', medium: '#121212', dzen: '#FFCC00',
+    // Podcasts (7)
+    mave: '#FF6B35', 'spotify-podcast': '#1DB954', 'apple-podcasts': '#D56DFB',
+    'deezer-podcast': '#A238FF', 'pocket-casts': '#F43E37',
+    'yandex-music': '#FC3F1D', 'tg-podcast': '#0088cc'
+  };
+  const PLATFORM_ICONS = {
+    // Social networks
+    linkedin: 'in', threads: '@', telegram: 'TG', facebook: 'fb',
+    vk: 'VK', bluesky: 'BS', 'ok.ru': 'OK', 'vc.ru': 'VC',
+    'dev.to': 'DEV', youtube: 'YT', mastodon: 'M',
+    instagram: 'IG', tiktok: 'TT',
+    nostr: 'NR', hashnode: 'HN', minds: 'MI',
+    'write.as': 'WA', tumblr: 'TB', medium: 'MD', dzen: 'DZ',
+    // Podcasts
+    mave: 'MV', 'spotify-podcast': 'SP', 'apple-podcasts': 'AP',
+    'deezer-podcast': 'DZ', 'pocket-casts': 'PC',
+    'yandex-music': 'YM', 'tg-podcast': 'TG'
+  };
+  const PODCAST_PLATFORMS = new Set([
+    'mave', 'spotify-podcast', 'apple-podcasts', 'deezer-podcast',
+    'pocket-casts', 'yandex-music', 'tg-podcast'
+  ]);
+  const AUTHOR_COLORS = { tim: '#2563EB' };
+
+  let DATA = null;
+  let sortCol = null, sortDir = 'desc';
+  let dateFrom = null, dateTo = null;
+
+  fetch('analytics.json')
+    .then(r => r.json())
+    .then(data => { DATA = data; render(); })
+    .catch(() => {
+      document.getElementById('subtitle').textContent = 'Не удалось загрузить analytics.json';
+    });
+
+  function getFilteredPosts() {
+    const posts = Object.entries(DATA.posts).map(([id, p]) => ({ id, ...p }));
+    if (!dateFrom && !dateTo) return posts;
+    return posts.filter(p => {
+      if (!p.date) return true;
+      if (dateFrom && p.date < dateFrom) return false;
+      if (dateTo && p.date > dateTo) return false;
+      return true;
+    });
+  }
+
+  // KEY FIX: Compute platform totals from actual post data (source of truth)
+  // instead of trusting platform-level totals which may be stale/wrong
+  function computePlatformTotals() {
+    const posts = getFilteredPosts();
+    const byPlat = {};
+
+    // Initialize all known platforms from DATA.platforms (for status metadata)
+    if (DATA.platforms) {
+      Object.entries(DATA.platforms).forEach(([p, d]) => {
+        byPlat[p] = {
+          count: 0,
+          views: 0,
+          likes: 0,
+          comments: 0,
+          shares: 0,
+          status: d.status || 'pending',
+          last_collected: d.last_collected,
+          type: d.type || (PODCAST_PLATFORMS.has(p) ? 'podcast' : 'social')
+        };
+      });
+    }
+
+    // Aggregate metrics from individual posts (ground truth)
+    posts.forEach(p => {
+      const plat = p.platform;
+      if (!byPlat[plat]) {
+        byPlat[plat] = { count: 0, views: 0, likes: 0, comments: 0, shares: 0, status: 'ok', type: PODCAST_PLATFORMS.has(plat) ? 'podcast' : 'social' };
+      }
+      byPlat[plat].count++;
+      byPlat[plat].views += p.metrics?.views || 0;
+      byPlat[plat].likes += p.metrics?.likes || 0;
+      byPlat[plat].comments += p.metrics?.comments || 0;
+      byPlat[plat].shares += p.metrics?.shares || 0;
+    });
+
+    // If a platform has posts with real metrics, its effective status is "ok"
+    for (const [name, d] of Object.entries(byPlat)) {
+      if (d.count > 0 && (d.views > 0 || d.likes > 0 || d.shares > 0)) {
+        d.status = 'ok';
+      }
+    }
+
+    return byPlat;
+  }
+
+  function render() {
+    renderSubtitle();
+    renderTopStats();
+    renderPlatformTable();
+    renderPlatformBars();
+    renderAuthorCompare();
+    renderPostsTable();
+    renderFollowers();
+    renderTrends();
+    renderFreshness();
+    renderCRM();
+  }
+
+  function renderSubtitle() {
+    const meta = DATA.meta;
+    const dt = meta.generated_at ? new Date(meta.generated_at) : null;
+    const timeStr = dt ? dt.toLocaleString('ru-RU', { timeZone: 'Europe/Moscow', hour: '2-digit', minute: '2-digit', day: '2-digit', month: '2-digit' }) : '—';
+    const hasPending = Object.values(DATA.platforms).some(p => p.status === 'pending');
+    const dotClass = hasPending ? 'dot-pending' : 'dot-fresh';
+    const label = hasPending ? 'коллектор не запущен' : 'актуально';
+    document.getElementById('subtitle').innerHTML =
+      `Данные: ${timeStr} MSK <span class="freshness"><span class="dot ${dotClass}"></span>${label}</span>`;
+  }
+
+  function renderTopStats() {
+    const posts = getFilteredPosts();
+    // Compute totals from posts (source of truth)
+    const byPlat = computePlatformTotals();
+    let totalViews = 0, totalLikes = 0, totalComments = 0, totalShares = 0;
+    let platformCount = 0, okCount = 0, issueCount = 0;
+    for (const [name, p] of Object.entries(byPlat)) {
+      totalViews += p.views;
+      totalLikes += p.likes;
+      totalComments += p.comments;
+      totalShares += p.shares;
+      platformCount++;
+      if (p.status === 'ok') okCount++;
+      else issueCount++;
+    }
+    const totalEng = totalLikes + totalComments + totalShares;
+    const er = totalViews > 0 ? ((totalEng / totalViews) * 100).toFixed(1) : '—';
+
+    // Total followers
+    const followers = DATA.followers || {};
+    const totalFollowers = Object.values(followers).reduce((s, v) => s + (typeof v === 'number' ? v : (v?.current || 0)), 0);
+
+    document.getElementById('top-stats').innerHTML = `
+      <div class="stat"><span class="stat-num">${fmt(totalViews)}</span><span class="stat-label">охват</span></div>
+      <div class="stat"><span class="stat-num">${fmt(totalEng)}</span><span class="stat-label">взаимодействия</span></div>
+      <div class="stat"><span class="stat-num">${er}%</span><span class="stat-label">ER</span></div>
+      <div class="stat"><span class="stat-num">${posts.length}</span><span class="stat-label">постов</span></div>
+      <div class="stat"><span class="stat-num">${fmt(totalFollowers)}</span><span class="stat-label">подписчиков</span></div>
+      <div class="stat"><span class="stat-num" style="color:#10b981">${okCount}</span><span class="stat-label">платформ ОК</span></div>
+      <div class="stat"><span class="stat-num" style="color:${issueCount > 0 ? '#ef4444' : '#10b981'}">${issueCount}</span><span class="stat-label">с проблемами</span></div>
+    `;
+  }
+
+  function renderPlatformTable() {
+    const byPlat = computePlatformTotals();
+
+    const STATUS_LABELS = {
+      ok: '&#9989; OK', needs_reauth: '&#10060; reauth', needs_telethon: '&#9888;&#65039; telethon',
+      needs_permission: '&#9888;&#65039; permission', needs_permissions: '&#9888;&#65039; permissions',
+      pending: '&#8987; pending', error: '&#10060; error'
+    };
+
+    function platformRow(name, d) {
+      const eng = d.likes + d.comments + d.shares;
+      const er = d.views > 0 ? ((eng / d.views) * 100).toFixed(1) : '—';
+      const erClass = er === '—' ? '' : er >= 6 ? 'er-excellent' : er >= 3 ? 'er-good' : er >= 1 ? 'er-average' : 'er-poor';
+      const color = PLATFORM_COLORS[name] || '#666';
+      const icon = PLATFORM_ICONS[name] || '?';
+      const statusLabel = STATUS_LABELS[d.status] || d.status || '—';
+      const statusColor = d.status === 'ok' ? '#10b981' : d.status?.startsWith('needs') ? '#f59e0b' : '#666';
+      const countLabel = d.type === 'podcast' ? 'эп.' : '';
+      return `<tr>
+        <td><span class="p-badge" style="background:${color}">${icon}</span> <span class="p-name">${name}</span></td>
+        <td class="num">${d.count}${countLabel ? ' <span style="color:#555;font-size:10px">' + countLabel + '</span>' : ''}</td>
+        <td class="num">${fmt(d.views)}</td>
+        <td class="num">${fmt(d.likes)}</td>
+        <td class="num">${fmt(d.comments)}</td>
+        <td class="num">${fmt(d.shares)}</td>
+        <td class="num"><span class="er ${erClass}">${er}${er !== '—' ? '%' : ''}</span></td>
+        <td style="color:${statusColor};font-size:11px">${statusLabel}</td>
+      </tr>`;
+    }
+
+    // Split into social and podcast groups
+    const social = Object.entries(byPlat).filter(([n, d]) => d.type !== 'podcast');
+    const podcasts = Object.entries(byPlat).filter(([n, d]) => d.type === 'podcast');
+    const sortFn = (a, b) => b[1].views - a[1].views || b[1].count - a[1].count || a[0].localeCompare(b[0]);
+    social.sort(sortFn);
+    podcasts.sort(sortFn);
+
+    let html = '';
+    if (social.length > 0) {
+      html += `<tr><td colspan="8" style="padding:10px 10px 4px;color:#888;font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:1px;border-bottom:1px solid #222;background:#0d0d0d">Соцсети (${social.length})</td></tr>`;
+      html += social.map(([n, d]) => platformRow(n, d)).join('');
+    }
+    if (podcasts.length > 0) {
+      html += `<tr><td colspan="8" style="padding:14px 10px 4px;color:#888;font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:1px;border-bottom:1px solid #222;background:#0d0d0d">Подкасты (${podcasts.length})</td></tr>`;
+      html += podcasts.map(([n, d]) => platformRow(n, d)).join('');
+    }
+
+    document.getElementById('platform-tbody').innerHTML = html || '<tr><td colspan="8" style="color:#444;text-align:center;padding:20px;">Нет данных.</td></tr>';
+  }
+
+  function renderPlatformBars() {
+    const byPlat = computePlatformTotals();
+    const viewsMap = {};
+    Object.entries(byPlat).forEach(([p, d]) => { viewsMap[p] = d.views; });
+    const maxVal = Math.max(...Object.values(viewsMap), 1);
+    const sorted = Object.entries(viewsMap).sort((a, b) => b[1] - a[1]);
+    if (sorted.length === 0 || maxVal === 0) { document.getElementById('platform-bars').innerHTML = ''; return; }
+
+    document.getElementById('platform-bars').innerHTML = sorted.map(([name, val]) => {
+      const pct = (val / maxVal * 100).toFixed(0);
+      const color = PLATFORM_COLORS[name] || '#666';
+      return `<div class="bar-wrap"><span class="bar-label">${name}</span><div class="bar-track"><div class="bar-fill" style="width:${Math.max(pct,1)}%;background:${color}">${pct > 15 ? fmt(val) : ''}</div></div><span class="bar-value">${fmt(val)}</span></div>`;
+    }).join('');
+  }
+
+  function renderAuthorCompare() {
+    const posts = getFilteredPosts();
+    const byAuth = {};
+    posts.forEach(p => {
+      if (!byAuth[p.author]) byAuth[p.author] = { count: 0, views: 0, likes: 0, comments: 0, shares: 0 };
+      const b = byAuth[p.author]; b.count++; b.views += p.metrics?.views||0; b.likes += p.metrics?.likes||0; b.comments += p.metrics?.comments||0; b.shares += p.metrics?.shares||0;
+    });
+
+    document.getElementById('author-compare').innerHTML = Object.entries(byAuth).map(([name, d]) => {
+      const eng = d.likes + d.comments + d.shares;
+      const er = d.views > 0 ? ((eng / d.views) * 100).toFixed(1) : '—';
+      const avg = d.count > 0 ? Math.round(d.views / d.count) : 0;
+      const color = AUTHOR_COLORS[name] || '#666';
+      const label = name === 'tim' ? 'Тим' : name;
+      return `<div class="author-card"><span class="author-dot" style="background:${color}"></span><span class="author-name">${label}</span><div class="author-stats">
+        <div class="author-stat"><div class="author-stat-val">${d.count}</div><div class="author-stat-lbl">постов</div></div>
+        <div class="author-stat"><div class="author-stat-val">${fmt(d.views)}</div><div class="author-stat-lbl">views</div></div>
+        <div class="author-stat"><div class="author-stat-val">${fmt(eng)}</div><div class="author-stat-lbl">engagement</div></div>
+        <div class="author-stat"><div class="author-stat-val">${er}%</div><div class="author-stat-lbl">ER</div></div>
+        <div class="author-stat"><div class="author-stat-val">${fmt(avg)}</div><div class="author-stat-lbl">avg/пост</div></div>
+      </div></div>`;
+    }).join('') || '<p style="color:#444">Нет данных</p>';
+  }
+
+  function renderPostsTable() {
+    const posts = getFilteredPosts();
+    if (posts.length === 0) { document.getElementById('posts-tbody').innerHTML = '<tr><td colspan="9" style="color:#444;text-align:center;padding:40px;">Нет данных.</td></tr>'; return; }
+
+    if (sortCol) {
+      posts.sort((a, b) => {
+        let va, vb;
+        if (sortCol === 'date') { va = a.date; vb = b.date; }
+        else if (sortCol === 'platform') { va = a.platform; vb = b.platform; }
+        else if (sortCol === 'author') { va = a.author; vb = b.author; }
+        else if (sortCol === 'views') { va = a.metrics?.views||0; vb = b.metrics?.views||0; }
+        else if (sortCol === 'likes') { va = a.metrics?.likes||0; vb = b.metrics?.likes||0; }
+        else if (sortCol === 'comments') { va = a.metrics?.comments||0; vb = b.metrics?.comments||0; }
+        else if (sortCol === 'shares') { va = a.metrics?.shares||0; vb = b.metrics?.shares||0; }
+        else if (sortCol === 'er') {
+          const ea = (a.metrics?.likes||0)+(a.metrics?.comments||0)+(a.metrics?.shares||0);
+          const eb = (b.metrics?.likes||0)+(b.metrics?.comments||0)+(b.metrics?.shares||0);
+          va = (a.metrics?.views||0) > 0 ? ea/(a.metrics?.views||1) : 0;
+          vb = (b.metrics?.views||0) > 0 ? eb/(b.metrics?.views||1) : 0;
+        }
+        if (typeof va === 'string') return sortDir === 'asc' ? va.localeCompare(vb) : vb.localeCompare(va);
+        return sortDir === 'asc' ? va - vb : vb - va;
+      });
+    }
+
+    document.getElementById('posts-tbody').innerHTML = posts.map(p => {
+      const eng = (p.metrics?.likes||0)+(p.metrics?.comments||0)+(p.metrics?.shares||0);
+      const er = (p.metrics?.views||0) > 0 ? ((eng/p.metrics.views)*100).toFixed(1) : '—';
+      const erClass = er === '—' ? '' : er >= 6 ? 'er-excellent' : er >= 3 ? 'er-good' : er >= 1 ? 'er-average' : 'er-poor';
+      const color = PLATFORM_COLORS[p.platform]||'#666';
+      const icon = PLATFORM_ICONS[p.platform]||'?';
+      const topic = (p.topic||'').substring(0,40);
+      return `<tr><td>${p.date||'—'}</td><td><span class="p-badge" style="background:${color}">${icon}</span> <span class="p-name">${p.platform}</span></td><td>Тим</td><td style="color:#ddd;max-width:250px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${topic}</td><td class="num">${fmt(p.metrics?.views||0)}</td><td class="num">${fmt(p.metrics?.likes||0)}</td><td class="num">${fmt(p.metrics?.comments||0)}</td><td class="num">${fmt(p.metrics?.shares||0)}</td><td class="num"><span class="er ${erClass}">${er}${er!=='—'?'%':''}</span></td></tr>`;
+    }).join('');
+  }
+
+  function renderFollowers() {
+    const followers = DATA.followers || {};
+    const entries = Object.entries(followers).filter(([,v]) => v != null).sort((a,b) => b[1] - a[1]);
+    const total = entries.reduce((s, [,v]) => s + v, 0);
+    const maxVal = entries.length > 0 ? entries[0][1] : 1;
+
+    document.getElementById('followers-top-stats').innerHTML = `
+      <div class="stat"><span class="stat-num">${fmt(total)}</span><span class="stat-label">всего подписчиков</span></div>
+      <div class="stat"><span class="stat-num">${entries.length}</span><span class="stat-label">платформ</span></div>
+    `;
+
+    // Bar chart
+    document.getElementById('followers-bars').innerHTML = entries.map(([name, val]) => {
+      const pct = maxVal > 0 ? (val / maxVal * 100).toFixed(0) : 0;
+      const color = PLATFORM_COLORS[name] || '#666';
+      return `<div class="bar-wrap"><span class="bar-label">${name}</span><div class="bar-track"><div class="bar-fill" style="width:${Math.max(pct,2)}%;background:${color}">${pct > 15 ? fmt(val) : ''}</div></div><span class="bar-value">${fmt(val)}</span></div>`;
+    }).join('') || '<p style="color:#444">Нет данных о подписчиках</p>';
+
+    // Cards
+    document.getElementById('followers-cards').innerHTML = '<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:8px;margin-top:16px;">' +
+      entries.map(([name, val]) => {
+        const color = PLATFORM_COLORS[name] || '#666';
+        const icon = PLATFORM_ICONS[name] || '?';
+        return `<div class="follower-card"><div class="fc-icon" style="background:${color}">${icon}</div><div class="fc-name">${name}</div><div class="fc-count">${fmt(val)}</div></div>`;
+      }).join('') + '</div>';
+  }
+
+  let trendMetric = 'views';
+  let trendPlatform = 'all';
+
+  function renderTrends() {
+    const posts = getFilteredPosts();
+    if (posts.length === 0) { document.getElementById('trend-chart').innerHTML = '<div class="empty-state"><p>Нет данных</p></div>'; return; }
+
+    // Populate platform filter
+    const sel = document.getElementById('trend-platform-filter');
+    const platforms = [...new Set(posts.map(p => p.platform))].sort();
+    if (sel.options.length <= 1) {
+      platforms.forEach(p => { const o = document.createElement('option'); o.value = p; o.textContent = p; sel.appendChild(o); });
+    }
+    sel.value = trendPlatform;
+
+    // Filter posts
+    const filtered = trendPlatform === 'all' ? posts : posts.filter(p => p.platform === trendPlatform);
+
+    // Aggregate by date
+    const byDate = {};
+    filtered.forEach(p => {
+      if (!p.date) return;
+      if (!byDate[p.date]) byDate[p.date] = { views: 0, likes: 0, comments: 0, shares: 0 };
+      const d = byDate[p.date];
+      d.views += p.metrics?.views || 0;
+      d.likes += p.metrics?.likes || 0;
+      d.comments += p.metrics?.comments || 0;
+      d.shares += p.metrics?.shares || 0;
+    });
+
+    const dates = Object.keys(byDate).sort();
+    const values = dates.map(d => {
+      const r = byDate[d];
+      const eng = r.likes + r.comments + r.shares;
+      if (trendMetric === 'views') return r.views;
+      if (trendMetric === 'engagement') return eng;
+      if (trendMetric === 'er') return r.views > 0 ? parseFloat(((eng / r.views) * 100).toFixed(1)) : 0;
+      return r.views;
+    });
+
+    const maxVal = Math.max(...values, 1);
+    const isPercent = trendMetric === 'er';
+    const color = trendMetric === 'views' ? '#3B82F6' : trendMetric === 'engagement' ? '#10B981' : '#F59E0B';
+
+    document.getElementById('trend-chart').innerHTML = `
+      <div class="trend-row">${dates.map((d, i) => `<div class="trend-bar" style="height:${Math.max((values[i]/maxVal*100).toFixed(0),2)}%;background:${color}" data-val="${isPercent ? values[i]+'%' : fmt(values[i])}"></div>`).join('')}</div>
+      <div class="trend-labels">${dates.map(d => `<span>${d.split('-')[2]}.${d.split('-')[1]}</span>`).join('')}</div>
+    `;
+  }
+
+  function renderFreshness() {
+    document.getElementById('freshness-tbody').innerHTML = Object.entries(DATA.platforms).map(([name, p]) => {
+      let statusDot, statusText;
+      if (p.status === 'needs_reauth') { statusDot='dot-error'; statusText='нужна re-auth'; }
+      else if (p.status === 'needs_user_token') { statusDot='dot-error'; statusText='нужен user token'; }
+      else if (p.status === 'needs_telethon') { statusDot='dot-error'; statusText='нужен Telethon'; }
+      else if (p.status === 'needs_permission') { statusDot='dot-error'; statusText='нужна модерация'; }
+      else if (p.status === 'needs_permissions') { statusDot='dot-error'; statusText='нужны permissions'; }
+      else if (p.status === 'error') { statusDot='dot-stale'; statusText='ошибка'; }
+      else if (p.status === 'pending' || !p.last_collected) { statusDot='dot-pending'; statusText='ожидает'; }
+      else {
+        const age = (Date.now() - new Date(p.last_collected).getTime()) / 3600000;
+        if (age < 2) { statusDot='dot-fresh'; statusText='актуально'; }
+        else if (age < 6) { statusDot='dot-aging'; statusText='устаревает'; }
+        else { statusDot='dot-stale'; statusText='устарело'; }
+      }
+      const timeStr = p.last_collected ? new Date(p.last_collected).toLocaleString('ru-RU', { timeZone:'Europe/Moscow', hour:'2-digit', minute:'2-digit', day:'2-digit', month:'2-digit' }) : '—';
+      const color = PLATFORM_COLORS[name]||'#666';
+      const icon = PLATFORM_ICONS[name]||'?';
+      return `<tr><td><span class="p-badge" style="background:${color}">${icon}</span> <span class="p-name">${name}</span></td><td style="color:#888">${timeStr}</td><td><span class="dot ${statusDot}"></span> ${statusText}</td></tr>`;
+    }).join('');
+  }
+
+  function renderCRM() {
+    var crm = DATA.crm_utm;
+    if (!crm) { document.getElementById('crm-stats').innerHTML = '<div class="empty-state"><p>CRM UTM data not collected yet.</p></div>'; return; }
+    document.getElementById('crm-stats').innerHTML = [
+      '<div class="stat"><span class="stat-num">'+crm.total_users+'</span><span class="stat-label">USERS</span></div>',
+      '<div class="stat"><span class="stat-num">'+crm.paid_users+'</span><span class="stat-label">PAID</span></div>',
+      '<div class="stat"><span class="stat-num">'+crm.trial_users+'</span><span class="stat-label">TRIAL</span></div>',
+      '<div class="stat"><span class="stat-num">'+crm.team_users+'</span><span class="stat-label">TEAM</span></div>',
+      '<div class="stat"><span class="stat-num">'+crm.conversion_rate+'%</span><span class="stat-label">CONVERSION</span></div>',
+    ].join('');
+
+    var utmSources = crm.utm_sources || {};
+    var rows = Object.entries(utmSources).filter(function(e){return e[0]!=='direct';}).sort(function(a,b){return b[1]-a[1];}).map(function(entry) {
+      var src=entry[0],count=entry[1]; var parts=src.split('_');
+      var pm={li:'linkedin',th:'threads',tg:'telegram',vk:'vk',fb:'facebook',bs:'bluesky'};
+      return '<tr><td>'+src+'</td><td class="num">'+count+'</td><td>'+(pm[parts[0]]||parts[0])+'</td><td>'+(parts[1]||'—')+'</td><td>'+(parts.length>2?parts.slice(2).join('_'):'—')+'</td></tr>';
+    }).join('');
+    rows += '<tr style="border-top:2px solid #333"><td><b>direct</b></td><td class="num"><b>'+(utmSources.direct||0)+'</b></td><td>—</td><td>—</td><td>—</td></tr>';
+    document.getElementById('utm-tbody').innerHTML = rows;
+
+    var leads=crm.platform_leads||{};
+    var sorted=Object.entries(leads).sort(function(a,b){return b[1]-a[1];});
+    var maxVal=sorted.length>0?sorted[0][1]:1;
+    var PC={linkedin:'#0077B5',threads:'#000',telegram:'#26A5E4',vk:'#4680C2',facebook:'#1877F2',bluesky:'#0085FF',webinar2:'#10B981',webinar3:'#F59E0B',ref:'#8B5CF6'};
+    document.getElementById('platform-leads-bars').innerHTML = sorted.map(function(e){var n=e[0],v=e[1],p=Math.round(v/maxVal*100),c=PC[n]||'#666';return '<div class="bar-wrap"><span class="bar-label">'+n+'</span><div class="bar-track"><div class="bar-fill" style="width:'+p+'%;background:'+c+'">'+(p>15?v:'')+'</div></div><span class="bar-value">'+v+'</span></div>';}).join('');
+  }
+
+  function fmt(n) {
+    if (n >= 1000000) return (n/1000000).toFixed(1)+'M';
+    if (n >= 1000) return (n/1000).toFixed(1)+'K';
+    return String(n);
+  }
+
+  // Tab switching
+  document.querySelectorAll('.tab').forEach(tab => {
+    tab.addEventListener('click', () => {
+      document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+      document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+      tab.classList.add('active');
+      document.getElementById('tab-'+tab.dataset.tab).classList.add('active');
+    });
+  });
+
+  // Column sorting
+  document.querySelectorAll('#posts-table th[data-sort]').forEach(th => {
+    th.addEventListener('click', () => {
+      const col = th.dataset.sort;
+      if (sortCol === col) sortDir = sortDir === 'asc' ? 'desc' : 'asc';
+      else { sortCol = col; sortDir = 'desc'; }
+      document.querySelectorAll('#posts-table th').forEach(h => h.classList.remove('sorted-asc','sorted-desc'));
+      th.classList.add(sortDir === 'asc' ? 'sorted-asc' : 'sorted-desc');
+      renderPostsTable();
+    });
+  });
+
+  // Trend metric buttons
+  document.querySelectorAll('.trend-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.trend-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      trendMetric = btn.dataset.metric;
+      renderTrends();
+    });
+  });
+
+  // Trend platform filter
+  document.getElementById('trend-platform-filter').addEventListener('change', (e) => {
+    trendPlatform = e.target.value;
+    renderTrends();
+  });
+
+  // Date filter presets
+  document.querySelectorAll('.date-preset[data-range]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.date-preset[data-range]').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const range = btn.dataset.range;
+      if (range === 'all') {
+        dateFrom = null; dateTo = null;
+        document.getElementById('date-from').value = '';
+        document.getElementById('date-to').value = '';
+      } else {
+        const days = parseInt(range);
+        const now = new Date();
+        const from = new Date(now); from.setDate(from.getDate() - days);
+        dateFrom = from.toISOString().split('T')[0];
+        dateTo = now.toISOString().split('T')[0];
+        document.getElementById('date-from').value = dateFrom;
+        document.getElementById('date-to').value = dateTo;
+      }
+      if (DATA) render();
+    });
+  });
+
+  // Date filter apply button
+  document.getElementById('date-apply').addEventListener('click', () => {
+    const fromVal = document.getElementById('date-from').value;
+    const toVal = document.getElementById('date-to').value;
+    dateFrom = fromVal || null;
+    dateTo = toVal || null;
+    document.querySelectorAll('.date-preset[data-range]').forEach(b => b.classList.remove('active'));
+    if (!dateFrom && !dateTo) {
+      document.querySelector('.date-preset[data-range="all"]').classList.add('active');
+    }
+    if (DATA) render();
+  });
+
+  // Auto-refresh every 5 minutes
+  setInterval(function() {
+    fetch('analytics.json?' + Date.now()).then(r => r.json()).then(data => { DATA = data; render(); }).catch(function(){});
+  }, 300000);
+})();
+</script>
+</body>
+</html>

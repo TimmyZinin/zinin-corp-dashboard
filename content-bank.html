@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Банк контента | Zinin Corp</title>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;600;700&family=Onest:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="zinin-corp.css?v=20260306">
+<style>
+
+/* Stats */
+.stats{display:flex;gap:10px;margin-bottom:20px;flex-wrap:wrap}
+.stat{background:#141414;border:1px solid #222;border-radius:10px;padding:12px 16px;text-align:center;min-width:100px}
+.stat-num{display:block;font-size:24px;font-weight:700;color:#fff}
+.stat-label{font-size:10px;color:#666;text-transform:uppercase;letter-spacing:.5px}
+
+/* Filters */
+.filters{margin-bottom:16px;display:flex;gap:6px;flex-wrap:wrap}
+.filter-btn{background:#1a1a1a;border:1px solid #333;color:#aaa;padding:5px 12px;border-radius:6px;font-size:11px;cursor:pointer;transition:all .15s}
+.filter-btn:hover{border-color:#555;color:#fff}
+.filter-btn.active{border-color:#6c5ce7;color:#fff;background:rgba(108,92,231,.15)}
+
+/* Bank Item Card */
+.bank-item{background:#141420;border:1px solid #222;border-radius:10px;margin-bottom:12px;overflow:hidden;transition:all .15s}
+.bank-item:hover{border-color:#333}
+.bank-item-header{padding:14px 16px;cursor:pointer;display:flex;align-items:center;gap:12px}
+.bank-item-header:hover{background:#1a1a28}
+.bi-arrow{color:#555;font-size:12px;transition:transform .2s;flex-shrink:0}
+.bi-arrow.open{transform:rotate(90deg)}
+.bi-id{font-size:10px;color:#555;min-width:90px}
+.bi-category{font-size:9px;font-weight:600;padding:2px 8px;border-radius:3px;text-transform:uppercase;letter-spacing:.5px}
+.bi-title{flex:1;font-size:13px;color:#ddd;line-height:1.4}
+.bi-status{font-size:10px;padding:2px 8px;border-radius:10px;font-weight:600}
+.bi-tier{font-size:10px;color:#666;min-width:36px;text-align:center}
+.bi-deriv-count{font-size:10px;color:#555}
+
+/* Status colors */
+.s-raw{background:rgba(116,185,255,.15);color:#74b9ff}
+.s-processed{background:rgba(253,203,110,.15);color:#fdcb6e}
+.s-scheduled{background:rgba(108,92,231,.15);color:#a29bfe}
+.s-published{background:rgba(0,184,148,.15);color:#00b894}
+
+/* Category colors */
+.c-actionable{background:rgba(0,184,148,.15);color:#00b894}
+.c-analytical{background:rgba(116,185,255,.15);color:#74b9ff}
+.c-aspirational{background:rgba(253,203,110,.15);color:#fdcb6e}
+.c-anthropological{background:rgba(225,112,85,.15);color:#e17055}
+
+/* Derivatives panel */
+.bi-body{display:none;border-top:1px solid #1a1a2a;padding:14px 16px;background:#0d0d14}
+.bi-body.open{display:block}
+.bi-raw-text{font-size:12px;color:#888;line-height:1.6;margin-bottom:14px;padding:10px;background:#0a0a0a;border-radius:6px;border:1px solid #1a1a1a}
+.bi-raw-label{font-size:10px;color:#555;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px}
+.bi-tags{margin-bottom:12px}
+.bi-tag{display:inline-block;font-size:10px;color:#a29bfe;background:rgba(108,92,231,.1);border:1px solid rgba(108,92,231,.2);padding:1px 8px;border-radius:10px;margin-right:4px;margin-bottom:4px}
+.deriv-list{display:grid;gap:8px}
+.deriv-card{background:#141420;border:1px solid #222;border-radius:8px;padding:10px 14px;display:flex;align-items:flex-start;gap:10px}
+.deriv-card:hover{border-color:#333}
+.deriv-platform{font-size:10px;font-weight:700;padding:3px 8px;border-radius:4px;min-width:70px;text-align:center;flex-shrink:0}
+.deriv-text{font-size:11px;color:#999;line-height:1.5;flex:1;max-height:60px;overflow:hidden;text-overflow:ellipsis}
+.deriv-status{font-size:9px;padding:2px 6px;border-radius:3px;flex-shrink:0}
+.deriv-chars{font-size:9px;color:#555;flex-shrink:0}
+
+/* Platform badge colors */
+.dp-linkedin{background:rgba(10,102,194,.2);color:#0a66c2}
+.dp-threads{background:rgba(0,0,0,.3);color:#fff;border:1px solid #333}
+.dp-telegram{background:rgba(0,136,204,.2);color:#0088cc}
+.dp-facebook{background:rgba(24,119,242,.2);color:#1877f2}
+.dp-vk{background:rgba(0,119,255,.2);color:#0077ff}
+.dp-bluesky{background:rgba(0,133,255,.2);color:#0085ff}
+.dp-mastodon{background:rgba(99,100,255,.2);color:#6364ff}
+.dp-devto{background:rgba(255,255,255,.1);color:#fff}
+.dp-hashnode{background:rgba(41,98,255,.2);color:#2962ff}
+.dp-vcru{background:rgba(255,100,0,.2);color:#ff6400}
+.dp-medium{background:rgba(255,255,255,.1);color:#ccc}
+.dp-writeas{background:rgba(255,255,255,.08);color:#999}
+.dp-tumblr{background:rgba(0,25,53,.3);color:#36465d}
+.dp-minds{background:rgba(243,200,35,.2);color:#f3c823}
+.dp-nostr{background:rgba(128,0,255,.2);color:#8000ff}
+.dp-okru{background:rgba(238,130,8,.2);color:#ee8208}
+.dp-instagram{background:rgba(225,48,108,.2);color:#e1306c}
+.dp-youtube{background:rgba(255,0,0,.2);color:#ff0000}
+
+/* Empty state */
+.empty{text-align:center;padding:60px 20px;color:#444}
+.empty-icon{font-size:48px;margin-bottom:12px}
+.empty-text{font-size:14px;margin-bottom:6px;color:#555}
+.empty-hint{font-size:12px;color:#444}
+
+@media(max-width:768px){
+  .bank-item-header{flex-wrap:wrap;gap:6px}
+  .bi-id,.bi-tier,.bi-deriv-count{display:none}
+  .deriv-card{flex-direction:column;gap:6px}
+}
+</style>
+</head>
+<body>
+<div class="zc-container">
+
+<nav class="zc-nav">
+  <span class="zc-nav-brand"><img src="img/avatar.jpg" alt="" class="zc-nav-avatar">Zinin <span class="zc-nav-brand-suffix">Corp</span></span>
+  <a href="overview.html">Обзор</a>
+  <a href="content.html">Календарь</a>
+  <a href="bank.html" class="active">Банк контента</a>
+  <a href="analytics.html">Аналитика</a>
+  <a href="connectors.html">Коннекторы</a>
+  <a href="finance.html">Финансы</a>
+  <a href="tasks.html">Задачи</a>
+</nav>
+
+<div class="zc-page-header">
+  <h1>Content Bank</h1>
+  <p class="zc-subtitle">Идеи &rarr; Обработка &rarr; Платформы &rarr; Публикация</p>
+</div>
+
+<div class="stats" id="stats"></div>
+
+<div class="filters" id="filters">
+  <button class="filter-btn active" data-filter="all">Все</button>
+  <button class="filter-btn" data-filter="raw">Raw</button>
+  <button class="filter-btn" data-filter="processed">Processed</button>
+  <button class="filter-btn" data-filter="scheduled">Scheduled</button>
+  <button class="filter-btn" data-filter="published">Published</button>
+  <span style="width:1px;background:#333;margin:0 4px"></span>
+  <button class="filter-btn" data-filter="actionable">Actionable</button>
+  <button class="filter-btn" data-filter="analytical">Analytical</button>
+  <button class="filter-btn" data-filter="aspirational">Aspirational</button>
+  <button class="filter-btn" data-filter="anthropological">Anthropological</button>
+</div>
+
+<div id="bank-list"></div>
+
+</div>
+
+<div class="zc-footer">
+  Zinin Corp &middot; Content Bank &middot; 2026
+</div>
+
+<script src="bank_data.js"></script>
+<script>
+const STATUS_CLASS = {raw:'s-raw',processed:'s-processed',scheduled:'s-scheduled',published:'s-published'};
+const CAT_CLASS = {actionable:'c-actionable',analytical:'c-analytical',aspirational:'c-aspirational',anthropological:'c-anthropological'};
+const PLATFORM_CLASS = {linkedin:'dp-linkedin',threads:'dp-threads',telegram:'dp-telegram',facebook:'dp-facebook',vk:'dp-vk',bluesky:'dp-bluesky',mastodon:'dp-mastodon',devto:'dp-devto',hashnode:'dp-hashnode',vcru:'dp-vcru',medium:'dp-medium',writeas:'dp-writeas',tumblr:'dp-tumblr',minds:'dp-minds',nostr:'dp-nostr',okru:'dp-okru',instagram:'dp-instagram',youtube:'dp-youtube'};
+const PLATFORM_NAMES = {linkedin:'LinkedIn',threads:'Threads',telegram:'Telegram',facebook:'Facebook',vk:'VK',bluesky:'Bluesky',mastodon:'Mastodon',devto:'Dev.to',hashnode:'Hashnode',vcru:'VC.ru',medium:'Medium',writeas:'Write.as',tumblr:'Tumblr',minds:'Minds',nostr:'Nostr',okru:'OK.ru',instagram:'Instagram',youtube:'YouTube'};
+
+let currentFilter = 'all';
+
+function renderStats(){
+  const items = BANK_ITEMS;
+  const raw = items.filter(i=>i.status==='raw').length;
+  const processed = items.filter(i=>i.status==='processed').length;
+  const scheduled = items.filter(i=>i.status==='scheduled').length;
+  const published = items.filter(i=>i.status==='published').length;
+  const totalDerivs = items.reduce((s,i)=>(s+(i.derivatives||[]).length),0);
+  document.getElementById('stats').innerHTML = `
+    <div class="stat"><span class="stat-num">${items.length}</span><span class="stat-label">Всего идей</span></div>
+    <div class="stat"><span class="stat-num" style="color:#74b9ff">${raw}</span><span class="stat-label">Raw</span></div>
+    <div class="stat"><span class="stat-num" style="color:#fdcb6e">${processed}</span><span class="stat-label">Processed</span></div>
+    <div class="stat"><span class="stat-num" style="color:#a29bfe">${scheduled}</span><span class="stat-label">Scheduled</span></div>
+    <div class="stat"><span class="stat-num" style="color:#00b894">${published}</span><span class="stat-label">Published</span></div>
+    <div class="stat"><span class="stat-num">${totalDerivs}</span><span class="stat-label">Деривативы</span></div>
+  `;
+}
+
+function escapeHTML(s){return s?s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'):''}
+
+function renderList(){
+  const list = document.getElementById('bank-list');
+  const cats = ['actionable','analytical','aspirational','anthropological'];
+  const statuses = ['raw','processed','scheduled','published'];
+  let filtered = BANK_ITEMS;
+
+  if(currentFilter !== 'all'){
+    if(statuses.includes(currentFilter)){
+      filtered = filtered.filter(i=>i.status===currentFilter);
+    } else if(cats.includes(currentFilter)){
+      filtered = filtered.filter(i=>i.category===currentFilter);
+    }
+  }
+
+  if(filtered.length === 0){
+    list.innerHTML = `<div class="empty">
+      <div class="empty-icon">&#128203;</div>
+      <div class="empty-text">Банк контента пуст</div>
+      <div class="empty-hint">Добавьте идею: <code>/bank &lt;текст или URL&gt;</code></div>
+    </div>`;
+    return;
+  }
+
+  list.innerHTML = filtered.map((item,idx)=>{
+    const derivs = item.derivatives || [];
+    const derivHTML = derivs.map(d=>`
+      <div class="deriv-card">
+        <span class="deriv-platform ${PLATFORM_CLASS[d.platform]||''}">${PLATFORM_NAMES[d.platform]||d.platform}</span>
+        <div class="deriv-text">${escapeHTML((d.text||'').substring(0,200))}${(d.text||'').length>200?'...':''}</div>
+        <span class="deriv-chars">${(d.text||'').length} ch</span>
+        <span class="deriv-status ${STATUS_CLASS[d.status]||''}">${d.status||'draft'}</span>
+      </div>
+    `).join('');
+
+    const tagsHTML = (item.tags||[]).map(t=>`<span class="bi-tag">${escapeHTML(t)}</span>`).join('');
+
+    return `
+    <div class="bank-item" data-idx="${idx}">
+      <div class="bank-item-header" onclick="toggleItem(this)">
+        <span class="bi-arrow">&#9654;</span>
+        <span class="bi-id">${escapeHTML(item.id)}</span>
+        <span class="bi-category ${CAT_CLASS[item.category]||''}">${item.category||'?'}</span>
+        <span class="bi-title">${escapeHTML((item.raw_text||'').substring(0,120))}${(item.raw_text||'').length>120?'...':''}</span>
+        <span class="bi-tier">T${item.tier||'?'}</span>
+        <span class="bi-deriv-count">${derivs.length} deriv</span>
+        <span class="bi-status ${STATUS_CLASS[item.status]||''}">${item.status||'?'}</span>
+      </div>
+      <div class="bi-body">
+        <div class="bi-raw-label">Raw Text</div>
+        <div class="bi-raw-text">${escapeHTML(item.raw_text)}</div>
+        ${tagsHTML?'<div class="bi-tags">'+tagsHTML+'</div>':''}
+        ${item.topic_cluster?'<div style="font-size:10px;color:#666;margin-bottom:10px">Cluster: '+escapeHTML(item.topic_cluster)+'</div>':''}
+        ${derivs.length?'<div class="bi-raw-label">Derivatives ('+derivs.length+')</div><div class="deriv-list">'+derivHTML+'</div>':'<div style="font-size:11px;color:#555">No derivatives yet. Run <code>/bank process</code></div>'}
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function toggleItem(header){
+  const arrow = header.querySelector('.bi-arrow');
+  const body = header.nextElementSibling;
+  arrow.classList.toggle('open');
+  body.classList.toggle('open');
+}
+
+// Filter buttons
+document.getElementById('filters').addEventListener('click',function(e){
+  if(!e.target.classList.contains('filter-btn')) return;
+  currentFilter = e.target.dataset.filter;
+  document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
+  e.target.classList.add('active');
+  renderList();
+});
+
+renderStats();
+renderList();
+</script>
+</body>
+</html>

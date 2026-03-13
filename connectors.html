@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Коннекторы | Zinin Corp</title>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;600;700&family=Onest:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="zinin-corp.css?v=20260305">
+<style>
+.conn-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.provider-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 12px;
+}
+
+.provider-item {
+  background: var(--zc-bg-elevated);
+  padding: 12px;
+  border-radius: 8px;
+  border: 1px solid var(--zc-border);
+}
+
+.provider-item strong {
+  color: var(--zc-text-primary);
+}
+
+.provider-item span {
+  color: var(--zc-text-muted);
+  font-size: 12px;
+}
+
+.tab-section-title {
+  font-family: 'Unbounded', sans-serif;
+  font-size: 18px;
+  font-weight: 600;
+  margin: 24px 0 16px;
+  color: var(--zc-text-primary);
+}
+
+.external-mcp-list {
+  background: var(--zc-bg-card);
+  border: 1px solid var(--zc-border);
+  border-radius: 8px;
+  padding: 16px;
+}
+
+.external-mcp-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--zc-border);
+}
+
+.external-mcp-item:last-child {
+  border-bottom: none;
+}
+
+.mcp-name {
+  font-family: 'Unbounded', sans-serif;
+  font-weight: 600;
+  color: var(--zc-accent);
+}
+
+.mcp-desc {
+  color: var(--zc-text-secondary);
+  font-size: 13px;
+}
+
+@media (max-width: 640px) {
+  .zc-tabs {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .zc-tabs::-webkit-scrollbar {
+    display: none;
+  }
+
+  .zc-table-wrap {
+    font-size: 12px;
+  }
+
+  .conn-cards {
+    grid-template-columns: 1fr;
+  }
+}
+</style>
+</head>
+<body>
+<div class="zc-container--wide">
+
+<nav class="zc-nav">
+  <span class="zc-nav-brand"><img src="img/avatar.jpg" alt="" class="zc-nav-avatar">Zinin <span class="zc-nav-brand-suffix">Corp</span></span>
+  <a href="overview.html">Обзор</a>
+  <a href="content.html">Календарь</a>
+  <a href="bank.html">Банк контента</a>
+  <a href="analytics.html">Аналитика</a>
+  <a href="connectors.html" class="active">Коннекторы</a>
+  <a href="finance.html">Финансы</a>
+  <a href="tasks.html">Задачи</a>
+</nav>
+
+<div class="zc-page-header">
+  <h1>API Connectors</h1>
+  <p class="zc-subtitle">Статус всех интеграций</p>
+</div>
+
+<div class="zc-stats">
+  <div class="zc-stat">
+    <div class="zc-stat-num">54</div>
+    <div class="zc-stat-label">Всего API</div>
+  </div>
+  <div class="zc-stat">
+    <div class="zc-stat-num" style="color: var(--zc-status-green)">22</div>
+    <div class="zc-stat-label">Активные</div>
+  </div>
+  <div class="zc-stat">
+    <div class="zc-stat-num" style="color: var(--zc-status-red)">6</div>
+    <div class="zc-stat-label">Требуют починки</div>
+  </div>
+  <div class="zc-stat">
+    <div class="zc-stat-num" style="color: var(--zc-text-muted)">8</div>
+    <div class="zc-stat-label">Не подключены</div>
+  </div>
+</div>
+
+<div class="zc-tabs">
+  <button class="zc-tab active" data-tab="smm">Соц. сети <span class="zc-tab-count">19</span></button>
+  <button class="zc-tab" data-tab="finance">Финансовые API <span class="zc-tab-count">28</span></button>
+  <button class="zc-tab" data-tab="llm">LLM & Costs <span class="zc-tab-count">3</span></button>
+  <button class="zc-tab" data-tab="mcp">MCP серверы <span class="zc-tab-count">4</span></button>
+</div>
+
+<!-- Tab Content: SMM -->
+<div class="zc-tab-content active" data-tab="smm">
+  <div class="zc-table-wrap">
+    <table class="zc-table">
+      <thead>
+        <tr>
+          <th style="width:40px">#</th>
+          <th style="width:120px">Платформа</th>
+          <th style="width:140px">Аккаунт</th>
+          <th style="width:100px">API</th>
+          <th style="width:140px">Статус</th>
+          <th>Стратегия</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="zc-group-row" style="--zc-group-color: var(--zc-status-green)">
+          <td colspan="6"><strong>Активные — API проверен, публикуют</strong></td>
+        </tr>
+        <tr>
+          <td>1</td><td>LinkedIn</td><td>Tim Zinin</td><td><span class="zc-badge zc-badge--green">OK</span></td><td><span class="zc-status-ok">PUBLISHING</span></td><td>Expert longreads, AI agents, SBORKA. 2-3/week</td>
+        </tr>
+        <tr>
+          <td>2</td><td>Threads</td><td>@timzinin</td><td><span class="zc-badge zc-badge--green">OK</span></td><td><span class="zc-status-ok">PUBLISHING</span></td><td>Micro-thoughts, provocations. Daily</td>
+        </tr>
+        <tr>
+          <td>3</td><td>Facebook</td><td>Tim Zinin (Page)</td><td><span class="zc-badge zc-badge--green">OK</span></td><td><span class="zc-status-ok">PUBLISHING</span></td><td>Cross-post LinkedIn. 2/week</td>
+        </tr>
+        <tr>
+          <td>4</td><td>VK</td><td>Timofey Zinin</td><td><span class="zc-badge zc-badge--green">OK</span></td><td><span class="zc-status-ok">PUBLISHING</span></td><td>RU-audience, AI/career. 2-3/week</td>
+        </tr>
+        <tr>
+          <td>5</td><td>Telegram</td><td>@timofeyzinin</td><td><span class="zc-badge zc-badge--green">Telethon</span></td><td><span class="zc-status-ok">PUBLISHING</span></td><td>Deep posts, behind-the-scenes. 3-5/week</td>
+        </tr>
+        <tr>
+          <td>6</td><td>Bluesky</td><td>timzinin.bsky.social</td><td><span class="zc-badge zc-badge--green">OK</span></td><td><span class="zc-status-ok">PUBLISHING</span></td><td>EN: tech/decentralized. Daily</td>
+        </tr>
+        <tr>
+          <td>7</td><td>Dev.to</td><td>@timmyzinin</td><td><span class="zc-badge zc-badge--green">OK</span></td><td><span class="zc-status-ok">PUBLISHING</span></td><td>EN tutorials: AI, MCP. 2-4/month</td>
+        </tr>
+        <tr>
+          <td>8</td><td>Instagram</td><td>@timzinin</td><td><span class="zc-badge zc-badge--green">OK</span></td><td><span class="zc-status-ok">PUBLISHING</span></td><td>Carousels, infographics, Reels. 3-5/week</td>
+        </tr>
+        <tr class="zc-group-row" style="--zc-group-color: var(--zc-status-blue)">
+          <td colspan="6"><strong>Подключены, не публикуем</strong></td>
+        </tr>
+        <tr>
+          <td>9</td><td>Mastodon</td><td>@timzinin@mastodon.social</td><td><span class="zc-badge zc-badge--green">OK</span></td><td><span class="zc-status-ready">CONNECTED</span></td><td>Cross-post Threads</td>
+        </tr>
+        <tr>
+          <td>10</td><td>OK.ru</td><td>Timofey Zinin</td><td><span class="zc-badge zc-badge--green">OK</span></td><td><span class="zc-status-ready">SET_STATUS</span></td><td>API reads, can't write (waiting permission)</td>
+        </tr>
+        <tr class="zc-group-row" style="--zc-group-color: var(--zc-status-red)">
+          <td colspan="6"><strong>Сломаны — требуют починки</strong></td>
+        </tr>
+        <tr>
+          <td>11</td><td>YouTube</td><td>Tim Zinin (1.87K)</td><td><span class="zc-badge zc-badge--red">EXPIRED</span></td><td><span class="zc-status-broken">TOKEN EXPIRED</span></td><td>OAuth refresh expired — fixed Mar 4</td>
+        </tr>
+        <tr>
+          <td>12</td><td>VC.ru</td><td>Timofey Zinin</td><td><span class="zc-badge zc-badge--red">404</span></td><td><span class="zc-status-broken">API 404</span></td><td>Endpoint changed</td>
+        </tr>
+        <tr>
+          <td>13</td><td>LinkedIn</td><td>Kristina Zhukova</td><td><span class="zc-badge zc-badge--red">DISABLED</span></td><td><span class="zc-status-broken">APP DISABLED</span></td><td>Not relevant (Kristina left)</td>
+        </tr>
+        <tr class="zc-group-row" style="--zc-group-color: var(--zc-status-yellow)">
+          <td colspan="6"><strong>Ждут действий</strong></td>
+        </tr>
+        <tr>
+          <td>14</td><td>TikTok</td><td>@timzinin</td><td><span class="zc-badge zc-badge--gray">—</span></td><td><span class="zc-status-waiting">App Review</span></td><td>Short videos. 3-5/week</td>
+        </tr>
+        <tr>
+          <td>15</td><td>Discord</td><td>---</td><td><span class="zc-badge zc-badge--gray">—</span></td><td><span class="zc-status-waiting">No webhook</span></td><td>Community hub</td>
+        </tr>
+        <tr>
+          <td>16</td><td>Threads</td><td>Kristina Zhukova</td><td><span class="zc-badge zc-badge--gray">—</span></td><td><span class="zc-status-waiting">No token</span></td><td>Not relevant</td>
+        </tr>
+        <tr class="zc-group-row" style="--zc-group-color: var(--zc-text-muted)">
+          <td colspan="6"><strong>Не приоритет / невозможно</strong></td>
+        </tr>
+        <tr>
+          <td>17</td><td>Twitter/X</td><td>Tim Zinin</td><td><span class="zc-badge zc-badge--gray">—</span></td><td><span class="zc-status-skip">$200/mo</span></td><td>API is paid</td>
+        </tr>
+        <tr>
+          <td>18</td><td>Medium</td><td>---</td><td><span class="zc-badge zc-badge--gray">—</span></td><td><span class="zc-status-skip">Impossible</span></td><td>Bot detection</td>
+        </tr>
+        <tr>
+          <td>19</td><td>DTF</td><td>---</td><td><span class="zc-badge zc-badge--gray">—</span></td><td><span class="zc-status-skip">Skipped</span></td><td>Not relevant</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- Tab Content: Finance -->
+<div class="zc-tab-content" data-tab="finance">
+  <div class="zc-table-wrap">
+    <table class="zc-table">
+      <thead>
+        <tr>
+          <th style="width:40px">#</th>
+          <th style="width:180px">Сервис</th>
+          <th style="width:140px">API</th>
+          <th style="width:100px">Статус</th>
+          <th>Описание</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="zc-group-row" style="--zc-group-color: var(--zc-status-green)">
+          <td colspan="5"><strong>Крипто-портфели</strong></td>
+        </tr>
+        <tr>
+          <td>1</td><td>CoinGecko</td><td>Free API</td><td><span class="zc-badge zc-badge--green">Active</span></td><td>Crypto prices (BTC, ETH, SOL, TON). 5-min cache</td>
+        </tr>
+        <tr>
+          <td>2</td><td>Moralis (EVM)</td><td>v2.2</td><td><span class="zc-badge zc-badge--green">Active</span></td><td>Multi-chain: Ethereum, Polygon, Arbitrum, Base, BSC</td>
+        </tr>
+        <tr>
+          <td>3</td><td>Moralis Transactions</td><td>v2.2</td><td><span class="zc-badge zc-badge--green">Active</span></td><td>EVM transaction history (70+ types, 30 days)</td>
+        </tr>
+        <tr>
+          <td>4</td><td>Helius (Solana)</td><td>DAS API</td><td><span class="zc-badge zc-badge--green">Active</span></td><td>SOL balance, SPL tokens, NFTs</td>
+        </tr>
+        <tr>
+          <td>5</td><td>Helius Transactions</td><td>DAS API</td><td><span class="zc-badge zc-badge--green">Active</span></td><td>Solana history (70+ types)</td>
+        </tr>
+        <tr>
+          <td>6</td><td>TonAPI</td><td>REST</td><td><span class="zc-badge zc-badge--green">Active</span></td><td>TON balance + Jetton holdings</td>
+        </tr>
+        <tr>
+          <td>7</td><td>TonAPI Transactions</td><td>Actions API</td><td><span class="zc-badge zc-badge--green">Active</span></td><td>TON history</td>
+        </tr>
+        <tr>
+          <td>8</td><td>Hiro (Stacks)</td><td>Public</td><td><span class="zc-badge zc-badge--green">Active</span></td><td>STX + tokens. No key needed</td>
+        </tr>
+        <tr>
+          <td>9</td><td>Papaya</td><td>JSON-RPC</td><td><span class="zc-badge zc-badge--green">Active</span></td><td>Streaming payments (6 EVM chains). No key</td>
+        </tr>
+        <tr>
+          <td>10</td><td>Blockscout (Eventum)</td><td>Explorer</td><td><span class="zc-badge zc-badge--green">Active</span></td><td>Eventum L3 (Arbitrum Orbit). No key</td>
+        </tr>
+        <tr class="zc-group-row" style="--zc-group-color: var(--zc-status-blue)">
+          <td colspan="5"><strong>Банки</strong></td>
+        </tr>
+        <tr>
+          <td>11</td><td>T-Bank Balance</td><td>Business API</td><td><span class="zc-badge zc-badge--green">Active</span></td><td>Russian business accounts (RUB)</td>
+        </tr>
+        <tr>
+          <td>12</td><td>T-Bank Statement</td><td>Business API</td><td><span class="zc-badge zc-badge--green">Active</span></td><td>Statements for period</td>
+        </tr>
+        <tr>
+          <td>13</td><td>TBC Balance</td><td>Pending</td><td><span class="zc-badge zc-badge--yellow">Manual</span></td><td>Georgia — API approval pending</td>
+        </tr>
+        <tr>
+          <td>14</td><td>TBC Statement</td><td>Pending</td><td><span class="zc-badge zc-badge--yellow">Manual</span></td><td>Georgian statements (pending)</td>
+        </tr>
+        <tr>
+          <td>15</td><td>Vakifbank Balance</td><td>Not Connected</td><td><span class="zc-badge zc-badge--red">—</span></td><td>Turkey — need API portal + mTLS</td>
+        </tr>
+        <tr>
+          <td>16</td><td>Vakifbank Statement</td><td>Not Connected</td><td><span class="zc-badge zc-badge--red">—</span></td><td>Turkish statements</td>
+        </tr>
+        <tr>
+          <td>17</td><td>Krungsri Balance</td><td>Not Connected</td><td><span class="zc-badge zc-badge--red">—</span></td><td>Thailand — need OAuth 2.0</td>
+        </tr>
+        <tr>
+          <td>18</td><td>Krungsri Statement</td><td>Not Connected</td><td><span class="zc-badge zc-badge--red">—</span></td><td>Thai statements</td>
+        </tr>
+        <tr class="zc-group-row" style="--zc-group-color: var(--zc-status-green)">
+          <td colspan="5"><strong>Доходы</strong></td>
+        </tr>
+        <tr>
+          <td>19</td><td>Tribute.tg</td><td>REST + Webhooks</td><td><span class="zc-badge zc-badge--green">Active</span></td><td>Subscriptions, revenue, stats</td>
+        </tr>
+        <tr>
+          <td>20</td><td>Stripe</td><td>Planned</td><td><span class="zc-badge zc-badge--gray">Stub</span></td><td>Planned, stub code only</td>
+        </tr>
+        <tr class="zc-group-row" style="--zc-group-color: var(--zc-status-green)">
+          <td colspan="5"><strong>Валютные курсы</strong></td>
+        </tr>
+        <tr>
+          <td>21</td><td>open.er-api.com</td><td>Free API</td><td><span class="zc-badge zc-badge--green">Active</span></td><td>166 currencies, 1h cache. No key</td>
+        </tr>
+        <tr class="zc-group-row" style="--zc-group-color: var(--zc-status-green)">
+          <td colspan="5"><strong>Утилиты</strong></td>
+        </tr>
+        <tr>
+          <td>22</td><td>Screenshot OCR</td><td>Vision</td><td><span class="zc-badge zc-badge--green">Active</span></td><td>Extract data from screenshots (TBC, @wallet)</td>
+        </tr>
+        <tr>
+          <td>23</td><td>Tinkoff CSV</td><td>Import</td><td><span class="zc-badge zc-badge--green">Active</span></td><td>Personal bank statements import</td>
+        </tr>
+        <tr>
+          <td>24</td><td>Budget Alerts</td><td>Internal</td><td><span class="zc-badge zc-badge--green">Active</span></td><td>Threshold alert system</td>
+        </tr>
+        <tr>
+          <td>25</td><td>P&L Report</td><td>Internal</td><td><span class="zc-badge zc-badge--green">Active</span></td><td>Profit/loss report generation</td>
+        </tr>
+        <tr>
+          <td>26</td><td>Expense Categorizer</td><td>Internal</td><td><span class="zc-badge zc-badge--green">Active</span></td><td>Auto-categorize transactions</td>
+        </tr>
+        <tr>
+          <td>27</td><td>Portfolio Summary</td><td>Aggregator</td><td><span class="zc-badge zc-badge--green">Active</span></td><td>Meta-aggregator of all data</td>
+        </tr>
+        <tr>
+          <td>28</td><td>Cashflow Forecast</td><td>Internal</td><td><span class="zc-badge zc-badge--green">Active</span></td><td>Cash flow forecasting</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- Tab Content: LLM -->
+<div class="zc-tab-content" data-tab="llm">
+  <div class="conn-cards">
+    <div class="zc-dash-card">
+      <div class="zc-dash-card-header">
+        <span style="font-size:24px">⚡</span>
+        <span class="zc-badge zc-badge--green">Active</span>
+      </div>
+      <h3>OpenRouter</h3>
+      <p>Cost tracking: daily/weekly/monthly. Balance remaining, free tier status.</p>
+      <small style="color:var(--zc-text-muted)">API: openrouter.ai/api/v1</small>
+    </div>
+    <div class="zc-dash-card">
+      <div class="zc-dash-card-header">
+        <span style="font-size:24px">🎙</span>
+        <span class="zc-badge zc-badge--green">Active</span>
+      </div>
+      <h3>ElevenLabs</h3>
+      <p>TTS usage: characters used/limit, reset date, next payment.</p>
+      <small style="color:var(--zc-text-muted)">API: api.elevenlabs.io/v1</small>
+    </div>
+    <div class="zc-dash-card">
+      <div class="zc-dash-card-header">
+        <span style="font-size:24px">🤖</span>
+        <span class="zc-badge zc-badge--green">Active</span>
+      </div>
+      <h3>OpenAI</h3>
+      <p>Cost tracking (30-day rolling). Admin API.</p>
+      <small style="color:var(--zc-text-muted)">API: api.openai.com/v1</small>
+    </div>
+  </div>
+
+  <h3 class="tab-section-title">Расходы API</h3>
+  <div class="zc-table-wrap">
+    <table class="zc-table" id="api-costs-table">
+      <thead>
+        <tr>
+          <th style="width:160px">Провайдер</th>
+          <th style="width:120px">Месяц</th>
+          <th style="width:120px">Неделя</th>
+          <th style="width:120px">Сегодня</th>
+          <th style="width:140px">Лимит</th>
+          <th>Обновлено</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>OpenRouter</strong></td>
+          <td>—</td>
+          <td>—</td>
+          <td>—</td>
+          <td>—</td>
+          <td><span class="zc-badge zc-badge--gray">нет данных</span></td>
+        </tr>
+        <tr>
+          <td><strong>ElevenLabs</strong></td>
+          <td>—</td>
+          <td>—</td>
+          <td>—</td>
+          <td>—</td>
+          <td><span class="zc-badge zc-badge--gray">нет данных</span></td>
+        </tr>
+        <tr>
+          <td><strong>OpenAI</strong></td>
+          <td>—</td>
+          <td>—</td>
+          <td>—</td>
+          <td>—</td>
+          <td><span class="zc-badge zc-badge--gray">нет данных</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <p style="color:var(--zc-text-muted);font-size:12px;margin-top:8px;">Данные собираются скриптом collect_api_costs.py каждые 6 часов. Обновление дашборда — в следующем спринте.</p>
+
+  <h3 class="tab-section-title">Поддерживаемые LLM-провайдеры</h3>
+  <div class="provider-grid">
+    <div class="provider-item">
+      <strong>Groq</strong><br>
+      <span>Llama 3.3 70B — free, 100K tok/day</span>
+    </div>
+    <div class="provider-item">
+      <strong>OpenRouter</strong><br>
+      <span>Multiple models — free tier + paid</span>
+    </div>
+    <div class="provider-item">
+      <strong>MiniMax M2.5</strong><br>
+      <span>$20/mo Plus</span>
+    </div>
+    <div class="provider-item">
+      <strong>Google Gemini</strong><br>
+      <span>For images</span>
+    </div>
+  </div>
+</div>
+
+<!-- Tab Content: MCP -->
+<div class="zc-tab-content" data-tab="mcp">
+  <h3 class="tab-section-title">Внутренние MCP серверы</h3>
+  <div class="conn-cards">
+    <div class="zc-dash-card">
+      <div class="zc-dash-card-header">
+        <span style="font-size:24px">💰</span>
+        <span class="zc-badge zc-badge--green">8 tools</span>
+      </div>
+      <h3>CFO MCP</h3>
+      <p>Crypto, portfolio, tribute, forex, bank, API costs</p>
+      <small style="color:var(--zc-text-muted)">cfo_server.py</small>
+    </div>
+    <div class="zc-dash-card">
+      <div class="zc-dash-card-header">
+        <span style="font-size:24px">📚</span>
+        <span class="zc-badge zc-badge--green">Active</span>
+      </div>
+      <h3>Knowledge Base MCP</h3>
+      <p>Company knowledge base</p>
+      <small style="color:var(--zc-text-muted)">kb_server.py</small>
+    </div>
+    <div class="zc-dash-card">
+      <div class="zc-dash-card-header">
+        <span style="font-size:24px">✈️</span>
+        <span class="zc-badge zc-badge--green">Active</span>
+      </div>
+      <h3>Telegram MCP</h3>
+      <p>Internal Telegram integration</p>
+      <small style="color:var(--zc-text-muted)">telegram_server.py</small>
+    </div>
+    <div class="zc-dash-card">
+      <div class="zc-dash-card-header">
+        <span style="font-size:24px">🎁</span>
+        <span class="zc-badge zc-badge--green">Active</span>
+      </div>
+      <h3>Tribute MCP</h3>
+      <p>Tribute.tg payments</p>
+      <small style="color:var(--zc-text-muted)">tribute_server.py</small>
+    </div>
+  </div>
+
+  <h3 class="tab-section-title">Внешние MCP (Claude Code)</h3>
+  <div class="external-mcp-list">
+    <div class="external-mcp-item">
+      <div>
+        <span class="mcp-name">telegram-mcp</span>
+        <div class="mcp-desc">Telethon — MTProto, read/send messages</div>
+      </div>
+    </div>
+    <div class="external-mcp-item">
+      <div>
+        <span class="mcp-name">telegram-bot-api</span>
+        <div class="mcp-desc">Bot API, 162 methods</div>
+      </div>
+    </div>
+    <div class="external-mcp-item">
+      <div>
+        <span class="mcp-name">tg-communicator</span>
+        <div class="mcp-desc">HITL: Claude ↔ Tim</div>
+      </div>
+    </div>
+    <div class="external-mcp-item">
+      <div>
+        <span class="mcp-name">mcp-mermaid</span>
+        <div class="mcp-desc">Diagram generation</div>
+      </div>
+    </div>
+    <div class="external-mcp-item">
+      <div>
+        <span class="mcp-name">playwright</span>
+        <div class="mcp-desc">Browser automation</div>
+      </div>
+    </div>
+  </div>
+
+  <h3 class="tab-section-title">Circuit Breakers</h3>
+  <div class="zc-table-wrap">
+    <table class="zc-table" id="circuit-breakers-table">
+      <thead>
+        <tr>
+          <th style="width:160px">Сервис</th>
+          <th style="width:100px">Состояние</th>
+          <th style="width:80px">Ошибки</th>
+          <th style="width:100px">Макс.</th>
+          <th style="width:120px">Таймаут</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>CoinGecko</td><td><span class="zc-badge zc-badge--green">closed</span></td><td>0</td><td>5</td><td>300с</td></tr>
+        <tr><td>Moralis</td><td><span class="zc-badge zc-badge--green">closed</span></td><td>0</td><td>5</td><td>300с</td></tr>
+        <tr><td>Helius</td><td><span class="zc-badge zc-badge--green">closed</span></td><td>0</td><td>5</td><td>300с</td></tr>
+        <tr><td>TonAPI</td><td><span class="zc-badge zc-badge--green">closed</span></td><td>0</td><td>5</td><td>300с</td></tr>
+        <tr><td>T-Bank</td><td><span class="zc-badge zc-badge--green">closed</span></td><td>0</td><td>5</td><td>300с</td></tr>
+        <tr><td>Tribute</td><td><span class="zc-badge zc-badge--green">closed</span></td><td>0</td><td>5</td><td>300с</td></tr>
+        <tr><td>OpenRouter</td><td><span class="zc-badge zc-badge--green">closed</span></td><td>0</td><td>5</td><td>300с</td></tr>
+        <tr><td>ElevenLabs</td><td><span class="zc-badge zc-badge--green">closed</span></td><td>0</td><td>5</td><td>300с</td></tr>
+        <tr><td>OpenAI</td><td><span class="zc-badge zc-badge--green">closed</span></td><td>0</td><td>5</td><td>300с</td></tr>
+        <tr><td>Forex</td><td><span class="zc-badge zc-badge--green">closed</span></td><td>0</td><td>5</td><td>300с</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p style="color:var(--zc-text-muted);font-size:12px;margin-top:8px;">closed = работает, open = отключён, half-open = пробует восстановиться.</p>
+</div>
+
+</div>
+
+<div class="zc-footer">Zinin Corp &middot; Connectors &middot; 2026</div>
+
+<script>
+document.querySelectorAll('.zc-tab').forEach(tab => {
+  tab.addEventListener('click', () => {
+    document.querySelectorAll('.zc-tab').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.zc-tab-content').forEach(c => c.classList.remove('active'));
+    tab.classList.add('active');
+    document.querySelector(`.zc-tab-content[data-tab="${tab.dataset.tab}"]`).classList.add('active');
+  });
+});
+</script>
+</body>
+</html>
