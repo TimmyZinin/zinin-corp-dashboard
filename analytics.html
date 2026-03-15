@@ -167,6 +167,7 @@ tr:hover td { background: #141414; }
     <div class="tab" data-tab="followers">Подписчики</div>
     <div class="tab" data-tab="trends">Тренды</div>
     <div class="tab" data-tab="crm">CRM & UTM</div>
+    <div class="tab" data-tab="webtraffic">Веб-трафик</div>
   </div>
 
   <!-- TAB: Overview -->
@@ -247,6 +248,26 @@ tr:hover td { background: #141414; }
       </thead>
       <tbody id="freshness-tbody"></tbody>
     </table>
+  </div>
+
+  <!-- TAB: Web Traffic (Umami) -->
+  <div class="tab-content" id="tab-webtraffic">
+    <div class="stats" id="web-top-stats"></div>
+    <h3 style="color:#fff; font-size:14px; margin: 0 0 12px;">Сайты (Umami Analytics)</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Сайт</th>
+          <th class="num">Pageviews (24h)</th>
+          <th class="num">Visitors (24h)</th>
+          <th class="num">Pageviews (7d)</th>
+          <th class="num">Visitors (7d)</th>
+          <th>Статус</th>
+        </tr>
+      </thead>
+      <tbody id="web-tbody"></tbody>
+    </table>
+    <p class="data-source" style="margin-top:12px">* данные из Umami Analytics (sborka.work/stats/). Обновляются при открытии вкладки.</p>
   </div>
 
   <!-- TAB: CRM -->
@@ -754,6 +775,65 @@ tr:hover td { background: #141414; }
   setInterval(function() {
     fetch('analytics.json?' + Date.now()).then(r => r.json()).then(data => { DATA = data; render(); }).catch(function(){});
   }, 300000);
+  // === WEB TRAFFIC TAB (Umami) ===
+  const UMAMI_SITES = [
+    { id: 'b00703aa-b94d-457b-8071-46d9ce71968a', name: 'СБОРКА', domain: 'sborka.work', color: '#0088cc' },
+    { id: '52458f23-8460-424e-954f-a67ce6c7e2ea', name: 'КРМКТЛ', domain: 'cryptomarketologi.online', color: '#F59E0B' },
+    { id: 'de17788f-87df-4bcf-92b1-f79f850dc6e6', name: 'MCPHire', domain: 'mcphire.com', color: '#8B5CF6' },
+    { id: 'da69b03f-17f5-4061-8080-6277e6032b9d', name: 'MentalStab', domain: 'mentalstab.com', color: '#EF4444' },
+  ];
+
+  async function loadWebTraffic() {
+    const tbody = document.getElementById('web-tbody');
+    const topStats = document.getElementById('web-top-stats');
+    tbody.innerHTML = '<tr><td colspan="6" style="color:#666;text-align:center;padding:20px">Загрузка данных из Umami...</td></tr>';
+
+    const now = Date.now();
+    const day = 86400000;
+    let totalPV24 = 0, totalUV24 = 0, totalPV7 = 0, totalUV7 = 0;
+    const rows = [];
+
+    for (const site of UMAMI_SITES) {
+      try {
+        const [r24, r7] = await Promise.all([
+          fetch(`https://sborka.work/stats/api/websites/${site.id}/stats?startAt=${now - day}&endAt=${now}`).then(r => r.ok ? r.json() : null).catch(() => null),
+          fetch(`https://sborka.work/stats/api/websites/${site.id}/stats?startAt=${now - 7*day}&endAt=${now}`).then(r => r.ok ? r.json() : null).catch(() => null),
+        ]);
+        const pv24 = r24 ? (r24.pageviews?.value || 0) : '—';
+        const uv24 = r24 ? (r24.visitors?.value || r24.uniques?.value || 0) : '—';
+        const pv7 = r7 ? (r7.pageviews?.value || 0) : '—';
+        const uv7 = r7 ? (r7.visitors?.value || r7.uniques?.value || 0) : '—';
+        if (typeof pv24 === 'number') totalPV24 += pv24;
+        if (typeof uv24 === 'number') totalUV24 += uv24;
+        if (typeof pv7 === 'number') totalPV7 += pv7;
+        if (typeof uv7 === 'number') totalUV7 += uv7;
+        const status = r24 ? '<span style="color:#10B981">● Live</span>' : '<span style="color:#EF4444">● Offline</span>';
+        rows.push(`<tr>
+          <td><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:${site.color};margin-right:6px;vertical-align:middle"></span>${site.name} <span class="p-name">${site.domain}</span></td>
+          <td class="num">${pv24}</td><td class="num">${uv24}</td>
+          <td class="num">${pv7}</td><td class="num">${uv7}</td>
+          <td>${status}</td>
+        </tr>`);
+      } catch(e) {
+        rows.push(`<tr><td>${site.name}</td><td colspan="5" style="color:#666">Ошибка загрузки</td></tr>`);
+      }
+    }
+
+    tbody.innerHTML = rows.join('');
+    topStats.innerHTML = `
+      <div class="stat"><span class="stat-num">${UMAMI_SITES.length}</span><span class="stat-label">Сайтов</span></div>
+      <div class="stat"><span class="stat-num">${totalPV24}</span><span class="stat-label">Pageviews 24h</span></div>
+      <div class="stat"><span class="stat-num">${totalUV24}</span><span class="stat-label">Visitors 24h</span></div>
+      <div class="stat"><span class="stat-num">${totalPV7}</span><span class="stat-label">Pageviews 7d</span></div>
+      <div class="stat"><span class="stat-num">${totalUV7}</span><span class="stat-label">Visitors 7d</span></div>
+    `;
+  }
+
+  // Load web traffic when tab becomes active
+  document.querySelector('[data-tab="webtraffic"]').addEventListener('click', function() {
+    loadWebTraffic();
+  });
+
 })();
 </script>
 </body>
