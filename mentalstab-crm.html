@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MentalStab CRM | Zinin Corp</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #0a0a0a; color: #e5e5e5; padding: 20px; }
+.container { max-width: 1200px; margin: 0 auto; }
+a { color: inherit; text-decoration: none; }
+.nav { display: flex; gap: 0; margin-bottom: 24px; border-bottom: 1px solid #222; flex-wrap: wrap; }
+.nav-brand { font-weight: 700; font-size: 14px; color: #555; padding: 10px 16px 10px 0; margin-right: 8px; }
+.nav a { padding: 10px 16px; font-size: 13px; color: #666; border-bottom: 2px solid transparent; transition: all .15s; }
+.nav a:hover { color: #ccc; }
+.nav a.active { color: #fff; border-bottom-color: #fff; }
+h1 { font-size: 24px; font-weight: 700; color: #fff; margin-bottom: 2px; }
+.subtitle { color: #666; font-size: 13px; margin-bottom: 20px; }
+.stats { display: flex; gap: 10px; margin-bottom: 20px; flex-wrap: wrap; }
+.stat { background: #141414; border: 1px solid #222; border-radius: 10px; padding: 12px 16px; text-align: center; min-width: 100px; flex: 1; }
+.stat-num { display: block; font-size: 28px; font-weight: 700; color: #fff; }
+.stat-label { font-size: 10px; color: #666; text-transform: uppercase; letter-spacing: 0.5px; }
+.tabs { display: flex; gap: 0; margin-bottom: 20px; border-bottom: 1px solid #222; }
+.tab { padding: 8px 16px; font-size: 13px; color: #666; cursor: pointer; border-bottom: 2px solid transparent; transition: all .15s; }
+.tab:hover { color: #ccc; }
+.tab.active { color: #fff; border-bottom-color: #EF4444; }
+.tab-content { display: none; }
+.tab-content.active { display: block; }
+table { width: 100%; border-collapse: collapse; font-size: 13px; margin-bottom: 16px; }
+th { text-align: left; padding: 8px 10px; color: #555; font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px; border-bottom: 1px solid #222; }
+td { padding: 8px 10px; border-bottom: 1px solid #1a1a1a; }
+tr:hover td { background: #141414; }
+.badge { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 11px; font-weight: 600; }
+.badge-bot { background: #1a2e4a; color: #60a5fa; }
+.badge-web { background: #2a2000; color: #f59e0b; }
+.badge-done { background: #0d3320; color: #10B981; }
+.badge-progress { background: #2a2000; color: #f59e0b; }
+.badge-new { background: #1a1a2e; color: #a78bfa; }
+.badge-paid { background: #0d3320; color: #10B981; }
+.empty { text-align: center; padding: 40px; color: #444; }
+.refresh-btn { background: #1a1a1a; color: #888; border: 1px solid #333; border-radius: 6px; padding: 6px 14px; font-size: 12px; cursor: pointer; transition: all .15s; }
+.refresh-btn:hover { color: #fff; border-color: #555; }
+.loading { color: #555; text-align: center; padding: 40px; }
+@media (max-width: 700px) { .stats { flex-direction: column; } }
+</style>
+</head>
+<body>
+<div class="container">
+
+<div class="nav">
+  <span class="nav-brand">Zinin Corp</span>
+  <a href="overview.html">Обзор</a>
+  <a href="analytics.html">Аналитика</a>
+  <a href="connectors.html">Коннекторы</a>
+  <a href="tasks.html">Задачи</a>
+  <a href="mentalstab-crm.html" class="active">MentalStab CRM</a>
+</div>
+
+<h1>MentalStab CRM</h1>
+<p class="subtitle" id="subtitle">Загрузка...</p>
+
+<div class="stats" id="top-stats">
+  <div class="stat"><span class="stat-num" id="s-leads">-</span><span class="stat-label">Лиды</span></div>
+  <div class="stat"><span class="stat-num" id="s-users">-</span><span class="stat-label">Бот-юзеры</span></div>
+  <div class="stat"><span class="stat-num" id="s-completed">-</span><span class="stat-label">Прошли опрос</span></div>
+  <div class="stat"><span class="stat-num" id="s-payments">-</span><span class="stat-label">Оплаты</span></div>
+  <div class="stat"><span class="stat-num" id="s-revenue">-</span><span class="stat-label">Выручка ₽</span></div>
+</div>
+
+<div class="tabs">
+  <div class="tab active" data-tab="leads">Лиды</div>
+  <div class="tab" data-tab="users">Бот-юзеры</div>
+  <div class="tab" data-tab="payments">Оплаты</div>
+  <div class="tab" data-tab="funnel">Воронка</div>
+</div>
+
+<!-- TAB: Leads -->
+<div class="tab-content active" id="tab-leads">
+  <table><thead><tr>
+    <th>#</th><th>Имя</th><th>Контакт</th><th>Источник</th><th>Сообщение</th><th>Дата</th>
+  </tr></thead><tbody id="leads-tbody"></tbody></table>
+</div>
+
+<!-- TAB: Bot Users -->
+<div class="tab-content" id="tab-users">
+  <table><thead><tr>
+    <th>Имя</th><th>Username</th><th>Телефон</th><th>Занятие</th><th>Беспокоит</th><th>Опыт</th><th>Статус</th><th>Дата</th>
+  </tr></thead><tbody id="users-tbody"></tbody></table>
+</div>
+
+<!-- TAB: Payments -->
+<div class="tab-content" id="tab-payments">
+  <table><thead><tr>
+    <th>#</th><th>Продукт</th><th>Сумма</th><th>TG User</th><th>Дата</th>
+  </tr></thead><tbody id="payments-tbody"></tbody></table>
+</div>
+
+<!-- TAB: Funnel -->
+<div class="tab-content" id="tab-funnel">
+  <div id="funnel-chart"></div>
+</div>
+
+</div>
+
+<script>
+const API = 'https://sborka.work/mental-api/api/crm?key=mentalstab2026';
+const PRODUCTS = { psQ4: 'Разовая сессия', psQ5: '1 месяц (4 сессии)', psQ6: '3 месяца (12 сессий)' };
+
+let DATA = null;
+
+async function load() {
+  document.getElementById('subtitle').textContent = 'Загрузка...';
+  try {
+    const r = await fetch(API);
+    DATA = await r.json();
+    render();
+  } catch(e) {
+    document.getElementById('subtitle').textContent = 'Ошибка загрузки: ' + e.message;
+  }
+}
+
+function render() {
+  const s = DATA.stats;
+  document.getElementById('s-leads').textContent = s.total_leads;
+  document.getElementById('s-users').textContent = s.total_bot_users;
+  document.getElementById('s-completed').textContent = s.bot_completed;
+  document.getElementById('s-payments').textContent = s.total_payments;
+  document.getElementById('s-revenue').textContent = s.revenue ? (s.revenue / 100).toLocaleString('ru') : '0';
+  document.getElementById('subtitle').textContent = 'Обновлено: ' + new Date().toLocaleString('ru-RU');
+
+  // Leads
+  const lt = document.getElementById('leads-tbody');
+  lt.innerHTML = DATA.leads.map(l => `<tr>
+    <td>${l.id}</td>
+    <td>${esc(l.name)}</td>
+    <td>${esc(l.contact)}</td>
+    <td><span class="badge ${l.source === 'bot' ? 'badge-bot' : 'badge-web'}">${l.source}</span></td>
+    <td style="max-width:300px;white-space:pre-wrap;font-size:12px;color:#888">${esc(l.message || '')}</td>
+    <td style="white-space:nowrap;color:#666">${l.created_at ? l.created_at.slice(0,10) : ''}</td>
+  </tr>`).join('') || '<tr><td colspan="6" class="empty">Нет лидов</td></tr>';
+
+  // Bot users
+  const ut = document.getElementById('users-tbody');
+  ut.innerHTML = DATA.bot_users.map(u => {
+    const st = u.state === 'done' ? '<span class="badge badge-done">done</span>' :
+               u.state === 'start' ? '<span class="badge badge-new">new</span>' :
+               '<span class="badge badge-progress">' + u.state + '</span>';
+    return `<tr>
+      <td>${esc(u.name)}</td>
+      <td style="color:#888">${u.username ? '@' + esc(u.username) : ''}</td>
+      <td style="color:#888">${esc(u.phone || '')}</td>
+      <td style="font-size:12px">${esc(u.q1 || '')}</td>
+      <td style="font-size:12px">${esc(u.q2 || '')}</td>
+      <td style="font-size:12px">${esc(u.q3 || '')}</td>
+      <td>${st}</td>
+      <td style="white-space:nowrap;color:#666">${u.created_at ? u.created_at.slice(0,10) : ''}</td>
+    </tr>`;
+  }).join('') || '<tr><td colspan="8" class="empty">Нет пользователей</td></tr>';
+
+  // Payments
+  const pt = document.getElementById('payments-tbody');
+  pt.innerHTML = DATA.payments.length ? DATA.payments.map(p => `<tr>
+    <td>${p.id}</td>
+    <td>${PRODUCTS[p.product_id] || p.product_id}</td>
+    <td style="font-weight:600;color:#10B981">${(p.amount / 100).toLocaleString('ru')} ${(p.currency || 'RUB').toUpperCase()}</td>
+    <td style="color:#888">${p.telegram_user_id}</td>
+    <td style="white-space:nowrap;color:#666">${p.created_at ? p.created_at.slice(0,10) : ''}</td>
+  </tr>`).join('') : '<tr><td colspan="5" class="empty">Оплат пока нет</td></tr>';
+
+  // Funnel
+  renderFunnel();
+}
+
+function renderFunnel() {
+  const s = DATA.stats;
+  const steps = [
+    { label: 'Зашли в бота', value: s.total_bot_users, color: '#3B82F6' },
+    { label: 'Прошли опрос', value: s.bot_completed, color: '#8B5CF6' },
+    { label: 'Оплатили', value: s.total_payments, color: '#10B981' },
+  ];
+  const max = Math.max(steps[0].value, 1);
+  document.getElementById('funnel-chart').innerHTML = steps.map(st => {
+    const w = Math.max((st.value / max) * 100, 5);
+    const conv = st === steps[0] ? '' : ` (${Math.round(st.value / steps[0].value * 100)}%)`;
+    return `<div style="margin-bottom:12px">
+      <div style="display:flex;justify-content:space-between;font-size:12px;color:#888;margin-bottom:4px">
+        <span>${st.label}</span><span style="font-weight:700;color:#fff">${st.value}${conv}</span>
+      </div>
+      <div style="height:28px;background:#141414;border-radius:6px;overflow:hidden">
+        <div style="height:100%;width:${w}%;background:${st.color};border-radius:6px;transition:width 0.5s"></div>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function esc(s) { const d = document.createElement('div'); d.textContent = s; return d.innerHTML; }
+
+// Tabs
+document.querySelectorAll('.tab').forEach(t => {
+  t.addEventListener('click', () => {
+    document.querySelectorAll('.tab').forEach(x => x.classList.remove('active'));
+    document.querySelectorAll('.tab-content').forEach(x => x.classList.remove('active'));
+    t.classList.add('active');
+    document.getElementById('tab-' + t.dataset.tab).classList.add('active');
+  });
+});
+
+load();
+setInterval(load, 60000);
+</script>
+</body>
+</html>
