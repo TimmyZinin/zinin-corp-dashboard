@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MCPHire Analytics | Zinin Corp</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  background: #0a0a0a;
+  color: #e5e5e5;
+  padding: 20px;
+}
+a { color: inherit; text-decoration: none; }
+.container { max-width: 1100px; margin: 0 auto; }
+
+/* Nav */
+.nav { display: flex; gap: 0; margin-bottom: 24px; border-bottom: 1px solid #222; flex-wrap: wrap; }
+.nav-brand { font-weight: 700; font-size: 14px; color: #555; padding: 10px 16px 10px 0; margin-right: 8px; }
+.nav a { padding: 10px 16px; font-size: 13px; color: #666; border-bottom: 2px solid transparent; transition: all .15s; }
+.nav a:hover { color: #ccc; }
+.nav a.active { color: #fff; border-bottom-color: #fff; }
+
+/* Header */
+h1 { font-size: 24px; font-weight: 700; color: #fff; margin-bottom: 4px; }
+.subtitle { color: #666; font-size: 13px; margin-bottom: 20px; display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.header-row { display: flex; align-items: flex-start; justify-content: space-between; flex-wrap: wrap; gap: 8px; margin-bottom: 6px; }
+
+/* Dots */
+.dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+.dot-green  { background: #10B981; }
+.dot-yellow { background: #F59E0B; }
+.dot-red    { background: #EF4444; }
+.dot-gray   { background: #6B7280; }
+.dot-pulse  { background: #6B7280; animation: pulse 1.4s ease-in-out infinite; }
+@keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.25; } }
+
+.live-status {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-size: 12px; color: #888;
+  background: #141414; border: 1px solid #222; border-radius: 6px;
+  padding: 4px 10px; margin-top: 2px;
+}
+
+/* Section label */
+.section-label {
+  font-size: 11px; text-transform: uppercase; letter-spacing: 0.8px;
+  color: #555; margin-bottom: 10px; margin-top: 28px;
+}
+
+/* KPI row */
+.stats { display: flex; gap: 10px; margin-bottom: 4px; flex-wrap: wrap; }
+.stat {
+  background: #141414; border: 1px solid #222; border-radius: 10px;
+  padding: 12px 16px; text-align: center; min-width: 100px; flex: 1;
+}
+.stat-num  { display: block; font-size: 28px; font-weight: 700; color: #fff; line-height: 1.1; }
+.stat-label { font-size: 10px; color: #666; text-transform: uppercase; letter-spacing: 0.5px; margin-top: 4px; }
+.stat.loading .stat-num { color: #333; }
+
+/* Service cards */
+.services { display: flex; gap: 10px; margin-bottom: 4px; flex-wrap: wrap; }
+.service-card {
+  background: #141414; border: 1px solid #222; border-radius: 10px;
+  padding: 14px 18px; flex: 1; min-width: 200px;
+  display: flex; align-items: center; gap: 12px;
+}
+.service-icon {
+  width: 36px; height: 36px; border-radius: 8px; background: #1a1a1a;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 16px; flex-shrink: 0;
+}
+.service-info { flex: 1; min-width: 0; }
+.service-name { font-size: 13px; font-weight: 600; color: #fff; margin-bottom: 3px; }
+.service-detail { font-size: 12px; color: #666; }
+.service-status { display: flex; align-items: center; gap: 6px; margin-top: 4px; }
+.service-status-text { font-size: 12px; }
+.service-ok   { color: #10B981; }
+.service-warn { color: #F59E0B; }
+.service-err  { color: #EF4444; }
+.service-loading { color: #555; }
+.resp-time { font-size: 11px; color: #555; }
+
+/* Table */
+table { width: 100%; border-collapse: collapse; font-size: 13px; }
+th {
+  text-align: left; padding: 8px 12px; color: #555;
+  font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px;
+  border-bottom: 1px solid #222;
+}
+td { padding: 10px 12px; border-bottom: 1px solid #1a1a1a; vertical-align: middle; }
+tr:last-child td { border-bottom: none; }
+tr:hover td { background: #181818; }
+.td-source { color: #ccc; font-weight: 500; }
+.td-cron { color: #666; font-size: 12px; }
+.td-ts { color: #555; font-size: 12px; }
+
+/* Table wrapper card */
+.table-card {
+  background: #141414; border: 1px solid #222; border-radius: 10px;
+  overflow: hidden; margin-bottom: 4px;
+}
+.table-card table { margin-bottom: 0; }
+
+/* Umami section */
+.umami-card {
+  background: #141414; border: 1px solid #222; border-radius: 10px;
+  overflow: hidden; margin-bottom: 4px;
+}
+.umami-header {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 12px 16px; border-bottom: 1px solid #222;
+}
+.umami-title { font-size: 13px; font-weight: 600; color: #fff; }
+.umami-note { font-size: 11px; color: #555; max-width: 480px; }
+.umami-frame { display: block; width: 100%; height: 500px; border: none; background: #141414; }
+
+/* Quick links */
+.links { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 4px; }
+.link-btn {
+  display: inline-flex; align-items: center; gap: 6px;
+  background: #141414; border: 1px solid #222; border-radius: 8px;
+  padding: 8px 14px; font-size: 13px; color: #ccc;
+  transition: all .15s; cursor: pointer;
+}
+.link-btn:hover { border-color: #444; color: #fff; background: #1a1a1a; }
+.link-btn .link-icon { font-size: 15px; }
+
+/* Refresh indicator */
+.refresh-bar {
+  display: flex; align-items: center; gap: 10px; justify-content: flex-end;
+  font-size: 11px; color: #444; margin-top: 6px; margin-bottom: 28px;
+}
+.refresh-progress {
+  width: 80px; height: 2px; background: #1a1a1a; border-radius: 1px; overflow: hidden;
+}
+.refresh-fill {
+  height: 100%; background: #333; border-radius: 1px;
+  transition: width 1s linear;
+}
+
+/* Separator spacing */
+.row-gap { margin-top: 0; }
+
+/* Responsive */
+@media (max-width: 700px) {
+  body { padding: 12px; }
+  h1 { font-size: 18px; }
+  .stat-num { font-size: 22px; }
+  .stat { min-width: 80px; padding: 10px 12px; }
+  .service-card { min-width: 100%; }
+  .links { gap: 6px; }
+  .link-btn { font-size: 12px; padding: 7px 10px; }
+  .umami-frame { height: 380px; }
+}
+</style>
+</head>
+<body>
+<div class="container">
+
+  <!-- Nav -->
+  <div class="nav">
+    <span class="nav-brand">Zinin Corp</span>
+    <a href="analytics.html">Аналитика</a>
+    <a href="connectors.html">Коннекторы</a>
+    <a href="tasks.html">Задачи</a>
+    <a href="mcphire-analytics.html" class="active">MCPHire</a>
+  </div>
+
+  <!-- Header -->
+  <div class="header-row">
+    <div>
+      <h1>MCPHire &mdash; Job Marketplace Analytics</h1>
+      <p class="subtitle">
+        Мониторинг вакансий, API, MCP, импорта
+        <span id="last-updated"></span>
+      </p>
+    </div>
+    <div class="live-status" id="live-status">
+      <span class="dot dot-pulse" id="live-dot"></span>
+      <span id="live-text">Подключение...</span>
+    </div>
+  </div>
+
+  <!-- ── Row 1: KPI ── -->
+  <div class="section-label">Ключевые метрики</div>
+  <div class="stats" id="kpi-row">
+    <div class="stat loading" id="kpi-jobs">
+      <span class="stat-num" id="kpi-jobs-num">&mdash;</span>
+      <span class="stat-label">Вакансий</span>
+    </div>
+    <div class="stat loading" id="kpi-companies">
+      <span class="stat-num" id="kpi-companies-num">&mdash;</span>
+      <span class="stat-label">Компаний</span>
+    </div>
+    <div class="stat loading" id="kpi-cities">
+      <span class="stat-num" id="kpi-cities-num">&mdash;</span>
+      <span class="stat-label">Городов</span>
+    </div>
+    <div class="stat loading" id="kpi-categories">
+      <span class="stat-num" id="kpi-categories-num">&mdash;</span>
+      <span class="stat-label">Категорий</span>
+    </div>
+  </div>
+  <div class="refresh-bar">
+    <span>KPI обновляется каждые 60 с</span>
+    <div class="refresh-progress"><div class="refresh-fill" id="kpi-progress" style="width:100%"></div></div>
+  </div>
+
+  <!-- ── Row 2: Services ── -->
+  <div class="section-label row-gap">Состояние сервисов</div>
+  <div class="services" id="services-row">
+
+    <!-- API -->
+    <div class="service-card">
+      <div class="service-icon">API</div>
+      <div class="service-info">
+        <div class="service-name">API</div>
+        <div class="service-detail">api.mcphire.com/v1/health</div>
+        <div class="service-status">
+          <span class="dot dot-pulse" id="api-dot"></span>
+          <span class="service-status-text service-loading" id="api-status">Проверка...</span>
+          <span class="resp-time" id="api-time"></span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Frontend -->
+    <div class="service-card">
+      <div class="service-icon">WEB</div>
+      <div class="service-info">
+        <div class="service-name">Frontend</div>
+        <div class="service-detail">mcphire.com</div>
+        <div class="service-status">
+          <span class="dot dot-pulse" id="fe-dot"></span>
+          <span class="service-status-text service-loading" id="fe-status">Проверка...</span>
+          <span class="resp-time" id="fe-time"></span>
+        </div>
+      </div>
+    </div>
+
+    <!-- MCP SSE -->
+    <div class="service-card">
+      <div class="service-icon">MCP</div>
+      <div class="service-info">
+        <div class="service-name">MCP SSE</div>
+        <div class="service-detail">mcp.mcphire.com/sse</div>
+        <div class="service-status">
+          <span class="dot dot-pulse" id="mcp-dot"></span>
+          <span class="service-status-text service-loading" id="mcp-status">Проверка...</span>
+          <span class="resp-time" id="mcp-time"></span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <div class="refresh-bar">
+    <span>Сервисы обновляются каждые 30 с</span>
+    <div class="refresh-progress"><div class="refresh-fill" id="svc-progress" style="width:100%"></div></div>
+  </div>
+
+  <!-- ── Row 3: Import Status ── -->
+  <div class="section-label row-gap">Статус импорта</div>
+  <div class="table-card">
+    <table>
+      <thead>
+        <tr>
+          <th>Источник</th>
+          <th>Расписание</th>
+          <th>Последняя проверка</th>
+          <th>Статус</th>
+        </tr>
+      </thead>
+      <tbody id="import-table-body">
+        <tr>
+          <td class="td-source">HH.ru</td>
+          <td class="td-cron">Каждые 6 ч</td>
+          <td class="td-ts" id="imp-hh">—</td>
+          <td><span class="dot dot-gray"></span></td>
+        </tr>
+        <tr>
+          <td class="td-source">RemoteOK</td>
+          <td class="td-cron">Каждые 12 ч</td>
+          <td class="td-ts" id="imp-remoteok">—</td>
+          <td><span class="dot dot-gray"></span></td>
+        </tr>
+        <tr>
+          <td class="td-source">Sitemap</td>
+          <td class="td-cron">Ежедневно 05:00</td>
+          <td class="td-ts" id="imp-sitemap">—</td>
+          <td><span class="dot dot-gray"></span></td>
+        </tr>
+        <tr>
+          <td class="td-source">Backup</td>
+          <td class="td-cron">Ежедневно 04:00</td>
+          <td class="td-ts" id="imp-backup">—</td>
+          <td><span class="dot dot-gray"></span></td>
+        </tr>
+        <tr>
+          <td class="td-source">Archiver</td>
+          <td class="td-cron">Ежедневно 03:00</td>
+          <td class="td-ts" id="imp-archiver">—</td>
+          <td><span class="dot dot-gray"></span></td>
+        </tr>
+        <tr>
+          <td class="td-source">Health Check</td>
+          <td class="td-cron">Каждые 30 мин</td>
+          <td class="td-ts" id="imp-health">—</td>
+          <td><span class="dot dot-gray"></span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- ── Row 4: Umami ── -->
+  <div class="section-label row-gap">Web Analytics (Umami)</div>
+  <div class="umami-card">
+    <div class="umami-header">
+      <span class="umami-title">Umami — mcphire.com</span>
+      <span class="umami-note">Если Umami share не настроен — покажет пустой iframe. Настроить share link в Umami UI.</span>
+    </div>
+    <iframe
+      class="umami-frame"
+      src="https://mcphire.com/stats/share/mcphire/de17788f-87df-4bcf-92b1-f79f850dc6e6"
+      title="Umami Analytics — mcphire.com"
+      loading="lazy"
+      allowfullscreen
+    ></iframe>
+  </div>
+
+  <!-- ── Row 5: Quick Links ── -->
+  <div class="section-label row-gap">Быстрые ссылки</div>
+  <div class="links">
+    <a class="link-btn" href="https://api.mcphire.com/v1/docs" target="_blank" rel="noopener">
+      <span class="link-icon">&#128196;</span> API Docs
+    </a>
+    <a class="link-btn" href="https://mcphire.com" target="_blank" rel="noopener">
+      <span class="link-icon">&#127760;</span> mcphire.com
+    </a>
+    <a class="link-btn" href="https://github.com/TimmyZinin/mcphire-frontend" target="_blank" rel="noopener">
+      <span class="link-icon">&#128025;</span> GitHub Frontend
+    </a>
+    <a class="link-btn" href="https://github.com/TimmyZinin/mcphire-mcp" target="_blank" rel="noopener">
+      <span class="link-icon">&#128025;</span> GitHub Backend
+    </a>
+    <a class="link-btn" href="https://github.com/TimmyZinin/mcphire-frontend/wiki" target="_blank" rel="noopener">
+      <span class="link-icon">&#128214;</span> Wiki
+    </a>
+  </div>
+
+  <div style="height:32px"></div>
+
+</div><!-- /container -->
+
+<script>
+'use strict';
+
+/* ─── Utilities ─────────────────────────────────────────── */
+
+function fmtNum(n) {
+  if (n == null || isNaN(n)) return '—';
+  return Number(n).toLocaleString('ru-RU');
+}
+
+function fmtTs() {
+  return new Date().toLocaleTimeString('ru-RU', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+}
+
+function setDot(el, state) {
+  // state: 'green' | 'yellow' | 'red' | 'gray' | 'pulse'
+  el.className = 'dot dot-' + state;
+}
+
+function setProgress(fillEl, pct) {
+  fillEl.style.width = pct + '%';
+}
+
+/* ─── Live status (health) ───────────────────────────────── */
+
+var liveDot  = document.getElementById('live-dot');
+var liveText = document.getElementById('live-text');
+
+function updateLiveStatus(ok, ms) {
+  if (ok) {
+    setDot(liveDot, 'green');
+    liveText.textContent = 'API online' + (ms != null ? ' (' + ms + ' ms)' : '');
+  } else {
+    setDot(liveDot, 'red');
+    liveText.textContent = 'API недоступен';
+  }
+}
+
+/* ─── KPI fetch ──────────────────────────────────────────── */
+
+var kpiCards = {
+  jobs:       document.getElementById('kpi-jobs-num'),
+  companies:  document.getElementById('kpi-companies-num'),
+  cities:     document.getElementById('kpi-cities-num'),
+  categories: document.getElementById('kpi-categories-num')
+};
+
+var kpiCardEls = {
+  jobs:       document.getElementById('kpi-jobs'),
+  companies:  document.getElementById('kpi-companies'),
+  cities:     document.getElementById('kpi-cities'),
+  categories: document.getElementById('kpi-categories')
+};
+
+var lastUpdatedEl = document.getElementById('last-updated');
+
+function fetchKPI() {
+  var t0 = Date.now();
+  fetch('https://api.mcphire.com/v1/jobs/stats', { signal: AbortSignal.timeout(8000) })
+    .then(function(r) {
+      if (!r.ok) throw new Error('HTTP ' + r.status);
+      return r.json();
+    })
+    .then(function(data) {
+      var ms = Date.now() - t0;
+      kpiCards.jobs.textContent       = fmtNum(data.totalJobs);
+      kpiCards.companies.textContent  = fmtNum(data.companiesCount);
+      kpiCards.cities.textContent     = fmtNum(data.citiesCount);
+      kpiCards.categories.textContent = fmtNum(data.categoriesCount);
+      Object.values(kpiCardEls).forEach(function(el) { el.classList.remove('loading'); });
+      lastUpdatedEl.textContent = 'Обновлено в ' + fmtTs();
+      updateLiveStatus(true, ms);
+    })
+    .catch(function(err) {
+      Object.keys(kpiCards).forEach(function(k) { kpiCards[k].textContent = '—'; });
+      lastUpdatedEl.textContent = 'Ошибка загрузки (' + fmtTs() + ')';
+      // Live status updated separately by health check, but mark fail here too
+    });
+}
+
+/* ─── KPI auto-refresh (60 s) ────────────────────────────── */
+
+var kpiProgressEl = document.getElementById('kpi-progress');
+var KPI_INTERVAL  = 60;
+var kpiTimer      = KPI_INTERVAL;
+
+setInterval(function() {
+  kpiTimer--;
+  if (kpiTimer <= 0) {
+    kpiTimer = KPI_INTERVAL;
+    fetchKPI();
+  }
+  setProgress(kpiProgressEl, (kpiTimer / KPI_INTERVAL) * 100);
+}, 1000);
+
+fetchKPI();
+setProgress(kpiProgressEl, 100);
+
+/* ─── Service health checks ──────────────────────────────── */
+
+var services = [
+  {
+    id:   'api',
+    url:  'https://api.mcphire.com/v1/health',
+    mode: 'json',
+    dotEl:    document.getElementById('api-dot'),
+    textEl:   document.getElementById('api-status'),
+    timeEl:   document.getElementById('api-time')
+  },
+  {
+    id:   'fe',
+    url:  'https://mcphire.com',
+    mode: 'fetch',
+    dotEl:    document.getElementById('fe-dot'),
+    textEl:   document.getElementById('fe-status'),
+    timeEl:   document.getElementById('fe-time')
+  },
+  {
+    id:   'mcp',
+    url:  'https://mcp.mcphire.com/sse',
+    mode: 'fetch',
+    dotEl:    document.getElementById('mcp-dot'),
+    textEl:   document.getElementById('mcp-status'),
+    timeEl:   document.getElementById('mcp-time')
+  }
+];
+
+function checkService(svc) {
+  var t0 = Date.now();
+  setDot(svc.dotEl, 'pulse');
+  svc.textEl.textContent = 'Проверка...';
+  svc.textEl.className   = 'service-status-text service-loading';
+  svc.timeEl.textContent = '';
+
+  fetch(svc.url, {
+    method: 'GET',
+    mode: 'no-cors',   // avoids CORS block; response is opaque but we get network reachability
+    signal: AbortSignal.timeout(8000)
+  })
+    .then(function(r) {
+      var ms = Date.now() - t0;
+      // no-cors returns opaque responses (type === 'opaque'), status === 0 but reachable
+      var reachable = (r.status === 0 && r.type === 'opaque') || (r.status >= 200 && r.status < 400);
+      if (reachable) {
+        setDot(svc.dotEl, 'green');
+        svc.textEl.textContent = 'Online';
+        svc.textEl.className   = 'service-status-text service-ok';
+        svc.timeEl.textContent = ms + ' ms';
+        if (svc.id === 'api') updateLiveStatus(true, ms);
+      } else {
+        setDot(svc.dotEl, 'red');
+        svc.textEl.textContent = 'HTTP ' + r.status;
+        svc.textEl.className   = 'service-status-text service-err';
+        svc.timeEl.textContent = '';
+        if (svc.id === 'api') updateLiveStatus(false, null);
+      }
+    })
+    .catch(function(err) {
+      var ms = Date.now() - t0;
+      var msg = err && err.name === 'TimeoutError' ? 'Таймаут' : 'Недоступен';
+      setDot(svc.dotEl, 'red');
+      svc.textEl.textContent = msg;
+      svc.textEl.className   = 'service-status-text service-err';
+      svc.timeEl.textContent = '';
+      if (svc.id === 'api') updateLiveStatus(false, null);
+    });
+}
+
+function checkAllServices() {
+  services.forEach(function(svc) { checkService(svc); });
+}
+
+/* ─── Service auto-refresh (30 s) ───────────────────────── */
+
+var svcProgressEl = document.getElementById('svc-progress');
+var SVC_INTERVAL  = 30;
+var svcTimer      = SVC_INTERVAL;
+
+setInterval(function() {
+  svcTimer--;
+  if (svcTimer <= 0) {
+    svcTimer = SVC_INTERVAL;
+    checkAllServices();
+  }
+  setProgress(svcProgressEl, (svcTimer / SVC_INTERVAL) * 100);
+}, 1000);
+
+checkAllServices();
+setProgress(svcProgressEl, 100);
+
+/* ─── Import status timestamps ───────────────────────────── */
+// These are populated from cron logs via API when available.
+// Fallback: show static schedule notes since we have no dedicated endpoint.
+
+var importSources = [
+  { id: 'imp-hh',       label: 'HH.ru',        interval: 6 * 3600 },
+  { id: 'imp-remoteok', label: 'RemoteOK',      interval: 12 * 3600 },
+  { id: 'imp-sitemap',  label: 'Sitemap',       fixedHour: 5 },
+  { id: 'imp-backup',   label: 'Backup',        fixedHour: 4 },
+  { id: 'imp-archiver', label: 'Archiver',      fixedHour: 3 },
+  { id: 'imp-health',   label: 'Health Check',  interval: 1800 }
+];
+
+function tryFetchImportStatus() {
+  fetch('https://api.mcphire.com/v1/import/status', {
+    signal: AbortSignal.timeout(6000)
+  })
+    .then(function(r) {
+      if (!r.ok) throw new Error('no endpoint');
+      return r.json();
+    })
+    .then(function(data) {
+      // Expected: { hh: "2026-03-18T06:00:00Z", remoteok: "...", ... }
+      var map = {
+        'imp-hh':       data.hh       || data['hh.ru'],
+        'imp-remoteok': data.remoteok || data['remote_ok'],
+        'imp-sitemap':  data.sitemap,
+        'imp-backup':   data.backup,
+        'imp-archiver': data.archiver,
+        'imp-health':   data.health   || data['health_check']
+      };
+      Object.keys(map).forEach(function(id) {
+        var el = document.getElementById(id);
+        if (!el) return;
+        if (map[id]) {
+          var d = new Date(map[id]);
+          el.textContent = isNaN(d) ? map[id] : d.toLocaleString('ru-RU', { day: '2-digit', month: '2-digit', hour: '2-digit', minute: '2-digit' });
+        }
+      });
+    })
+    .catch(function() {
+      // Endpoint not available — leave timestamps as '—'
+      // This is expected during initial deployment
+    });
+}
+
+tryFetchImportStatus();
+setInterval(tryFetchImportStatus, 60000);
+
+/* ─── Visibility-based refresh (tab focus) ───────────────── */
+
+document.addEventListener('visibilitychange', function() {
+  if (document.visibilityState === 'visible') {
+    fetchKPI();
+    checkAllServices();
+  }
+});
+</script>
+</body>
+</html>
