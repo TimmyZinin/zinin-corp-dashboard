@@ -185,6 +185,18 @@
       <span class="nav-tag tag-analytics">ANALYTICS</span>
     </a>
 
+    <div class="sidebar-header" style="margin-top:12px">External Tools</div>
+    <a class="nav-item" href="https://n8n.timzinin.com" target="_blank">
+      <span class="nav-dot" style="background:#ff6d5a"></span>
+      <span class="nav-label">n8n Workflows</span>
+      <span class="nav-tag tag-ops">OPS</span>
+    </a>
+    <a class="nav-item" href="https://langfuse.timzinin.com" target="_blank">
+      <span class="nav-dot" style="background:#7c3aed"></span>
+      <span class="nav-label">Langfuse</span>
+      <span class="nav-tag tag-analytics">MONITORING</span>
+    </a>
+
     <div class="sidebar-footer">
       <button class="signout-btn" id="signoutBtn">Sign Out</button>
     </div>
@@ -250,6 +262,8 @@
   // Navigation
   navItems.forEach(item => {
     item.addEventListener('click', e => {
+      // External links open in new tab
+      if (item.href && item.target === '_blank') return;
       e.preventDefault();
       navItems.forEach(n => n.classList.remove('active'));
       item.classList.add('active');
