@@ -203,7 +203,7 @@
   </nav>
 
   <main class="content" id="content">
-    <iframe id="dashFrame" src="overview.html"></iframe>
+    <iframe id="dashFrame" src="overview.html?embed=1"></iframe>
   </main>
 </div>
 
@@ -267,10 +267,22 @@
       e.preventDefault();
       navItems.forEach(n => n.classList.remove('active'));
       item.classList.add('active');
-      dashFrame.src = item.dataset.page;
+      dashFrame.src = item.dataset.page + '?embed=1';
       // Close mobile sidebar
       document.getElementById('sidebar').classList.remove('open');
     });
+  });
+
+  // Listen for navigation from iframe (dashboard cards)
+  window.addEventListener('message', e => {
+    if (e.data && e.data.type === 'navigate' && e.data.page) {
+      dashFrame.src = e.data.page + '?embed=1';
+      // Update sidebar active state
+      navItems.forEach(n => {
+        n.classList.remove('active');
+        if (n.dataset.page === e.data.page) n.classList.add('active');
+      });
+    }
   });
 
   // Mobile toggle

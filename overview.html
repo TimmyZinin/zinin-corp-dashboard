@@ -4,327 +4,138 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Обзор | Zinin Corp</title>
-<!--
-  CRITIQUE - Current Architecture Section Issues:
-
-  1. TODO: Flow nodes are too small (56px) - should be larger for visual impact
-  2. TODO: Missing animation-delay on flow nodes - they should appear sequentially like in ai-agents-guide
-  3. TODO: Tooltips are broken - they appear below but get clipped by overflow:hidden on parent
-  4. TODO: Color scheme is inconsistent - purple/teal/pink/yellow/green/blue - too many colors
-  5. TODO: No glow pulse animation on active nodes
-  6. TODO: Hierarchy section has no connection lines between nodes
-  7. TODO: Platform tags look boring - need hover glow effect
-  8. TODO: MRR bar lacks animated gradient
-  9. TODO: No floating particles background effect like in original infographics
-  10. TODO: Typography is inconsistent - mixing Unbounded for headers but system fonts for body
-  11. TODO: Card shadows are flat - need layered shadow effect
-  12. TODO: No hover micro-interactions on any elements
-  13. TODO: Flow arrows are static - should pulse or animate
-  14. TODO: Missing "pulse" dot animation for live status indicators
-  15. TODO: Background gradient is too simple - needs radial gradients with animation
-  16. TODO: Section spacing is inconsistent
-  17. TODO: No entrance animations - everything loads instantly
-  18. TODO: Icons are emoji - should be custom SVG for consistency
-  19. TODO: Platform grid lacks grouping or categorization
-  20. TODO: MRR section has no visual hierarchy
-  21. TODO: No connection lines between main flow and hierarchy
-  22. TODO: Colors don't match the original infographic palette exactly
-  23. TODO: Missing "hand-drawn" or organic border radius style
-  24. TODO: No parallax or scroll-based animations
-  25. TODO: Dark mode is hardcoded - light mode is broken
-  26. TODO: No loading skeleton states
-  27. TODO: KPI cards lack animated counters
-  28. TODO: Dashboard cards have no staggered entrance
-  29. TODO: Nav is too plain - needs glassmorphism
-  30. TODO: Footer is bare - needs branding
-  31. TODO: No responsive flow adjustments for mobile
-  32. TODO: Hierarchy line is just a div - should be SVG for better styling
-  33. TODO: No "active" state indicators
-  34. TODO: Colors are too saturated - need more subtle tones
-  35. TODO: Missing gradient overlays on cards
-  36. TODO: No subtle noise texture in background
-  37. TODO: Flow chain lacks branching visualization
-  38. TODO: Agent nodes should have role icons, not just emojis
-  39. TODO: No connection status indicators
-  40. TODO: Missing animated gradient borders
-  41. TODO: Text hierarchy is weak - sizes too similar
-  42. TODO: No "breathing" animation on key elements
-  43. TODO: Icons should have background shapes
-  44. TODO: Section backgrounds should have subtle patterns
-  45. TODO: No "data updating" indicators
-  46. TODO: Missing hover states on platform tags
-  47. TODO: MRR section lacks breakdown visualization
-  48. TODO: No "last updated" timestamp with live indicator
-  49. TODO: Architecture should be split into layers with clear separation
-  50. TODO: Overall - needs more motion, more glow, more character
--->
-<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@300;400;500;600;700;800&family=Onest:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="zinin-corp.css?v=20260306">
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;600;700&family=Onest:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="zinin-corp.css?v=20260320">
 <style>
-/*
-  IMPROVED STYLES - Addressing critique above
-*/
-:root {
-  --bg-primary: #0a0a0f;
-  --bg-card: #12121a;
-  --bg-hover: #1a1a27;
-  --text-primary: #e8e8f0;
-  --text-secondary: #9999b0;
-  --text-muted: #666680;
-  --border: #222233;
-  --shadow: rgba(108, 92, 231, 0.1);
-  --shadow-hover: rgba(108, 92, 231, 0.2);
-  --kpi-green: #00b894;
-  --kpi-orange: #e17055;
-  --kpi-blue: #0984e3;
-  --accent: #6c5ce7;
-  --accent-glow: rgba(108, 92, 231, 0.3);
+/* === OVERVIEW PAGE STYLES === */
+
+/* Health strip */
+.ov-health { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 28px; }
+.ov-kpi {
+  background: var(--zc-bg-card); border: 1px solid var(--zc-border); border-radius: var(--zc-radius-xl);
+  padding: 18px 20px; position: relative; overflow: hidden; transition: var(--zc-ease-base);
 }
-
-body{padding:20px}
-
-
-h1{font-family:'Unbounded',sans-serif;font-size:32px;font-weight:700;color:var(--text-primary);margin-bottom:4px;letter-spacing:-0.5px}
-.subtitle{color:var(--text-muted);font-size:13px;margin-bottom:20px}
-
-/* KPI Strip */
-.kpi-strip{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px;margin-bottom:28px}
-.kpi{background:linear-gradient(135deg,rgba(18,18,26,0.9),rgba(26,26,39,0.7));border:1px solid rgba(255,255,255,0.06);border-radius:16px;padding:18px 22px;box-shadow:0 4px 30px rgba(0,0,0,0.3),inset 0 1px 0 rgba(255,255,255,0.05);transition:all .3s;position:relative;overflow:hidden}
-.kpi::before{content:'';position:absolute;top:0;left:-100%;width:200%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,0.05),transparent);transition:left .5s}
-.kpi:hover{transform:translateY(-4px);box-shadow:0 8px 40px rgba(108,92,231,0.2),inset 0 1px 0 rgba(255,255,255,0.1)}
-.kpi:hover::before{left:100%}
-.kpi::after{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--accent),var(--kpi-blue));opacity:0;transition:opacity .3s}
-.kpi:hover::after{opacity:1}
-.kpi-label{font-size:10px;text-transform:uppercase;letter-spacing:1.5px;color:var(--text-muted);margin-bottom:6px}
-.kpi-value{font-family:'Unbounded',sans-serif;font-size:28px;font-weight:700;background:linear-gradient(135deg,#fff,#999);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
-.kpi-sub{font-size:11px;color:var(--text-muted);margin-top:4px}
-.kpi-green .kpi-value{-webkit-text-fill-color:var(--kpi-green)}
-.kpi-orange .kpi-value{-webkit-text-fill-color:var(--kpi-orange)}
-.kpi-blue .kpi-value{-webkit-text-fill-color:var(--kpi-blue)}
-
-/* Section */
-.section-title{font-size:11px;text-transform:uppercase;letter-spacing:2px;color:var(--text-muted);margin-bottom:16px;padding-bottom:8px;border-bottom:1px solid rgba(255,255,255,0.05)}
-
-/* Dashboard Cards */
-.dashboards{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px;margin-bottom:32px}
-.dash-card{background:linear-gradient(145deg,rgba(18,18,26,0.9),rgba(26,26,39,0.6));border:1px solid rgba(255,255,255,0.06);border-radius:16px;padding:20px;color:var(--text-primary);transition:all .3s;cursor:pointer;display:block;position:relative;overflow:hidden;box-shadow:0 4px 20px rgba(0,0,0,0.2)}
-.dash-card::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(255,255,255,0.1),transparent)}
-.dash-card:hover{transform:translateY(-4px);box-shadow:0 12px 40px rgba(108,92,231,0.15),0 0 0 1px rgba(108,92,231,0.2)}
-.dash-card-header{display:flex;align-items:center;gap:14px;margin-bottom:12px}
-.dash-icon{width:44px;height:44px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0;background:linear-gradient(135deg,rgba(108,92,231,0.2),rgba(108,92,231,0.05));border:1px solid rgba(108,92,231,0.2)}
-.dash-card h3{font-size:15px;font-weight:600}
-.dash-card p{font-size:12px;color:var(--text-muted);line-height:1.5}
-.dash-badge{position:absolute;top:14px;right:14px;font-size:9px;padding:3px 10px;border-radius:20px;font-weight:600;text-transform:uppercase;letter-spacing:.5px;background:rgba(0,184,148,.15);color:#00b894;border:1px solid rgba(0,184,148,0.3)}
-
-/* Quick Links */
-.quick-links{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px;margin-bottom:32px}
-.qlink{background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);border-radius:10px;padding:14px 18px;color:var(--text-primary);transition:all .2s;display:flex;align-items:center;gap:12px;font-size:13px}
-.qlink:hover{background:rgba(108,92,231,0.1);border-color:rgba(108,92,231,0.3);transform:translateX(4px)}
-.qlink-icon{font-size:18px}
-
-/* Architecture Section */
-.arch-section{
-  background:linear-gradient(145deg,rgba(18,18,26,0.95),rgba(26,26,39,0.8));
-  border:1px solid rgba(255,255,255,0.08);
-  border-radius:20px;
-  padding:28px;
-  margin-bottom:24px;
-  box-shadow:0 8px 40px rgba(0,0,0,0.3);
-  position:relative;
-  overflow:hidden
+.ov-kpi:hover { border-color: var(--zc-border-accent); box-shadow: var(--zc-shadow-hover); }
+.ov-kpi-accent { position: absolute; top: 0; left: 0; right: 0; height: 3px; }
+.ov-kpi-label { font-size: 10px; text-transform: uppercase; letter-spacing: 1.5px; color: var(--zc-text-muted); margin-bottom: 6px; }
+.ov-kpi-value { font-family: var(--zc-font-display); font-size: 28px; font-weight: 700; line-height: 1.1; }
+.ov-kpi-sub { font-size: 11px; color: var(--zc-text-muted); margin-top: 6px; }
+.ov-kpi-badge {
+  display: inline-flex; align-items: center; gap: 4px; font-size: 11px; font-weight: 600;
+  padding: 2px 8px; border-radius: 100px; margin-top: 6px;
 }
-.arch-section::before{
-  content:'';
-  position:absolute;
-  top:-50%;left:-50%;width:200%;height:200%;
-  background:radial-gradient(circle at 30% 30%, rgba(108,92,231,0.1) 0%, transparent 50%);
-  animation:archFloat 15s ease-in-out infinite;
-  pointer-events:none
-}
-@keyframes archFloat{
-  0%,100%{transform:scale(1) rotate(0deg)}
-  50%{transform:scale(1.1) rotate(5deg)}
-}
+.ov-badge-green { background: var(--zc-status-green-dim); color: var(--zc-status-green); }
+.ov-badge-yellow { background: var(--zc-status-yellow-dim); color: var(--zc-status-yellow); }
+.ov-badge-red { background: var(--zc-status-red-dim); color: var(--zc-status-red); }
+.ov-progress { background: rgba(255,255,255,0.05); border-radius: 6px; height: 6px; margin-top: 8px; overflow: hidden; }
+.ov-progress-bar { height: 100%; border-radius: 6px; transition: width 0.8s ease; }
 
-.arch-section h3{font-family:'Unbounded',sans-serif;font-size:20px;margin-bottom:4px;position:relative}
-.arch-section .desc{color:var(--text-muted);font-size:12px;margin-bottom:20px;position:relative}
+/* Section headers */
+.ov-section { font-family: var(--zc-font-display); font-size: 14px; font-weight: 600; color: var(--zc-text-heading);
+  margin: 28px 0 14px; display: flex; align-items: center; gap: 10px; }
+.ov-section::after { content: ''; flex: 1; height: 1px; background: var(--zc-border); }
 
-/* Flow Chain - Main visualization */
-.flow-chain{display:flex;align-items:center;gap:12px;flex-wrap:wrap;justify-content:center;margin:24px 0;position:relative}
-.flow-node{
-  width:72px;height:72px;
-  border-radius:20px;
-  display:flex;align-items:center;justify-content:center;
-  font-size:28px;
-  font-weight:700;
-  flex-shrink:0;
-  transition:all .3s cubic-bezier(0.34,1.56,0.64,1);
-  position:relative;
-  cursor:pointer;
-  animation:nodeAppear 0.6s ease backwards;
+/* Two-column grid */
+.ov-grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 16px; }
+
+/* Cards */
+.ov-card {
+  background: var(--zc-bg-card); border: 1px solid var(--zc-border); border-radius: var(--zc-radius-xl);
+  padding: 20px; position: relative; overflow: hidden; transition: var(--zc-ease-base);
 }
-.flow-node:nth-child(1){animation-delay:0.1s}
-.flow-node:nth-child(3){animation-delay:0.2s}
-.flow-node:nth-child(5){animation-delay:0.3s}
-.flow-node:nth-child(7){animation-delay:0.4s}
-.flow-node:nth-child(9){animation-delay:0.5s}
-
-@keyframes nodeAppear{
-  from{opacity:0;transform:scale(0.5) translateY(20px)}
-  to{opacity:1;transform:scale(1) translateY(0)}
+.ov-card:hover { border-color: var(--zc-border-accent); }
+.ov-card-accent { position: absolute; top: 0; left: 0; right: 0; height: 3px; }
+.ov-card-title {
+  font-family: var(--zc-font-display); font-size: 11px; font-weight: 600; text-transform: uppercase;
+  letter-spacing: 1.2px; margin-bottom: 14px; display: flex; align-items: center; gap: 8px;
 }
+.ov-row { display: flex; justify-content: space-between; align-items: center; padding: 8px 0; border-bottom: 1px solid var(--zc-border-subtle); }
+.ov-row:last-child { border-bottom: none; }
+.ov-row-label { color: var(--zc-text-secondary); font-size: 13px; }
+.ov-row-value { font-weight: 600; color: var(--zc-text-heading); font-variant-numeric: tabular-nums; }
+.ov-row-total { border-top: 2px solid var(--zc-border-strong); padding-top: 10px; }
+.ov-row-total .ov-row-value { font-size: 18px; }
 
-.flow-node:hover{transform:scale(1.15) translateY(-5px)}
-.flow-arrow{color:var(--text-muted);font-size:24px;flex-shrink:0;animation:pulse 2s ease-in-out infinite}
-@keyframes pulse{0%,100%{opacity:1}50%{opacity:0.4}}
-
-/* Node colors with glow */
-.node-tim{background:linear-gradient(135deg,rgba(9,132,227,0.3),rgba(9,132,227,0.1));border:2px solid rgba(9,132,227,0.5);box-shadow:0 0 30px rgba(9,132,227,0.3),inset 0 0 20px rgba(9,132,227,0.1)}
-.node-tim:hover{box-shadow:0 0 50px rgba(9,132,227,0.5),inset 0 0 30px rgba(9,132,227,0.2)}
-
-.node-ceo{background:linear-gradient(135deg,rgba(108,92,231,0.3),rgba(108,92,231,0.1));border:2px solid rgba(108,92,231,0.5);box-shadow:0 0 30px rgba(108,92,231,0.3)}
-.node-ceo:hover{box-shadow:0 0 50px rgba(108,92,231,0.5)}
-
-.node-agents{background:linear-gradient(135deg,rgba(0,206,201,0.3),rgba(0,206,201,0.1));border:2px solid rgba(0,206,201,0.5);box-shadow:0 0 30px rgba(0,206,201,0.3)}
-.node-agents:hover{box-shadow:0 0 50px rgba(0,206,201,0.5)}
-
-.node-platforms{background:linear-gradient(135deg,rgba(253,203,110,0.3),rgba(253,203,110,0.1));border:2px solid rgba(253,203,110,0.5);box-shadow:0 0 30px rgba(253,203,110,0.3)}
-.node-platforms:hover{box-shadow:0 0 50px rgba(253,203,110,0.5)}
-
-.node-revenue{background:linear-gradient(135deg,rgba(0,184,148,0.3),rgba(0,184,148,0.1));border:2px solid rgba(0,184,148,0.5);box-shadow:0 0 30px rgba(0,184,148,0.3)}
-.node-revenue:hover{box-shadow:0 0 50px rgba(0,184,148,0.5)}
-
-/* Tooltips */
-.flow-node .tooltip{
-  position:absolute;
-  bottom:85px;
-  left:50%;
-  transform:translateX(-50%) scale(0.9);
-  background:rgba(18,18,26,0.95);
-  padding:10px 16px;
-  border-radius:10px;
-  font-size:12px;
-  white-space:nowrap;
-  opacity:0;
-  pointer-events:none;
-  transition:all .2s cubic-bezier(0.34,1.56,0.64,1);
-  box-shadow:0 8px 30px rgba(0,0,0,0.5),0 0 0 1px rgba(255,255,255,0.1);
-  z-index:100;
-  backdrop-filter:blur(10px)
+/* Quick links */
+.ov-links { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 8px; margin-bottom: 24px; }
+.ov-link {
+  background: rgba(255,255,255,0.02); border: 1px solid var(--zc-border); border-radius: var(--zc-radius-lg);
+  padding: 10px 14px; color: var(--zc-text-primary); transition: var(--zc-ease-base);
+  display: flex; align-items: center; gap: 10px; font-size: 13px; text-decoration: none;
 }
-.flow-node:hover .tooltip{opacity:1;transform:translateX(-50%) scale(1)}
-.tooltip::after{
-  content:'';position:absolute;bottom:-6px;left:50%;transform:translateX(-50%) rotate(45deg);
-  width:12px;height:12px;background:rgba(18,18,26,0.95)
-}
+.ov-link:hover { background: var(--zc-accent-dim); border-color: var(--zc-accent-border); transform: translateX(3px); }
+.ov-link-icon { font-size: 16px; flex-shrink: 0; }
 
-/* Hierarchy - AI Agents */
-.hierarchy{display:flex;flex-direction:column;align-items:center;gap:8px;margin:28px 0;position:relative}
-.hierarchy-row{display:flex;gap:12px;justify-content:center}
-.hierarchy .flow-node{width:56px;height:56px;font-size:20px;border-radius:16px}
+/* Dashboard cards */
+.ov-dashboards { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 10px; margin-bottom: 24px; }
+.ov-dash {
+  background: var(--zc-bg-card); border: 1px solid var(--zc-border); border-radius: var(--zc-radius-lg);
+  padding: 14px 16px; display: flex; align-items: center; gap: 12px; transition: var(--zc-ease-base);
+  text-decoration: none; color: var(--zc-text-primary); cursor: pointer;
+}
+.ov-dash:hover { border-color: var(--zc-accent-border); box-shadow: var(--zc-shadow-hover); transform: translateY(-2px); }
+.ov-dash-icon { width: 36px; height: 36px; border-radius: 10px; display: flex; align-items: center; justify-content: center;
+  font-size: 16px; background: var(--zc-accent-dim); border: 1px solid var(--zc-accent-border); flex-shrink: 0; }
+.ov-dash-title { font-size: 13px; font-weight: 600; }
+.ov-dash-sub { font-size: 10px; color: var(--zc-text-muted); margin-top: 2px; }
+.ov-dash-live { font-size: 8px; padding: 2px 6px; border-radius: 10px; background: var(--zc-status-green-dim);
+  color: var(--zc-status-green); font-weight: 700; letter-spacing: 0.5px; margin-left: auto; }
 
-.hierarchy-line{
-  width:2px;height:20px;
-  background:linear-gradient(180deg,rgba(108,92,231,0.5),rgba(108,92,231,0.1));
-  position:relative
+/* Platform dots */
+.ov-platforms { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
+.ov-plat {
+  font-size: 10px; font-weight: 600; padding: 4px 10px; border-radius: 6px; border: 1px solid;
+  transition: var(--zc-ease-fast);
 }
-.hierarchy-line::after{
-  content:'';position:absolute;bottom:-4px;left:50%;transform:translateX(-50%);
-  width:8px;height:8px;border-radius:50%;background:var(--accent);
-  box-shadow:0 0 10px var(--accent);animation:pulse 2s infinite
-}
+.ov-plat:hover { transform: translateY(-1px); }
+.ov-plat-ok { background: var(--zc-status-green-dim); border-color: rgba(16,185,129,0.25); color: var(--zc-status-green); }
+.ov-plat-warn { background: var(--zc-status-yellow-dim); border-color: rgba(245,158,11,0.25); color: var(--zc-status-yellow); }
+.ov-plat-err { background: var(--zc-status-red-dim); border-color: rgba(239,68,68,0.25); color: var(--zc-status-red); }
 
-.hierarchy-label{font-size:11px;color:var(--text-muted);text-align:center;margin-top:12px;letter-spacing:1px}
+/* Pipeline */
+.ov-pipeline { display: flex; flex-direction: column; gap: 10px; }
+.ov-pipe-lane { display: flex; align-items: center; gap: 12px; }
+.ov-pipe-stage { flex-shrink: 0; width: 72px; text-align: right; }
+.ov-pipe-stage-name { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; }
+.ov-pipe-items { display: flex; flex-wrap: wrap; gap: 6px; flex: 1; }
+.ov-pipe-item {
+  background: var(--zc-bg-overlay); border: 1px solid; border-radius: 6px; padding: 5px 10px;
+  font-size: 11px; font-weight: 600; color: var(--zc-text-primary);
+}
+.ov-pipe-item small { display: block; font-size: 9px; color: var(--zc-text-muted); font-weight: 400; margin-top: 1px; }
 
-/* Platforms */
-.platform-grid{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-top:20px}
-.platform-tag{
-  background:rgba(255,255,255,0.03);
-  border:1px solid rgba(255,255,255,0.08);
-  padding:8px 14px;
-  border-radius:10px;
-  font-size:11px;
-  color:var(--text-secondary);
-  transition:all .2s;
-  cursor:pointer
+/* Recommendations */
+.ov-recs { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 12px; margin-bottom: 24px; }
+.ov-rec {
+  background: var(--zc-bg-card); border: 1px solid var(--zc-border); border-radius: var(--zc-radius-lg);
+  padding: 16px; position: relative; overflow: hidden;
 }
-.platform-tag:hover{
-  background:rgba(108,92,231,0.15);
-  border-color:rgba(108,92,231,0.4);
-  color:#a89bff;
-  transform:translateY(-2px);
-  box-shadow:0 4px 15px rgba(108,92,231,0.2)
-}
+.ov-rec-accent { position: absolute; top: 0; left: 0; right: 0; height: 2px; }
+.ov-rec-title { font-size: 13px; font-weight: 600; color: var(--zc-text-heading); margin-bottom: 6px; }
+.ov-rec-text { font-size: 11px; color: var(--zc-text-secondary); line-height: 1.6; }
 
-/* MRR Progress */
-.mrr-display{
-  display:flex;
-  align-items:center;
-  gap:16px;
-  margin-top:24px;
-  padding:20px;
-  background:rgba(0,0,0,0.2);
-  border-radius:14px;
-  border:1px solid rgba(255,255,255,0.05)
-}
-.mrr-bar{
-  flex:1;
-  height:14px;
-  background:rgba(255,255,255,0.05);
-  border-radius:7px;
-  overflow:hidden;
-  position:relative
-}
-.mrr-fill{
-  height:100%;
-  background:linear-gradient(90deg,#00b894,#00cec9,#6c5ce7,#a29bfe);
-  background-size:300% 100%;
-  border-radius:7px;
-  animation:gradientMove 3s ease infinite;
-  transition:width 1.5s cubic-bezier(0.34,1.56,0.64,1)
-}
-@keyframes gradientMove{
-  0%{background-position:0% 50%}
-  50%{background-position:100% 50%}
-  100%{background-position:0% 50%}
-}
-.mrr-value{
-  font-family:'Unbounded',sans-serif;
-  font-size:28px;
-  font-weight:700;
-  background:linear-gradient(135deg,#00b894,#00cec9);
-  -webkit-background-clip:text;
-  -webkit-text-fill-color:transparent;
-  min-width:100px;text-align:right
-}
-.mrr-labels{flex:1}
-.mrr-labels .label{font-size:11px;color:var(--text-muted);margin-bottom:4px}
-.mrr-labels .sources{font-size:10px;color:var(--text-secondary);opacity:0.7}
+/* Status dot */
+.ov-status-dot { width: 8px; height: 8px; border-radius: 50%; display: inline-block; }
+.ov-status-dot.green { background: var(--zc-status-green); box-shadow: 0 0 8px rgba(16,185,129,0.5); animation: pulse 2s infinite; }
+.ov-status-dot.yellow { background: var(--zc-status-yellow); box-shadow: 0 0 8px rgba(245,158,11,0.4); }
+.ov-status-dot.red { background: var(--zc-status-red); box-shadow: 0 0 8px rgba(239,68,68,0.5); }
+@keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.5; } }
 
-/* Status */
-.status-bar{display:flex;align-items:center;gap:8px;font-size:12px;color:var(--kpi-green);margin-bottom:20px}
-.status-dot{width:8px;height:8px;background:var(--kpi-green);border-radius:50%;box-shadow:0 0 10px var(--kpi-green);animation:statusPulse 2s infinite}
-@keyframes statusPulse{0%,100%{opacity:1;box-shadow:0 0 10px var(--kpi-green)}50%{opacity:0.6;box-shadow:0 0 5px var(--kpi-green)}}
-
-@media(max-width:900px){
-  .flow-chain{flex-wrap:wrap}
-  .flow-node{width:60px;height:60px;font-size:22px}
-}
-@media(max-width:640px){
-  .dashboards{grid-template-columns:1fr}
-  .kpi-strip{grid-template-columns:repeat(2,1fr)}
-  .hierarchy .flow-node{width:44px;height:44px;font-size:16px}
-}
+/* Responsive */
+@media (max-width: 900px) { .ov-health { grid-template-columns: repeat(2, 1fr); } .ov-grid-2 { grid-template-columns: 1fr; } }
+@media (max-width: 600px) { .ov-health { grid-template-columns: 1fr; } .ov-dashboards { grid-template-columns: 1fr; } }
 </style>
 </head>
-<body class="zc-bg-animated">
+<body>
+<script>if(window.parent!==window)document.body.classList.add('zc-embed');</script>
+
 <div class="zc-container">
 
 <nav class="zc-nav">
   <span class="zc-nav-brand"><img src="img/avatar.jpg" alt="" class="zc-nav-avatar">Zinin <span class="zc-nav-brand-suffix">Corp</span></span>
   <a href="overview.html" class="active">Обзор</a>
-  <a href="content.html">Календарь</a>
-  <a href="bank.html">Банк контента</a>
+  <a href="content-calendar.html">Календарь</a>
+  <a href="content-bank.html">Банк</a>
   <a href="analytics.html">Аналитика</a>
   <a href="connectors.html">Коннекторы</a>
   <a href="finance.html">Финансы</a>
@@ -333,1368 +144,458 @@ h1{font-family:'Unbounded',sans-serif;font-size:32px;font-weight:700;color:var(-
 
 <div class="zc-page-header">
   <h1>Zinin Corporation</h1>
-  <p class="zc-subtitle">AI-Powered Business Dashboard</p>
-</div>
-<div class="status-bar">
-  <span class="status-dot"></span>
-  All systems operational
+  <p class="zc-subtitle">Health Monitor &middot; <span id="last-updated" style="color:var(--zc-text-disabled)">—</span></p>
 </div>
 
-<!-- KPI Strip -->
-<div class="kpi-strip">
-  <div class="kpi kpi-green">
-    <div class="kpi-label">MRR</div>
-    <div class="kpi-value">$515</div>
-    <div class="kpi-sub">Target: $2,500</div>
+<!-- ═══════════════════════════════════════════════════════════════
+     HEALTH MONITOR — 4 KPIs (5-second rule)
+     ═══════════════════════════════════════════════════════════════ -->
+<div class="ov-health">
+
+  <div class="ov-kpi">
+    <div class="ov-kpi-accent" style="background: linear-gradient(90deg, #10b981, #34d399)"></div>
+    <div class="ov-kpi-label">MRR</div>
+    <div class="ov-kpi-value" style="color: var(--zc-status-green)">$1,100</div>
+    <div class="ov-kpi-sub">Цель: $2,500</div>
+    <div class="ov-progress"><div class="ov-progress-bar" style="width:44%; background: linear-gradient(90deg, #10b981, #34d399)"></div></div>
+    <div class="ov-kpi-badge ov-badge-green">44% от цели</div>
   </div>
-  <div class="kpi kpi-blue">
-    <div class="kpi-label">CRM Users</div>
-    <div class="kpi-value" id="crm-total">59</div>
-    <div class="kpi-sub" id="crm-sub">Loading...</div>
+
+  <div class="ov-kpi">
+    <div class="ov-kpi-accent" style="background: linear-gradient(90deg, #6c5ce7, #a29bfe)"></div>
+    <div class="ov-kpi-label">Чистая прибыль</div>
+    <div class="ov-kpi-value" style="color: #a29bfe">+$825</div>
+    <div class="ov-kpi-sub">Маржа: 75%</div>
+    <div class="ov-kpi-badge ov-badge-green">+63% vs Jan</div>
   </div>
-  <div class="kpi kpi-orange">
-    <div class="kpi-label">Platforms</div>
-    <div class="kpi-value">11</div>
-    <div class="kpi-sub">9 connected</div>
+
+  <div class="ov-kpi">
+    <div class="ov-kpi-accent" style="background: linear-gradient(90deg, #3b82f6, #60a5fa)"></div>
+    <div class="ov-kpi-label">Cash Position</div>
+    <div class="ov-kpi-value" style="color: #60a5fa" id="cash-total">—</div>
+    <div class="ov-kpi-sub" id="cash-breakdown">TON + Gate.io + TBC</div>
   </div>
-  <div class="kpi kpi-blue">
-    <div class="kpi-label">AI Agents</div>
-    <div class="kpi-value">6</div>
-    <div class="kpi-sub">Active crew</div>
+
+  <div class="ov-kpi">
+    <div class="ov-kpi-accent" style="background: linear-gradient(90deg, #10b981, #3b82f6)"></div>
+    <div class="ov-kpi-label">Uptime</div>
+    <div class="ov-kpi-value" id="uptime-value" style="color: var(--zc-status-green)">
+      <span class="ov-status-dot green" style="margin-right:6px"></span>—
+    </div>
+    <div class="ov-kpi-sub" id="uptime-sub">21 монитор</div>
+    <a href="/uptime/" target="_blank" style="font-size:10px; color:var(--zc-accent); text-decoration:none; margin-top:4px; display:inline-block">Открыть Uptime Kuma →</a>
   </div>
+
 </div>
 
-<!-- Dashboards -->
-<div class="section-title">Dashboards</div>
-<div class="dashboards">
-  <a class="dash-card" href="content.html">
-    <span class="dash-badge">LIVE</span>
-    <div class="dash-card-header">
-      <div class="dash-icon">📅</div>
-      <h3>Content Calendar</h3>
-    </div>
-    <p>Publishing schedule across 11 platforms.</p>
-  </a>
 
-  <a class="dash-card" href="analytics.html">
-    <span class="dash-badge">LIVE</span>
-    <div class="dash-card-header">
-      <div class="dash-icon">📈</div>
-      <h3>SMM Analytics</h3>
-    </div>
-    <p>Engagement metrics per post.</p>
-  </a>
-
-  <a class="dash-card" href="connectors.html">
-    <span class="dash-badge">LIVE</span>
-    <div class="dash-card-header">
-      <div class="dash-icon">🔗</div>
-      <h3>SMM Connectors</h3>
-    </div>
-    <p>API status, tokens, rate limits.</p>
-  </a>
-
-  <a class="dash-card" href="tasks.html">
-    <span class="dash-badge">LIVE</span>
-    <div class="dash-card-header">
-      <div class="dash-icon">📋</div>
-      <h3>Task Board</h3>
-    </div>
-    <p>Kanban: Бэклог → В работе → Готово</p>
-  </a>
-
-  <a class="dash-card" href="https://sborka.work" target="_blank">
-    <span class="dash-badge">LIVE</span>
-    <div class="dash-card-header">
-      <div class="dash-icon">🌐</div>
-      <h3>sborka.work</h3>
-    </div>
-    <p>Landing, catalog, content plans.</p>
-  </a>
-
-  <a class="dash-card" href="https://t.me/Sborka_work_bot" target="_blank">
-    <span class="dash-badge">LIVE</span>
-    <div class="dash-card-header">
-      <div class="dash-icon">🤖</div>
-      <h3>Career Bot</h3>
-    </div>
-    <p>@Sborka_work_bot — TMA</p>
-  </a>
-
-  <a class="dash-card" href="https://sborka.work/crm-admin/admin?key=sborka2026admin" target="_blank">
-    <span class="dash-badge">LIVE</span>
-    <div class="dash-card-header">
-      <div class="dash-icon">📊</div>
-      <h3>CRM</h3>
-    </div>
-    <p>User management, subscriptions.</p>
-  </a>
-
-  <a class="dash-card" href="https://scope.timzinin.com" target="_blank">
-    <span class="dash-badge">LIVE</span>
-    <div class="dash-card-header">
-      <div class="dash-icon">🌍</div>
-      <h3>WorldScope</h3>
-    </div>
-    <p>Real-time: aircraft, ships, webcams. Umami ✅</p>
-  </a>
-
-  <a class="dash-card" href="https://t.me/tim_news_agent_bot" target="_blank">
-    <span class="dash-badge">LIVE</span>
-    <div class="dash-card-header">
-      <div class="dash-icon">👑</div>
-      <h3>CEO Bot</h3>
-    </div>
-    <p>6 AI agents, task pool.</p>
-  </a>
-</div>
-
-<!-- Quick Links -->
-<div class="section-title">Quick Links</div>
-<div class="quick-links">
-  <a class="qlink" href="https://github.com/TimmyZinin" target="_blank">
-    <span class="qlink-icon">💻</span> GitHub
-  </a>
-  <a class="qlink" href="https://sborka.work/content-plan-18-19-feb.html" target="_blank">
-    <span class="qlink-icon">📝</span> Content Plan
-  </a>
-  <a class="qlink" href="https://t.me/tim_cmo_hunter_bot/KRMKTL" target="_blank">
-    <span class="qlink-icon">💰</span> KRMKTL
-  </a>
-  <a class="qlink" href="https://cryptomarketologi.online" target="_blank">
-    <span class="qlink-icon">🚀</span> Crypto Marketologists
-  </a>
-  <a class="qlink" href="https://www.linkedin.com/in/timzinin/" target="_blank">
-    <span class="qlink-icon">👤</span> LinkedIn
-  </a>
-  <a class="qlink" href="https://timmyzinin.github.io/smm-research-hub/index.html" target="_blank" style="background:rgba(108,92,231,0.08);border-color:rgba(108,92,231,0.2)">
-    <span class="qlink-icon">🔬</span> SMM Research Hub (29 аудитов)
-  </a>
-  <a class="qlink" href="https://sborka.work" target="_blank" style="background:rgba(0,184,148,0.08);border-color:rgba(0,184,148,0.2)">
-    <span class="qlink-icon">📡</span> Uptime Kuma (21 монитор)
-  </a>
-  <a class="qlink" href="https://sborka.work" target="_blank" style="background:rgba(253,121,168,0.08);border-color:rgba(253,121,168,0.2)">
-    <span class="qlink-icon">📈</span> Umami Analytics
-  </a>
-</div>
-
-<!-- Architecture - Improved Flow Visualization -->
-<div class="arch-section">
-  <h3>Business Architecture</h3>
-  <p class="desc">System flow: Tim → CEO → Agents → Platforms → Revenue</p>
-
-  <!-- Main flow chain -->
-  <div class="flow-chain">
-    <div class="flow-node node-tim">
-      👤
-      <span class="tooltip">Tim Zinin<br><small style="opacity:0.6">Founder</small></span>
-    </div>
-    <span class="flow-arrow">→</span>
-
-    <div class="flow-node node-ceo">
-      🤖
-      <span class="tooltip">CEO Bot<br><small style="opacity:0.6">@tim_news_agent_bot</small></span>
-    </div>
-    <span class="flow-arrow">→</span>
-
-    <div class="flow-node node-agents">
-      🧠
-      <span class="tooltip">6 AI Agents<br><small style="opacity:0.6">CrewAI</small></span>
-    </div>
-    <span class="flow-arrow">→</span>
-
-    <div class="flow-node node-platforms">
-      📱
-      <span class="tooltip">11 Platforms<br><small style="opacity:0.6">SMM Publishing</small></span>
-    </div>
-    <span class="flow-arrow">→</span>
-
-    <div class="flow-node node-revenue">
-      💰
-      <span class="tooltip">Revenue<br><small style="opacity:0.6">MRR $515</small></span>
-    </div>
-  </div>
-
-  <!-- Hierarchy: AI Agents -->
-  <div class="hierarchy">
-    <div class="hierarchy-row">
-      <div class="flow-node node-ceo" style="width:72px;height:72px;font-size:22px">
-        👑
-        <span class="tooltip">CEO Alexey<br><small style="opacity:0.6">Sonnet 4</small></span>
-      </div>
-    </div>
-    <div class="hierarchy-line"></div>
-    <div class="hierarchy-row">
-      <div class="flow-node node-agents">💵<span class="tooltip">CFO Mattias</span></div>
-      <div class="flow-node node-agents">⚙️<span class="tooltip">CTO Martin</span></div>
-      <div class="flow-node node-platforms">📣<span class="tooltip">SMM Yuki</span></div>
-      <div class="flow-node node-tim">📋<span class="tooltip">CPO Sophie</span></div>
-      <div class="flow-node node-ceo">🎨<span class="tooltip">Designer Ryan</span></div>
-    </div>
-    <div class="hierarchy-label">6 AI Agents · CrewAI · OpenRouter</div>
-  </div>
-
-  <!-- Platforms -->
-  <div class="platform-grid">
-    <span class="platform-tag">LinkedIn</span>
-    <span class="platform-tag">Threads</span>
-    <span class="platform-tag">Telegram</span>
-    <span class="platform-tag">Facebook</span>
-    <span class="platform-tag">VK</span>
-    <span class="platform-tag">YouTube</span>
-    <span class="platform-tag">Bluesky</span>
-    <span class="platform-tag">OK.ru</span>
-    <span class="platform-tag">VC.ru</span>
-    <span class="platform-tag">Dev.to</span>
-    <span class="platform-tag">Mastodon</span>
-  </div>
-
-  <!-- MRR Progress -->
-  <div class="mrr-display">
-    <div class="mrr-labels">
-      <div class="label">MRR Progress</div>
-      <div class="sources">KRMKTL $350 · Botanica $165 · SBORKA $0</div>
-    </div>
-    <div class="mrr-bar"><div class="mrr-fill" style="width:20.6%"></div></div>
-    <span class="mrr-value">$515</span>
-  </div>
-</div>
-
-<!-- =========================================================
-     INFOGRAPHIC CHARTS — Zinin Corp Overview
-     All chart-specific classes prefixed with ov-
-     Pure HTML + CSS, no JS, no external libraries
-     ========================================================= -->
-<style>
-/* ---- Base wrappers ---- */
-.ov-section {
-  margin-bottom: 32px;
-}
-
-.ov-charts-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 16px;
-}
-
-.ov-chart-card {
-  background: #141414;
-  border: 1px solid #222222;
-  border-radius: 14px;
-  padding: 24px;
-  position: relative;
-  overflow: hidden;
-}
-
-.ov-chart-card::before {
-  content: '';
-  position: absolute;
-  top: 0; left: 0; right: 0;
-  height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(108,92,231,0.25), transparent);
-}
-
-.ov-chart-title {
-  font-family: 'Unbounded', sans-serif;
-  font-size: 11px;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 1.8px;
-  color: #666666;
-  margin-bottom: 20px;
-}
-
-/* ---- Legend dots ---- */
-.ov-legend {
-  display: flex;
-  gap: 16px;
-  flex-wrap: wrap;
-  margin-bottom: 16px;
-}
-
-.ov-legend-item {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  font-size: 10px;
-  color: #666666;
-}
-
-.ov-legend-dot {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  flex-shrink: 0;
-}
-
-/* ==========================================================
-   CHART 1: Infrastructure Map
-   ========================================================== */
-.ov-infra {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
-
-.ov-infra-row {
-  display: flex;
-  align-items: stretch;
-  gap: 12px;
-}
-
-/* Connector line between nodes */
-.ov-infra-connector {
-  display: flex;
-  align-items: center;
-  flex-shrink: 0;
-  width: 20px;
-  justify-content: center;
-  position: relative;
-}
-
-.ov-infra-connector::before {
-  content: '';
-  position: absolute;
-  top: 50%; left: 50%;
-  transform: translate(-50%, -50%);
-  width: 20px;
-  height: 1px;
-  background: linear-gradient(90deg, #222222, rgba(108,92,231,0.4), #222222);
-}
-
-/* Node card */
-.ov-infra-node {
-  flex: 1;
-  background: #0d0d12;
-  border: 1px solid #222222;
-  border-radius: 10px;
-  padding: 14px;
-  position: relative;
-}
-
-.ov-infra-node-header {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  margin-bottom: 10px;
-}
-
-.ov-infra-status-dot {
-  width: 7px;
-  height: 7px;
-  border-radius: 50%;
-  flex-shrink: 0;
-}
-
-.ov-infra-status-dot--green  { background: #10b981; box-shadow: 0 0 6px rgba(16,185,129,0.5); }
-.ov-infra-status-dot--yellow { background: #f59e0b; box-shadow: 0 0 6px rgba(245,158,11,0.4); }
-.ov-infra-status-dot--gray   { background: #6b7280; }
-
-.ov-infra-node-name {
-  font-family: 'Unbounded', sans-serif;
-  font-size: 10px;
-  font-weight: 600;
-  color: #e5e5e5;
-  letter-spacing: 0.5px;
-}
-
-.ov-infra-node-meta {
-  font-size: 9px;
-  color: #444444;
-  margin-top: 1px;
-}
-
-/* Service pills inside node */
-.ov-infra-services {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 4px;
-}
-
-.ov-infra-pill {
-  font-size: 9px;
-  padding: 2px 7px;
-  border-radius: 4px;
-  border: 1px solid;
-  white-space: nowrap;
-  line-height: 1.6;
-}
-
-.ov-infra-pill--green  { background: rgba(16,185,129,0.08);  border-color: rgba(16,185,129,0.2);  color: #10b981; }
-.ov-infra-pill--yellow { background: rgba(245,158,11,0.08);  border-color: rgba(245,158,11,0.2);  color: #f59e0b; }
-.ov-infra-pill--gray   { background: rgba(107,114,128,0.08); border-color: rgba(107,114,128,0.2); color: #9ca3af; }
-.ov-infra-pill--blue   { background: rgba(59,130,246,0.08);  border-color: rgba(59,130,246,0.2);  color: #60a5fa; }
-.ov-infra-pill--purple { background: rgba(108,92,231,0.08);  border-color: rgba(108,92,231,0.25); color: #a89bff; }
-
-/* Top row: 3 nodes side by side */
-.ov-infra-top {
-  display: grid;
-  grid-template-columns: 1fr auto 1fr auto 1fr auto 1fr;
-  gap: 0;
-  align-items: stretch;
-}
-
-/* Bottom: GitHub full width */
-.ov-infra-bottom {
-  display: flex;
-  justify-content: center;
-}
-
-.ov-infra-bottom .ov-infra-node {
-  max-width: 280px;
-  text-align: center;
-}
-
-.ov-infra-bottom .ov-infra-services {
-  justify-content: center;
-}
-
-/* Vertical connector from top-row to bottom node */
-.ov-infra-vconnector {
-  display: flex;
-  justify-content: center;
-  position: relative;
-  height: 12px;
-}
-
-.ov-infra-vconnector::before {
-  content: '';
-  position: absolute;
-  top: 0; bottom: 0; left: 50%;
-  width: 1px;
-  background: linear-gradient(180deg, #222222, rgba(108,92,231,0.3), #222222);
-}
-
-/* ==========================================================
-   CHART 2: Revenue Breakdown
-   ========================================================== */
-.ov-rev-target-row {
-  display: flex;
-  align-items: baseline;
-  justify-content: space-between;
-  margin-bottom: 8px;
-}
-
-.ov-rev-target-label {
-  font-size: 10px;
-  color: #444444;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-}
-
-.ov-rev-target-val {
-  font-family: 'Unbounded', sans-serif;
-  font-size: 13px;
-  color: #666666;
-}
-
-/* Progress track */
-.ov-rev-track {
-  height: 6px;
-  background: rgba(255,255,255,0.05);
-  border-radius: 3px;
-  margin-bottom: 20px;
-  position: relative;
-  overflow: hidden;
-}
-
-.ov-rev-fill {
-  position: absolute;
-  top: 0; left: 0; bottom: 0;
-  background: linear-gradient(90deg, #10b981, #3b82f6, #6c5ce7);
-  border-radius: 3px;
-  width: 20.6%;
-}
-
-/* Individual source bars */
-.ov-rev-sources {
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
-}
-
-.ov-rev-source-row {
-  display: flex;
-  flex-direction: column;
-  gap: 5px;
-}
-
-.ov-rev-source-meta {
-  display: flex;
-  justify-content: space-between;
-  align-items: baseline;
-}
-
-.ov-rev-source-name {
-  font-size: 11px;
-  color: #999999;
-}
-
-.ov-rev-source-pct {
-  font-size: 10px;
-  color: #444444;
-  font-variant-numeric: tabular-nums;
-}
-
-.ov-rev-source-amount {
-  font-family: 'Unbounded', sans-serif;
-  font-size: 13px;
-  font-weight: 600;
-}
-
-.ov-rev-bar-track {
-  height: 8px;
-  background: rgba(255,255,255,0.04);
-  border-radius: 4px;
-  position: relative;
-  overflow: hidden;
-}
-
-.ov-rev-bar-fill {
-  position: absolute;
-  top: 0; left: 0; bottom: 0;
-  border-radius: 4px;
-}
-
-/* MRR total block */
-.ov-rev-total {
-  margin-top: 20px;
-  padding-top: 16px;
-  border-top: 1px solid #1a1a1a;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.ov-rev-total-label {
-  font-size: 10px;
-  text-transform: uppercase;
-  letter-spacing: 1.2px;
-  color: #444444;
-}
-
-.ov-rev-total-val {
-  font-family: 'Unbounded', sans-serif;
-  font-size: 22px;
-  font-weight: 700;
-  color: #10b981;
-}
-
-.ov-rev-total-pct {
-  font-size: 10px;
-  color: #444444;
-  margin-top: 2px;
-  text-align: right;
-}
-
-/* ==========================================================
-   CHART 3: Platform Coverage Grid
-   ========================================================== */
-.ov-plat-grid {
-  display: grid;
-  grid-template-columns: repeat(6, 1fr);
-  gap: 8px;
-}
-
-.ov-plat-dot {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 5px;
-}
-
-.ov-plat-circle {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 9px;
-  font-weight: 700;
-  letter-spacing: 0;
-  text-align: center;
-  border: 1.5px solid;
-  line-height: 1.2;
-  transition: transform 0.15s ease;
-  cursor: default;
-}
-
-.ov-plat-circle:hover {
-  transform: scale(1.12);
-}
-
-.ov-plat-circle--green {
-  background: rgba(16,185,129,0.10);
-  border-color: rgba(16,185,129,0.35);
-  color: #10b981;
-}
-
-.ov-plat-circle--yellow {
-  background: rgba(245,158,11,0.10);
-  border-color: rgba(245,158,11,0.35);
-  color: #f59e0b;
-}
-
-.ov-plat-circle--red {
-  background: rgba(239,68,68,0.10);
-  border-color: rgba(239,68,68,0.35);
-  color: #ef4444;
-}
-
-.ov-plat-name {
-  font-size: 8px;
-  color: #444444;
-  text-align: center;
-  line-height: 1.2;
-  max-width: 44px;
-  word-break: break-word;
-}
-
-/* ==========================================================
-   CHART 4: Project Pipeline
-   ========================================================== */
-.ov-pipeline {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-
-.ov-pipeline-lane {
-  display: flex;
-  align-items: flex-start;
-  gap: 12px;
-}
-
-.ov-pipeline-stage {
-  flex-shrink: 0;
-  width: 78px;
-  text-align: right;
-}
-
-.ov-pipeline-stage-name {
-  font-size: 9px;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 1.2px;
-  line-height: 1.4;
-}
-
-.ov-pipeline-stage-hint {
-  font-size: 8px;
-  color: #444444;
-  margin-top: 1px;
-}
-
-.ov-pipeline-bar-track {
-  flex: 1;
-  position: relative;
-  padding-left: 10px;
-}
-
-/* Vertical lane line */
-.ov-pipeline-bar-track::before {
-  content: '';
-  position: absolute;
-  left: 0; top: 0; bottom: -10px;
-  width: 1px;
-  background: linear-gradient(180deg, var(--ov-lane-color, #222222), transparent);
-  opacity: 0.4;
-}
-
-.ov-pipeline-lane:last-child .ov-pipeline-bar-track::before {
-  display: none;
-}
-
-/* Timeline dot on the lane line */
-.ov-pipeline-bar-track::after {
-  content: '';
-  position: absolute;
-  left: -3px; top: 9px;
-  width: 7px; height: 7px;
-  border-radius: 50%;
-  background: var(--ov-lane-color, #444444);
-  box-shadow: 0 0 8px var(--ov-lane-color, transparent);
-}
-
-.ov-pipeline-projects {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 6px;
-  padding-top: 4px;
-}
-
-.ov-pipeline-card {
-  background: #0d0d12;
-  border: 1px solid;
-  border-radius: 7px;
-  padding: 6px 10px;
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-  min-width: 96px;
-}
-
-.ov-pipeline-card-name {
-  font-size: 11px;
-  font-weight: 600;
-  color: #e5e5e5;
-  white-space: nowrap;
-}
-
-.ov-pipeline-card-detail {
-  font-size: 9px;
-  color: #555555;
-  line-height: 1.3;
-  white-space: nowrap;
-}
-
-/* Lane color themes */
-.ov-pipeline-lane--revenue {
-  --ov-lane-color: #10b981;
-}
-.ov-pipeline-lane--revenue .ov-pipeline-stage-name {
-  color: #10b981;
-}
-.ov-pipeline-lane--revenue .ov-pipeline-card {
-  border-color: rgba(16,185,129,0.25);
-}
-.ov-pipeline-lane--revenue .ov-pipeline-card-name {
-  color: #10b981;
-}
-
-.ov-pipeline-lane--growth {
-  --ov-lane-color: #3b82f6;
-}
-.ov-pipeline-lane--growth .ov-pipeline-stage-name {
-  color: #3b82f6;
-}
-.ov-pipeline-lane--growth .ov-pipeline-card {
-  border-color: rgba(59,130,246,0.25);
-}
-
-.ov-pipeline-lane--build {
-  --ov-lane-color: #f59e0b;
-}
-.ov-pipeline-lane--build .ov-pipeline-stage-name {
-  color: #f59e0b;
-}
-.ov-pipeline-lane--build .ov-pipeline-card {
-  border-color: rgba(245,158,11,0.25);
-}
-
-.ov-pipeline-lane--explore {
-  --ov-lane-color: #6c5ce7;
-}
-.ov-pipeline-lane--explore .ov-pipeline-stage-name {
-  color: #6c5ce7;
-}
-.ov-pipeline-lane--explore .ov-pipeline-card {
-  border-color: rgba(108,92,231,0.25);
-}
-
-/* ---- Responsive ---- */
-@media (max-width: 860px) {
-  .ov-charts-grid {
-    grid-template-columns: 1fr;
-  }
-}
-
-@media (max-width: 600px) {
-  .ov-plat-grid {
-    grid-template-columns: repeat(5, 1fr);
-  }
-  .ov-infra-top {
-    grid-template-columns: 1fr auto 1fr;
-    row-gap: 8px;
-  }
-}
-</style>
-
-<!-- Section label -->
-<div class="section-title" style="margin-top:32px">Business Infographics</div>
-
-<div class="ov-section">
-  <div class="ov-charts-grid">
-
-    <!-- ==========================================
-         CHART 1: Infrastructure Map
-         ========================================== -->
-    <div class="ov-chart-card">
-      <div class="ov-chart-title">Infrastructure Map</div>
-
-      <div class="ov-legend">
-        <span class="ov-legend-item">
-          <span class="ov-legend-dot" style="background:#10b981;box-shadow:0 0 5px rgba(16,185,129,0.5)"></span>
-          Running
-        </span>
-        <span class="ov-legend-item">
-          <span class="ov-legend-dot" style="background:#f59e0b"></span>
-          Partial
-        </span>
-        <span class="ov-legend-item">
-          <span class="ov-legend-dot" style="background:#6b7280"></span>
-          Local / Passive
-        </span>
-      </div>
-
-      <!-- Four nodes in a horizontal row -->
-      <div class="ov-infra-top">
-
-        <!-- RUVDS -->
-        <div class="ov-infra-node">
-          <div class="ov-infra-node-header">
-            <span class="ov-infra-status-dot ov-infra-status-dot--green"></span>
-            <div>
-              <div class="ov-infra-node-name">RUVDS VPS</div>
-              <div class="ov-infra-node-meta">185.202.239.165</div>
-            </div>
-          </div>
-          <div class="ov-infra-services">
-            <span class="ov-infra-pill ov-infra-pill--green">nginx</span>
-            <span class="ov-infra-pill ov-infra-pill--green">sborka-site</span>
-            <span class="ov-infra-pill ov-infra-pill--green">sborka-bot</span>
-            <span class="ov-infra-pill ov-infra-pill--green">content-bank</span>
-            <span class="ov-infra-pill ov-infra-pill--green">linkedin-pub</span>
-            <span class="ov-infra-pill ov-infra-pill--green">ig-scheduler</span>
-            <span class="ov-infra-pill ov-infra-pill--blue">analytics</span>
-            <span class="ov-infra-pill ov-infra-pill--blue">url-checker</span>
-          </div>
-        </div>
-
-        <!-- Connector -->
-        <div class="ov-infra-connector"></div>
-
-        <!-- Contabo -->
-        <div class="ov-infra-node">
-          <div class="ov-infra-node-header">
-            <span class="ov-infra-status-dot ov-infra-status-dot--green"></span>
-            <div>
-              <div class="ov-infra-node-name">Contabo VPS</div>
-              <div class="ov-infra-node-meta">161.97.155.94</div>
-            </div>
-          </div>
-          <div class="ov-infra-services">
-            <span class="ov-infra-pill ov-infra-pill--green">tg-autoresp</span>
-            <span class="ov-infra-pill ov-infra-pill--green">ai-video-pipe</span>
-            <span class="ov-infra-pill ov-infra-pill--purple">openclaw ×5</span>
-            <span class="ov-infra-pill ov-infra-pill--purple">11 skills</span>
-            <span class="ov-infra-pill ov-infra-pill--purple">9 crons</span>
-          </div>
-        </div>
-
-        <!-- Connector -->
-        <div class="ov-infra-connector"></div>
-
-        <!-- GitHub -->
-        <div class="ov-infra-node">
-          <div class="ov-infra-node-header">
-            <span class="ov-infra-status-dot ov-infra-status-dot--gray"></span>
-            <div>
-              <div class="ov-infra-node-name">GitHub</div>
-              <div class="ov-infra-node-meta">TimmyZinin</div>
-            </div>
-          </div>
-          <div class="ov-infra-services">
-            <span class="ov-infra-pill ov-infra-pill--gray">sborka-career</span>
-            <span class="ov-infra-pill ov-infra-pill--gray">sborka-smm</span>
-            <span class="ov-infra-pill ov-infra-pill--gray">tg-autoresp</span>
-            <span class="ov-infra-pill ov-infra-pill--gray">sborka-web</span>
-            <span class="ov-infra-pill ov-infra-pill--gray">+11 repos</span>
-          </div>
-        </div>
-
-        <!-- Connector -->
-        <div class="ov-infra-connector"></div>
-
-        <!-- Local Mac -->
-        <div class="ov-infra-node">
-          <div class="ov-infra-node-header">
-            <span class="ov-infra-status-dot ov-infra-status-dot--yellow"></span>
-            <div>
-              <div class="ov-infra-node-name">Local Mac</div>
-              <div class="ov-infra-node-meta">macOS Darwin 25.3</div>
-            </div>
-          </div>
-          <div class="ov-infra-services">
-            <span class="ov-infra-pill ov-infra-pill--purple">Claude Code</span>
-            <span class="ov-infra-pill ov-infra-pill--yellow">30 agents</span>
-            <span class="ov-infra-pill ov-infra-pill--gray">deploy</span>
-            <span class="ov-infra-pill ov-infra-pill--gray">content plans</span>
-          </div>
-        </div>
-
-      </div>
-    </div>
-
-    <!-- ==========================================
-         CHART 2: Revenue Breakdown
-         ========================================== -->
-    <div class="ov-chart-card">
-      <div class="ov-chart-title">Revenue Breakdown</div>
-
-      <!-- Overall target progress -->
-      <div class="ov-rev-target-row">
-        <span class="ov-rev-target-label">Progress to target</span>
-        <span class="ov-rev-target-val">$515 / $2,500</span>
-      </div>
-      <div class="ov-rev-track">
-        <div class="ov-rev-fill"></div>
-      </div>
-
-      <!-- Individual sources -->
-      <div class="ov-rev-sources">
-
-        <!-- KRMKTL -->
-        <div class="ov-rev-source-row">
-          <div class="ov-rev-source-meta">
-            <div>
-              <span class="ov-rev-source-name">КРМКТЛ</span>
-              <span style="font-size:9px;color:#444;margin-left:6px">Crypto Marketologi · 8 vendors</span>
-            </div>
-            <span class="ov-rev-source-amount" style="color:#10b981">$350</span>
-          </div>
-          <div style="display:flex;align-items:center;gap:8px">
-            <div class="ov-rev-bar-track" style="flex:1">
-              <div class="ov-rev-bar-fill" style="width:68%; background:linear-gradient(90deg,#10b981,#059669);"></div>
-            </div>
-            <span class="ov-rev-source-pct">68%</span>
-          </div>
-        </div>
-
-        <!-- Botanica -->
-        <div class="ov-rev-source-row">
-          <div class="ov-rev-source-meta">
-            <div>
-              <span class="ov-rev-source-name">Botanica</span>
-              <span style="font-size:9px;color:#444;margin-left:6px">Bootcamp · donation-based</span>
-            </div>
-            <span class="ov-rev-source-amount" style="color:#3b82f6">$165</span>
-          </div>
-          <div style="display:flex;align-items:center;gap:8px">
-            <div class="ov-rev-bar-track" style="flex:1">
-              <div class="ov-rev-bar-fill" style="width:32%; background:linear-gradient(90deg,#3b82f6,#2563eb);"></div>
-            </div>
-            <span class="ov-rev-source-pct">32%</span>
-          </div>
-        </div>
-
-        <!-- SBORKA -->
-        <div class="ov-rev-source-row">
-          <div class="ov-rev-source-meta">
-            <div>
-              <span class="ov-rev-source-name">СБОРКА</span>
-              <span style="font-size:9px;color:#444;margin-left:6px">Career club · pre-revenue</span>
-            </div>
-            <span class="ov-rev-source-amount" style="color:#444444">$0</span>
-          </div>
-          <div style="display:flex;align-items:center;gap:8px">
-            <div class="ov-rev-bar-track" style="flex:1">
-              <div class="ov-rev-bar-fill" style="width:0.5%; background:#222222;"></div>
-            </div>
-            <span class="ov-rev-source-pct">0%</span>
-          </div>
-        </div>
-
-      </div>
-
-      <!-- Total -->
-      <div class="ov-rev-total">
-        <div>
-          <div class="ov-rev-total-label">MRR</div>
-          <div style="font-size:9px;color:#333;margin-top:2px">of $2,500 target</div>
-        </div>
-        <div style="text-align:right">
-          <div class="ov-rev-total-val">$515</div>
-          <div class="ov-rev-total-pct">20.6% achieved</div>
-        </div>
-      </div>
-    </div>
-
-    <!-- ==========================================
-         CHART 3: Platform Coverage
-         ========================================== -->
-    <div class="ov-chart-card">
-      <div class="ov-chart-title">Platform Coverage — 18 Active</div>
-
-      <div class="ov-legend" style="margin-bottom:14px">
-        <span class="ov-legend-item">
-          <span class="ov-legend-dot" style="background:#10b981;box-shadow:0 0 5px rgba(16,185,129,0.5)"></span>
-          API working (15)
-        </span>
-        <span class="ov-legend-item">
-          <span class="ov-legend-dot" style="background:#f59e0b"></span>
-          Playwright (2)
-        </span>
-        <span class="ov-legend-item">
-          <span class="ov-legend-dot" style="background:#ef4444"></span>
-          Blocked (1)
-        </span>
-      </div>
-
-      <div class="ov-plat-grid">
-        <!-- Green: API working -->
-        <div class="ov-plat-dot">
-          <div class="ov-plat-circle ov-plat-circle--green">LI</div>
-          <span class="ov-plat-name">LinkedIn</span>
-        </div>
-        <div class="ov-plat-dot">
-          <div class="ov-plat-circle ov-plat-circle--green">TG</div>
-          <span class="ov-plat-name">Telegram</span>
-        </div>
-        <div class="ov-plat-dot">
-          <div class="ov-plat-circle ov-plat-circle--green">TH</div>
-          <span class="ov-plat-name">Threads</span>
-        </div>
-        <div class="ov-plat-dot">
-          <div class="ov-plat-circle ov-plat-circle--green">FB</div>
-          <span class="ov-plat-name">Facebook</span>
-        </div>
-        <div class="ov-plat-dot">
-          <div class="ov-plat-circle ov-plat-circle--green">VK</div>
-          <span class="ov-plat-name">VK</span>
-        </div>
-        <div class="ov-plat-dot">
-          <div class="ov-plat-circle ov-plat-circle--green">BS</div>
-          <span class="ov-plat-name">Bluesky</span>
-        </div>
-        <div class="ov-plat-dot">
-          <div class="ov-plat-circle ov-plat-circle--green">YT</div>
-          <span class="ov-plat-name">YouTube</span>
-        </div>
-        <div class="ov-plat-dot">
-          <div class="ov-plat-circle ov-plat-circle--green">IG</div>
-          <span class="ov-plat-name">Instagram</span>
-        </div>
-        <div class="ov-plat-dot">
-          <div class="ov-plat-circle ov-plat-circle--green">MS</div>
-          <span class="ov-plat-name">Mastodon</span>
-        </div>
-        <div class="ov-plat-dot">
-          <div class="ov-plat-circle ov-plat-circle--green">DT</div>
-          <span class="ov-plat-name">Dev.to</span>
-        </div>
-        <div class="ov-plat-dot">
-          <div class="ov-plat-circle ov-plat-circle--green">HN</div>
-          <span class="ov-plat-name">Hashnode</span>
-        </div>
-        <div class="ov-plat-dot">
-          <div class="ov-plat-circle ov-plat-circle--green">MI</div>
-          <span class="ov-plat-name">Minds</span>
-        </div>
-        <div class="ov-plat-dot">
-          <div class="ov-plat-circle ov-plat-circle--green">WA</div>
-          <span class="ov-plat-name">Write.as</span>
-        </div>
-        <div class="ov-plat-dot">
-          <div class="ov-plat-circle ov-plat-circle--green">TM</div>
-          <span class="ov-plat-name">Tumblr</span>
-        </div>
-        <div class="ov-plat-dot">
-          <div class="ov-plat-circle ov-plat-circle--green">NS</div>
-          <span class="ov-plat-name">Nostr</span>
-        </div>
-        <!-- Yellow: Playwright -->
-        <div class="ov-plat-dot">
-          <div class="ov-plat-circle ov-plat-circle--yellow">VC</div>
-          <span class="ov-plat-name">VC.ru</span>
-        </div>
-        <div class="ov-plat-dot">
-          <div class="ov-plat-circle ov-plat-circle--yellow">DZ</div>
-          <span class="ov-plat-name">Дзен</span>
-        </div>
-        <!-- Red: Blocked -->
-        <div class="ov-plat-dot">
-          <div class="ov-plat-circle ov-plat-circle--red">OK</div>
-          <span class="ov-plat-name">OK.ru</span>
-        </div>
-      </div>
-    </div>
-
-    <!-- ==========================================
-         CHART 4: Project Pipeline
-         ========================================== -->
-    <div class="ov-chart-card">
-      <div class="ov-chart-title">Project Pipeline</div>
-
-      <div class="ov-pipeline">
-
-        <!-- Revenue stage -->
-        <div class="ov-pipeline-lane ov-pipeline-lane--revenue">
-          <div class="ov-pipeline-stage">
-            <div class="ov-pipeline-stage-name">Revenue</div>
-            <div class="ov-pipeline-stage-hint">Generating</div>
-          </div>
-          <div class="ov-pipeline-bar-track">
-            <div class="ov-pipeline-projects">
-              <div class="ov-pipeline-card">
-                <span class="ov-pipeline-card-name">КРМКТЛ</span>
-                <span class="ov-pipeline-card-detail">8 vendors · $350/mo</span>
-              </div>
-              <div class="ov-pipeline-card">
-                <span class="ov-pipeline-card-name">Botanica</span>
-                <span class="ov-pipeline-card-detail">Bootcamp · $165/mo</span>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Growth stage -->
-        <div class="ov-pipeline-lane ov-pipeline-lane--growth">
-          <div class="ov-pipeline-stage">
-            <div class="ov-pipeline-stage-name">Growth</div>
-            <div class="ov-pipeline-stage-hint">Scaling</div>
-          </div>
-          <div class="ov-pipeline-bar-track">
-            <div class="ov-pipeline-projects">
-              <div class="ov-pipeline-card">
-                <span class="ov-pipeline-card-name">СБОРКА</span>
-                <span class="ov-pipeline-card-detail">Bot · site · webinar</span>
-              </div>
-              <div class="ov-pipeline-card">
-                <span class="ov-pipeline-card-name">Content Factory</span>
-                <span class="ov-pipeline-card-detail">20 platforms · 192 posts</span>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Build stage -->
-        <div class="ov-pipeline-lane ov-pipeline-lane--build">
-          <div class="ov-pipeline-stage">
-            <div class="ov-pipeline-stage-name">Build</div>
-            <div class="ov-pipeline-stage-hint">Фаза 0</div>
-          </div>
-          <div class="ov-pipeline-bar-track">
-            <div class="ov-pipeline-projects">
-              <div class="ov-pipeline-card">
-                <span class="ov-pipeline-card-name">Yuki</span>
-                <span class="ov-pipeline-card-detail">AI SMM · beauty salons</span>
-              </div>
-              <div class="ov-pipeline-card">
-                <span class="ov-pipeline-card-name">AI Video</span>
-                <span class="ov-pipeline-card-detail">HeyGen · YT Shorts</span>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Explore stage -->
-        <div class="ov-pipeline-lane ov-pipeline-lane--explore">
-          <div class="ov-pipeline-stage">
-            <div class="ov-pipeline-stage-name">Explore</div>
-            <div class="ov-pipeline-stage-hint">Research</div>
-          </div>
-          <div class="ov-pipeline-bar-track">
-            <div class="ov-pipeline-projects">
-              <div class="ov-pipeline-card">
-                <span class="ov-pipeline-card-name">Personal Brand</span>
-                <span class="ov-pipeline-card-detail">18+ platforms · 12K+ aud.</span>
-              </div>
-              <div class="ov-pipeline-card">
-                <span class="ov-pipeline-card-name">MCP-First</span>
-                <span class="ov-pipeline-card-detail">Job board · Dice model</span>
-              </div>
-            </div>
-          </div>
-        </div>
-
-      </div>
-    </div>
-
-  </div><!-- /.ov-charts-grid -->
-</div><!-- /.ov-section -->
-
-<!-- Revenue Dashboard -->
-<div class="section-title" style="margin-top:32px">Revenue Dashboard</div>
-<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:16px;margin-bottom:32px">
+<!-- ═══════════════════════════════════════════════════════════════
+     ФИНАНСЫ
+     ═══════════════════════════════════════════════════════════════ -->
+<div class="ov-section">Финансы</div>
+<div class="ov-grid-2">
 
   <!-- MRR Breakdown -->
-  <div style="background:linear-gradient(145deg,rgba(18,18,26,0.9),rgba(26,26,39,0.7));border:1px solid rgba(255,255,255,0.06);border-radius:16px;padding:20px;position:relative;overflow:hidden">
-    <div style="position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,#00b894,#55efc4)"></div>
-    <div style="font-family:'Unbounded',sans-serif;font-size:13px;font-weight:600;margin-bottom:14px;color:#00b894">MRR Breakdown</div>
-    <table style="width:100%;font-size:13px;color:var(--text-secondary);border-collapse:collapse">
-      <tr style="border-bottom:1px solid rgba(255,255,255,0.06)">
-        <td style="padding:8px 0"><b style="color:var(--text-primary)">КРМКТЛ</b><br><small>8 вендоров, Telegram</small></td>
-        <td style="text-align:right;color:#00b894;font-weight:600;font-size:15px">$350</td>
-      </tr>
-      <tr style="border-bottom:1px solid rgba(255,255,255,0.06)">
-        <td style="padding:8px 0"><b style="color:var(--text-primary)">Ботаника</b><br><small>Bootcamp, donations</small></td>
-        <td style="text-align:right;color:#00b894;font-weight:600;font-size:15px">$165</td>
-      </tr>
-      <tr>
-        <td style="padding:8px 0"><b style="color:var(--text-primary)">ИТОГО MRR</b></td>
-        <td style="text-align:right;color:#55efc4;font-weight:700;font-size:18px">$515</td>
-      </tr>
-    </table>
-    <div style="margin-top:12px;background:rgba(255,255,255,0.04);border-radius:8px;height:8px;overflow:hidden">
-      <div style="width:20.6%;height:100%;background:linear-gradient(90deg,#00b894,#55efc4);border-radius:8px"></div>
+  <div class="ov-card">
+    <div class="ov-card-accent" style="background: linear-gradient(90deg, #10b981, #34d399)"></div>
+    <div class="ov-card-title" style="color: var(--zc-status-green)">MRR по клиентам</div>
+    <div class="ov-row">
+      <span class="ov-row-label">КРМКТЛ <span style="font-size:10px;color:var(--zc-text-disabled)">8 вендоров</span></span>
+      <span class="ov-row-value" style="color: var(--zc-status-green)">$600</span>
     </div>
-    <div style="font-size:11px;color:var(--text-muted);margin-top:4px;text-align:right">$515 / $2,500 цель (20.6%)</div>
+    <div class="ov-row">
+      <span class="ov-row-label">Ботаника <span style="font-size:10px;color:var(--zc-text-disabled)">Tribute</span></span>
+      <span class="ov-row-value" style="color: var(--zc-status-blue)">$500</span>
+    </div>
+    <div class="ov-row">
+      <span class="ov-row-label">СБОРКА <span style="font-size:10px;color:var(--zc-text-disabled)">pre-revenue</span></span>
+      <span class="ov-row-value" style="color: var(--zc-text-disabled)">$0</span>
+    </div>
+    <div class="ov-row ov-row-total">
+      <span class="ov-row-label"><strong>MRR</strong></span>
+      <span class="ov-row-value" style="color: var(--zc-status-green); font-size: 20px">$1,100</span>
+    </div>
+    <div class="ov-progress" style="margin-top:10px"><div class="ov-progress-bar" style="width:44%; background: linear-gradient(90deg, #10b981, #3b82f6, #6c5ce7)"></div></div>
+    <div style="font-size:10px; color:var(--zc-text-disabled); text-align:right; margin-top:4px">$1,100 / $2,500 (44%)</div>
   </div>
 
-  <!-- Расходы -->
-  <div style="background:linear-gradient(145deg,rgba(18,18,26,0.9),rgba(26,26,39,0.7));border:1px solid rgba(255,255,255,0.06);border-radius:16px;padding:20px;position:relative;overflow:hidden">
-    <div style="position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,#e17055,#fdcb6e)"></div>
-    <div style="font-family:'Unbounded',sans-serif;font-size:13px;font-weight:600;margin-bottom:14px;color:#e17055">Расходы (мес.)</div>
-    <table style="width:100%;font-size:13px;color:var(--text-secondary);border-collapse:collapse">
-      <tr style="border-bottom:1px solid rgba(255,255,255,0.06)">
-        <td style="padding:6px 0">RUVDS (VPS)</td>
-        <td style="text-align:right;color:#e17055">$15</td>
-      </tr>
-      <tr style="border-bottom:1px solid rgba(255,255,255,0.06)">
-        <td style="padding:6px 0">Contabo (VPS)</td>
-        <td style="text-align:right;color:#e17055">$8</td>
-      </tr>
-      <tr style="border-bottom:1px solid rgba(255,255,255,0.06)">
-        <td style="padding:6px 0">HeyGen (Creator)</td>
-        <td style="text-align:right;color:#e17055">$29</td>
-      </tr>
-      <tr style="border-bottom:1px solid rgba(255,255,255,0.06)">
-        <td style="padding:6px 0">MiniMax M2.5 (Plus)</td>
-        <td style="text-align:right;color:#e17055">$20</td>
-      </tr>
-      <tr style="border-bottom:1px solid rgba(255,255,255,0.06)">
-        <td style="padding:6px 0">Claude Code (Max)</td>
-        <td style="text-align:right;color:#e17055">$200</td>
-      </tr>
-      <tr style="border-bottom:1px solid rgba(255,255,255,0.06)">
-        <td style="padding:6px 0">Домены (timzinin.com и др.)</td>
-        <td style="text-align:right;color:#e17055">$3</td>
-      </tr>
-      <tr>
-        <td style="padding:6px 0"><b style="color:var(--text-primary)">ИТОГО расходы</b></td>
-        <td style="text-align:right;color:#fdcb6e;font-weight:700;font-size:16px">$275</td>
-      </tr>
-    </table>
+  <!-- P&L Summary -->
+  <div class="ov-card">
+    <div class="ov-card-accent" style="background: linear-gradient(90deg, #6c5ce7, #a29bfe)"></div>
+    <div class="ov-card-title" style="color: #a29bfe">P&L (Март 2026)</div>
+    <div class="ov-row">
+      <span class="ov-row-label">Выручка (MRR)</span>
+      <span class="ov-row-value" style="color: var(--zc-status-green)">+$1,100</span>
+    </div>
+    <div class="ov-row">
+      <span class="ov-row-label">OPEX</span>
+      <span class="ov-row-value" style="color: var(--zc-status-red)">-$275</span>
+    </div>
+    <div class="ov-row ov-row-total">
+      <span class="ov-row-label"><strong>Чистая прибыль</strong></span>
+      <span class="ov-row-value" style="color: #a29bfe">+$825</span>
+    </div>
+    <div style="margin-top:12px; display:flex; gap:16px; font-size:11px">
+      <span style="color:var(--zc-text-muted)">Маржа: <strong style="color:var(--zc-status-green)">75%</strong></span>
+      <span style="color:var(--zc-text-muted)">До цели: <strong style="color:var(--zc-status-yellow)">$1,400</strong></span>
+    </div>
+
+    <div style="margin-top:16px; padding-top:12px; border-top:1px solid var(--zc-border-subtle)">
+      <div style="font-size:10px; text-transform:uppercase; letter-spacing:1px; color:var(--zc-text-disabled); margin-bottom:8px">Cash Reserves</div>
+      <div class="ov-row" style="padding:4px 0">
+        <span class="ov-row-label" style="font-size:12px">TON Wallet</span>
+        <span class="ov-row-value" style="font-size:13px" id="ton-usd">—</span>
+      </div>
+      <div class="ov-row" style="padding:4px 0">
+        <span class="ov-row-label" style="font-size:12px">Gate.io</span>
+        <span class="ov-row-value" style="font-size:13px">~$200</span>
+      </div>
+      <div class="ov-row" style="padding:4px 0">
+        <span class="ov-row-label" style="font-size:12px">TBC</span>
+        <span class="ov-row-value" style="font-size:13px">~$400</span>
+      </div>
+    </div>
+
+    <a href="finance.html" style="font-size:11px; color:var(--zc-accent); text-decoration:none; margin-top:10px; display:inline-block">Подробнее →</a>
   </div>
 
-  <!-- P&L -->
-  <div style="background:linear-gradient(145deg,rgba(18,18,26,0.9),rgba(26,26,39,0.7));border:1px solid rgba(255,255,255,0.06);border-radius:16px;padding:20px;position:relative;overflow:hidden">
-    <div style="position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,#6c5ce7,#a29bfe)"></div>
-    <div style="font-family:'Unbounded',sans-serif;font-size:13px;font-weight:600;margin-bottom:14px;color:#a29bfe">P&L Summary</div>
-    <table style="width:100%;font-size:13px;color:var(--text-secondary);border-collapse:collapse">
-      <tr style="border-bottom:1px solid rgba(255,255,255,0.06)">
-        <td style="padding:8px 0">Доход (MRR)</td>
-        <td style="text-align:right;color:#00b894;font-weight:600">+$515</td>
-      </tr>
-      <tr style="border-bottom:1px solid rgba(255,255,255,0.06)">
-        <td style="padding:8px 0">Расходы</td>
-        <td style="text-align:right;color:#e17055;font-weight:600">-$275</td>
-      </tr>
-      <tr>
-        <td style="padding:8px 0"><b style="color:var(--text-primary)">Чистая прибыль</b></td>
-        <td style="text-align:right;color:#55efc4;font-weight:700;font-size:20px">+$240</td>
-      </tr>
-    </table>
-    <div style="margin-top:16px;font-size:12px;color:var(--text-muted);line-height:1.7">
-      <div>Маржа: <b style="color:#00b894">46.6%</b></div>
-      <div>До цели: <b style="color:#fdcb6e">$1,985</b> MRR (+385%)</div>
-      <div>При текущем росте: <b style="color:var(--text-secondary)">~8-10 мес.</b></div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════════════════════
+     ТРАФИК И КОНТЕНТ
+     ═══════════════════════════════════════════════════════════════ -->
+<div class="ov-section">Трафик и контент</div>
+<div class="ov-grid-2">
+
+  <!-- Platform Coverage -->
+  <div class="ov-card">
+    <div class="ov-card-accent" style="background: linear-gradient(90deg, #3b82f6, #60a5fa)"></div>
+    <div class="ov-card-title" style="color: var(--zc-status-blue)">Покрытие платформ — 18 активных</div>
+    <div style="display:flex; gap:12px; margin-bottom:12px; font-size:11px">
+      <span style="color:var(--zc-status-green)"><span class="ov-status-dot green"></span> API (15)</span>
+      <span style="color:var(--zc-status-yellow)"><span class="ov-status-dot yellow"></span> Playwright (2)</span>
+      <span style="color:var(--zc-status-red)"><span class="ov-status-dot red"></span> Blocked (1)</span>
+    </div>
+    <div class="ov-platforms">
+      <span class="ov-plat ov-plat-ok">LinkedIn</span>
+      <span class="ov-plat ov-plat-ok">Telegram</span>
+      <span class="ov-plat ov-plat-ok">Threads</span>
+      <span class="ov-plat ov-plat-ok">Facebook</span>
+      <span class="ov-plat ov-plat-ok">VK</span>
+      <span class="ov-plat ov-plat-ok">Bluesky</span>
+      <span class="ov-plat ov-plat-ok">YouTube</span>
+      <span class="ov-plat ov-plat-ok">Instagram</span>
+      <span class="ov-plat ov-plat-ok">Mastodon</span>
+      <span class="ov-plat ov-plat-ok">Dev.to</span>
+      <span class="ov-plat ov-plat-ok">Hashnode</span>
+      <span class="ov-plat ov-plat-ok">Minds</span>
+      <span class="ov-plat ov-plat-ok">Write.as</span>
+      <span class="ov-plat ov-plat-ok">Tumblr</span>
+      <span class="ov-plat ov-plat-ok">Nostr</span>
+      <span class="ov-plat ov-plat-warn">VC.ru</span>
+      <span class="ov-plat ov-plat-warn">Дзен</span>
+      <span class="ov-plat ov-plat-err">OK.ru</span>
+    </div>
+    <a href="connectors.html" style="font-size:11px; color:var(--zc-accent); text-decoration:none; margin-top:10px; display:inline-block">Все коннекторы →</a>
+  </div>
+
+  <!-- Content & Analytics -->
+  <div class="ov-card">
+    <div class="ov-card-accent" style="background: linear-gradient(90deg, #f59e0b, #fbbf24)"></div>
+    <div class="ov-card-title" style="color: var(--zc-status-yellow)">Контент и аналитика</div>
+    <div class="ov-row">
+      <span class="ov-row-label">CRM Users</span>
+      <span class="ov-row-value" id="crm-total">—</span>
+    </div>
+    <div class="ov-row">
+      <span class="ov-row-label">Зарегистрированы</span>
+      <span class="ov-row-value" id="crm-registered" style="font-size:13px">—</span>
+    </div>
+    <div class="ov-row">
+      <span class="ov-row-label">Активные платформы</span>
+      <span class="ov-row-value">18</span>
+    </div>
+
+    <div style="margin-top:14px; display:flex; flex-wrap:wrap; gap:8px">
+      <a href="analytics.html" class="ov-link" style="flex:1; min-width:120px">
+        <span class="ov-link-icon">📈</span> Аналитика
+      </a>
+      <a href="content-calendar.html" class="ov-link" style="flex:1; min-width:120px">
+        <span class="ov-link-icon">📅</span> Календарь
+      </a>
+      <a href="content-bank.html" class="ov-link" style="flex:1; min-width:120px">
+        <span class="ov-link-icon">🗃</span> Банк контента
+      </a>
     </div>
   </div>
 
 </div>
 
-<!-- Business Analytics: Recommendations -->
-<div class="section-title" style="margin-top:32px">Рекомендации — что не хватает бизнесу</div>
-<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:16px;margin-bottom:32px">
 
-  <div style="background:linear-gradient(145deg,rgba(18,18,26,0.9),rgba(26,26,39,0.7));border:1px solid rgba(255,255,255,0.06);border-radius:16px;padding:20px;position:relative;overflow:hidden">
-    <div style="position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,#e17055,#fdcb6e)"></div>
-    <div style="font-family:'Unbounded',sans-serif;font-size:13px;font-weight:600;margin-bottom:10px;color:#e17055">P&L и Unit-экономика</div>
-    <ul style="font-size:12px;color:var(--text-secondary);line-height:1.8;list-style:none;padding:0">
-      <li>— Нет трекинга расходов (API, хостинг, подписки, время)</li>
-      <li>— Нет unit-экономики по клиентам (CAC, LTV, churn)</li>
-      <li>— MRR есть, но без breakdown по продуктам/клиентам</li>
-      <li>— Нет прогноза выхода на $2,500 MRR с текущим темпом</li>
-    </ul>
+<!-- ═══════════════════════════════════════════════════════════════
+     ПРОДУКТОВЫЕ МЕТРИКИ
+     ═══════════════════════════════════════════════════════════════ -->
+<div class="ov-section">Продуктовые метрики</div>
+<div class="ov-grid-2">
+
+  <!-- Project Pipeline -->
+  <div class="ov-card">
+    <div class="ov-card-accent" style="background: linear-gradient(90deg, #10b981, #3b82f6)"></div>
+    <div class="ov-card-title" style="color: var(--zc-text-heading)">Project Pipeline</div>
+    <div class="ov-pipeline">
+      <div class="ov-pipe-lane">
+        <div class="ov-pipe-stage"><div class="ov-pipe-stage-name" style="color:var(--zc-status-green)">Revenue</div></div>
+        <div class="ov-pipe-items">
+          <div class="ov-pipe-item" style="border-color:rgba(16,185,129,0.3); color:var(--zc-status-green)">КРМКТЛ<small>$600/mo</small></div>
+          <div class="ov-pipe-item" style="border-color:rgba(59,130,246,0.3); color:var(--zc-status-blue)">Botanica<small>$500/mo</small></div>
+        </div>
+      </div>
+      <div class="ov-pipe-lane">
+        <div class="ov-pipe-stage"><div class="ov-pipe-stage-name" style="color:var(--zc-status-blue)">Growth</div></div>
+        <div class="ov-pipe-items">
+          <div class="ov-pipe-item" style="border-color:rgba(59,130,246,0.25)">СБОРКА<small>Bot + Site + Webinar</small></div>
+          <div class="ov-pipe-item" style="border-color:rgba(59,130,246,0.25)">Content Factory<small>20 платформ</small></div>
+        </div>
+      </div>
+      <div class="ov-pipe-lane">
+        <div class="ov-pipe-stage"><div class="ov-pipe-stage-name" style="color:var(--zc-status-yellow)">Build</div></div>
+        <div class="ov-pipe-items">
+          <div class="ov-pipe-item" style="border-color:rgba(245,158,11,0.25)">Yuki<small>AI SMM салоны</small></div>
+          <div class="ov-pipe-item" style="border-color:rgba(245,158,11,0.25)">MentalStab<small>Бот + CRM</small></div>
+        </div>
+      </div>
+      <div class="ov-pipe-lane">
+        <div class="ov-pipe-stage"><div class="ov-pipe-stage-name" style="color:var(--zc-accent)">Explore</div></div>
+        <div class="ov-pipe-items">
+          <div class="ov-pipe-item" style="border-color:rgba(108,92,231,0.25)">MCPHire<small>Job Board</small></div>
+          <div class="ov-pipe-item" style="border-color:rgba(108,92,231,0.25)">Personal Brand<small>18+ платформ</small></div>
+        </div>
+      </div>
+    </div>
+    <a href="project-control.html" style="font-size:11px; color:var(--zc-accent); text-decoration:none; margin-top:10px; display:inline-block">Project Control →</a>
   </div>
 
-  <div style="background:linear-gradient(145deg,rgba(18,18,26,0.9),rgba(26,26,39,0.7));border:1px solid rgba(255,255,255,0.06);border-radius:16px;padding:20px;position:relative;overflow:hidden">
-    <div style="position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,#0984e3,#74b9ff)"></div>
-    <div style="font-family:'Unbounded',sans-serif;font-size:13px;font-weight:600;margin-bottom:10px;color:#0984e3">Воронка продаж и лиды</div>
-    <ul style="font-size:12px;color:var(--text-secondary);line-height:1.8;list-style:none;padding:0">
-      <li>— Нет CRM для лидов (сейчас всё в голове / Telegram)</li>
-      <li>— Нет трекинга конверсий: контент → визит → лид → клиент</li>
-      <li>— UTM-метки стоят, но Umami не связан с воронкой</li>
-      <li>— Yuki (салоны) и Сборка (вебинары) — нет единой pipeline</li>
-    </ul>
-  </div>
+  <!-- Infrastructure -->
+  <div class="ov-card">
+    <div class="ov-card-accent" style="background: linear-gradient(90deg, #6b7280, #9ca3af)"></div>
+    <div class="ov-card-title" style="color: var(--zc-text-secondary)">Инфраструктура</div>
+    <div class="ov-row">
+      <span class="ov-row-label"><span class="ov-status-dot green" style="margin-right:6px"></span>Contabo VPS 30</span>
+      <span class="ov-row-value" style="font-size:12px; color:var(--zc-text-muted)">185.202.239.165</span>
+    </div>
+    <div class="ov-row">
+      <span class="ov-row-label"><span class="ov-status-dot green" style="margin-right:6px"></span>Contabo VPS 10</span>
+      <span class="ov-row-value" style="font-size:12px; color:var(--zc-text-muted)">161.97.155.94</span>
+    </div>
+    <div class="ov-row">
+      <span class="ov-row-label"><span class="ov-status-dot green" style="margin-right:6px"></span>GitHub</span>
+      <span class="ov-row-value" style="font-size:12px; color:var(--zc-text-muted)">TimmyZinin</span>
+    </div>
+    <div class="ov-row">
+      <span class="ov-row-label"><span class="ov-status-dot yellow" style="margin-right:6px"></span>Local Mac</span>
+      <span class="ov-row-value" style="font-size:12px; color:var(--zc-text-muted)">Claude Code + 30 agents</span>
+    </div>
 
-  <div style="background:linear-gradient(145deg,rgba(18,18,26,0.9),rgba(26,26,39,0.7));border:1px solid rgba(255,255,255,0.06);border-radius:16px;padding:20px;position:relative;overflow:hidden">
-    <div style="position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,#00b894,#55efc4)"></div>
-    <div style="font-family:'Unbounded',sans-serif;font-size:13px;font-weight:600;margin-bottom:10px;color:#00b894">Контент → Revenue связь</div>
-    <ul style="font-size:12px;color:var(--text-secondary);line-height:1.8;list-style:none;padding:0">
-      <li>— 192 поста на 20 платформ, но нет данных какой контент приводит клиентов</li>
-      <li>— Нет attribution model (first touch / last touch / multi-touch)</li>
-      <li>— LinkedIn autopub работает, но ROI не считается</li>
-      <li>— SMM Research Hub есть — но нет A/B тестов гипотез</li>
-    </ul>
-  </div>
-
-  <div style="background:linear-gradient(145deg,rgba(18,18,26,0.9),rgba(26,26,39,0.7));border:1px solid rgba(255,255,255,0.06);border-radius:16px;padding:20px;position:relative;overflow:hidden">
-    <div style="position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,#6c5ce7,#a29bfe)"></div>
-    <div style="font-family:'Unbounded',sans-serif;font-size:13px;font-weight:600;margin-bottom:10px;color:#a29bfe">Операционная зрелость</div>
-    <ul style="font-size:12px;color:var(--text-secondary);line-height:1.8;list-style:none;padding:0">
-      <li>— Нет SLA по проектам (время ответа клиенту, время деплоя)</li>
-      <li>— Нет retrospectives — ошибки повторяются (DNS, бот-деплой)</li>
-      <li>— Security audit раз в 2 недели, но 4 CRITICAL открыты</li>
-      <li>— Нет мониторинга uptime с алертами (кроме базового cron)</li>
-    </ul>
-  </div>
-
-  <div style="background:linear-gradient(145deg,rgba(18,18,26,0.9),rgba(26,26,39,0.7));border:1px solid rgba(255,255,255,0.06);border-radius:16px;padding:20px;position:relative;overflow:hidden">
-    <div style="position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,#fdcb6e,#ffeaa7)"></div>
-    <div style="font-family:'Unbounded',sans-serif;font-size:13px;font-weight:600;margin-bottom:10px;color:#fdcb6e">Приоритезация и фокус</div>
-    <ul style="font-size:12px;color:var(--text-secondary);line-height:1.8;list-style:none;padding:0">
-      <li>— 7 активных проектов параллельно — нет ICE/RICE скоринга</li>
-      <li>— Нет OKR или North Star метрики (что именно двигаем?)</li>
-      <li>— Backlog растёт (7 задач), но нет критерия «что дропнуть»</li>
-      <li>— Revenue-задачи (Yuki, КРМКТЛ) конкурируют с инфра-задачами</li>
-    </ul>
-  </div>
-
-  <div style="background:linear-gradient(145deg,rgba(18,18,26,0.9),rgba(26,26,39,0.7));border:1px solid rgba(255,255,255,0.06);border-radius:16px;padding:20px;position:relative;overflow:hidden">
-    <div style="position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,#fd79a8,#e84393)"></div>
-    <div style="font-family:'Unbounded',sans-serif;font-size:13px;font-weight:600;margin-bottom:10px;color:#fd79a8">Что внедрить первым</div>
-    <ol style="font-size:12px;color:var(--text-secondary);line-height:1.8;padding-left:16px">
-      <li><b style="color:var(--text-primary)">Revenue dashboard</b> — P&L, расходы, MRR breakdown по клиентам</li>
-      <li><b style="color:var(--text-primary)">Lead CRM</b> — простой JSON/SQLite трекер: лид → статус → сделка</li>
-      <li><b style="color:var(--text-primary)">Content → Revenue attribution</b> — UTM + Umami + revenue tag</li>
-      <li><b style="color:var(--text-primary)">OKR Q2 2026</b> — 1 North Star + 3 Key Results</li>
-    </ol>
+    <div style="margin-top:14px; display:flex; flex-wrap:wrap; gap:8px">
+      <a href="/uptime/" target="_blank" class="ov-link" style="flex:1; min-width:120px">
+        <span class="ov-link-icon">📡</span> Uptime Kuma
+      </a>
+      <a href="tasks.html" class="ov-link" style="flex:1; min-width:120px">
+        <span class="ov-link-icon">📋</span> Задачи
+      </a>
+    </div>
   </div>
 
 </div>
 
+
+<!-- ═══════════════════════════════════════════════════════════════
+     ДАШБОРДЫ
+     ═══════════════════════════════════════════════════════════════ -->
+<div class="ov-section">Дашборды</div>
+<div class="ov-dashboards">
+  <a class="ov-dash" href="content-calendar.html">
+    <div class="ov-dash-icon">📅</div>
+    <div><div class="ov-dash-title">Content Calendar</div><div class="ov-dash-sub">Расписание публикаций</div></div>
+    <span class="ov-dash-live">LIVE</span>
+  </a>
+  <a class="ov-dash" href="analytics.html">
+    <div class="ov-dash-icon">📈</div>
+    <div><div class="ov-dash-title">SMM Analytics</div><div class="ov-dash-sub">Метрики вовлечённости</div></div>
+    <span class="ov-dash-live">LIVE</span>
+  </a>
+  <a class="ov-dash" href="connectors.html">
+    <div class="ov-dash-icon">🔗</div>
+    <div><div class="ov-dash-title">Connectors</div><div class="ov-dash-sub">API, токены, лимиты</div></div>
+    <span class="ov-dash-live">LIVE</span>
+  </a>
+  <a class="ov-dash" href="finance.html">
+    <div class="ov-dash-icon">💰</div>
+    <div><div class="ov-dash-title">Finance</div><div class="ov-dash-sub">P&L, прогноз, TON</div></div>
+    <span class="ov-dash-live">LIVE</span>
+  </a>
+  <a class="ov-dash" href="factory.html">
+    <div class="ov-dash-icon">🏭</div>
+    <div><div class="ov-dash-title">Content Factory</div><div class="ov-dash-sub">Конвейер контента</div></div>
+    <span class="ov-dash-live">LIVE</span>
+  </a>
+  <a class="ov-dash" href="funnel.html">
+    <div class="ov-dash-icon">🔽</div>
+    <div><div class="ov-dash-title">Funnel</div><div class="ov-dash-sub">Воронка продаж</div></div>
+    <span class="ov-dash-live">LIVE</span>
+  </a>
+  <a class="ov-dash" href="project-control.html">
+    <div class="ov-dash-icon">🎯</div>
+    <div><div class="ov-dash-title">Project Control</div><div class="ov-dash-sub">Контроль проектов</div></div>
+    <span class="ov-dash-live">LIVE</span>
+  </a>
+  <a class="ov-dash" href="mcphire-analytics.html">
+    <div class="ov-dash-icon">🌐</div>
+    <div><div class="ov-dash-title">MCPHire</div><div class="ov-dash-sub">Job Board аналитика</div></div>
+    <span class="ov-dash-live">LIVE</span>
+  </a>
+  <a class="ov-dash" href="mentalstab-crm.html">
+    <div class="ov-dash-icon">🧠</div>
+    <div><div class="ov-dash-title">MentalStab CRM</div><div class="ov-dash-sub">Клиенты и сессии</div></div>
+    <span class="ov-dash-live">LIVE</span>
+  </a>
 </div>
+
+
+<!-- ═══════════════════════════════════════════════════════════════
+     БЫСТРЫЕ ССЫЛКИ
+     ═══════════════════════════════════════════════════════════════ -->
+<div class="ov-section">Быстрые ссылки</div>
+<div class="ov-links">
+  <a class="ov-link" href="https://github.com/TimmyZinin" target="_blank"><span class="ov-link-icon">💻</span> GitHub</a>
+  <a class="ov-link" href="https://sborka.work" target="_blank"><span class="ov-link-icon">🌐</span> sborka.work</a>
+  <a class="ov-link" href="https://t.me/Sborka_work_bot" target="_blank"><span class="ov-link-icon">🤖</span> Career Bot</a>
+  <a class="ov-link" href="https://sborka.work/crm-admin/admin?key=sborka2026admin" target="_blank"><span class="ov-link-icon">📊</span> CRM Admin</a>
+  <a class="ov-link" href="https://scope.timzinin.com" target="_blank"><span class="ov-link-icon">🌍</span> WorldScope</a>
+  <a class="ov-link" href="https://t.me/tim_news_agent_bot" target="_blank"><span class="ov-link-icon">👑</span> CEO Bot</a>
+  <a class="ov-link" href="https://t.me/tim_cmo_hunter_bot/KRMKTL" target="_blank"><span class="ov-link-icon">💰</span> КРМКТЛ</a>
+  <a class="ov-link" href="https://cryptomarketologi.online" target="_blank"><span class="ov-link-icon">🚀</span> Crypto Marketologi</a>
+  <a class="ov-link" href="https://www.linkedin.com/in/timzinin/" target="_blank"><span class="ov-link-icon">👤</span> LinkedIn</a>
+  <a class="ov-link" href="https://timmyzinin.github.io/smm-research-hub/index.html" target="_blank"><span class="ov-link-icon">🔬</span> SMM Research Hub</a>
+  <a class="ov-link" href="/uptime/" target="_blank"><span class="ov-link-icon">📡</span> Uptime Kuma</a>
+  <a class="ov-link" href="https://n8n.timzinin.com" target="_blank"><span class="ov-link-icon">⚡</span> n8n Workflows</a>
+  <a class="ov-link" href="https://langfuse.timzinin.com" target="_blank"><span class="ov-link-icon">🔍</span> Langfuse</a>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════════════════════
+     РЕКОМЕНДАЦИИ — ТОП-3
+     ═══════════════════════════════════════════════════════════════ -->
+<div class="ov-section">Рекомендации</div>
+<div class="ov-recs">
+  <div class="ov-rec">
+    <div class="ov-rec-accent" style="background: linear-gradient(90deg, #ef4444, #f87171)"></div>
+    <div class="ov-rec-title">Снизить концентрацию выручки</div>
+    <div class="ov-rec-text">КРМКТЛ = 55% MRR. Запустить СБОРКА Premium ($50/sub) и Yuki (5 салонов = +$500/mo) для диверсификации.</div>
+  </div>
+  <div class="ov-rec">
+    <div class="ov-rec-accent" style="background: linear-gradient(90deg, #f59e0b, #fbbf24)"></div>
+    <div class="ov-rec-title">Content → Revenue attribution</div>
+    <div class="ov-rec-text">192 поста на 20 платформ, но нет данных какой контент приводит клиентов. Связать UTM + Umami + revenue tag.</div>
+  </div>
+  <div class="ov-rec">
+    <div class="ov-rec-accent" style="background: linear-gradient(90deg, #6c5ce7, #a29bfe)"></div>
+    <div class="ov-rec-title">North Star метрика</div>
+    <div class="ov-rec-text">7 проектов параллельно, нет ICE/RICE скоринга. Определить OKR Q2 2026: 1 North Star + 3 Key Results.</div>
+  </div>
+</div>
+
 
 <div class="zc-footer">
   Zinin Corp &middot; Dashboard &middot; 2026
 </div>
 
+</div><!-- /.zc-container -->
+
+
+<!-- ═══════════════════════════════════════════════════════════════
+     LIVE DATA
+     ═══════════════════════════════════════════════════════════════ -->
 <script>
-// Load CRM data
-async function loadDashboardData() {
+// Update timestamp
+document.getElementById('last-updated').textContent = new Date().toLocaleDateString('ru-RU', { day: 'numeric', month: 'short', year: 'numeric' });
+
+// CRM data
+(async function loadCRM() {
   try {
-    const crmResponse = await fetch('https://sborka.work/crm-admin/admin?key=sborka2026admin');
-    const crmHtml = await crmResponse.text();
-    const totalMatch = crmHtml.match(/Всего: <b>(\d+)/);
-    const registeredMatch = crmHtml.match(/Зарегистрированы: <b>(\d+)/);
+    const res = await fetch('https://sborka.work/crm-admin/admin?key=sborka2026admin');
+    const html = await res.text();
+    const total = html.match(/Всего: <b>(\d+)/);
+    const reg = html.match(/Зарегистрированы: <b>(\d+)/);
+    if (total) document.getElementById('crm-total').textContent = total[1];
+    if (reg) document.getElementById('crm-registered').textContent = reg[1];
+  } catch(e) { console.log('CRM:', e.message); }
+})();
 
-    if (totalMatch) {
-      document.getElementById('crm-total').textContent = totalMatch[1];
-      document.getElementById('crm-sub').textContent = registeredMatch ? registeredMatch[1] + ' registered' : '';
+// TON wallet
+(async function loadTON() {
+  const ADDR = 'UQCsUT6TyPwoN5nTuf9kuX0OiQnRP3UxzmDf8GWZUpHsASdo';
+  try {
+    const [accRes, jettonsRes, priceRes] = await Promise.all([
+      fetch('https://tonapi.io/v2/accounts/' + ADDR, { headers: { Accept: 'application/json' } }),
+      fetch('https://tonapi.io/v2/accounts/' + ADDR + '/jettons?currencies=usd', { headers: { Accept: 'application/json' } }),
+      fetch('https://api.coingecko.com/api/v3/simple/price?ids=the-open-network&vs_currencies=usd')
+    ]);
+    const acc = await accRes.json();
+    const jettons = await jettonsRes.json();
+    const price = await priceRes.json();
+    const tonBal = parseInt(acc.balance || 0) / 1e9;
+    const tonPrice = price['the-open-network']?.usd || 0;
+    const tonUsd = tonBal * tonPrice;
+
+    let usdtBal = 0;
+    for (const j of (jettons.balances || [])) {
+      const sym = j.jetton?.symbol || '';
+      const dec = parseInt(j.jetton?.decimals || 9);
+      const bal = parseInt(j.balance || '0') / Math.pow(10, dec);
+      if ((sym === 'USD₮' || sym === 'USDT' || sym === 'jUSDT') && bal > 0.01) usdtBal = bal;
     }
-  } catch (e) {
-    console.log('CRM load failed:', e.message);
+
+    const tonTotal = tonUsd + usdtBal;
+    const gateio = 200;
+    const tbc = 400;
+    const cashTotal = tonTotal + gateio + tbc;
+
+    document.getElementById('ton-usd').textContent = '$' + tonTotal.toFixed(0);
+    document.getElementById('cash-total').textContent = '$' + Math.round(cashTotal).toLocaleString();
+    document.getElementById('cash-breakdown').textContent = 'TON $' + Math.round(tonTotal) + ' + Gate.io $200 + TBC ~$400';
+  } catch(e) {
+    document.getElementById('cash-total').textContent = '~$600+';
+    console.log('TON:', e.message);
   }
+})();
 
-  document.getElementById('last-updated').textContent = new Date().toLocaleDateString('ru-RU');
-}
+// Uptime Kuma status check
+(async function loadUptime() {
+  try {
+    const ping = await fetch('/uptime/', { method: 'HEAD', signal: AbortSignal.timeout(5000) });
+    document.getElementById('uptime-value').innerHTML =
+      '<span class="ov-status-dot ' + (ping.ok ? 'green' : 'red') + '" style="margin-right:6px"></span>' +
+      (ping.ok ? 'Online' : 'Down');
+    document.getElementById('uptime-sub').textContent = ping.ok ? 'Uptime Kuma работает' : 'Проверьте сервер';
+  } catch(e) {
+    document.getElementById('uptime-value').innerHTML =
+      '<span class="ov-status-dot yellow" style="margin-right:6px"></span>Нет данных';
+    document.getElementById('uptime-sub').textContent = 'Не удалось подключиться';
+  }
+})();
 
-loadDashboardData();
+// Dashboard navigation (for non-iframe usage)
+document.querySelectorAll('.ov-dash[href]:not([target])').forEach(d => {
+  d.addEventListener('click', e => {
+    if (window.parent !== window) {
+      e.preventDefault();
+      window.parent.postMessage({ type: 'navigate', page: d.getAttribute('href') }, '*');
+    }
+  });
+});
 </script>
+
 </body>
 </html>
