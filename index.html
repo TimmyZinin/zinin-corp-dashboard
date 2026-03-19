@@ -203,7 +203,7 @@
   </nav>
 
   <main class="content" id="content">
-    <iframe id="dashFrame" src="overview.html?embed=1"></iframe>
+    <iframe id="dashFrame" src="overview.html"></iframe>
   </main>
 </div>
 
@@ -267,7 +267,7 @@
       e.preventDefault();
       navItems.forEach(n => n.classList.remove('active'));
       item.classList.add('active');
-      dashFrame.src = item.dataset.page + '?embed=1';
+      dashFrame.src = item.dataset.page;
       // Close mobile sidebar
       document.getElementById('sidebar').classList.remove('open');
     });
