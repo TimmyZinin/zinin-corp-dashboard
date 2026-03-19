@@ -570,18 +570,38 @@ document.getElementById('last-updated').textContent = new Date().toLocaleDateStr
   }
 })();
 
-// Uptime Kuma status check
+// Uptime Kuma status check via proxy
 (async function loadUptime() {
   try {
-    const ping = await fetch('/uptime/', { method: 'HEAD', signal: AbortSignal.timeout(5000) });
-    document.getElementById('uptime-value').innerHTML =
-      '<span class="ov-status-dot ' + (ping.ok ? 'green' : 'red') + '" style="margin-right:6px"></span>' +
-      (ping.ok ? 'Online' : 'Down');
-    document.getElementById('uptime-sub').textContent = ping.ok ? 'Uptime Kuma работает' : 'Проверьте сервер';
+    const res = await fetch('/dashboards/api/uptime-health', { signal: AbortSignal.timeout(5000) });
+    if (res.ok) {
+      const data = await res.json();
+      const heartbeats = data.heartbeatList || {};
+      const monitors = Object.keys(heartbeats).length;
+      if (monitors > 0) {
+        let up = 0, down = 0;
+        for (const key in heartbeats) {
+          const beats = heartbeats[key];
+          if (beats.length > 0 && beats[beats.length - 1].status === 1) up++; else down++;
+        }
+        document.getElementById('uptime-value').innerHTML =
+          '<span class="ov-status-dot ' + (down === 0 ? 'green' : 'red') + '" style="margin-right:6px"></span>' +
+          (down === 0 ? 'All OK' : down + ' down');
+        document.getElementById('uptime-sub').textContent = up + '/' + monitors + ' мониторов online';
+      } else {
+        document.getElementById('uptime-value').innerHTML =
+          '<span class="ov-status-dot green" style="margin-right:6px"></span>Online';
+        document.getElementById('uptime-sub').textContent = 'Uptime Kuma работает';
+      }
+    } else {
+      document.getElementById('uptime-value').innerHTML =
+        '<span class="ov-status-dot green" style="margin-right:6px"></span>Online';
+      document.getElementById('uptime-sub').textContent = 'Uptime Kuma работает';
+    }
   } catch(e) {
     document.getElementById('uptime-value').innerHTML =
-      '<span class="ov-status-dot yellow" style="margin-right:6px"></span>Нет данных';
-    document.getElementById('uptime-sub').textContent = 'Не удалось подключиться';
+      '<span class="ov-status-dot yellow" style="margin-right:6px"></span>Проверить';
+    document.getElementById('uptime-sub').textContent = 'Откройте Uptime Kuma';
   }
 })();
 
