@@ -628,6 +628,10 @@
     <div class="fin-card-title" style="color: #3b82f6">Денежная позиция</div>
 
     <div class="fin-metric-row">
+      <span class="fin-metric-label">Крипто-портфель (мультичейн)</span>
+      <span class="fin-metric-value" id="cash-crypto-total" style="color: #627EEA">загрузка...</span>
+    </div>
+    <div class="fin-metric-row">
       <span class="fin-metric-label">Ежемесячный денежный поток</span>
       <span class="fin-metric-value fin-positive">+$825</span>
     </div>
@@ -839,6 +843,55 @@
 
 </div>
 
+
+<!-- ============================================================
+     ROW 6a: Multi-chain Crypto Portfolio (live from /portfolio.json)
+     ============================================================ -->
+<div class="fin-section-title">Крипто-портфель (мультичейн)</div>
+<div class="fin-grid-2">
+
+  <div class="fin-card">
+    <div class="fin-card-accent" style="background: linear-gradient(90deg, #627EEA, #9945FF, #0098EA, #5546FF)"></div>
+    <div class="fin-card-title" style="color: #627EEA">Сводка портфеля</div>
+    <div class="fin-kpi-value" id="crypto-total-usd" style="color: #627EEA; margin-bottom: 16px">Загрузка...</div>
+    <div class="fin-chart-wrap" id="chart-crypto-allocation" style="min-height: 220px"></div>
+    <div class="fin-kpi-sub" style="text-align: right; margin-top: 8px" id="crypto-updated">Последнее обновление: —</div>
+  </div>
+
+  <div class="fin-card">
+    <div class="fin-card-accent" style="background: linear-gradient(90deg, #627EEA, #0098EA)"></div>
+    <div class="fin-card-title" style="color: #627EEA">Балансы по чейнам</div>
+
+    <div class="fin-metric-row">
+      <span class="fin-metric-label" style="display:flex;align-items:center;gap:6px"><span style="width:10px;height:10px;border-radius:50%;background:#627EEA;display:inline-block"></span> Ethereum (EVM)</span>
+      <span class="fin-metric-value" id="chain-evm">—</span>
+    </div>
+    <div class="fin-metric-row">
+      <span class="fin-metric-label" style="display:flex;align-items:center;gap:6px"><span style="width:10px;height:10px;border-radius:50%;background:#0098EA;display:inline-block"></span> TON</span>
+      <span class="fin-metric-value" id="chain-ton">—</span>
+    </div>
+    <div class="fin-metric-row">
+      <span class="fin-metric-label" style="display:flex;align-items:center;gap:6px"><span style="width:10px;height:10px;border-radius:50%;background:#9945FF;display:inline-block"></span> Solana</span>
+      <span class="fin-metric-value" id="chain-solana">—</span>
+    </div>
+    <div class="fin-metric-row">
+      <span class="fin-metric-label" style="display:flex;align-items:center;gap:6px"><span style="width:10px;height:10px;border-radius:50%;background:#5546FF;display:inline-block"></span> Stacks</span>
+      <span class="fin-metric-value" id="chain-stacks">—</span>
+    </div>
+    <div class="fin-metric-row">
+      <span class="fin-metric-label" style="display:flex;align-items:center;gap:6px"><span style="width:10px;height:10px;border-radius:50%;background:#f59e0b;display:inline-block"></span> TG @wallet</span>
+      <span class="fin-metric-value fin-muted" id="chain-tgwallet">~$2,246 (ручной)</span>
+    </div>
+
+    <div style="margin-top: 16px; padding-top: 12px; border-top: 2px solid var(--zc-border-strong)">
+      <div class="fin-metric-row">
+        <span class="fin-metric-label"><strong>Курсы</strong></span>
+        <span class="fin-metric-value fin-muted" id="crypto-prices" style="font-size: 11px">—</span>
+      </div>
+    </div>
+  </div>
+
+</div>
 
 <!-- ============================================================
      ROW 6b: Tribute Payout History
@@ -1268,6 +1321,95 @@ const APEX_DARK = {
   } catch (e) {
     document.getElementById('ton-total-usd').textContent = 'Ошибка загрузки';
     console.error('TON wallet fetch error:', e);
+  }
+})();
+
+
+// ── Multi-chain Crypto Portfolio (from /portfolio.json) ──
+(async function() {
+  try {
+    const res = await fetch('/portfolio.json');
+    if (!res.ok) throw new Error('Portfolio fetch failed: ' + res.status);
+    const data = await res.json();
+
+    // Total USD
+    const total = data.total_usd || 0;
+    document.getElementById('crypto-total-usd').textContent = '$' + total.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+
+    // Chain balances
+    const chains = data.chains || {};
+    const fmt = v => '$' + (v || 0).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+
+    if (chains.evm) document.getElementById('chain-evm').textContent = fmt(chains.evm.total_usd);
+    if (chains.ton) document.getElementById('chain-ton').textContent = fmt(chains.ton.total_usd);
+    if (chains.solana) document.getElementById('chain-solana').textContent = fmt(chains.solana.total_usd);
+    if (chains.stacks) document.getElementById('chain-stacks').textContent = fmt(chains.stacks.total_usd);
+
+    // Prices
+    const prices = data.prices || {};
+    const priceStr = Object.entries(prices).map(([k, v]) => k + ': $' + v.toFixed(2)).join(' | ');
+    document.getElementById('crypto-prices').textContent = priceStr || '—';
+
+    // Updated timestamp
+    if (data.updated_at) {
+      const dt = new Date(data.updated_at);
+      document.getElementById('crypto-updated').textContent = 'Обновлено: ' + dt.toLocaleString('ru-RU', { hour: '2-digit', minute: '2-digit', day: 'numeric', month: 'short' });
+    }
+
+    // Also update the "Денежная позиция" card
+    const cashEl = document.getElementById('cash-crypto-total');
+    if (cashEl) cashEl.textContent = fmt(total);
+
+    // Donut chart — allocation by chain
+    const chartData = [];
+    const chartLabels = [];
+    const chartColors = [];
+    const chainConfig = [
+      { key: 'evm', label: 'EVM (ETH+L2)', color: '#627EEA' },
+      { key: 'ton', label: 'TON', color: '#0098EA' },
+      { key: 'solana', label: 'Solana', color: '#9945FF' },
+      { key: 'stacks', label: 'Stacks', color: '#5546FF' },
+    ];
+
+    for (const c of chainConfig) {
+      const val = chains[c.key]?.total_usd || 0;
+      if (val > 0.01) {
+        chartData.push(Math.round(val * 100) / 100);
+        chartLabels.push(c.label);
+        chartColors.push(c.color);
+      }
+    }
+
+    if (chartData.length > 0) {
+      new ApexCharts(document.querySelector('#chart-crypto-allocation'), {
+        series: chartData,
+        labels: chartLabels,
+        chart: { type: 'donut', height: 220, background: 'transparent', foreColor: ZC_COLORS.text },
+        colors: chartColors,
+        plotOptions: {
+          pie: {
+            donut: {
+              size: '72%',
+              labels: {
+                show: true,
+                name: { fontSize: '12px', color: ZC_COLORS.text },
+                value: { fontSize: '20px', fontFamily: "'Unbounded', sans-serif", fontWeight: 700, color: '#fff', formatter: v => '$' + parseFloat(v).toLocaleString() },
+                total: { show: true, label: 'Портфель', fontSize: '11px', color: ZC_COLORS.text, formatter: w => '$' + w.globals.seriesTotals.reduce((a, b) => a + b, 0).toLocaleString() }
+              }
+            }
+          }
+        },
+        stroke: { width: 2, colors: ['#0a0a0a'] },
+        legend: { position: 'bottom', fontSize: '11px', labels: { colors: ZC_COLORS.text } },
+        tooltip: { theme: 'dark', y: { formatter: v => '$' + v.toLocaleString() } },
+        dataLabels: { enabled: false }
+      }).render();
+    }
+
+  } catch (e) {
+    document.getElementById('crypto-total-usd').textContent = 'Нет данных';
+    document.getElementById('crypto-total-usd').style.fontSize = '18px';
+    console.warn('Portfolio fetch:', e.message);
   }
 })();
 </script>

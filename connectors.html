@@ -115,25 +115,25 @@
 
 <div class="zc-stats">
   <div class="zc-stat">
-    <div class="zc-stat-num">54</div>
+    <div class="zc-stat-num">65</div>
     <div class="zc-stat-label">Всего API</div>
   </div>
   <div class="zc-stat">
-    <div class="zc-stat-num" style="color: var(--zc-status-green)">22</div>
+    <div class="zc-stat-num" style="color: var(--zc-status-green)">33</div>
     <div class="zc-stat-label">Активные</div>
   </div>
   <div class="zc-stat">
-    <div class="zc-stat-num" style="color: var(--zc-status-red)">6</div>
+    <div class="zc-stat-num" style="color: var(--zc-status-red)">4</div>
     <div class="zc-stat-label">Требуют починки</div>
   </div>
   <div class="zc-stat">
-    <div class="zc-stat-num" style="color: var(--zc-text-muted)">8</div>
+    <div class="zc-stat-num" style="color: var(--zc-text-muted)">10</div>
     <div class="zc-stat-label">Не подключены</div>
   </div>
 </div>
 
 <div class="zc-tabs">
-  <button class="zc-tab active" data-tab="smm">Соц. сети <span class="zc-tab-count">19</span></button>
+  <button class="zc-tab active" data-tab="smm">Соц. сети <span class="zc-tab-count">30</span></button>
   <button class="zc-tab" data-tab="finance">Финансовые API <span class="zc-tab-count">28</span></button>
   <button class="zc-tab" data-tab="llm">LLM & Costs <span class="zc-tab-count">3</span></button>
   <button class="zc-tab" data-tab="mcp">MCP серверы <span class="zc-tab-count">4</span></button>
@@ -194,37 +194,79 @@
           <td colspan="6"><strong>Сломаны — требуют починки</strong></td>
         </tr>
         <tr>
-          <td>11</td><td>YouTube</td><td>Tim Zinin (1.87K)</td><td><span class="zc-badge zc-badge--red">EXPIRED</span></td><td><span class="zc-status-broken">TOKEN EXPIRED</span></td><td>OAuth refresh expired — fixed Mar 4</td>
+          <td>11</td><td>YouTube</td><td>Tim Zinin (1.87K)</td><td><span class="zc-badge zc-badge--red">EXPIRED</span></td><td><span class="zc-status-broken">RE-AUTH NEEDED</span></td><td>Refresh token invalid_grant. Нужна OAuth re-auth через браузер</td>
         </tr>
         <tr>
-          <td>12</td><td>VC.ru</td><td>Timofey Zinin</td><td><span class="zc-badge zc-badge--red">404</span></td><td><span class="zc-status-broken">API 404</span></td><td>Endpoint changed</td>
-        </tr>
-        <tr>
-          <td>13</td><td>LinkedIn</td><td>Kristina Zhukova</td><td><span class="zc-badge zc-badge--red">DISABLED</span></td><td><span class="zc-status-broken">APP DISABLED</span></td><td>Not relevant (Kristina left)</td>
+          <td>12</td><td>VC.ru</td><td>Timofey Zinin</td><td><span class="zc-badge zc-badge--yellow">Playwright</span></td><td><span class="zc-status-ready">BROWSER</span></td><td>Playwright + VK ID. 1-2 статьи/нед. API удалён</td>
         </tr>
         <tr class="zc-group-row" style="--zc-group-color: var(--zc-status-yellow)">
           <td colspan="6"><strong>Ждут действий</strong></td>
         </tr>
         <tr>
-          <td>14</td><td>TikTok</td><td>@timzinin</td><td><span class="zc-badge zc-badge--gray">—</span></td><td><span class="zc-status-waiting">App Review</span></td><td>Short videos. 3-5/week</td>
+          <td>13</td><td>TikTok</td><td>@timzinin</td><td><span class="zc-badge zc-badge--gray">—</span></td><td><span class="zc-status-waiting">App Review</span></td><td>Short videos. 3-5/week</td>
         </tr>
         <tr>
-          <td>15</td><td>Discord</td><td>---</td><td><span class="zc-badge zc-badge--gray">—</span></td><td><span class="zc-status-waiting">No webhook</span></td><td>Community hub</td>
-        </tr>
-        <tr>
-          <td>16</td><td>Threads</td><td>Kristina Zhukova</td><td><span class="zc-badge zc-badge--gray">—</span></td><td><span class="zc-status-waiting">No token</span></td><td>Not relevant</td>
+          <td>14</td><td>Discord</td><td>---</td><td><span class="zc-badge zc-badge--gray">—</span></td><td><span class="zc-status-waiting">No webhook</span></td><td>Community hub</td>
         </tr>
         <tr class="zc-group-row" style="--zc-group-color: var(--zc-text-muted)">
-          <td colspan="6"><strong>Не приоритет / невозможно</strong></td>
+          <td colspan="6"><strong>Платный / ручной доступ</strong></td>
         </tr>
         <tr>
-          <td>17</td><td>Twitter/X</td><td>Tim Zinin</td><td><span class="zc-badge zc-badge--gray">—</span></td><td><span class="zc-status-skip">$200/mo</span></td><td>API is paid</td>
+          <td>15</td><td>Twitter/X</td><td>Tim Zinin</td><td><span class="zc-badge zc-badge--gray">—</span></td><td><span class="zc-status-skip">$200/mo</span></td><td>API is paid</td>
         </tr>
         <tr>
-          <td>18</td><td>Medium</td><td>---</td><td><span class="zc-badge zc-badge--gray">—</span></td><td><span class="zc-status-skip">Impossible</span></td><td>Bot detection</td>
+          <td>14</td><td>Medium</td><td>@timzinin</td><td><span class="zc-badge zc-badge--yellow">Playwright</span></td><td><span class="zc-status-ready">SEMI-AUTO</span></td><td>Import URL via Playwright + Google OAuth. 2x/мес</td>
         </tr>
         <tr>
-          <td>19</td><td>DTF</td><td>---</td><td><span class="zc-badge zc-badge--gray">—</span></td><td><span class="zc-status-skip">Skipped</span></td><td>Not relevant</td>
+          <td>15</td><td>DTF</td><td>Timofey Zinin</td><td><span class="zc-badge zc-badge--yellow">Playwright</span></td><td><span class="zc-status-ready">SEMI-AUTO</span></td><td>Playwright + VK ID. Tech/gaming контент. 1-2/нед</td>
+        </tr>
+        <tr class="zc-group-row" style="--zc-group-color: #0098EA">
+          <td colspan="6"><strong>Подкасты (СБОРКА Podcast)</strong></td>
+        </tr>
+        <tr>
+          <td>18</td><td>Mave.digital</td><td>СБОРКА</td><td><span class="zc-badge zc-badge--green">RSS</span></td><td><span class="zc-status-ok">PUBLISHING</span></td><td>Основной хостинг подкаста. RSS-дистрибуция</td>
+        </tr>
+        <tr>
+          <td>19</td><td>Yandex Music</td><td>СБОРКА</td><td><span class="zc-badge zc-badge--green">via Mave</span></td><td><span class="zc-status-ok">PUBLISHING</span></td><td>RU-аудитория. Авто-дистрибуция через Mave</td>
+        </tr>
+        <tr>
+          <td>20</td><td>Apple Podcasts</td><td>СБОРКА</td><td><span class="zc-badge zc-badge--green">via Mave</span></td><td><span class="zc-status-ok">PUBLISHING</span></td><td>Глобальная аудитория. Авто-дистрибуция через Mave</td>
+        </tr>
+        <tr>
+          <td>21</td><td>Spotify</td><td>СБОРКА</td><td><span class="zc-badge zc-badge--green">via Mave</span></td><td><span class="zc-status-ok">PUBLISHING</span></td><td>Крупнейшая подкаст-платформа. Авто через Mave</td>
+        </tr>
+        <tr>
+          <td>22</td><td>VK Music</td><td>СБОРКА</td><td><span class="zc-badge zc-badge--green">via Mave</span></td><td><span class="zc-status-ready">CONNECTED</span></td><td>RU подкаст-каталог. Дистрибуция через Mave</td>
+        </tr>
+        <tr>
+          <td>23</td><td>Deezer</td><td>СБОРКА</td><td><span class="zc-badge zc-badge--yellow">via Mave</span></td><td><span class="zc-status-waiting">SETUP</span></td><td>Настроить Mave дистрибуцию</td>
+        </tr>
+        <tr>
+          <td>24</td><td>Pocket Casts</td><td>СБОРКА</td><td><span class="zc-badge zc-badge--yellow">via Mave</span></td><td><span class="zc-status-waiting">SETUP</span></td><td>Настроить Mave дистрибуцию</td>
+        </tr>
+        <tr class="zc-group-row" style="--zc-group-color: var(--zc-accent)">
+          <td colspan="6"><strong>Блог-платформы</strong></td>
+        </tr>
+        <tr>
+          <td>25</td><td>Hashnode</td><td>@timmyzinin</td><td><span class="zc-badge zc-badge--green">REST API</span></td><td><span class="zc-status-ready">READY</span></td><td>EN: DevRel, AI, MCP. PAT авторизация. 2-4/мес</td>
+        </tr>
+        <tr>
+          <td>26</td><td>Tumblr</td><td>timzinin</td><td><span class="zc-badge zc-badge--green">OAuth 2.0</span></td><td><span class="zc-status-ready">READY</span></td><td>Cross-post визуальный контент</td>
+        </tr>
+        <tr>
+          <td>27</td><td>Write.as</td><td>timzinin</td><td><span class="zc-badge zc-badge--green">REST API</span></td><td><span class="zc-status-ready">READY</span></td><td>Privacy-focused лонгриды. Анонимная аудитория</td>
+        </tr>
+        <tr class="zc-group-row" style="--zc-group-color: #a29bfe">
+          <td colspan="6"><strong>Децентрализованные</strong></td>
+        </tr>
+        <tr>
+          <td>28</td><td>Nostr</td><td>npub (Tim)</td><td><span class="zc-badge zc-badge--green">Protocol</span></td><td><span class="zc-status-ready">CONNECTED</span></td><td>Decentralized protocol. Крипто-аудитория</td>
+        </tr>
+        <tr>
+          <td>29</td><td>Minds</td><td>timzinin</td><td><span class="zc-badge zc-badge--green">REST API</span></td><td><span class="zc-status-ready">READY</span></td><td>Open-source альтернатива. Крипто/tech аудитория</td>
+        </tr>
+        <tr>
+          <td>30</td><td>Lemmy</td><td>timzinin</td><td><span class="zc-badge zc-badge--green">ActivityPub</span></td><td><span class="zc-status-ready">READY</span></td><td>Federated Reddit. Tech communities</td>
         </tr>
       </tbody>
     </table>
