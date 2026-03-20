@@ -894,10 +894,46 @@
 </div>
 
 <!-- ============================================================
-     ROW 6b: Tribute Payout History
+     ROW 6b: Tribute Live Data + Payout History
      ============================================================ -->
-<div class="fin-section-title">История выплат Tribute (Ботаника)</div>
-<div class="fin-card">
+<div class="fin-section-title">Tribute — подписки и доходы</div>
+<div class="fin-grid-2">
+
+  <div class="fin-card">
+    <div class="fin-card-accent" style="background: linear-gradient(90deg, #6c5ce7, #a29bfe)"></div>
+    <div class="fin-card-title" style="color: #a29bfe">Баланс Tribute</div>
+    <div style="display: flex; gap: 24px; align-items: baseline; margin-bottom: 16px">
+      <div>
+        <div class="fin-kpi-value" style="color: #a29bfe; font-size: 28px" id="tribute-rub">—</div>
+        <div class="fin-kpi-sub">RUB</div>
+      </div>
+      <div>
+        <div class="fin-kpi-value" style="color: #a29bfe; font-size: 22px" id="tribute-usd">—</div>
+        <div class="fin-kpi-sub">USD</div>
+      </div>
+    </div>
+    <div class="fin-metric-row">
+      <span class="fin-metric-label">Подписки (март)</span>
+      <span class="fin-metric-value" id="tribute-march-subs">—</span>
+    </div>
+    <div class="fin-metric-row">
+      <span class="fin-metric-label">Активные тарифы</span>
+      <span class="fin-metric-value" id="tribute-plans" style="font-size: 11px">—</span>
+    </div>
+    <div class="fin-kpi-sub" style="text-align: right; margin-top: 12px" id="tribute-updated">Обновлено: —</div>
+  </div>
+
+  <div class="fin-card">
+    <div class="fin-card-accent" style="background: linear-gradient(90deg, #6c5ce7, #a29bfe)"></div>
+    <div class="fin-card-title" style="color: #a29bfe">Последние транзакции</div>
+    <div id="tribute-tx-list" style="font-size: 13px">
+      <div class="fin-kpi-sub">Загрузка...</div>
+    </div>
+  </div>
+
+</div>
+
+<div class="fin-card" style="margin-top: 16px">
   <div class="fin-card-accent" style="background: linear-gradient(90deg, #6c5ce7, #a29bfe)"></div>
   <div class="fin-card-title" style="color: #a29bfe">Ежемесячные выплаты от Tribute</div>
   <div class="fin-chart-wrap" id="chart-tribute-history"></div>
@@ -1321,6 +1357,47 @@ const APEX_DARK = {
   } catch (e) {
     document.getElementById('ton-total-usd').textContent = 'Ошибка загрузки';
     console.error('TON wallet fetch error:', e);
+  }
+})();
+
+
+// ── Tribute Live Data (from /tribute.json) ──
+(async function() {
+  try {
+    const res = await fetch('/tribute.json');
+    if (!res.ok) throw new Error('Tribute fetch: ' + res.status);
+    const data = await res.json();
+
+    const e = data.earnings || {};
+    document.getElementById('tribute-rub').textContent = '₽' + (e.rub || 0).toLocaleString();
+    document.getElementById('tribute-usd').textContent = '$' + (e.usd || 0).toFixed(2);
+
+    const s = data.summary || {};
+    document.getElementById('tribute-march-subs').textContent = (s.march_subscriptions || 0) + ' новых';
+    document.getElementById('tribute-plans').textContent = (s.active_plans || []).join(', ') || '—';
+
+    if (data.updated_at) {
+      const dt = new Date(data.updated_at);
+      document.getElementById('tribute-updated').textContent = 'Обновлено: ' + dt.toLocaleString('ru-RU', { hour: '2-digit', minute: '2-digit', day: 'numeric', month: 'short' });
+    }
+
+    // Transactions list
+    const txList = document.getElementById('tribute-tx-list');
+    const txs = (data.transactions || []).slice(0, 8);
+    if (txs.length > 0) {
+      txList.innerHTML = txs.map(function(tx) {
+        const isIncome = tx.type !== 'payout';
+        const color = isIncome ? 'var(--zc-status-green)' : 'var(--zc-text-muted)';
+        const sign = isIncome ? '+' : '';
+        const label = tx.user + (tx.plan ? ' — ' + tx.plan : '');
+        return '<div class="fin-metric-row">' +
+          '<span class="fin-metric-label">' + tx.date + ' ' + label + '</span>' +
+          '<span class="fin-metric-value" style="color:' + color + '">' + sign + tx.amount.toLocaleString() + ' ' + tx.currency + '</span>' +
+          '</div>';
+      }).join('');
+    }
+  } catch (e) {
+    console.warn('Tribute data:', e.message);
   }
 })();
 
