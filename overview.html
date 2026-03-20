@@ -558,8 +558,10 @@ document.getElementById('last-updated').textContent = new Date().toLocaleDateStr
     const res = await fetch('/tribute.json');
     if (res.ok) {
       const data = await res.json();
-      tributeUsd = (data.earnings?.usd || 0);
-      document.getElementById('ov-tribute').textContent = '$' + tributeUsd.toFixed(0) + ' + ₽' + (data.earnings?.rub || 0).toLocaleString();
+      const s = data.summary || {};
+      const balRub = Math.round((s.total_revenue_rub || 0) - (s.total_payouts_rub || 0));
+      tributeUsd = (s.total_revenue_usd || data.earnings?.usd || 0);
+      document.getElementById('ov-tribute').textContent = '$' + tributeUsd.toFixed(0) + ' + ₽' + balRub.toLocaleString();
     }
   } catch(e) { console.log('Tribute:', e.message); }
 

@@ -1368,12 +1368,20 @@ const APEX_DARK = {
     if (!res.ok) throw new Error('Tribute fetch: ' + res.status);
     const data = await res.json();
 
-    const e = data.earnings || {};
-    document.getElementById('tribute-rub').textContent = '₽' + (e.rub || 0).toLocaleString();
-    document.getElementById('tribute-usd').textContent = '$' + (e.usd || 0).toFixed(2);
-
+    // Balance = total revenue - total payouts
     const s = data.summary || {};
-    document.getElementById('tribute-march-subs').textContent = (s.march_subscriptions || 0) + ' новых';
+    const balRub = (s.total_revenue_rub || 0) - (s.total_payouts_rub || 0);
+    const balUsd = (s.total_revenue_usd || 0);
+    const marchRev = s.revenue_2026_03 || s.monthly_revenue?.['2026-03'] || {};
+
+    document.getElementById('tribute-rub').textContent = '₽' + Math.round(balRub).toLocaleString();
+    document.getElementById('tribute-usd').textContent = '$' + balUsd.toFixed(2);
+
+    // Count march subscriptions from transactions
+    const marchSubs = (data.transactions || []).filter(function(tx) {
+      return tx.date && tx.date.startsWith('2026-03') && tx.type === 'subscription';
+    }).length;
+    document.getElementById('tribute-march-subs').textContent = marchSubs + ' новых';
     document.getElementById('tribute-plans').textContent = (s.active_plans || []).join(', ') || '—';
 
     if (data.updated_at) {
