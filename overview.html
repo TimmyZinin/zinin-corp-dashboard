@@ -172,7 +172,7 @@
     <div class="ov-kpi-accent" style="background: linear-gradient(90deg, #3b82f6, #60a5fa)"></div>
     <div class="ov-kpi-label">Cash Position</div>
     <div class="ov-kpi-value" style="color: #60a5fa" id="cash-total">—</div>
-    <div class="ov-kpi-sub" id="cash-breakdown">TON + Gate.io + TBC</div>
+    <div class="ov-kpi-sub" id="cash-breakdown">Крипто + Tribute + банки</div>
   </div>
 
   <div class="ov-kpi">
@@ -242,8 +242,12 @@
     <div style="margin-top:16px; padding-top:12px; border-top:1px solid var(--zc-border-subtle)">
       <div style="font-size:10px; text-transform:uppercase; letter-spacing:1px; color:var(--zc-text-disabled); margin-bottom:8px">Cash Reserves</div>
       <div class="ov-row" style="padding:4px 0">
-        <span class="ov-row-label" style="font-size:12px">TON Wallet</span>
-        <span class="ov-row-value" style="font-size:13px" id="ton-usd">—</span>
+        <span class="ov-row-label" style="font-size:12px;display:flex;align-items:center;gap:4px"><span style="width:6px;height:6px;border-radius:50%;background:#627EEA"></span> Крипто-портфель</span>
+        <span class="ov-row-value" style="font-size:13px" id="ov-crypto">—</span>
+      </div>
+      <div class="ov-row" style="padding:4px 0">
+        <span class="ov-row-label" style="font-size:12px;display:flex;align-items:center;gap:4px"><span style="width:6px;height:6px;border-radius:50%;background:#a29bfe"></span> Tribute баланс</span>
+        <span class="ov-row-value" style="font-size:13px" id="ov-tribute">—</span>
       </div>
       <div class="ov-row" style="padding:4px 0">
         <span class="ov-row-label" style="font-size:12px">Gate.io</span>
@@ -532,42 +536,38 @@ document.getElementById('last-updated').textContent = new Date().toLocaleDateStr
   } catch(e) { console.log('CRM:', e.message); }
 })();
 
-// TON wallet
-(async function loadTON() {
-  const ADDR = 'UQCsUT6TyPwoN5nTuf9kuX0OiQnRP3UxzmDf8GWZUpHsASdo';
+// Crypto portfolio + Tribute → Cash Position
+(async function loadCashPosition() {
+  const gateio = 200;
+  const tbc = 400;
+  let cryptoTotal = 0;
+  let tributeUsd = 0;
+
+  // Load crypto portfolio
   try {
-    const [accRes, jettonsRes, priceRes] = await Promise.all([
-      fetch('https://tonapi.io/v2/accounts/' + ADDR, { headers: { Accept: 'application/json' } }),
-      fetch('https://tonapi.io/v2/accounts/' + ADDR + '/jettons?currencies=usd', { headers: { Accept: 'application/json' } }),
-      fetch('https://api.coingecko.com/api/v3/simple/price?ids=the-open-network&vs_currencies=usd')
-    ]);
-    const acc = await accRes.json();
-    const jettons = await jettonsRes.json();
-    const price = await priceRes.json();
-    const tonBal = parseInt(acc.balance || 0) / 1e9;
-    const tonPrice = price['the-open-network']?.usd || 0;
-    const tonUsd = tonBal * tonPrice;
-
-    let usdtBal = 0;
-    for (const j of (jettons.balances || [])) {
-      const sym = j.jetton?.symbol || '';
-      const dec = parseInt(j.jetton?.decimals || 9);
-      const bal = parseInt(j.balance || '0') / Math.pow(10, dec);
-      if ((sym === 'USD₮' || sym === 'USDT' || sym === 'jUSDT') && bal > 0.01) usdtBal = bal;
+    const res = await fetch('/portfolio.json');
+    if (res.ok) {
+      const data = await res.json();
+      cryptoTotal = data.total_usd || 0;
+      document.getElementById('ov-crypto').textContent = '$' + Math.round(cryptoTotal).toLocaleString();
     }
+  } catch(e) { console.log('Portfolio:', e.message); }
 
-    const tonTotal = tonUsd + usdtBal;
-    const gateio = 200;
-    const tbc = 400;
-    const cashTotal = tonTotal + gateio + tbc;
+  // Load Tribute data
+  try {
+    const res = await fetch('/tribute.json');
+    if (res.ok) {
+      const data = await res.json();
+      tributeUsd = (data.earnings?.usd || 0);
+      document.getElementById('ov-tribute').textContent = '$' + tributeUsd.toFixed(0) + ' + ₽' + (data.earnings?.rub || 0).toLocaleString();
+    }
+  } catch(e) { console.log('Tribute:', e.message); }
 
-    document.getElementById('ton-usd').textContent = '$' + tonTotal.toFixed(0);
-    document.getElementById('cash-total').textContent = '$' + Math.round(cashTotal).toLocaleString();
-    document.getElementById('cash-breakdown').textContent = 'TON $' + Math.round(tonTotal) + ' + Gate.io $200 + TBC ~$400';
-  } catch(e) {
-    document.getElementById('cash-total').textContent = '~$600+';
-    console.log('TON:', e.message);
-  }
+  // Total cash
+  const cashTotal = cryptoTotal + tributeUsd + gateio + tbc;
+  document.getElementById('cash-total').textContent = '$' + Math.round(cashTotal).toLocaleString();
+  document.getElementById('cash-breakdown').textContent =
+    'Крипто $' + Math.round(cryptoTotal) + ' + Tribute $' + Math.round(tributeUsd) + ' + Gate $200 + TBC ~$400';
 })();
 
 // Uptime Kuma status check via proxy
