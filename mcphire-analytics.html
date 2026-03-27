@@ -416,8 +416,9 @@ function fetchKPI() {
       if (!r.ok) throw new Error('HTTP ' + r.status);
       return r.json();
     })
-    .then(function(data) {
+    .then(function(resp) {
       var ms = Date.now() - t0;
+      var data = resp.data || resp;
       kpiCards.jobs.textContent       = fmtNum(data.totalJobs);
       kpiCards.companies.textContent  = fmtNum(data.companiesCount);
       kpiCards.cities.textContent     = fmtNum(data.citiesCount);
