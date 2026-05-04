@@ -4,103 +4,360 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Zinin Corp — Dashboards</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;600;700;800&family=Onest:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Instrument+Serif&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="zinin-corp.css?v=20260503-sprint-a">
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-  body { font-family: 'Inter', -apple-system, sans-serif; background: #0d1117; color: #e6edf3; height: 100vh; overflow: hidden; }
+  /* ==========================================================================
+   * Zinin Corp Shell — Sprint A (2026-05-03)
+   * Linear-style recessive sidebar 240px + Pinned tier + ⌘K palette.
+   * Tokens from zinin-corp.css; no duplicate values here.
+   * ======================================================================== */
 
-  /* === LOGIN SCREEN === */
+  body {
+    padding: 0;
+    height: 100vh;
+    overflow: hidden;
+  }
+
+  .is-hidden { display: none !important; }
+
+  /* === LOGIN OVERLAY === */
   .login-overlay {
-    position: fixed; inset: 0; background: #0d1117;
-    display: flex; align-items: center; justify-content: center;
+    position: fixed; inset: 0;
+    background: var(--zc-bg-base);
+    display: grid; place-items: center;
     z-index: 9999;
   }
-  .login-overlay.hidden { display: none; }
-  .login-box {
-    background: #161b22; border: 1px solid #30363d; border-radius: 16px;
-    padding: 48px 40px; width: 380px; text-align: center;
+  .login-card {
+    width: min(380px, calc(100vw - 32px));
+    background: var(--zc-bg-card);
+    border: 1px solid var(--zc-border-hairline);
+    border-radius: var(--zc-radius-xl);
+    padding: 48px 40px;
+    text-align: left;
   }
-  .login-logo { font-size: 28px; font-weight: 700; margin-bottom: 8px; color: #fff; }
-  .login-sub { color: #8b949e; font-size: 14px; margin-bottom: 32px; }
+  .login-mark {
+    font-family: var(--zc-font-display);
+    font-weight: 800;
+    font-size: 32px;
+    letter-spacing: var(--zc-letter-display);
+    color: var(--zc-text-heading);
+    line-height: 1;
+  }
+  .login-serial {
+    font-family: var(--zc-font-mono);
+    font-size: 11px;
+    color: var(--zc-text-muted);
+    margin-top: 8px;
+    letter-spacing: 0.04em;
+  }
+  .login-title {
+    margin-top: 36px;
+    font-family: var(--zc-font-serif);
+    font-size: 18px;
+    color: var(--zc-text-primary);
+    line-height: 1.3;
+  }
   .login-input {
-    width: 100%; padding: 12px 16px; background: #0d1117; border: 1px solid #30363d;
-    border-radius: 8px; color: #e6edf3; font-size: 15px; outline: none;
-    margin-bottom: 16px; font-family: inherit;
+    width: 100%;
+    margin-top: 18px;
+    padding: 12px 14px;
+    background: var(--zc-bg-input);
+    border: 1px solid var(--zc-border-input);
+    border-radius: var(--zc-radius-md);
+    color: var(--zc-text-heading);
+    font: 500 14px/1 var(--zc-font-body);
+    outline: none;
+    transition: var(--zc-ease-fast);
   }
-  .login-input:focus { border-color: #58a6ff; }
-  .login-input::placeholder { color: #484f58; }
+  .login-input:focus {
+    border-color: var(--zc-accent);
+    box-shadow: 0 0 0 3px var(--zc-accent-dim);
+  }
+  .login-input::placeholder { color: var(--zc-text-disabled); }
   .login-btn {
-    width: 100%; padding: 12px; background: #238636; border: none; border-radius: 8px;
-    color: #fff; font-size: 15px; font-weight: 600; cursor: pointer; font-family: inherit;
+    width: 100%;
+    margin-top: 12px;
+    padding: 12px;
+    background: var(--zc-accent);
+    border: none;
+    border-radius: var(--zc-radius-md);
+    color: #1a0f08;
+    font: 700 14px/1 var(--zc-font-body);
+    letter-spacing: 0.02em;
+    cursor: pointer;
+    transition: var(--zc-ease-fast);
   }
-  .login-btn:hover { background: #2ea043; }
-  .login-error { color: #f85149; font-size: 13px; margin-top: 12px; display: none; }
+  .login-btn:hover { background: var(--zc-accent-hover); }
+  .login-error {
+    color: var(--zc-status-red);
+    font-size: 12px;
+    margin-top: 12px;
+    display: none;
+  }
 
-  /* === MAIN LAYOUT === */
-  .app { display: flex; height: 100vh; }
-  .app.hidden { display: none; }
+  /* === APP LAYOUT === */
+  .app { display: grid; grid-template-columns: 240px 1fr; height: 100vh; }
 
-  /* === SIDEBAR === */
+  /* === SIDEBAR — Linear-style recessive === */
   .sidebar {
-    width: 240px; background: #0d1117; border-right: 1px solid #21262d;
-    display: flex; flex-direction: column; flex-shrink: 0; overflow-y: auto;
+    background: var(--zc-bg-raised);
+    border-right: 1px solid var(--zc-border-hairline);
+    display: flex; flex-direction: column;
+    overflow-y: auto;
+    overflow-x: hidden;
+    scrollbar-width: thin;
+    scrollbar-color: var(--zc-border) transparent;
   }
-  .sidebar-header {
-    padding: 20px 16px 12px; font-size: 11px; font-weight: 600;
-    color: #8b949e; letter-spacing: 1.2px; text-transform: uppercase;
-  }
-  .sidebar-brand {
-    padding: 16px 16px 4px; font-size: 18px; font-weight: 700; color: #fff;
-  }
-  .nav-item {
-    display: flex; align-items: center; padding: 8px 16px; cursor: pointer;
-    border-radius: 6px; margin: 1px 8px; transition: background 0.15s;
-    text-decoration: none; color: #c9d1d9;
-  }
-  .nav-item:hover { background: #161b22; }
-  .nav-item.active { background: #1f2937; color: #fff; }
-  .nav-dot {
-    width: 8px; height: 8px; border-radius: 50%; margin-right: 12px; flex-shrink: 0;
-  }
-  .nav-label { flex: 1; font-size: 14px; font-weight: 500; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-  .nav-tag {
-    font-size: 10px; font-weight: 600; padding: 2px 6px; border-radius: 4px;
-    letter-spacing: 0.5px; flex-shrink: 0; margin-left: 8px;
-  }
-  .tag-ops { background: rgba(139,148,158,0.15); color: #8b949e; }
-  .tag-content { background: rgba(227,179,65,0.15); color: #e3b341; }
-  .tag-analytics { background: rgba(163,113,247,0.15); color: #a371f7; }
-  .tag-finance { background: rgba(248,81,73,0.15); color: #f85149; }
-  .tag-factory { background: rgba(227,145,65,0.15); color: #e39141; }
-  .tag-executive { background: rgba(219,171,255,0.15); color: #dbabff; }
+  .sidebar::-webkit-scrollbar { width: 6px; }
+  .sidebar::-webkit-scrollbar-thumb { background: var(--zc-border); border-radius: 3px; }
 
-  .sidebar-footer {
-    margin-top: auto; padding: 16px; border-top: 1px solid #21262d;
+  /* Wordmark block */
+  .brand {
+    padding: 22px 18px 16px;
+    border-bottom: 1px solid var(--zc-border-hairline);
+    display: flex; flex-direction: column; gap: 4px;
+    user-select: none;
+  }
+  .brand-mark {
+    font-family: var(--zc-font-display);
+    font-weight: 800;
+    font-size: 18px;
+    letter-spacing: -0.03em;
+    color: var(--zc-text-heading);
+    line-height: 1;
+  }
+  .brand-mark .brand-amp { color: var(--zc-accent); }
+  .brand-serial {
+    font-family: var(--zc-font-mono);
+    font-size: 10px;
+    color: var(--zc-text-muted);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+
+  /* ⌘K trigger */
+  .cmdk-trigger {
+    margin: 14px 12px 4px;
+    padding: 9px 12px;
+    background: var(--zc-bg-card);
+    border: 1px solid var(--zc-border);
+    border-radius: var(--zc-radius-md);
+    display: flex; align-items: center; gap: 10px;
+    color: var(--zc-text-muted);
+    font: 500 12.5px var(--zc-font-body);
+    cursor: pointer;
+    transition: var(--zc-ease-fast);
+  }
+  .cmdk-trigger:hover { border-color: var(--zc-border-input); color: var(--zc-text-secondary); }
+  .cmdk-trigger .cmdk-arrow { margin-left: auto; opacity: 0.6; }
+  .cmdk-trigger kbd {
+    font: 500 10px var(--zc-font-mono);
+    background: var(--zc-bg-input);
+    border: 1px solid var(--zc-border-input);
+    border-radius: 3px;
+    padding: 1px 5px;
+    color: var(--zc-text-secondary);
+  }
+
+  /* Sections (Pinned + Categories) */
+  .nav-section { padding: 14px 0 4px; }
+  .nav-section-label {
+    padding: 0 18px 6px;
+    font: 600 10px var(--zc-font-body);
+    color: var(--zc-text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+  }
+  .nav-section-label.with-rule {
+    display: flex; align-items: center; gap: 10px;
+  }
+  .nav-section-label.with-rule::after {
+    content: ''; flex: 1; height: 1px; background: var(--zc-border-hairline);
+    margin-right: 0;
+  }
+
+  .nav-item {
+    display: flex; align-items: center; gap: 10px;
+    padding: 7px 18px 7px 17px;
+    color: var(--zc-text-secondary);
+    font: 500 13.5px var(--zc-font-body);
+    border-left: 1px solid transparent;
+    cursor: pointer;
+    transition: var(--zc-ease-fast);
+    user-select: none;
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  }
+  .nav-item:hover {
+    background: rgba(255, 255, 255, 0.025);
+    color: var(--zc-text-primary);
+  }
+  .nav-item.is-active {
+    background: rgba(255, 255, 255, 0.04);
+    color: var(--zc-text-heading);
+    border-left-color: var(--zc-accent);
+    font-weight: 600;
+  }
+  .nav-item-ext-arrow {
+    margin-left: auto;
+    font-family: var(--zc-font-mono);
+    color: var(--zc-text-muted);
+    font-size: 12px;
+    opacity: 0.7;
+  }
+
+  /* Account row at bottom */
+  .account-row {
+    margin-top: auto;
+    padding: 14px 18px;
+    border-top: 1px solid var(--zc-border-hairline);
+    display: flex; align-items: center; gap: 10px;
+    background: var(--zc-bg-raised);
+  }
+  .account-avatar {
+    width: 26px; height: 26px;
+    border-radius: 50%;
+    background: var(--zc-bg-card);
+    border: 1px solid var(--zc-border);
+    display: grid; place-items: center;
+    font: 700 11px var(--zc-font-display);
+    color: var(--zc-accent);
+    letter-spacing: 0;
+  }
+  .account-name {
+    flex: 1;
+    font: 500 12.5px var(--zc-font-body);
+    color: var(--zc-text-primary);
+  }
+  .account-name small {
+    display: block;
+    font: 400 10px var(--zc-font-mono);
+    color: var(--zc-text-muted);
+    letter-spacing: 0.04em;
   }
   .signout-btn {
-    width: 100%; padding: 8px; background: transparent; border: 1px solid #30363d;
-    border-radius: 6px; color: #8b949e; font-size: 13px; cursor: pointer;
-    font-family: inherit;
+    background: transparent;
+    border: 1px solid var(--zc-border-input);
+    color: var(--zc-text-muted);
+    padding: 5px 9px;
+    border-radius: var(--zc-radius-sm);
+    font: 500 11px var(--zc-font-body);
+    cursor: pointer;
+    transition: var(--zc-ease-fast);
   }
-  .signout-btn:hover { color: #f85149; border-color: #f85149; }
+  .signout-btn:hover { color: var(--zc-status-red); border-color: var(--zc-status-red); }
 
-  /* === CONTENT === */
-  .content {
-    flex: 1; overflow: hidden; background: #0d1117;
-  }
+  /* === CONTENT (iframe stage) === */
+  .content { background: var(--zc-bg-base); overflow: hidden; }
   .content iframe {
-    width: 100%; height: 100%; border: none; background: #0d1117;
+    width: 100%; height: 100%; border: none;
+    background: var(--zc-bg-base);
+  }
+
+  /* === ⌘K PALETTE === */
+  .cmdk-overlay {
+    position: fixed; inset: 0;
+    background: rgba(0, 0, 0, 0.55);
+    backdrop-filter: blur(4px);
+    z-index: 9000;
+    display: grid; place-items: start center;
+    padding-top: 18vh;
+  }
+  .cmdk-panel {
+    width: min(560px, calc(100vw - 32px));
+    background: var(--zc-bg-card);
+    border: 1px solid var(--zc-border-input);
+    border-radius: var(--zc-radius-xl);
+    box-shadow: var(--zc-shadow-lg);
+    overflow: hidden;
+  }
+  .cmdk-input {
+    width: 100%;
+    padding: 18px 20px;
+    background: transparent;
+    border: 0;
+    border-bottom: 1px solid var(--zc-border-hairline);
+    color: var(--zc-text-heading);
+    font: 500 16px var(--zc-font-body);
+    outline: none;
+  }
+  .cmdk-input::placeholder { color: var(--zc-text-muted); }
+  .cmdk-list {
+    max-height: 360px;
+    overflow-y: auto;
+    padding: 8px;
+  }
+  .cmdk-item {
+    display: flex; align-items: center; gap: 12px;
+    padding: 10px 12px;
+    border-radius: var(--zc-radius-md);
+    cursor: pointer;
+    color: var(--zc-text-primary);
+  }
+  .cmdk-item.is-selected {
+    background: var(--zc-accent-dim);
+    color: var(--zc-text-heading);
+  }
+  .cmdk-tag {
+    font: 600 9px var(--zc-font-body);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--zc-text-muted);
+    margin-left: auto;
+  }
+  .cmdk-empty {
+    padding: 24px; text-align: center;
+    color: var(--zc-text-muted);
+    font-family: var(--zc-font-serif);
+    font-size: 14px;
+  }
+  .cmdk-foot {
+    padding: 8px 16px;
+    border-top: 1px solid var(--zc-border-hairline);
+    display: flex; align-items: center; gap: 14px;
+    font: 500 10.5px var(--zc-font-mono);
+    color: var(--zc-text-muted);
+  }
+  .cmdk-foot kbd {
+    background: var(--zc-bg-input);
+    border: 1px solid var(--zc-border-input);
+    border-radius: 3px;
+    padding: 1px 5px;
+    margin-right: 4px;
   }
 
   /* === MOBILE === */
+  .mobile-toggle {
+    display: none;
+    position: fixed; top: 12px; left: 12px;
+    z-index: 110;
+    background: var(--zc-bg-card);
+    border: 1px solid var(--zc-border);
+    border-radius: var(--zc-radius-md);
+    color: var(--zc-text-primary);
+    padding: 7px 10px;
+    cursor: pointer;
+  }
+  .mobile-toggle svg { display: block; }
+
   @media (max-width: 768px) {
-    .sidebar { width: 200px; position: fixed; left: -200px; z-index: 100; transition: left 0.3s; }
-    .sidebar.open { left: 0; }
-    .mobile-toggle {
-      position: fixed; top: 12px; left: 12px; z-index: 101;
-      background: #161b22; border: 1px solid #30363d; border-radius: 8px;
-      color: #e6edf3; padding: 8px 12px; cursor: pointer; font-size: 18px;
+    .app { grid-template-columns: 1fr; }
+    .sidebar {
+      position: fixed; top: 0; bottom: 0; left: -260px;
+      width: 240px;
+      transition: left 0.24s ease;
+      z-index: 100;
+      box-shadow: var(--zc-shadow-lg);
     }
+    .sidebar.is-open { left: 0; }
+    .mobile-toggle { display: block; }
+    .content { padding-top: 56px; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { transition: none !important; animation: none !important; }
   }
 </style>
 </head>
@@ -108,189 +365,265 @@
 
 <!-- LOGIN -->
 <div class="login-overlay" id="loginOverlay">
-  <div class="login-box">
-    <div class="login-logo">Zinin Corp</div>
-    <div class="login-sub">Corporate Dashboard Access</div>
-    <input class="login-input" id="passwordInput" type="password" placeholder="Password" autofocus>
-    <button class="login-btn" id="loginBtn">Sign In</button>
+  <div class="login-card">
+    <div class="login-mark">Zinin <span class="brand-amp">Corp</span></div>
+    <div class="login-serial">№001 · OPS DESK · CORP.TIMZININ.COM</div>
+    <div class="login-title">Operating since hour zero. Pass required.</div>
+    <input class="login-input" id="passwordInput" type="password" placeholder="Password" autocomplete="current-password" autofocus>
+    <button class="login-btn" id="loginBtn">Enter</button>
     <div class="login-error" id="loginError">Invalid password</div>
   </div>
 </div>
 
 <!-- APP -->
-<div class="app hidden" id="app">
-  <button class="mobile-toggle" id="mobileToggle" style="display:none;">☰</button>
-  <nav class="sidebar" id="sidebar">
-    <div class="sidebar-brand">Zinin Corp</div>
-    <div class="sidebar-header">Dashboards</div>
+<div class="app is-hidden" id="app">
+  <button class="mobile-toggle" id="mobileToggle" aria-label="Toggle navigation">
+    <svg width="18" height="14" viewBox="0 0 18 14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+      <line x1="1" y1="2"  x2="17" y2="2"/>
+      <line x1="1" y1="7"  x2="17" y2="7"/>
+      <line x1="1" y1="12" x2="17" y2="12"/>
+    </svg>
+  </button>
 
-    <a class="nav-item active" data-page="overview.html">
-      <span class="nav-dot" style="background:#8b949e"></span>
-      <span class="nav-label">Overview</span>
-      <span class="nav-tag tag-ops">OPS</span>
-    </a>
-    <a class="nav-item" data-page="content-calendar.html">
-      <span class="nav-dot" style="background:#e3b341"></span>
-      <span class="nav-label">Content Calendar</span>
-      <span class="nav-tag tag-content">CONTENT</span>
-    </a>
-    <a class="nav-item" data-page="content-bank.html">
-      <span class="nav-dot" style="background:#3fb950"></span>
-      <span class="nav-label">Content Bank</span>
-      <span class="nav-tag tag-content">CONTENT</span>
-    </a>
-    <a class="nav-item" data-page="analytics.html">
-      <span class="nav-dot" style="background:#a371f7"></span>
-      <span class="nav-label">Analytics</span>
-      <span class="nav-tag tag-analytics">ANALYTICS</span>
-    </a>
-    <a class="nav-item" data-page="connectors.html">
-      <span class="nav-dot" style="background:#58a6ff"></span>
-      <span class="nav-label">Connectors</span>
-      <span class="nav-tag tag-ops">OPS</span>
-    </a>
-    <a class="nav-item" data-page="finance.html">
-      <span class="nav-dot" style="background:#f85149"></span>
-      <span class="nav-label">Finance</span>
-      <span class="nav-tag tag-finance">FINANCE</span>
-    </a>
-    <a class="nav-item" data-page="tasks.html">
-      <span class="nav-dot" style="background:#e39141"></span>
-      <span class="nav-label">Tasks</span>
-      <span class="nav-tag tag-ops">OPS</span>
-    </a>
-    <a class="nav-item" data-page="funnel.html">
-      <span class="nav-dot" style="background:#39d2c0"></span>
-      <span class="nav-label">Funnel</span>
-      <span class="nav-tag tag-analytics">ANALYTICS</span>
-    </a>
-    <a class="nav-item" data-page="factory.html">
-      <span class="nav-dot" style="background:#e39141"></span>
-      <span class="nav-label">Factory</span>
-      <span class="nav-tag tag-factory">FACTORY</span>
-    </a>
-    <a class="nav-item" data-page="zinin-corp.html">
-      <span class="nav-dot" style="background:#dbabff"></span>
-      <span class="nav-label">Zinin Corp</span>
-      <span class="nav-tag tag-executive">EXECUTIVE</span>
-    </a>
-    <a class="nav-item" data-page="project-control.html">
-      <span class="nav-dot" style="background:#39d2c0"></span>
-      <span class="nav-label">Project Control</span>
-      <span class="nav-tag tag-executive">EXECUTIVE</span>
-    </a>
-    <a class="nav-item" data-page="mcphire-analytics.html">
-      <span class="nav-dot" style="background:#3fb950"></span>
-      <span class="nav-label">MCPHire</span>
-      <span class="nav-tag tag-analytics">ANALYTICS</span>
-    </a>
+  <nav class="sidebar" id="sidebar" aria-label="Primary">
+    <div class="brand">
+      <div class="brand-mark">Zinin <span class="brand-amp">Corp</span></div>
+      <div class="brand-serial">№001 · ops desk</div>
+    </div>
 
-    <div class="sidebar-header" style="margin-top:12px">External Tools</div>
-    <a class="nav-item" href="https://n8n.timzinin.com" target="_blank">
-      <span class="nav-dot" style="background:#ff6d5a"></span>
-      <span class="nav-label">n8n Workflows</span>
-      <span class="nav-tag tag-ops">OPS</span>
-    </a>
-    <a class="nav-item" href="https://langfuse.timzinin.com" target="_blank">
-      <span class="nav-dot" style="background:#7c3aed"></span>
-      <span class="nav-label">Langfuse</span>
-      <span class="nav-tag tag-analytics">MONITORING</span>
-    </a>
+    <button class="cmdk-trigger" id="cmdkTrigger" aria-label="Jump to dashboard">
+      <span>Jump to dashboard…</span>
+      <span class="cmdk-arrow"><kbd>⌘</kbd><kbd>K</kbd></span>
+    </button>
 
-    <div class="sidebar-footer">
-      <button class="signout-btn" id="signoutBtn">Sign Out</button>
+    <!-- Pinned -->
+    <div class="nav-section">
+      <div class="nav-section-label">Pinned</div>
+      <a class="nav-item is-active" data-page="overview.html"        data-tag="OPS">Overview</a>
+      <a class="nav-item"           data-page="finance.html"         data-tag="FINANCE">Finance</a>
+      <a class="nav-item"           data-page="tasks.html"           data-tag="OPS">Tasks</a>
+      <a class="nav-item"           data-page="project-control.html" data-tag="EXECUTIVE">Project control</a>
+    </div>
+
+    <!-- Operations -->
+    <div class="nav-section">
+      <div class="nav-section-label with-rule">Operations</div>
+      <a class="nav-item" data-page="connectors.html"     data-tag="OPS">Connectors</a>
+      <a class="nav-item" data-page="hh-kanban.html"      data-tag="OPS">HH kanban</a>
+      <a class="nav-item" data-page="mentalstab-crm.html" data-tag="OPS">MentalStab CRM</a>
+    </div>
+
+    <!-- Content -->
+    <div class="nav-section">
+      <div class="nav-section-label with-rule">Content</div>
+      <a class="nav-item" data-page="content-calendar.html" data-tag="CONTENT">Content calendar</a>
+      <a class="nav-item" data-page="content-bank.html"     data-tag="CONTENT">Content bank</a>
+      <a class="nav-item" data-page="factory.html"          data-tag="FACTORY">Factory</a>
+    </div>
+
+    <!-- Analytics -->
+    <div class="nav-section">
+      <div class="nav-section-label with-rule">Analytics</div>
+      <a class="nav-item" data-page="analytics.html"         data-tag="ANALYTICS">Analytics</a>
+      <a class="nav-item" data-page="funnel.html"            data-tag="ANALYTICS">Funnel</a>
+      <a class="nav-item" data-page="mcphire-analytics.html" data-tag="ANALYTICS">MCPHire</a>
+    </div>
+
+    <!-- Executive -->
+    <div class="nav-section">
+      <div class="nav-section-label with-rule">Executive</div>
+      <a class="nav-item" data-page="zinin-corp.html" data-tag="EXECUTIVE">Monthly report</a>
+    </div>
+
+    <!-- External -->
+    <div class="nav-section">
+      <div class="nav-section-label with-rule">External</div>
+      <a class="nav-item" href="https://n8n.timzinin.com"      target="_blank" rel="noopener">n8n workflows<span class="nav-item-ext-arrow">↗</span></a>
+      <a class="nav-item" href="https://langfuse.timzinin.com" target="_blank" rel="noopener">Langfuse<span class="nav-item-ext-arrow">↗</span></a>
+    </div>
+
+    <!-- Account -->
+    <div class="account-row">
+      <div class="account-avatar">ZT</div>
+      <div class="account-name">Tim Zinin<small>signed in</small></div>
+      <button class="signout-btn" id="signoutBtn" type="button">Exit</button>
     </div>
   </nav>
 
   <main class="content" id="content">
-    <iframe id="dashFrame" src="overview.html"></iframe>
+    <iframe id="dashFrame" src="overview.html" title="Dashboard view" loading="eager"></iframe>
   </main>
 </div>
 
-<script>
-  // SHA-256 hash
-  async function sha256(msg) {
-    const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(msg));
-    return Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2, '0')).join('');
-  }
+<!-- ⌘K palette -->
+<div class="cmdk-overlay is-hidden" id="cmdkOverlay" role="dialog" aria-modal="true" aria-label="Command palette">
+  <div class="cmdk-panel">
+    <input class="cmdk-input" id="cmdkInput" type="text" placeholder="Jump to dashboard or external tool…" autocomplete="off">
+    <div class="cmdk-list" id="cmdkList"></div>
+    <div class="cmdk-foot">
+      <span><kbd>↑↓</kbd>navigate</span>
+      <span><kbd>↵</kbd>open</span>
+      <span><kbd>esc</kbd>close</span>
+    </div>
+  </div>
+</div>
 
-  // Password hash for ZininCorp2026!
-  const PASS_HASH = '2c891effcbe2762c281517a62cd93a28d3b67c837188f0da35965db12c40bb1f';
+<script src="auth.js" defer></script>
+<script defer>
+(function () {
+  'use strict';
 
-  const loginOverlay = document.getElementById('loginOverlay');
-  const app = document.getElementById('app');
-  const passwordInput = document.getElementById('passwordInput');
-  const loginBtn = document.getElementById('loginBtn');
-  const loginError = document.getElementById('loginError');
-  const signoutBtn = document.getElementById('signoutBtn');
-  const dashFrame = document.getElementById('dashFrame');
-  const navItems = document.querySelectorAll('.nav-item');
+  document.addEventListener('DOMContentLoaded', function () {
+    var sidebar     = document.getElementById('sidebar');
+    var dashFrame   = document.getElementById('dashFrame');
+    var navItems    = Array.from(document.querySelectorAll('.nav-item[data-page]'));
+    var cmdkTrigger = document.getElementById('cmdkTrigger');
+    var cmdkOverlay = document.getElementById('cmdkOverlay');
+    var cmdkInput   = document.getElementById('cmdkInput');
+    var cmdkList    = document.getElementById('cmdkList');
+    var mobileToggle = document.getElementById('mobileToggle');
 
-  // Check session
-  if (localStorage.getItem('zc_auth') === PASS_HASH) {
-    loginOverlay.classList.add('hidden');
-    app.classList.remove('hidden');
-  }
-
-  // Login
-  async function doLogin() {
-    const hash = await sha256(passwordInput.value);
-    if (hash === PASS_HASH) {
-      localStorage.setItem('zc_auth', PASS_HASH);
-      loginOverlay.classList.add('hidden');
-      app.classList.remove('hidden');
-      loginError.style.display = 'none';
-    } else {
-      loginError.style.display = 'block';
-      passwordInput.value = '';
-      passwordInput.focus();
-    }
-  }
-
-  loginBtn.addEventListener('click', doLogin);
-  passwordInput.addEventListener('keydown', e => { if (e.key === 'Enter') doLogin(); });
-
-  // Sign out
-  signoutBtn.addEventListener('click', () => {
-    localStorage.removeItem('zc_auth');
-    loginOverlay.classList.remove('hidden');
-    app.classList.add('hidden');
-    passwordInput.value = '';
-    passwordInput.focus();
-  });
-
-  // Navigation
-  navItems.forEach(item => {
-    item.addEventListener('click', e => {
-      // External links open in new tab
-      if (item.href && item.target === '_blank') return;
-      e.preventDefault();
-      navItems.forEach(n => n.classList.remove('active'));
-      item.classList.add('active');
-      dashFrame.src = item.dataset.page;
-      // Close mobile sidebar
-      document.getElementById('sidebar').classList.remove('open');
-    });
-  });
-
-  // Listen for navigation from iframe (dashboard cards)
-  window.addEventListener('message', e => {
-    if (e.data && e.data.type === 'navigate' && e.data.page) {
-      dashFrame.src = e.data.page + '?embed=1';
-      // Update sidebar active state
-      navItems.forEach(n => {
-        n.classList.remove('active');
-        if (n.dataset.page === e.data.page) n.classList.add('active');
+    function setActive(page) {
+      navItems.forEach(function (n) {
+        n.classList.toggle('is-active', n.dataset.page === page);
       });
     }
-  });
 
-  // Mobile toggle
-  const mobileToggle = document.getElementById('mobileToggle');
-  if (window.innerWidth <= 768) mobileToggle.style.display = 'block';
-  mobileToggle.addEventListener('click', () => {
-    document.getElementById('sidebar').classList.toggle('open');
+    function navigate(page) {
+      if (!page) return;
+      dashFrame.src = page;
+      setActive(page);
+      sidebar.classList.remove('is-open');
+    }
+
+    navItems.forEach(function (item) {
+      item.addEventListener('click', function (e) {
+        e.preventDefault();
+        navigate(item.dataset.page);
+      });
+    });
+
+    // External links should still work
+    document.querySelectorAll('.nav-item[href]').forEach(function (a) {
+      a.addEventListener('click', function () { sidebar.classList.remove('is-open'); });
+    });
+
+    // Mobile toggle
+    if (mobileToggle) {
+      mobileToggle.addEventListener('click', function () {
+        sidebar.classList.toggle('is-open');
+      });
+    }
+
+    // Postmessage from iframes
+    window.addEventListener('message', function (e) {
+      if (e.data && e.data.type === 'navigate' && e.data.page) {
+        navigate(e.data.page);
+      }
+    });
+
+    // === ⌘K palette ===
+    var commands = navItems.map(function (n) {
+      return { label: n.textContent.trim(), page: n.dataset.page, tag: n.dataset.tag || '' };
+    });
+    // Add external tools to palette as well
+    document.querySelectorAll('.nav-item[href]').forEach(function (a) {
+      commands.push({ label: a.textContent.replace(/↗/g, '').trim(), href: a.href, tag: 'EXTERNAL' });
+    });
+
+    var cmdkSelected = 0;
+
+    function renderList(query) {
+      var q = (query || '').trim().toLowerCase();
+      var filtered = q
+        ? commands.filter(function (c) { return c.label.toLowerCase().includes(q); })
+        : commands.slice();
+
+      cmdkList.innerHTML = '';
+      if (filtered.length === 0) {
+        var e = document.createElement('div');
+        e.className = 'cmdk-empty';
+        e.textContent = 'No matches.';
+        cmdkList.appendChild(e);
+        return;
+      }
+      cmdkSelected = Math.min(cmdkSelected, filtered.length - 1);
+      filtered.forEach(function (c, i) {
+        var row = document.createElement('div');
+        row.className = 'cmdk-item' + (i === cmdkSelected ? ' is-selected' : '');
+        row.textContent = c.label;
+        var t = document.createElement('span');
+        t.className = 'cmdk-tag';
+        t.textContent = c.tag;
+        row.appendChild(t);
+        row.addEventListener('mouseenter', function () {
+          cmdkSelected = i;
+          renderList(cmdkInput.value);
+        });
+        row.addEventListener('click', function () { execute(c); });
+        cmdkList.appendChild(row);
+      });
+      cmdkList._filtered = filtered;
+    }
+
+    function openCmdk() {
+      cmdkOverlay.classList.remove('is-hidden');
+      cmdkInput.value = '';
+      cmdkSelected = 0;
+      renderList('');
+      setTimeout(function () { cmdkInput.focus(); }, 10);
+    }
+    function closeCmdk() {
+      cmdkOverlay.classList.add('is-hidden');
+    }
+    function execute(c) {
+      closeCmdk();
+      if (c.href) {
+        window.open(c.href, '_blank', 'noopener');
+      } else if (c.page) {
+        navigate(c.page);
+      }
+    }
+
+    cmdkTrigger && cmdkTrigger.addEventListener('click', openCmdk);
+
+    cmdkOverlay.addEventListener('click', function (e) {
+      if (e.target === cmdkOverlay) closeCmdk();
+    });
+
+    cmdkInput.addEventListener('input', function () {
+      cmdkSelected = 0;
+      renderList(cmdkInput.value);
+    });
+
+    cmdkInput.addEventListener('keydown', function (e) {
+      var f = cmdkList._filtered || [];
+      if (e.key === 'ArrowDown') {
+        e.preventDefault();
+        cmdkSelected = (cmdkSelected + 1) % Math.max(f.length, 1);
+        renderList(cmdkInput.value);
+      } else if (e.key === 'ArrowUp') {
+        e.preventDefault();
+        cmdkSelected = (cmdkSelected - 1 + f.length) % Math.max(f.length, 1);
+        renderList(cmdkInput.value);
+      } else if (e.key === 'Enter') {
+        e.preventDefault();
+        if (f[cmdkSelected]) execute(f[cmdkSelected]);
+      } else if (e.key === 'Escape') {
+        closeCmdk();
+      }
+    });
+
+    document.addEventListener('keydown', function (e) {
+      if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k') {
+        e.preventDefault();
+        cmdkOverlay.classList.contains('is-hidden') ? openCmdk() : closeCmdk();
+      } else if (e.key === 'Escape' && !cmdkOverlay.classList.contains('is-hidden')) {
+        closeCmdk();
+      }
+    });
   });
+})();
 </script>
 </body>
 </html>

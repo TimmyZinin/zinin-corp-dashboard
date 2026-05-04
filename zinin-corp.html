@@ -4,16 +4,20 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Zinin Corp — Monthly Dashboard | March 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;600;700;800&family=Onest:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Instrument+Serif&display=swap" rel="stylesheet">
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+  /* zinin-corp.html — editorial monthly report (intentionally light/cream).
+     Sprint A 2026-05-03: Inter -> Onest+Unbounded+Instrument Serif, accent updated. */
 
   :root {
     --bg: #faf9f7;
     --card-bg: #ffffff;
     --text: #1a1a1a;
     --text-muted: #6b7280;
-    --accent: #f97316;
-    --accent-light: #fff7ed;
+    --accent: #ff5b3b;        /* Sprint A — single brand accent (was #f97316) */
+    --accent-light: #fff5f1;
     --green: #22c55e;
     --green-light: #f0fdf4;
     --blue: #3b82f6;
@@ -28,16 +32,22 @@
     --shadow: 0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
     --shadow-lg: 0 10px 25px rgba(0,0,0,0.08);
     --radius: 16px;
+    --font-display: 'Unbounded', -apple-system, sans-serif;
+    --font-body:    'Onest', -apple-system, sans-serif;
+    --font-serif:   'Instrument Serif', Georgia, serif;
+    --font-mono:    'JetBrains Mono', ui-monospace, monospace;
   }
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
 
   body {
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-family: var(--font-body);
     background: var(--bg);
     color: var(--text);
     line-height: 1.5;
     min-height: 100vh;
+    font-variant-numeric: tabular-nums lining-nums;
+    font-feature-settings: "tnum" 1, "lnum" 1;
   }
 
   .container {
@@ -97,11 +107,16 @@
     box-shadow: var(--shadow-lg);
   }
   .kpi-value {
-    font-size: 42px;
+    font-family: var(--font-display);
+    font-size: clamp(40px, 4.5vw, 56px);
     font-weight: 800;
+    letter-spacing: -0.03em;
     line-height: 1;
     margin-bottom: 6px;
   }
+  .kpi-value.purple { color: var(--accent); }  /* purple slot now uses brand orange */
+  .kpi-card { transition: var(--shadow) 0.2s; }
+  .kpi-card:hover { border-color: var(--accent); transform: none; box-shadow: none; }
   .kpi-label {
     font-size: 13px;
     color: var(--text-muted);
@@ -428,11 +443,20 @@
 
 <div class="container">
 
-  <!-- Header -->
-  <div class="header animate-in">
-    <div class="header-badge">Monthly Report</div>
-    <h1>Zinin Corp</h1>
-    <p>Итоги работы за март 2026. Все выполненные проекты и задачи команды.</p>
+  <!-- Header — editorial -->
+  <div class="header animate-in" style="text-align:left; display:grid; grid-template-columns:auto 1fr; gap:24px; align-items:end; padding-bottom:28px; border-bottom:1px solid var(--border); max-width:none;">
+    <svg width="56" height="56" viewBox="0 0 48 48" fill="none" aria-hidden="true">
+      <path d="M8 9 H30 L8 35 H30" stroke="currentColor" stroke-width="2.4" stroke-linecap="square"/>
+      <path d="M40 35 V13 a4 4 0 0 0 -4 -4 H30" stroke="var(--accent)" stroke-width="2.4" stroke-linecap="square" fill="none"/>
+      <circle cx="40" cy="38.2" r="1.6" fill="var(--accent)"/>
+    </svg>
+    <div>
+      <div style="font:500 11px var(--font-mono); letter-spacing:0.14em; text-transform:uppercase; color:var(--text-muted); margin-bottom:6px;">
+        <span style="color:var(--accent)">Executive</span> · Monthly report · <span id="zc-date-stamp">March 2026</span>
+      </div>
+      <h1 style="font-family:var(--font-display); font-weight:800; font-size:clamp(40px, 5vw, 64px); letter-spacing:-0.04em; line-height:1.02; color:var(--text); margin:0;">Zinin Corp</h1>
+      <p style="font-family:var(--font-serif); font-size:17px; color:var(--text-muted); margin-top:10px; max-width:60ch;">Итоги месяца — задачи, направления, расходы. Один лист на печать.</p>
+    </div>
   </div>
 
   <!-- KPIs -->
@@ -909,5 +933,9 @@
 
 </div>
 
+<script>
+// Embed detection — when in shell iframe, hide redundant chrome
+if (window.top !== window) document.body.classList.add('is-embed');
+</script>
 </body>
 </html>

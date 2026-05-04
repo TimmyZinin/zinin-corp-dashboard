@@ -1,0 +1,382 @@
+{
+  "_meta": {
+    "schema_version": 1,
+    "source": "CFO Paperclip agent",
+    "updated_at": "2026-05-03T21:43:49+03:00",
+    "currency": "USD"
+  },
+  "net_position": {
+    "total_cents": 60000,
+    "delta_7d_pct": 0.0,
+    "yesterday_cents": 58800,
+    "pending_in_cents": 5000,
+    "pending_out_cents": 6000
+  },
+  "cash_sources": [
+    {
+      "id": "ton",
+      "label": "TON crypto",
+      "amount_cents": 0,
+      "color": "#627EEA",
+      "live": true,
+      "endpoint": "/portfolio.json"
+    },
+    {
+      "id": "tribute",
+      "label": "Tribute",
+      "amount_cents": 0,
+      "color": "var(--zc-accent)",
+      "live": true,
+      "endpoint": "/tribute.json"
+    },
+    {
+      "id": "gate",
+      "label": "Gate.io",
+      "amount_cents": 20000,
+      "color": "#4ade80",
+      "live": false
+    },
+    {
+      "id": "tbc",
+      "label": "TBC bank",
+      "amount_cents": 40000,
+      "color": "#f5f1e8",
+      "live": false
+    }
+  ],
+  "kpis": {
+    "mrr": {
+      "current_cents": 110000,
+      "delta_label": "+41%",
+      "delta_kind": "up",
+      "vs_label": "vs Jan",
+      "history": [
+        50000,
+        55000,
+        60000,
+        62000,
+        70000,
+        72000,
+        80000,
+        85000,
+        90000,
+        95000,
+        100000,
+        110000
+      ]
+    },
+    "burn_30d": {
+      "current_cents": 27500,
+      "delta_label": "flat",
+      "delta_kind": "flat",
+      "vs_label": "vs prev 30d",
+      "history": [
+        29000,
+        28500,
+        28000,
+        27500,
+        27500,
+        27500,
+        27000,
+        27500,
+        27500,
+        27500
+      ]
+    },
+    "runway_months": {
+      "value": 2.2,
+      "computed_from": "net_position.total / kpis.burn_30d.current",
+      "history": [
+        3.0,
+        2.9,
+        2.8,
+        2.7,
+        2.5,
+        2.4,
+        2.3,
+        2.2,
+        2.2,
+        2.2
+      ]
+    },
+    "net_margin_pct": {
+      "value": 75,
+      "delta_label": "+10pp",
+      "delta_kind": "up",
+      "vs_label": "vs Jan",
+      "history": [
+        55,
+        58,
+        60,
+        63,
+        65,
+        68,
+        70,
+        72,
+        73,
+        74,
+        75
+      ]
+    }
+  },
+  "pnl_monthly": {
+    "current_period": "2026-03",
+    "previous_period": "2026-02",
+    "rows": [
+      {
+        "section": "revenue",
+        "items": [
+          {
+            "label": "КРМКТЛ · 8 vendors",
+            "current_cents": 60000,
+            "previous_cents": 60000,
+            "mom_pct": 0,
+            "kind": "neutral"
+          },
+          {
+            "label": "Botanica · Tribute",
+            "current_cents": 50000,
+            "previous_cents": 30000,
+            "mom_pct": 67,
+            "kind": "up"
+          },
+          {
+            "label": "SBORKA · trial",
+            "current_cents": 0,
+            "previous_cents": 0,
+            "mom_pct": null,
+            "kind": "neutral"
+          }
+        ],
+        "total": {
+          "label": "Total revenue",
+          "current_cents": 110000,
+          "previous_cents": 90000,
+          "mom_pct": 22,
+          "kind": "up"
+        }
+      },
+      {
+        "section": "opex",
+        "items": [
+          {
+            "label": "LLM · Anthropic + others",
+            "current_cents": 12618,
+            "previous_cents": 9240,
+            "mom_pct": 37,
+            "kind": "down",
+            "category": "llm"
+          },
+          {
+            "label": "Infra · Contabo VPS 30+10",
+            "current_cents": 5800,
+            "previous_cents": 5800,
+            "mom_pct": 0,
+            "kind": "neutral",
+            "category": "infra"
+          },
+          {
+            "label": "SaaS · n8n / Tribute fee",
+            "current_cents": 4500,
+            "previous_cents": 4200,
+            "mom_pct": 7,
+            "kind": "down",
+            "category": "saas"
+          },
+          {
+            "label": "Domains · Cloudflare · misc",
+            "current_cents": 2400,
+            "previous_cents": 2400,
+            "mom_pct": 0,
+            "kind": "neutral",
+            "category": "domains"
+          },
+          {
+            "label": "Heygen / image gen",
+            "current_cents": 2200,
+            "previous_cents": 1800,
+            "mom_pct": 22,
+            "kind": "down",
+            "category": "media"
+          }
+        ],
+        "total": {
+          "label": "Total OPEX",
+          "current_cents": 27518,
+          "previous_cents": 23440,
+          "mom_pct": 17,
+          "kind": "down"
+        }
+      }
+    ],
+    "net_profit": {
+      "current_cents": 82482,
+      "previous_cents": 66560,
+      "mom_pct": 24,
+      "kind": "up"
+    }
+  },
+  "ledger": [
+    {
+      "date": "2026-05-03",
+      "icon": "leaf",
+      "desc": "Botanica subscription · 3 users",
+      "cat": "Revenue",
+      "amount_cents": 15000
+    },
+    {
+      "date": "2026-05-02",
+      "icon": "brain-circuit",
+      "desc": "Anthropic API · prompt + cache",
+      "cat": "LLM",
+      "amount_cents": -842
+    },
+    {
+      "date": "2026-05-02",
+      "icon": "building-2",
+      "desc": "КРМКТЛ · monthly retainer",
+      "cat": "Revenue",
+      "amount_cents": 60000
+    },
+    {
+      "date": "2026-05-01",
+      "icon": "server",
+      "desc": "Contabo VPS 30 · monthly",
+      "cat": "Infra",
+      "amount_cents": -3200
+    },
+    {
+      "date": "2026-05-01",
+      "icon": "server",
+      "desc": "Contabo VPS 10 · monthly",
+      "cat": "Infra",
+      "amount_cents": -2600
+    },
+    {
+      "date": "2026-04-29",
+      "icon": "leaf",
+      "desc": "Botanica · trial conversion",
+      "cat": "Revenue",
+      "amount_cents": 5000
+    },
+    {
+      "date": "2026-04-28",
+      "icon": "workflow",
+      "desc": "n8n cloud · monthly",
+      "cat": "SaaS",
+      "amount_cents": -2400
+    },
+    {
+      "date": "2026-04-26",
+      "icon": "image",
+      "desc": "OpenRouter · Gemini image gen",
+      "cat": "LLM",
+      "amount_cents": -620
+    },
+    {
+      "date": "2026-04-25",
+      "icon": "leaf",
+      "desc": "Botanica · monthly",
+      "cat": "Revenue",
+      "amount_cents": 30000
+    },
+    {
+      "date": "2026-04-22",
+      "icon": "globe",
+      "desc": "Cloudflare · domains + tunnels",
+      "cat": "Infra",
+      "amount_cents": -1100
+    },
+    {
+      "date": "2026-04-20",
+      "icon": "brain-circuit",
+      "desc": "Anthropic API · weekly",
+      "cat": "LLM",
+      "amount_cents": -2840
+    },
+    {
+      "date": "2026-04-18",
+      "icon": "image",
+      "desc": "Heygen avatar render",
+      "cat": "Media",
+      "amount_cents": -1200
+    }
+  ],
+  "spend_by_category": [
+    {
+      "category": "LLM",
+      "amount_cents": 12600,
+      "pct": 46,
+      "icon": "brain-circuit"
+    },
+    {
+      "category": "Infra",
+      "amount_cents": 5800,
+      "pct": 21,
+      "icon": "server"
+    },
+    {
+      "category": "SaaS",
+      "amount_cents": 4500,
+      "pct": 16,
+      "icon": "package"
+    },
+    {
+      "category": "Domains/CDN",
+      "amount_cents": 2400,
+      "pct": 9,
+      "icon": "globe"
+    },
+    {
+      "category": "Image/video",
+      "amount_cents": 2200,
+      "pct": 8,
+      "icon": "image"
+    }
+  ],
+  "anomalies": [
+    {
+      "id": "llm-spend-up",
+      "level": "warn",
+      "title": "LLM spend up 37% MoM",
+      "text": "Anthropic burn $126.18 (Mar) vs $92.40 (Feb). Inspect Paperclip top agents.",
+      "actions": [
+        "Mute",
+        "Drill"
+      ],
+      "raised_at": "2026-05-03T20:00:00+03:00"
+    }
+  ],
+  "forecast": [
+    {
+      "month": "Mar 2026",
+      "net_cents": 82500,
+      "fill_pct": 80
+    },
+    {
+      "month": "Apr 2026",
+      "net_cents": 85000,
+      "fill_pct": 82
+    },
+    {
+      "month": "May 2026",
+      "net_cents": 91000,
+      "fill_pct": 88
+    },
+    {
+      "month": "Jun 2026",
+      "net_cents": 96000,
+      "fill_pct": 92
+    },
+    {
+      "month": "Jul 2026",
+      "net_cents": 100000,
+      "fill_pct": 96
+    }
+  ],
+  "coming_up_30d": {
+    "recurring_in_cents": 110000,
+    "recurring_out_cents": 27500,
+    "net_cents": 82500
+  }
+}

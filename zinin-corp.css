@@ -1,0 +1,2113 @@
+/*
+ * Zinin Corp — Unified Design System
+ * Version 1.0
+ *
+ * Usage: Add this single <link> to every dashboard before any page-specific styles.
+ * <link rel="stylesheet" href="zinin-corp.css">
+ * <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;600;700&family=Onest:wght@400;500;600&display=swap" rel="stylesheet">
+ *
+ * Token naming convention:
+ *   --zc-<category>-<variant>
+ * All public API tokens are prefixed with --zc-
+ * Internal (component-private) tokens use --_prefix and are not stable.
+ */
+
+
+/* =============================================================================
+   TOKENS — Color
+   ============================================================================= */
+
+:root {
+
+  /* --- Backgrounds ---
+     Three levels of depth. Keep cards one step lighter than the page.
+     Never go below bg-base for page-level backgrounds.
+  */
+  --zc-bg-base:     #0a0a0a;   /* page background */
+  --zc-bg-raised:   #111111;   /* elevated surface: nav sticky, table headers */
+  --zc-bg-card:     #141414;   /* cards, stat blocks, filter bars */
+  --zc-bg-card-alt: #141420;   /* bank/kanban cards — a trace of purple warmth */
+  --zc-bg-overlay:  #0d0d12;   /* expanded panels, modal backdrops over cards */
+  --zc-bg-input:    #1a1a1a;   /* filter buttons, inputs, selects */
+
+  /* --- Borders ---
+     All borders are single values — no need for a blur chain here.
+     Pair --zc-border with --zc-border-strong for dividers vs. containers.
+  */
+  --zc-border:        #222222;  /* card/cell borders */
+  --zc-border-strong: #2a2a2a;  /* date-row separators, group headers */
+  --zc-border-input:  #333333;  /* filter button resting border */
+  --zc-border-subtle: #1a1a1a;  /* row dividers inside tables */
+  --zc-border-accent: rgba(255, 91, 59, 0.35); /* focus / hover ring */
+  --zc-border-hairline: rgba(255, 255, 255, 0.08); /* recessive divider, Linear-style */
+
+  /* --- Text ---
+     Five levels. Use in order: heading → body → secondary → muted → disabled.
+  */
+  --zc-text-heading:   #ffffff;  /* h1, stat-num, card titles — pure white */
+  --zc-text-primary:   #e5e5e5;  /* body text */
+  --zc-text-secondary: #999999;  /* supporting labels, p-name, strategy text */
+  --zc-text-muted:     #666666;  /* timestamps, section labels, check-date */
+  --zc-text-disabled:  #444444;  /* placeholder, empty state */
+
+  /* --- Accent ---
+     Orange (#ff5b3b) is the single accent hue (V11 calibration ✓).
+     All tints derive from it. Do not introduce a second accent hue.
+     Updated 2026-05-03 for Sprint A redesign (was #6c5ce7 purple).
+  */
+  --zc-accent:         #ff5b3b;
+  --zc-accent-hover:   #ff7559;
+  --zc-accent-dim:     rgba(255, 91, 59, 0.15);
+  --zc-accent-glow:    rgba(255, 91, 59, 0.25);
+  --zc-accent-border:  rgba(255, 91, 59, 0.30);
+
+  /* --- Semantic status colors ---
+     Consistent across all dashboards. Never reassign these per-component.
+  */
+  --zc-status-green:        #10b981;
+  --zc-status-green-dim:    rgba(16, 185, 129, 0.12);
+  --zc-status-yellow:       #f59e0b;
+  --zc-status-yellow-dim:   rgba(245, 158, 11, 0.12);
+  --zc-status-red:          #ef4444;
+  --zc-status-red-dim:      rgba(239, 68, 68, 0.12);
+  --zc-status-blue:         #3b82f6;
+  --zc-status-blue-dim:     rgba(59, 130, 246, 0.12);
+  --zc-status-gray:         #6b7280;
+  --zc-status-gray-dim:     rgba(107, 114, 128, 0.12);
+
+  /* Kanban column colors (tasks.html) */
+  --zc-col-backlog: #74b9ff;
+  --zc-col-wip:     #f59e0b;
+  --zc-col-test:    #e17055;
+  --zc-col-done:    #10b981;
+
+  /* --- Platform badge palette ---
+     Used in content calendar, bank derivatives, analytics.
+     Format: bg / fg for each platform.
+  */
+  --zc-plat-linkedin-bg:   rgba(10, 102, 194, 0.18);
+  --zc-plat-linkedin-fg:   #4d9ed6;
+  --zc-plat-threads-bg:    rgba(255, 255, 255, 0.07);
+  --zc-plat-threads-fg:    #cccccc;
+  --zc-plat-telegram-bg:   rgba(0, 136, 204, 0.18);
+  --zc-plat-telegram-fg:   #29b6df;
+  --zc-plat-facebook-bg:   rgba(24, 119, 242, 0.18);
+  --zc-plat-facebook-fg:   #5b9cf6;
+  --zc-plat-vk-bg:         rgba(70, 128, 194, 0.18);
+  --zc-plat-vk-fg:         #6fa3d8;
+  --zc-plat-bluesky-bg:    rgba(0, 133, 255, 0.18);
+  --zc-plat-bluesky-fg:    #3da3ff;
+  --zc-plat-youtube-bg:    rgba(255, 0, 0, 0.15);
+  --zc-plat-youtube-fg:    #ff5555;
+  --zc-plat-instagram-bg:  rgba(225, 48, 108, 0.15);
+  --zc-plat-instagram-fg:  #e17090;
+  --zc-plat-okru-bg:       rgba(238, 130, 8, 0.18);
+  --zc-plat-okru-fg:       #f0a33a;
+  --zc-plat-vcru-bg:       rgba(255, 100, 0, 0.15);
+  --zc-plat-vcru-fg:       #ff7733;
+  --zc-plat-devto-bg:      rgba(255, 255, 255, 0.07);
+  --zc-plat-devto-fg:      #aaaaaa;
+  --zc-plat-medium-bg:     rgba(255, 255, 255, 0.07);
+  --zc-plat-medium-fg:     #aaaaaa;
+  --zc-plat-hashnode-bg:   rgba(41, 98, 255, 0.15);
+  --zc-plat-hashnode-fg:   #5b80ff;
+  --zc-plat-mastodon-bg:   rgba(99, 100, 255, 0.15);
+  --zc-plat-mastodon-fg:   #8b8cff;
+
+
+  /* =============================================================================
+     TOKENS — Typography
+     ============================================================================= */
+
+  /* Font families */
+  --zc-font-display: 'Unbounded', sans-serif;  /* page h1, section h2, stat-num, kanban col-title */
+  --zc-font-body:    'Onest', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --zc-font-mono:    'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+  --zc-font-serif:   'Instrument Serif', Georgia, serif;  /* editorial moments — ledger labels, section titles */
+
+  /* Display weights (V11 best practice — bold-as-hero) */
+  --zc-weight-display: 800;
+  --zc-letter-display: -0.04em;
+
+  /* Size scale (unitless rem) */
+  --zc-text-xs:   10px;   /* uppercase labels, check-dates, badge text */
+  --zc-text-sm:   11px;   /* secondary rows, note, freq tag */
+  --zc-text-base: 13px;   /* default body / table cells */
+  --zc-text-md:   14px;   /* nav-brand, platform name, card title */
+  --zc-text-lg:   16px;   /* sub-headers */
+  --zc-text-xl:   20px;   /* section titles */
+  --zc-text-2xl:  24px;   /* stat numbers, h1 on tight pages */
+  --zc-text-3xl:  28px;   /* h1 standard */
+  --zc-text-4xl:  36px;   /* overview h1 — use sparingly */
+
+  /* Weight tokens */
+  --zc-weight-regular:  400;
+  --zc-weight-medium:   500;
+  --zc-weight-semibold: 600;
+  --zc-weight-bold:     700;
+
+  /* Line-height */
+  --zc-leading-tight:  1.25;
+  --zc-leading-base:   1.45;
+  --zc-leading-relaxed: 1.6;
+
+
+  /* =============================================================================
+     TOKENS — Spacing (8px grid, with a 4px half-step)
+     ============================================================================= */
+
+  --zc-space-1:  4px;
+  --zc-space-2:  8px;
+  --zc-space-3:  12px;
+  --zc-space-4:  16px;
+  --zc-space-5:  20px;
+  --zc-space-6:  24px;
+  --zc-space-7:  28px;
+  --zc-space-8:  32px;
+  --zc-space-10: 40px;
+  --zc-space-12: 48px;
+
+
+  /* =============================================================================
+     TOKENS — Border radius
+     ============================================================================= */
+
+  --zc-radius-sm:  4px;   /* micro badges, inline chips */
+  --zc-radius-md:  6px;   /* filter buttons, small cards */
+  --zc-radius-lg:  10px;  /* stat cards, table headers */
+  --zc-radius-xl:  14px;  /* main cards, panels */
+  --zc-radius-2xl: 20px;  /* modal, architecture sections */
+  --zc-radius-pill: 100px;/* status badges pill shape */
+
+
+  /* =============================================================================
+     TOKENS — Shadow system
+     Purpose: depth cue only. No colored glow except on hover state.
+     ============================================================================= */
+
+  --zc-shadow-sm:   0 1px 4px rgba(0, 0, 0, 0.25);
+  --zc-shadow-md:   0 4px 16px rgba(0, 0, 0, 0.30);
+  --zc-shadow-lg:   0 8px 32px rgba(0, 0, 0, 0.35);
+  /* Hover uplift shadow — single orange glow, restrained */
+  --zc-shadow-hover: 0 8px 28px rgba(255, 91, 59, 0.14), 0 0 0 1px rgba(255, 91, 59, 0.18);
+
+  /* =============================================================================
+     TOKENS — Chart palette (Sprint A 2026-05-03)
+     Use these to override ApexCharts/Plotly defaults. Single-accent + neutrals.
+     ============================================================================= */
+  --zc-chart-1: #ff5b3b;  /* primary series — accent */
+  --zc-chart-2: #f5f1e8;  /* cream — high-contrast neutral on dark */
+  --zc-chart-3: #7a7a7a;  /* muted neutral */
+  --zc-chart-4: #2a8c63;  /* success/positive */
+  --zc-chart-5: #c5380e;  /* negative/loss — bordeaux, distinct from accent */
+
+  /* =============================================================================
+     TOKENS — Anti-AI noise overlay (V11 best practice)
+     Apply via background-image on any surface that needs identity texture.
+     ============================================================================= */
+  --zc-noise-bg: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 0.04 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+
+
+  /* =============================================================================
+     TOKENS — Transitions
+     ============================================================================= */
+
+  --zc-ease-fast:   all 0.15s ease;
+  --zc-ease-base:   all 0.20s ease;
+  --zc-ease-slow:   all 0.30s ease;
+}
+
+
+/* =============================================================================
+   RESET & BASE
+   ============================================================================= */
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  font-family: var(--zc-font-body);
+  font-size: var(--zc-text-base);
+  font-weight: var(--zc-weight-regular);
+  line-height: var(--zc-leading-base);
+  background: var(--zc-bg-base);
+  color: var(--zc-text-primary);
+  padding: var(--zc-space-5);
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  /* Tabular figures non-negotiable per 2026 dashboard research (Stripe/Mercury/Vercel) */
+  font-variant-numeric: tabular-nums lining-nums;
+  font-feature-settings: "tnum" 1, "lnum" 1;
+}
+
+/* Numeric content always tabular even where body is overridden */
+.zc-num,
+.zc-stat-num,
+.fin-kpi-value,
+table {
+  font-variant-numeric: tabular-nums lining-nums;
+  font-feature-settings: "tnum" 1, "lnum" 1;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  font-family: var(--zc-font-body);
+  cursor: pointer;
+}
+
+
+/* =============================================================================
+   LAYOUT
+   ============================================================================= */
+
+/*
+  .zc-container — page wrapper.
+  Use max-width: 1100px for single-column dashboards (analytics, connectors, content).
+  Use max-width: 1440px for wide layouts (tasks kanban).
+*/
+.zc-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  position: relative;
+}
+
+.zc-container--wide {
+  max-width: 1440px;
+  margin: 0 auto;
+  position: relative;
+}
+
+.zc-container--narrow {
+  max-width: 1100px;
+  margin: 0 auto;
+  position: relative;
+}
+
+
+/* =============================================================================
+   BACKGROUND — Ambient gradient
+   Applied to body::before. Subtle, non-animated version for all pages.
+   Overview/Tasks can override with the animated version via --zc-bg-animate.
+   ============================================================================= */
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 60% 50% at 15% 15%, rgba(255, 91, 59, 0.045) 0%, transparent 60%),
+    radial-gradient(ellipse 50% 40% at 85% 85%, rgba(245, 241, 232, 0.025) 0%, transparent 60%);
+  pointer-events: none;
+  z-index: -1;
+}
+
+/* Anti-AI noise overlay — applied above gradient, below content */
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: var(--zc-noise-bg);
+  background-repeat: repeat;
+  pointer-events: none;
+  z-index: -1;
+  opacity: 1;
+  mix-blend-mode: overlay;
+}
+
+/* Optional animated variant — add class="zc-bg-animated" to <body> */
+body.zc-bg-animated::before {
+  animation: zc-bg-drift 25s ease-in-out infinite;
+}
+
+@keyframes zc-bg-drift {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33%       { transform: translate(-0.8%, 0.8%) scale(1.01); }
+  66%       { transform: translate(0.8%, -0.8%) scale(0.99); }
+}
+
+
+/* =============================================================================
+   NAVIGATION
+   ============================================================================= */
+
+/*
+  .zc-nav — horizontal top navigation bar.
+  Brand mark + page links. No dropdowns, no hamburger.
+  Active state: white text + 2px purple underline.
+*/
+.zc-nav {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  flex-wrap: wrap;
+  margin-bottom: var(--zc-space-6);
+  padding-bottom: 0;
+  border-bottom: 1px solid var(--zc-border);
+}
+
+/* Brand mark — avatar + text */
+.zc-nav-brand {
+  display: flex;
+  align-items: center;
+  gap: var(--zc-space-2);
+  font-family: var(--zc-font-display);
+  font-size: var(--zc-text-md);
+  font-weight: var(--zc-weight-bold);
+  color: var(--zc-text-primary);
+  letter-spacing: -0.3px;
+  padding: var(--zc-space-2) var(--zc-space-4) var(--zc-space-2) 0;
+  margin-right: var(--zc-space-2);
+  border-right: 1px solid var(--zc-border);
+  transition: var(--zc-ease-fast);
+  user-select: none;
+  cursor: default;
+}
+
+/* Avatar circle in brand */
+.zc-nav-avatar {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid var(--zc-accent);
+  box-shadow: 0 0 0 1px rgba(255, 91, 59, 0.2);
+  flex-shrink: 0;
+}
+
+/* Corp suffix — slightly dimmer */
+.zc-nav-brand .zc-nav-brand-suffix {
+  color: var(--zc-text-muted);
+  font-weight: var(--zc-weight-regular);
+  font-size: var(--zc-text-sm);
+}
+
+/* Nav links */
+.zc-nav a,
+.zc-nav-link {
+  display: inline-block;
+  padding: var(--zc-space-3) var(--zc-space-4);
+  font-size: var(--zc-text-base);
+  font-weight: var(--zc-weight-regular);
+  color: var(--zc-text-muted);
+  border-bottom: 2px solid transparent;
+  margin-bottom: -1px;      /* overlap nav border-bottom */
+  transition: var(--zc-ease-fast);
+  white-space: nowrap;
+}
+
+.zc-nav a:hover,
+.zc-nav-link:hover {
+  color: var(--zc-text-primary);
+}
+
+.zc-nav a.active,
+.zc-nav-link.active {
+  color: var(--zc-text-heading);
+  border-bottom-color: var(--zc-accent);
+  font-weight: var(--zc-weight-semibold);
+}
+
+/* Optional: push a utility area (e.g. date stamp) to the right */
+.zc-nav-spacer {
+  flex: 1;
+}
+
+.zc-nav-meta {
+  font-size: var(--zc-text-xs);
+  color: var(--zc-text-disabled);
+  padding: var(--zc-space-3) 0;
+  white-space: nowrap;
+}
+
+
+/* =============================================================================
+   PAGE HEADER
+   ============================================================================= */
+
+/*
+  .zc-page-header — h1 + optional subtitle below the nav.
+  Keep it compact — no hero art, no oversized type unless it's the Overview page.
+*/
+.zc-page-header {
+  margin-bottom: var(--zc-space-5);
+}
+
+.zc-page-header h1,
+.zc-h1 {
+  font-family: var(--zc-font-display);
+  font-size: var(--zc-text-3xl);
+  font-weight: var(--zc-weight-bold);
+  color: var(--zc-text-heading);
+  line-height: var(--zc-leading-tight);
+  letter-spacing: -0.5px;
+  margin-bottom: var(--zc-space-1);
+}
+
+/* Tighter h1 for narrower dashboard pages */
+.zc-page-header--compact h1,
+.zc-h1--compact {
+  font-size: var(--zc-text-2xl);
+}
+
+.zc-page-header .zc-subtitle,
+.zc-subtitle {
+  font-size: var(--zc-text-base);
+  color: var(--zc-text-muted);
+  line-height: var(--zc-leading-base);
+}
+
+
+/* =============================================================================
+   SECTION LABEL
+   ============================================================================= */
+
+/*
+  Use above logical groups of content (not every card grid).
+  All-caps, tracked, no bold — just a quiet divider.
+*/
+.zc-section-label {
+  font-size: var(--zc-text-xs);
+  font-weight: var(--zc-weight-semibold);
+  text-transform: uppercase;
+  letter-spacing: 1.8px;
+  color: var(--zc-text-muted);
+  margin-bottom: var(--zc-space-4);
+  padding-bottom: var(--zc-space-2);
+  border-bottom: 1px solid var(--zc-border-subtle);
+}
+
+
+/* =============================================================================
+   STAT CARDS
+   ============================================================================= */
+
+/*
+  .zc-stats — flex row of stat blocks. Wraps at 600px.
+  .zc-stat  — individual metric block.
+  Semantic color modifier: style="--zc-stat-accent: var(--zc-status-green)"
+*/
+.zc-stats {
+  display: flex;
+  gap: var(--zc-space-3);
+  flex-wrap: wrap;
+  margin-bottom: var(--zc-space-5);
+}
+
+/* Grid variant — uniform columns */
+.zc-stats--grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: var(--zc-space-3);
+  margin-bottom: var(--zc-space-5);
+}
+
+.zc-stat {
+  background: var(--zc-bg-card);
+  border: 1px solid var(--zc-border);
+  border-radius: var(--zc-radius-lg);
+  padding: var(--zc-space-3) var(--zc-space-4);
+  text-align: center;
+  min-width: 80px;
+  flex: 1;
+  position: relative;
+  transition: var(--zc-ease-base);
+}
+
+/* Optional: 2px colored top stripe via CSS var */
+.zc-stat[style*="--zc-stat-accent"]::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: var(--zc-stat-accent, transparent);
+  border-radius: var(--zc-radius-lg) var(--zc-radius-lg) 0 0;
+  opacity: 0.7;
+}
+
+.zc-stat:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--zc-shadow-hover);
+}
+
+.zc-stat-num {
+  display: block;
+  font-family: var(--zc-font-display);
+  font-size: var(--zc-text-2xl);
+  font-weight: var(--zc-weight-bold);
+  color: var(--zc-stat-accent, var(--zc-text-heading));
+  line-height: 1.1;
+}
+
+.zc-stat-label {
+  display: block;
+  font-size: var(--zc-text-xs);
+  color: var(--zc-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  margin-top: var(--zc-space-1);
+}
+
+.zc-stat-sub {
+  display: block;
+  font-size: var(--zc-text-sm);
+  color: var(--zc-text-disabled);
+  margin-top: 2px;
+}
+
+
+/* =============================================================================
+   FILTERS
+   ============================================================================= */
+
+/*
+  .zc-filters     — wrapping container
+  .zc-filter-row  — one row of filter chips (label + buttons)
+  .zc-filter-btn  — individual filter chip
+*/
+.zc-filters {
+  margin-bottom: var(--zc-space-4);
+  display: flex;
+  flex-direction: column;
+  gap: var(--zc-space-2);
+}
+
+.zc-filter-row {
+  display: flex;
+  align-items: center;
+  gap: var(--zc-space-2);
+  flex-wrap: wrap;
+}
+
+.zc-filter-label {
+  font-size: var(--zc-text-xs);
+  font-weight: var(--zc-weight-semibold);
+  color: var(--zc-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  min-width: 56px;
+  flex-shrink: 0;
+}
+
+.zc-filter-btn {
+  background: var(--zc-bg-input);
+  border: 1px solid var(--zc-border-input);
+  color: var(--zc-text-secondary);
+  padding: 4px var(--zc-space-3);
+  border-radius: var(--zc-radius-md);
+  font-size: var(--zc-text-sm);
+  font-weight: var(--zc-weight-regular);
+  transition: var(--zc-ease-fast);
+  white-space: nowrap;
+}
+
+.zc-filter-btn:hover {
+  border-color: var(--zc-border-accent);
+  color: var(--zc-text-primary);
+  background: var(--zc-accent-dim);
+}
+
+.zc-filter-btn.active {
+  background: var(--zc-btn-dim, var(--zc-accent-dim));
+  border-color: var(--zc-btn-color, var(--zc-accent-border));
+  color: var(--zc-text-heading);
+  font-weight: var(--zc-weight-medium);
+}
+
+/* Platform-colored active filter — pair with style="--zc-btn-color: #0a66c2; --zc-btn-dim: rgba(10,102,194,0.15)" */
+
+
+/* =============================================================================
+   TABLES
+   ============================================================================= */
+
+/*
+  Used in: content calendar, analytics, connectors.
+  Assumes border-collapse: collapse, full width.
+*/
+.zc-table-wrap {
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.zc-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: var(--zc-text-base);
+}
+
+.zc-table thead {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+}
+
+.zc-table th {
+  background: var(--zc-bg-raised);
+  color: var(--zc-text-muted);
+  font-size: var(--zc-text-xs);
+  font-weight: var(--zc-weight-semibold);
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  padding: var(--zc-space-3) var(--zc-space-3);
+  text-align: left;
+  border-bottom: 2px solid var(--zc-border-strong);
+  user-select: none;
+  cursor: default;
+  white-space: nowrap;
+}
+
+.zc-table th.zc-sortable {
+  cursor: pointer;
+}
+
+.zc-table th.zc-sortable:hover {
+  color: var(--zc-text-secondary);
+}
+
+.zc-table th.sorted-asc::after  { content: ' \2191'; }
+.zc-table th.sorted-desc::after { content: ' \2193'; }
+
+.zc-table td {
+  padding: var(--zc-space-2) var(--zc-space-3);
+  border-bottom: 1px solid var(--zc-border-subtle);
+  vertical-align: middle;
+}
+
+.zc-table tbody tr:hover td {
+  background: var(--zc-bg-card);
+}
+
+/* Numeric column — right-aligned tabular figures */
+.zc-table .zc-num {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+  color: var(--zc-text-primary);
+}
+
+/* Group header row — used in connectors for status sections */
+.zc-table .zc-group-row td {
+  background: var(--zc-bg-raised);
+  color: var(--_group-color, var(--zc-text-secondary));
+  font-size: var(--zc-text-xs);
+  font-weight: var(--zc-weight-bold);
+  text-transform: uppercase;
+  letter-spacing: 1.2px;
+  padding: var(--zc-space-3) var(--zc-space-3);
+  border-bottom: 2px solid var(--_group-color, var(--zc-border));
+}
+
+/* Date-row in content calendar */
+.zc-table .zc-date-row td {
+  background: var(--zc-bg-raised);
+  padding: var(--zc-space-2) var(--zc-space-3);
+  border-bottom: 2px solid var(--zc-border-strong);
+  cursor: pointer;
+  user-select: none;
+}
+
+.zc-table .zc-date-row.past td {
+  opacity: 0.5;
+}
+
+.zc-date-label {
+  font-weight: var(--zc-weight-bold);
+  color: var(--zc-text-heading);
+  font-size: var(--zc-text-md);
+}
+
+.zc-date-meta {
+  color: var(--zc-text-muted);
+  font-size: var(--zc-text-sm);
+  margin-left: var(--zc-space-2);
+}
+
+/* Post-row in content calendar */
+.zc-table .zc-post-row {
+  cursor: pointer;
+}
+
+.zc-table .zc-post-row.hidden,
+.zc-table .zc-post-row.collapsed-child {
+  display: none;
+}
+
+/* Expanded post text */
+.zc-post-body {
+  display: none;
+  margin-top: var(--zc-space-2);
+  padding: var(--zc-space-3);
+  background: var(--zc-bg-overlay);
+  border-radius: var(--zc-radius-md);
+  border-left: 3px solid var(--zc-border-input);
+  font-size: var(--zc-text-base);
+  color: var(--zc-text-secondary);
+  line-height: var(--zc-leading-relaxed);
+  white-space: pre-wrap;
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+.zc-post-row.expanded .zc-post-body {
+  display: block;
+}
+
+
+/* =============================================================================
+   BADGES
+   ============================================================================= */
+
+/*
+  Platform badge — small colored rectangle.
+*/
+.zc-p-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 24px;
+  height: 18px;
+  padding: 0 4px;
+  border-radius: var(--zc-radius-sm);
+  font-size: 9px;
+  font-weight: var(--zc-weight-bold);
+  color: var(--zc-text-heading);
+  background: var(--zc-badge-bg, var(--zc-bg-input));
+  vertical-align: middle;
+  letter-spacing: 0.3px;
+}
+
+/*
+  Status badge — pill shaped.
+  Modifiers: --green, --yellow, --red, --blue, --gray
+*/
+.zc-badge {
+  display: inline-block;
+  padding: 2px var(--zc-space-2);
+  border-radius: var(--zc-radius-pill);
+  font-size: var(--zc-text-xs);
+  font-weight: var(--zc-weight-semibold);
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+  vertical-align: middle;
+}
+
+.zc-badge--green {
+  background: var(--zc-status-green-dim);
+  color: var(--zc-status-green);
+}
+.zc-badge--yellow {
+  background: var(--zc-status-yellow-dim);
+  color: var(--zc-status-yellow);
+}
+.zc-badge--red {
+  background: var(--zc-status-red-dim);
+  color: var(--zc-status-red);
+}
+.zc-badge--blue {
+  background: var(--zc-status-blue-dim);
+  color: var(--zc-status-blue);
+}
+.zc-badge--gray {
+  background: var(--zc-status-gray-dim);
+  color: var(--zc-status-gray);
+}
+.zc-badge--accent {
+  background: var(--zc-accent-dim);
+  color: var(--zc-accent-hover);
+}
+
+/* Tag badge — used in bank item tags */
+.zc-tag {
+  display: inline-block;
+  padding: 1px var(--zc-space-2);
+  border-radius: var(--zc-radius-pill);
+  font-size: var(--zc-text-xs);
+  color: var(--zc-accent-hover);
+  background: var(--zc-accent-dim);
+  border: 1px solid var(--zc-accent-border);
+  margin-right: 4px;
+  margin-bottom: 4px;
+}
+
+/* Category badge — squared, used in bank items and kanban cards */
+.zc-cat-badge {
+  display: inline-block;
+  padding: 2px var(--zc-space-2);
+  border-radius: var(--zc-radius-sm);
+  font-size: var(--zc-text-xs);
+  font-weight: var(--zc-weight-bold);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* Priority indicator — text only, used on kanban cards */
+.zc-priority {
+  font-size: 9px;
+  font-weight: var(--zc-weight-bold);
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+}
+.zc-priority--crit  { color: var(--zc-status-red); }
+.zc-priority--high  { color: var(--zc-status-yellow); }
+.zc-priority--med   { color: var(--zc-accent-hover); }
+.zc-priority--low   { color: var(--zc-text-muted); }
+
+/* Img badge — inline "img" indicator in content calendar */
+.zc-img-badge {
+  display: inline-block;
+  padding: 1px 5px;
+  border-radius: var(--zc-radius-sm);
+  font-size: 9px;
+  font-weight: var(--zc-weight-bold);
+  color: var(--zc-status-green);
+  background: var(--zc-status-green-dim);
+  margin-left: 4px;
+  vertical-align: middle;
+}
+
+/* Freq tag — used in connectors */
+.zc-freq {
+  display: inline-block;
+  background: rgba(59, 130, 246, 0.12);
+  color: var(--zc-status-blue);
+  padding: 1px var(--zc-space-2);
+  border-radius: var(--zc-radius-sm);
+  font-size: var(--zc-text-xs);
+  font-weight: var(--zc-weight-semibold);
+  white-space: nowrap;
+}
+
+
+/* =============================================================================
+   STATUS DOTS
+   ============================================================================= */
+
+.zc-dot {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  vertical-align: middle;
+  flex-shrink: 0;
+}
+
+.zc-dot--green  { background: var(--zc-status-green); }
+.zc-dot--yellow { background: var(--zc-status-yellow); }
+.zc-dot--red    { background: var(--zc-status-red); }
+.zc-dot--blue   { background: var(--zc-status-blue); }
+.zc-dot--gray   { background: var(--zc-status-gray); }
+.zc-dot--accent { background: var(--zc-accent); }
+
+/* Live pulse — use sparingly, only for genuinely live indicators */
+.zc-dot--pulse {
+  animation: zc-pulse 2s ease-in-out infinite;
+}
+
+@keyframes zc-pulse {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.3; }
+}
+
+
+/* =============================================================================
+   BANK ITEM CARD (expandable)
+   ============================================================================= */
+
+/*
+  Used in bank.html content bank view.
+  Collapsible: header is always visible, body expands on click.
+*/
+.zc-bank-item {
+  background: var(--zc-bg-card-alt);
+  border: 1px solid var(--zc-border);
+  border-radius: var(--zc-radius-lg);
+  margin-bottom: var(--zc-space-3);
+  overflow: hidden;
+  transition: border-color var(--zc-ease-fast);
+}
+
+.zc-bank-item:hover {
+  border-color: var(--zc-border-strong);
+}
+
+.zc-bank-item-header {
+  padding: var(--zc-space-4);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: var(--zc-space-3);
+  transition: background var(--zc-ease-fast);
+}
+
+.zc-bank-item-header:hover {
+  background: var(--zc-bg-overlay);
+}
+
+.zc-bank-arrow {
+  color: var(--zc-text-muted);
+  font-size: var(--zc-text-xs);
+  transition: transform var(--zc-ease-fast);
+  flex-shrink: 0;
+  /* Use a CSS triangle instead of an emoji or icon font */
+  width: 0;
+  height: 0;
+  border-top: 4px solid transparent;
+  border-bottom: 4px solid transparent;
+  border-left: 6px solid var(--zc-text-muted);
+  margin-right: -2px;
+}
+
+.zc-bank-arrow.open {
+  transform: rotate(90deg);
+}
+
+.zc-bank-id {
+  font-size: var(--zc-text-xs);
+  color: var(--zc-text-muted);
+  min-width: 90px;
+  flex-shrink: 0;
+  font-variant-numeric: tabular-nums;
+}
+
+.zc-bank-title {
+  flex: 1;
+  font-size: var(--zc-text-base);
+  color: var(--zc-text-primary);
+  line-height: var(--zc-leading-base);
+}
+
+.zc-bank-tier {
+  font-size: var(--zc-text-xs);
+  color: var(--zc-text-muted);
+  min-width: 36px;
+  text-align: center;
+  flex-shrink: 0;
+}
+
+.zc-bank-deriv-count {
+  font-size: var(--zc-text-xs);
+  color: var(--zc-text-muted);
+  flex-shrink: 0;
+}
+
+/* Expanded body panel */
+.zc-bank-body {
+  display: none;
+  border-top: 1px solid var(--zc-border-subtle);
+  padding: var(--zc-space-4);
+  background: var(--zc-bg-overlay);
+}
+
+.zc-bank-body.open {
+  display: block;
+}
+
+/* Raw text block inside bank body */
+.zc-bank-raw {
+  font-size: var(--zc-text-sm);
+  color: var(--zc-text-muted);
+  line-height: var(--zc-leading-relaxed);
+  margin-bottom: var(--zc-space-4);
+  padding: var(--zc-space-3);
+  background: var(--zc-bg-base);
+  border-radius: var(--zc-radius-md);
+  border: 1px solid var(--zc-border-subtle);
+}
+
+.zc-bank-raw-label {
+  font-size: var(--zc-text-xs);
+  color: var(--zc-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  margin-bottom: var(--zc-space-2);
+}
+
+/* Derivative card inside bank body */
+.zc-deriv-list {
+  display: grid;
+  gap: var(--zc-space-2);
+}
+
+.zc-deriv-card {
+  background: var(--zc-bg-card-alt);
+  border: 1px solid var(--zc-border);
+  border-radius: var(--zc-radius-md);
+  padding: var(--zc-space-3);
+  display: flex;
+  align-items: flex-start;
+  gap: var(--zc-space-3);
+  transition: border-color var(--zc-ease-fast);
+}
+
+.zc-deriv-card:hover {
+  border-color: var(--zc-border-strong);
+}
+
+.zc-deriv-platform {
+  font-size: var(--zc-text-xs);
+  font-weight: var(--zc-weight-bold);
+  padding: 3px var(--zc-space-2);
+  border-radius: var(--zc-radius-sm);
+  min-width: 70px;
+  text-align: center;
+  flex-shrink: 0;
+}
+
+.zc-deriv-text {
+  font-size: var(--zc-text-sm);
+  color: var(--zc-text-secondary);
+  line-height: var(--zc-leading-relaxed);
+  flex: 1;
+  max-height: 60px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.zc-deriv-chars {
+  font-size: 9px;
+  color: var(--zc-text-muted);
+  flex-shrink: 0;
+  font-variant-numeric: tabular-nums;
+}
+
+
+/* =============================================================================
+   KANBAN BOARD (tasks.html)
+   ============================================================================= */
+
+.zc-kanban {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--zc-space-4);
+  margin-top: var(--zc-space-4);
+}
+
+@media (max-width: 960px) {
+  .zc-kanban {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.zc-kanban-col {
+  background: var(--zc-bg-card);
+  border: 1px solid var(--zc-border);
+  border-radius: var(--zc-radius-xl);
+  padding: var(--zc-space-4);
+  min-height: 320px;
+}
+
+.zc-col-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--zc-space-4);
+  padding-bottom: var(--zc-space-3);
+  border-bottom: 2px solid var(--_col-color, var(--zc-border));
+}
+
+.zc-col-title {
+  font-family: var(--zc-font-display);
+  font-size: var(--zc-text-xs);
+  font-weight: var(--zc-weight-semibold);
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: var(--_col-color, var(--zc-text-muted));
+}
+
+.zc-col-count {
+  font-size: var(--zc-text-sm);
+  font-weight: var(--zc-weight-semibold);
+  color: var(--_col-color, var(--zc-text-muted));
+  background: rgba(255, 255, 255, 0.06);
+  padding: 2px var(--zc-space-3);
+  border-radius: var(--zc-radius-pill);
+}
+
+/* Kanban card */
+.zc-k-card {
+  background: var(--zc-bg-card-alt);
+  border: 1px solid var(--zc-border);
+  border-radius: var(--zc-radius-lg);
+  padding: var(--zc-space-3) var(--zc-space-4);
+  margin-bottom: var(--zc-space-3);
+  border-left: 3px solid var(--_card-priority-color, var(--zc-border-input));
+  transition: var(--zc-ease-base);
+  cursor: pointer;
+  position: relative;
+  box-shadow: var(--zc-shadow-sm);
+}
+
+.zc-k-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--zc-shadow-hover);
+  border-color: var(--zc-accent-border);
+}
+
+.zc-k-card-id {
+  font-size: var(--zc-text-xs);
+  color: var(--zc-text-muted);
+  margin-bottom: var(--zc-space-1);
+  font-family: var(--zc-font-display);
+  letter-spacing: 0.3px;
+}
+
+.zc-k-card-title {
+  font-size: var(--zc-text-base);
+  color: var(--zc-text-primary);
+  line-height: var(--zc-leading-base);
+  margin-bottom: var(--zc-space-3);
+  font-weight: var(--zc-weight-medium);
+}
+
+.zc-k-card-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.zc-k-card-assignee {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: var(--zc-text-xs);
+  color: var(--zc-text-muted);
+  margin-top: var(--zc-space-2);
+}
+
+.zc-k-card-assignee::before {
+  content: '';
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--zc-accent);
+  display: inline-block;
+  flex-shrink: 0;
+}
+
+
+/* =============================================================================
+   MODAL
+   ============================================================================= */
+
+.zc-modal-backdrop {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.70);
+  backdrop-filter: blur(4px);
+  z-index: 100;
+  align-items: center;
+  justify-content: center;
+  padding: var(--zc-space-5);
+}
+
+.zc-modal-backdrop.open {
+  display: flex;
+}
+
+.zc-modal {
+  background: var(--zc-bg-card);
+  border: 1px solid var(--zc-border-strong);
+  border-radius: var(--zc-radius-2xl);
+  padding: var(--zc-space-7) var(--zc-space-8);
+  max-width: 560px;
+  width: 100%;
+  max-height: 80vh;
+  overflow-y: auto;
+  box-shadow: var(--zc-shadow-lg), 0 0 0 1px rgba(255, 255, 255, 0.04);
+  position: relative;
+}
+
+.zc-modal-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: var(--zc-space-5);
+  gap: var(--zc-space-4);
+}
+
+.zc-modal-title {
+  font-family: var(--zc-font-display);
+  font-size: var(--zc-text-xl);
+  font-weight: var(--zc-weight-bold);
+  color: var(--zc-text-heading);
+  line-height: var(--zc-leading-tight);
+}
+
+.zc-modal-close {
+  background: transparent;
+  border: 1px solid var(--zc-border);
+  border-radius: var(--zc-radius-md);
+  color: var(--zc-text-muted);
+  font-size: var(--zc-text-base);
+  padding: 4px var(--zc-space-2);
+  line-height: 1;
+  transition: var(--zc-ease-fast);
+  flex-shrink: 0;
+}
+
+.zc-modal-close:hover {
+  color: var(--zc-text-heading);
+  border-color: var(--zc-border-strong);
+  background: var(--zc-bg-raised);
+}
+
+.zc-modal-body {
+  font-size: var(--zc-text-base);
+  color: var(--zc-text-secondary);
+  line-height: var(--zc-leading-relaxed);
+}
+
+.zc-modal-field {
+  margin-bottom: var(--zc-space-4);
+}
+
+.zc-modal-field-label {
+  font-size: var(--zc-text-xs);
+  color: var(--zc-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  margin-bottom: var(--zc-space-1);
+}
+
+.zc-modal-field-value {
+  font-size: var(--zc-text-base);
+  color: var(--zc-text-primary);
+}
+
+.zc-modal-divider {
+  height: 1px;
+  background: var(--zc-border);
+  margin: var(--zc-space-5) 0;
+}
+
+
+/* =============================================================================
+   DASHBOARD CARD (overview grid)
+   ============================================================================= */
+
+/*
+  General-purpose card linking to a dashboard section.
+  Used in overview.html grid of sub-dashboards.
+*/
+.zc-dash-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: var(--zc-space-4);
+  margin-bottom: var(--zc-space-8);
+}
+
+.zc-dash-card {
+  background: var(--zc-bg-card);
+  border: 1px solid var(--zc-border);
+  border-radius: var(--zc-radius-xl);
+  padding: var(--zc-space-5);
+  display: block;
+  color: var(--zc-text-primary);
+  transition: var(--zc-ease-base);
+  box-shadow: var(--zc-shadow-sm);
+  position: relative;
+  overflow: hidden;
+}
+
+.zc-dash-card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--zc-shadow-hover);
+  border-color: var(--zc-accent-border);
+}
+
+.zc-dash-card-header {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--zc-space-4);
+  margin-bottom: var(--zc-space-3);
+}
+
+/* Icon container — no emoji, use a background-color dot or SVG */
+.zc-dash-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: var(--zc-radius-lg);
+  background: var(--zc-accent-dim);
+  border: 1px solid var(--zc-accent-border);
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.zc-dash-card h3 {
+  font-family: var(--zc-font-display);
+  font-size: var(--zc-text-md);
+  font-weight: var(--zc-weight-semibold);
+  color: var(--zc-text-heading);
+  margin-bottom: 2px;
+}
+
+.zc-dash-card p {
+  font-size: var(--zc-text-sm);
+  color: var(--zc-text-muted);
+  line-height: var(--zc-leading-relaxed);
+}
+
+.zc-dash-badge {
+  position: absolute;
+  top: var(--zc-space-4);
+  right: var(--zc-space-4);
+}
+
+
+/* =============================================================================
+   BAR CHART (analytics.html inline charts)
+   ============================================================================= */
+
+.zc-bar-wrap {
+  display: flex;
+  align-items: center;
+  gap: var(--zc-space-2);
+  margin-bottom: var(--zc-space-2);
+}
+
+.zc-bar-label {
+  width: 80px;
+  font-size: var(--zc-text-sm);
+  color: var(--zc-text-secondary);
+  text-align: right;
+  flex-shrink: 0;
+}
+
+.zc-bar-track {
+  flex: 1;
+  height: 20px;
+  background: var(--zc-bg-card);
+  border-radius: var(--zc-radius-sm);
+  overflow: hidden;
+  border: 1px solid var(--zc-border);
+}
+
+.zc-bar-fill {
+  height: 100%;
+  border-radius: var(--zc-radius-sm);
+  background: var(--zc-status-blue);
+  transition: width 0.4s ease;
+  display: flex;
+  align-items: center;
+  padding-left: var(--zc-space-2);
+  font-size: var(--zc-text-xs);
+  color: var(--zc-text-heading);
+  font-weight: var(--zc-weight-semibold);
+}
+
+.zc-bar-value {
+  font-size: var(--zc-text-sm);
+  color: var(--zc-text-muted);
+  width: 56px;
+  flex-shrink: 0;
+  font-variant-numeric: tabular-nums;
+}
+
+/* Engagement rate badges */
+.zc-er {
+  display: inline-block;
+  padding: 2px var(--zc-space-2);
+  border-radius: var(--zc-radius-sm);
+  font-size: var(--zc-text-sm);
+  font-weight: var(--zc-weight-semibold);
+  font-variant-numeric: tabular-nums;
+}
+.zc-er--excellent { background: var(--zc-status-green-dim);  color: var(--zc-status-green); }
+.zc-er--good      { background: rgba(134, 239, 172, 0.10);    color: #86efac; }
+.zc-er--average   { background: var(--zc-status-yellow-dim); color: var(--zc-status-yellow); }
+.zc-er--poor      { background: var(--zc-status-red-dim);    color: var(--zc-status-red); }
+
+
+/* =============================================================================
+   TABS (analytics.html sub-views)
+   ============================================================================= */
+
+.zc-tabs {
+  display: flex;
+  gap: 0;
+  border-bottom: 1px solid var(--zc-border);
+  margin-bottom: var(--zc-space-5);
+}
+
+.zc-tab {
+  padding: var(--zc-space-2) var(--zc-space-4);
+  font-size: var(--zc-text-base);
+  color: var(--zc-text-muted);
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+  margin-bottom: -1px;
+  transition: var(--zc-ease-fast);
+  background: transparent;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  user-select: none;
+  white-space: nowrap;
+}
+
+.zc-tab:hover {
+  color: var(--zc-text-primary);
+}
+
+.zc-tab.active {
+  color: var(--zc-text-heading);
+  border-bottom-color: var(--zc-status-blue);
+  font-weight: var(--zc-weight-medium);
+}
+
+.zc-tab-content {
+  display: none;
+}
+
+.zc-tab-content.active {
+  display: block;
+}
+
+
+/* =============================================================================
+   LEGEND ROW (connectors.html)
+   ============================================================================= */
+
+.zc-legend {
+  display: flex;
+  gap: var(--zc-space-4);
+  margin-bottom: var(--zc-space-4);
+  font-size: var(--zc-text-sm);
+  color: var(--zc-text-secondary);
+  flex-wrap: wrap;
+}
+
+.zc-legend-item {
+  display: flex;
+  align-items: center;
+  gap: var(--zc-space-1);
+  white-space: nowrap;
+}
+
+
+/* =============================================================================
+   CONNECTOR STATUS TEXT
+   ============================================================================= */
+
+.zc-status-ok       { color: var(--zc-status-green); font-weight: var(--zc-weight-semibold); }
+.zc-status-broken   { color: var(--zc-status-red);   font-weight: var(--zc-weight-semibold); }
+.zc-status-waiting  { color: var(--zc-status-yellow); }
+.zc-status-ready    { color: var(--zc-status-blue);  font-weight: var(--zc-weight-semibold); }
+.zc-status-skip     { color: var(--zc-text-muted);   text-decoration: line-through; }
+
+/* Platform name in table */
+.zc-platform-name {
+  font-weight: var(--zc-weight-semibold);
+  color: var(--zc-text-heading);
+}
+
+/* Strategy text in connectors */
+.zc-strategy-text {
+  color: var(--zc-text-secondary);
+  font-size: var(--zc-text-sm);
+  line-height: var(--zc-leading-relaxed);
+  max-width: 360px;
+}
+
+
+/* =============================================================================
+   AUTHOR CARD (analytics comparison)
+   ============================================================================= */
+
+.zc-author-card {
+  background: var(--zc-bg-card);
+  border: 1px solid var(--zc-border);
+  border-radius: var(--zc-radius-lg);
+  padding: var(--zc-space-4);
+  margin-bottom: var(--zc-space-3);
+  display: flex;
+  align-items: center;
+  gap: var(--zc-space-4);
+}
+
+.zc-author-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.zc-author-name {
+  font-weight: var(--zc-weight-semibold);
+  color: var(--zc-text-heading);
+  font-size: var(--zc-text-md);
+  width: 80px;
+  flex-shrink: 0;
+}
+
+.zc-author-stats {
+  display: flex;
+  gap: var(--zc-space-5);
+  flex: 1;
+  flex-wrap: wrap;
+}
+
+.zc-author-stat-val {
+  font-size: 18px;
+  font-weight: var(--zc-weight-bold);
+  color: var(--zc-text-heading);
+  display: block;
+}
+
+.zc-author-stat-lbl {
+  font-size: var(--zc-text-xs);
+  color: var(--zc-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+}
+
+
+/* =============================================================================
+   EMPTY STATE
+   ============================================================================= */
+
+.zc-empty {
+  text-align: center;
+  padding: 64px var(--zc-space-5);
+  color: var(--zc-text-disabled);
+}
+
+.zc-empty-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: var(--zc-bg-card);
+  border: 1px solid var(--zc-border);
+  margin: 0 auto var(--zc-space-3);
+}
+
+.zc-empty-title {
+  font-size: var(--zc-text-md);
+  color: var(--zc-text-muted);
+  margin-bottom: var(--zc-space-1);
+}
+
+.zc-empty-hint {
+  font-size: var(--zc-text-sm);
+  color: var(--zc-text-disabled);
+}
+
+
+/* =============================================================================
+   FOOTER
+   ============================================================================= */
+
+.zc-footer {
+  text-align: center;
+  padding: var(--zc-space-5);
+  color: var(--zc-text-disabled);
+  font-size: var(--zc-text-xs);
+  border-top: 1px solid var(--zc-border-subtle);
+  margin-top: var(--zc-space-8);
+  letter-spacing: 0.3px;
+}
+
+.zc-footer a {
+  color: var(--zc-text-muted);
+  transition: color var(--zc-ease-fast);
+}
+
+.zc-footer a:hover {
+  color: var(--zc-text-secondary);
+}
+
+
+/* =============================================================================
+   UTILITY CLASSES
+   ============================================================================= */
+
+/* Spacing helpers */
+.zc-mb-0  { margin-bottom: 0; }
+.zc-mb-2  { margin-bottom: var(--zc-space-2); }
+.zc-mb-4  { margin-bottom: var(--zc-space-4); }
+.zc-mb-6  { margin-bottom: var(--zc-space-6); }
+.zc-mb-8  { margin-bottom: var(--zc-space-8); }
+
+/* Display helpers */
+.zc-flex         { display: flex; }
+.zc-flex-center  { display: flex; align-items: center; }
+.zc-flex-between { display: flex; align-items: center; justify-content: space-between; }
+.zc-flex-wrap    { flex-wrap: wrap; }
+.zc-gap-2        { gap: var(--zc-space-2); }
+.zc-gap-3        { gap: var(--zc-space-3); }
+.zc-gap-4        { gap: var(--zc-space-4); }
+
+/* Text helpers */
+.zc-text-heading   { color: var(--zc-text-heading); }
+.zc-text-primary   { color: var(--zc-text-primary); }
+.zc-text-secondary { color: var(--zc-text-secondary); }
+.zc-text-muted     { color: var(--zc-text-muted); }
+.zc-text-right     { text-align: right; }
+.zc-text-center    { text-align: center; }
+.zc-tabular        { font-variant-numeric: tabular-nums; }
+.zc-uppercase      { text-transform: uppercase; letter-spacing: 0.6px; }
+
+/* Font helpers */
+.zc-font-display { font-family: var(--zc-font-display); }
+.zc-font-body    { font-family: var(--zc-font-body); }
+
+/* Visibility */
+.zc-hidden { display: none; }
+
+
+/* =============================================================================
+   PLATFORM BADGE COLOR HELPERS
+   Apply to .zc-p-badge or .zc-deriv-platform
+   ============================================================================= */
+
+.zc-plat-linkedin  { background: var(--zc-plat-linkedin-bg);  color: var(--zc-plat-linkedin-fg); }
+.zc-plat-threads   { background: var(--zc-plat-threads-bg);   color: var(--zc-plat-threads-fg);  border: 1px solid var(--zc-border); }
+.zc-plat-telegram  { background: var(--zc-plat-telegram-bg);  color: var(--zc-plat-telegram-fg); }
+.zc-plat-facebook  { background: var(--zc-plat-facebook-bg);  color: var(--zc-plat-facebook-fg); }
+.zc-plat-vk        { background: var(--zc-plat-vk-bg);        color: var(--zc-plat-vk-fg); }
+.zc-plat-bluesky   { background: var(--zc-plat-bluesky-bg);   color: var(--zc-plat-bluesky-fg); }
+.zc-plat-youtube   { background: var(--zc-plat-youtube-bg);   color: var(--zc-plat-youtube-fg); }
+.zc-plat-instagram { background: var(--zc-plat-instagram-bg); color: var(--zc-plat-instagram-fg); }
+.zc-plat-okru      { background: var(--zc-plat-okru-bg);      color: var(--zc-plat-okru-fg); }
+.zc-plat-vcru      { background: var(--zc-plat-vcru-bg);      color: var(--zc-plat-vcru-fg); }
+.zc-plat-devto     { background: var(--zc-plat-devto-bg);     color: var(--zc-plat-devto-fg); }
+.zc-plat-medium    { background: var(--zc-plat-medium-bg);    color: var(--zc-plat-medium-fg); }
+.zc-plat-hashnode  { background: var(--zc-plat-hashnode-bg);  color: var(--zc-plat-hashnode-fg); }
+.zc-plat-mastodon  { background: var(--zc-plat-mastodon-bg);  color: var(--zc-plat-mastodon-fg); }
+
+
+/* =============================================================================
+   RESPONSIVE — breakpoints
+   960px: narrow single-column layout (most dashboards)
+   1200px: default
+   1440px+: wide layout (tasks kanban)
+   ============================================================================= */
+
+@media (max-width: 960px) {
+  body {
+    padding: var(--zc-space-3);
+  }
+
+  .zc-page-header h1,
+  .zc-h1 {
+    font-size: var(--zc-text-2xl);
+  }
+
+  .zc-stats {
+    gap: var(--zc-space-2);
+  }
+
+  .zc-stat {
+    min-width: 64px;
+    padding: var(--zc-space-2) var(--zc-space-3);
+  }
+
+  .zc-stat-num {
+    font-size: 20px;
+  }
+
+  .zc-kanban {
+    grid-template-columns: 1fr 1fr;
+    gap: var(--zc-space-3);
+  }
+
+  .zc-bank-item-header {
+    flex-wrap: wrap;
+    gap: var(--zc-space-2);
+  }
+
+  .zc-bank-id,
+  .zc-bank-tier,
+  .zc-bank-deriv-count {
+    display: none;
+  }
+
+  .zc-deriv-card {
+    flex-direction: column;
+    gap: var(--zc-space-2);
+  }
+
+  .zc-author-stats {
+    gap: var(--zc-space-3);
+  }
+
+  .zc-strategy-text {
+    max-width: 100%;
+  }
+
+  .zc-modal {
+    padding: var(--zc-space-5) var(--zc-space-5);
+    border-radius: var(--zc-radius-xl);
+  }
+}
+
+@media (max-width: 640px) {
+  .zc-kanban {
+    grid-template-columns: 1fr;
+  }
+
+  .zc-dash-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .zc-bar-label {
+    width: 60px;
+  }
+
+  .zc-nav-meta {
+    display: none;
+  }
+}
+
+
+/* =============================================================================
+   PRINT — strip color, keep structure
+   ============================================================================= */
+
+@media print {
+  body::before { display: none; }
+  .zc-nav      { border-bottom: 1px solid #ccc; }
+  .zc-nav a    { color: #333; }
+  .zc-modal-backdrop { display: none !important; }
+}
+
+
+/* =============================================================================
+   SPRINT A v2 — DASHBOARD KIT (2026-05-03)
+   Stripe/Mercury/Vercel/Linear-grade components.
+   Used by overview.html, finance.html in Sprint A iteration v2.
+   ============================================================================= */
+
+/* === KPI CARD (Stripe pattern) === */
+.kit-kpi {
+  background: var(--zc-bg-card);
+  border: 1px solid var(--zc-border-hairline);
+  border-radius: 14px;
+  padding: 18px 20px 16px;
+  display: flex; flex-direction: column; gap: 8px;
+  position: relative;
+  transition: border-color 0.15s ease;
+}
+.kit-kpi:hover { border-color: rgba(255,91,59,0.22); }
+
+.kit-kpi-head {
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 8px;
+}
+.kit-kpi-label {
+  font: 500 11.5px/1 var(--zc-font-body);
+  color: var(--zc-text-muted);
+  letter-spacing: 0.02em;
+}
+.kit-kpi-icon {
+  width: 14px; height: 14px;
+  color: var(--zc-text-muted);
+  opacity: 0.6;
+  flex-shrink: 0;
+}
+
+.kit-kpi-value {
+  font-family: var(--zc-font-display);
+  font-weight: 700;
+  font-size: clamp(28px, 2.6vw, 36px);
+  letter-spacing: -0.025em;
+  color: var(--zc-text-heading);
+  line-height: 1.05;
+  font-variant-numeric: tabular-nums lining-nums;
+}
+.kit-kpi-cents {
+  font-size: 70%;
+  color: var(--zc-text-muted);
+  font-weight: 600;
+}
+.kit-kpi-unit {
+  font: 500 13px var(--zc-font-body);
+  color: var(--zc-text-muted);
+  margin-left: 2px;
+}
+
+.kit-kpi-foot {
+  display: flex; align-items: center; gap: 8px;
+  margin-top: auto;
+}
+
+/* === DELTA PILLS === */
+.kit-pill {
+  display: inline-flex; align-items: center; gap: 3px;
+  padding: 2px 8px;
+  border-radius: 999px;
+  font: 600 11px/1.4 var(--zc-font-mono);
+  letter-spacing: 0.02em;
+  background: rgba(255,255,255,0.04);
+  color: var(--zc-text-secondary);
+}
+.kit-pill-up   { background: rgba(74, 222, 128, 0.10); color: #4ade80; }
+.kit-pill-down { background: rgba(248, 113, 113, 0.10); color: #f87171; }
+.kit-pill-flat { background: rgba(255,255,255,0.04); color: var(--zc-text-muted); }
+.kit-pill-accent { background: var(--zc-accent-dim); color: var(--zc-accent); }
+.kit-kpi-comp {
+  font: 500 11px var(--zc-font-mono);
+  color: var(--zc-text-muted);
+  letter-spacing: 0.02em;
+}
+
+/* === SPARKLINE container (uPlot mounts here) === */
+.kit-spark {
+  height: 44px;
+  margin: 4px -4px -4px;
+  position: relative;
+}
+.kit-spark-tall { height: 56px; }
+
+/* uPlot dark theme tweaks */
+.uplot { color: var(--zc-text-primary); font-family: var(--zc-font-mono); font-size: 11px; }
+.uplot .u-axis { color: var(--zc-text-muted); }
+.uplot .u-tooltip {
+  background: var(--zc-bg-card) !important;
+  border: 1px solid var(--zc-border-input) !important;
+  color: var(--zc-text-primary) !important;
+  border-radius: 6px;
+  padding: 6px 10px;
+  font: 500 11px var(--zc-font-mono);
+  font-variant-numeric: tabular-nums;
+}
+
+/* === SECTION HEADER === */
+.kit-sec {
+  display: flex; align-items: baseline; gap: 12px;
+  margin: 36px 0 14px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--zc-border-hairline);
+}
+.kit-sec-title {
+  font-family: var(--zc-font-serif);
+  font-size: 22px;
+  font-weight: 400;
+  color: var(--zc-text-heading);
+  letter-spacing: -0.005em;
+}
+.kit-sec-title::before {
+  content: '·'; color: var(--zc-accent);
+  font-size: 30px; line-height: 0; margin-right: 6px;
+  vertical-align: 2px;
+}
+.kit-sec-meta {
+  margin-left: auto;
+  font: 500 11px var(--zc-font-mono);
+  color: var(--zc-text-muted);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+/* === MERCURY LEDGER ROW === */
+.kit-ledger { display: flex; flex-direction: column; }
+.kit-ledger-row {
+  display: grid;
+  grid-template-columns: 78px 22px 1fr auto auto;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 4px;
+  border-bottom: 1px solid var(--zc-border-hairline);
+  transition: background 0.1s ease;
+}
+.kit-ledger-row:hover { background: rgba(255,255,255,0.02); }
+.kit-ledger-row:last-child { border-bottom: 0; }
+
+.kit-ledger-date {
+  font: 500 11px var(--zc-font-mono);
+  color: var(--zc-text-muted);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+.kit-ledger-icon {
+  width: 18px; height: 18px;
+  color: var(--zc-text-secondary);
+  opacity: 0.7;
+}
+.kit-ledger-desc {
+  font-family: var(--zc-font-serif);
+  font-size: 14.5px;
+  color: var(--zc-text-primary);
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.kit-ledger-cat {
+  font: 500 10.5px var(--zc-font-mono);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  padding: 2px 8px;
+  border-radius: 3px;
+  background: rgba(255,255,255,0.04);
+  color: var(--zc-text-muted);
+  white-space: nowrap;
+}
+.kit-ledger-amt {
+  font: 600 14px var(--zc-font-body);
+  font-variant-numeric: tabular-nums;
+  color: var(--zc-text-heading);
+  white-space: nowrap;
+  text-align: right;
+}
+.kit-ledger-amt.is-out { color: #f87171; }
+.kit-ledger-amt.is-in  { color: #4ade80; }
+
+/* === STATUS CHIPS ROW (Uptime monitors) === */
+.kit-chips {
+  display: flex; flex-wrap: wrap; gap: 6px;
+}
+.kit-chip {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 5px 9px;
+  border-radius: 5px;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid var(--zc-border-hairline);
+  font: 500 11.5px var(--zc-font-mono);
+  letter-spacing: 0.02em;
+  color: var(--zc-text-secondary);
+}
+.kit-chip-dot {
+  width: 6px; height: 6px; border-radius: 50%;
+  background: var(--zc-text-muted);
+}
+.kit-chip-dot.ok   { background: #4ade80; box-shadow: 0 0 6px rgba(74,222,128,0.5); }
+.kit-chip-dot.warn { background: #fbbf24; }
+.kit-chip-dot.err  { background: #f87171; box-shadow: 0 0 6px rgba(248,113,113,0.5); }
+.kit-chip:hover { background: rgba(255,255,255,0.06); }
+
+/* === ACTIVITY FEED (Vercel pattern) === */
+.kit-feed { position: relative; padding-left: 18px; }
+.kit-feed::before {
+  content: ''; position: absolute; left: 5px; top: 8px; bottom: 8px;
+  width: 1px; background: var(--zc-border-hairline);
+}
+.kit-feed-item {
+  position: relative;
+  padding: 10px 0 10px 16px;
+  display: grid; grid-template-columns: 60px 1fr; gap: 10px;
+  border-bottom: 1px solid var(--zc-border-hairline);
+}
+.kit-feed-item:last-child { border-bottom: 0; }
+.kit-feed-item::before {
+  content: ''; position: absolute; left: -14px; top: 16px;
+  width: 8px; height: 8px; border-radius: 50%;
+  background: var(--zc-bg-card);
+  border: 1.5px solid var(--zc-text-muted);
+}
+.kit-feed-item.is-revenue::before { border-color: #4ade80; background: #4ade80; }
+.kit-feed-item.is-error::before { border-color: #f87171; background: #f87171; }
+.kit-feed-item.is-deploy::before { border-color: var(--zc-accent); }
+.kit-feed-time {
+  font: 500 11px var(--zc-font-mono);
+  color: var(--zc-text-muted);
+  letter-spacing: 0.04em;
+}
+.kit-feed-text {
+  font-size: 13px;
+  color: var(--zc-text-primary);
+  line-height: 1.45;
+}
+.kit-feed-actor {
+  color: var(--zc-text-heading);
+  font-weight: 600;
+}
+.kit-feed-link {
+  color: var(--zc-accent);
+  text-decoration: none;
+}
+.kit-feed-link:hover { text-decoration: underline; }
+
+/* === BREAKDOWN BAR LIST (Ramp pattern) === */
+.kit-bars { display: flex; flex-direction: column; gap: 8px; }
+.kit-bar-row { display: grid; grid-template-columns: 1fr auto; gap: 8px; }
+.kit-bar-label {
+  display: flex; align-items: center; gap: 8px;
+  font-size: 12.5px;
+  color: var(--zc-text-primary);
+}
+.kit-bar-amt {
+  font: 600 12.5px var(--zc-font-body);
+  font-variant-numeric: tabular-nums;
+  color: var(--zc-text-heading);
+}
+.kit-bar-track {
+  grid-column: 1 / -1;
+  height: 4px; border-radius: 2px;
+  background: rgba(255,255,255,0.05);
+  overflow: hidden;
+}
+.kit-bar-fill {
+  height: 100%;
+  background: var(--zc-accent);
+  border-radius: 2px;
+}
+
+/* === ANOMALY CALLOUT (Ramp pattern) === */
+.kit-alert {
+  border-left: 3px solid #fbbf24;
+  background: rgba(251,191,36,0.04);
+  border-radius: 4px;
+  padding: 12px 14px;
+  display: grid; grid-template-columns: 1fr auto; gap: 12px;
+  align-items: center;
+}
+.kit-alert.is-error { border-left-color: #f87171; background: rgba(248,113,113,0.04); }
+.kit-alert-title {
+  font: 600 12px var(--zc-font-body);
+  color: var(--zc-text-heading);
+  margin-bottom: 2px;
+}
+.kit-alert-text {
+  font-size: 12px;
+  color: var(--zc-text-secondary);
+  line-height: 1.4;
+}
+.kit-alert-actions { display: flex; gap: 6px; }
+.kit-alert-btn {
+  font: 500 11px var(--zc-font-mono);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  padding: 4px 10px;
+  border-radius: 3px;
+  border: 1px solid var(--zc-border-input);
+  background: transparent;
+  color: var(--zc-text-secondary);
+  cursor: pointer;
+}
+.kit-alert-btn:hover { border-color: var(--zc-accent); color: var(--zc-accent); }
+
+/* === LUCIDE ICON SIZE TOKENS === */
+.lucide-12 { width: 12px; height: 12px; }
+.lucide-14 { width: 14px; height: 14px; }
+.lucide-16 { width: 16px; height: 16px; }
+.lucide-18 { width: 18px; height: 18px; }
+.lucide-20 { width: 20px; height: 20px; }
+
+/* === GRID SCAFFOLDS === */
+.kit-row { display: grid; gap: 14px; }
+.kit-row-4 { grid-template-columns: repeat(4, 1fr); }
+.kit-row-3 { grid-template-columns: repeat(3, 1fr); }
+.kit-row-2 { grid-template-columns: 1fr 1fr; }
+.kit-row-2-66 { grid-template-columns: 2fr 1fr; }
+@media (max-width: 1100px) {
+  .kit-row-4 { grid-template-columns: repeat(2, 1fr); }
+  .kit-row-3 { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 700px) {
+  .kit-row-4, .kit-row-3, .kit-row-2, .kit-row-2-66 { grid-template-columns: 1fr; }
+}

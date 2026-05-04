@@ -3,1501 +3,824 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Финансовый дашборд | Zinin Corp</title>
-<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;600;700&family=Onest:wght@400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="zinin-corp.css?v=20260305">
-<script src="https://cdn.jsdelivr.net/npm/apexcharts@3.49.0/dist/apexcharts.min.js"></script>
-<script src="https://cdn.plot.ly/plotly-finance-2.35.2.min.js"></script>
+<title>Ledger · Finance | Zinin Corp</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;600;700;800&family=Onest:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Instrument+Serif&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="zinin-corp.css?v=20260503-sprint-a-v2">
+<link rel="stylesheet" href="https://unpkg.com/uplot@1.6.30/dist/uPlot.min.css">
+<script src="https://unpkg.com/uplot@1.6.30/dist/uPlot.iife.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/apexcharts@3.49.0/dist/apexcharts.min.js" defer></script>
 <style>
-/* Finance-specific styles */
-.fin-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: 16px;
-  margin-bottom: 24px;
-}
+  body.is-embed .zc-nav { display: none; }
+  body.is-embed { padding-top: 0; }
 
-.fin-grid-2 {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 16px;
-  margin-bottom: 24px;
-}
-
-.fin-card {
-  background: var(--zc-bg-card);
-  border: 1px solid var(--zc-border);
-  border-radius: var(--zc-radius-xl);
-  padding: 20px;
-  position: relative;
-  overflow: hidden;
-}
-
-.fin-card:hover {
-  border-color: var(--zc-border-accent);
-  box-shadow: var(--zc-shadow-hover);
-  transition: var(--zc-ease-base);
-}
-
-.fin-card-accent {
-  position: absolute;
-  top: 0; left: 0; right: 0;
-  height: 3px;
-}
-
-.fin-card-title {
-  font-family: var(--zc-font-display);
-  font-size: 12px;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.8px;
-  margin-bottom: 14px;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.fin-kpi-value {
-  font-family: var(--zc-font-display);
-  font-size: 32px;
-  font-weight: 700;
-  color: var(--zc-text-heading);
-  line-height: 1.1;
-}
-
-.fin-kpi-sub {
-  font-size: 12px;
-  color: var(--zc-text-muted);
-  margin-top: 4px;
-}
-
-.fin-kpi-change {
-  display: inline-flex;
-  align-items: center;
-  gap: 4px;
-  font-size: 12px;
-  font-weight: 600;
-  padding: 2px 8px;
-  border-radius: 100px;
-  margin-top: 8px;
-}
-
-.fin-kpi-change.positive {
-  background: var(--zc-status-green-dim);
-  color: var(--zc-status-green);
-}
-
-.fin-kpi-change.negative {
-  background: var(--zc-status-red-dim);
-  color: var(--zc-status-red);
-}
-
-.fin-kpi-change.neutral {
-  background: var(--zc-status-gray-dim);
-  color: var(--zc-status-gray);
-}
-
-.fin-section-title {
-  font-family: var(--zc-font-display);
-  font-size: 18px;
-  font-weight: 600;
-  color: var(--zc-text-heading);
-  margin: 32px 0 16px;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.fin-section-title::after {
-  content: '';
-  flex: 1;
-  height: 1px;
-  background: var(--zc-border);
-}
-
-.fin-table {
-  width: 100%;
-  border-collapse: collapse;
-  font-size: 13px;
-}
-
-.fin-table th {
-  text-align: left;
-  padding: 10px 12px;
-  color: var(--zc-text-muted);
-  font-weight: 500;
-  font-size: 11px;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-  border-bottom: 1px solid var(--zc-border-strong);
-}
-
-.fin-table th:last-child,
-.fin-table td:last-child {
-  text-align: right;
-}
-
-.fin-table td {
-  padding: 10px 12px;
-  border-bottom: 1px solid var(--zc-border-subtle);
-  color: var(--zc-text-primary);
-}
-
-.fin-table tr:last-child td {
-  border-bottom: none;
-}
-
-.fin-table .total-row td {
-  border-top: 2px solid var(--zc-border-strong);
-  font-weight: 700;
-  color: var(--zc-text-heading);
-  padding-top: 12px;
-}
-
-.fin-table .subtotal-row td {
-  font-weight: 600;
-  color: var(--zc-text-heading);
-  background: rgba(255,255,255,0.02);
-}
-
-.fin-positive { color: var(--zc-status-green); }
-.fin-negative { color: var(--zc-status-red); }
-.fin-muted { color: var(--zc-text-muted); }
-
-.fin-progress-wrap {
-  background: rgba(255,255,255,0.04);
-  border-radius: 8px;
-  height: 8px;
-  overflow: hidden;
-  margin-top: 8px;
-}
-
-.fin-progress-bar {
-  height: 100%;
-  border-radius: 8px;
-  transition: width 0.6s ease;
-}
-
-.fin-chart-wrap {
-  min-height: 260px;
-}
-
-.fin-metric-row {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 10px 0;
-  border-bottom: 1px solid var(--zc-border-subtle);
-}
-
-.fin-metric-row:last-child {
-  border-bottom: none;
-}
-
-.fin-metric-label {
-  color: var(--zc-text-secondary);
-  font-size: 13px;
-}
-
-.fin-metric-value {
-  font-weight: 600;
-  color: var(--zc-text-heading);
-  font-variant-numeric: tabular-nums;
-}
-
-.fin-runway-bar {
-  display: flex;
-  gap: 2px;
-  margin-top: 12px;
-}
-
-.fin-runway-month {
-  flex: 1;
-  height: 24px;
-  border-radius: 4px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 10px;
-  font-weight: 600;
-  color: rgba(255,255,255,0.7);
-}
-
-.fin-health-indicator {
-  display: flex;
-  gap: 12px;
-  margin-top: 12px;
-}
-
-.fin-health-dot {
-  width: 12px;
-  height: 12px;
-  border-radius: 50%;
-  flex-shrink: 0;
-  margin-top: 2px;
-}
-
-.fin-health-item {
-  display: flex;
-  gap: 8px;
-  flex: 1;
-}
-
-.fin-health-text {
-  font-size: 12px;
-}
-
-.fin-health-text strong {
-  display: block;
-  color: var(--zc-text-heading);
-  font-size: 13px;
-  margin-bottom: 2px;
-}
-
-@media (max-width: 768px) {
-  .fin-grid-2 {
-    grid-template-columns: 1fr;
+  .page-h {
+    display: grid; grid-template-columns: auto 1fr auto; gap: 22px; align-items: end;
+    padding-bottom: 22px; border-bottom: 1px solid var(--zc-border-hairline);
+    margin-bottom: 28px;
   }
-  .fin-kpi-value {
-    font-size: 24px;
+  .page-emblem { width: 48px; height: 48px; color: var(--zc-text-heading); }
+  .page-meta { font: 500 11px var(--zc-font-mono); letter-spacing: 0.12em; text-transform: uppercase; color: var(--zc-text-muted); margin-bottom: 6px; }
+  .page-meta .accent { color: var(--zc-accent); }
+  .page-h h1 { font-family: var(--zc-font-display); font-weight: 800; font-size: clamp(36px, 4.6vw, 56px); letter-spacing: -0.04em; line-height: 1.02; color: var(--zc-text-heading); }
+  .page-sub { font-family: var(--zc-font-serif); font-size: 15px; color: var(--zc-text-secondary); margin-top: 6px; max-width: 60ch; }
+  .page-tabs { display: flex; gap: 2px; align-items: flex-end; }
+  .page-tab {
+    padding: 6px 12px;
+    font: 500 11px var(--zc-font-mono);
+    letter-spacing: 0.06em; text-transform: uppercase;
+    color: var(--zc-text-muted);
+    border: 1px solid transparent;
+    border-bottom: 1px solid var(--zc-border-hairline);
+    cursor: pointer;
   }
-}
+  .page-tab.is-active { color: var(--zc-accent); border-color: var(--zc-accent); border-bottom-color: transparent; }
+  .page-tab:hover:not(.is-active) { color: var(--zc-text-primary); }
 
-/* ApexCharts dark theme overrides */
-.apexcharts-tooltip {
-  background: #1a1a1a !important;
-  border: 1px solid #333 !important;
-  color: #e5e5e5 !important;
-}
-.apexcharts-tooltip-title {
-  background: #141414 !important;
-  border-bottom: 1px solid #333 !important;
-  color: #999 !important;
-}
-.apexcharts-xaxistooltip {
-  background: #1a1a1a !important;
-  border: 1px solid #333 !important;
-  color: #e5e5e5 !important;
-}
-.apexcharts-yaxistooltip {
-  background: #1a1a1a !important;
-  border: 1px solid #333 !important;
-  color: #e5e5e5 !important;
-}
+  /* === HERO NET POSITION (Mercury) === */
+  .net-hero {
+    background: var(--zc-bg-card);
+    border: 1px solid var(--zc-border-hairline);
+    border-radius: 18px;
+    padding: 28px 32px;
+    display: grid; grid-template-columns: 1.4fr 1fr; gap: 32px;
+    margin-bottom: 14px;
+  }
+  .net-hero-label {
+    display: inline-flex; align-items: center; gap: 8px;
+    font: 500 11px var(--zc-font-mono);
+    color: var(--zc-text-muted);
+    letter-spacing: 0.14em; text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+  .net-hero-label::before { content: ''; width: 4px; height: 4px; background: var(--zc-accent); border-radius: 50%; }
+  .net-hero-value {
+    font-family: var(--zc-font-display);
+    font-weight: 800;
+    font-size: clamp(48px, 5.5vw, 76px);
+    letter-spacing: -0.045em; line-height: 1;
+    color: var(--zc-text-heading);
+    font-variant-numeric: tabular-nums lining-nums;
+    margin-bottom: 12px;
+  }
+  .net-hero-cents { font-size: 60%; color: var(--zc-text-muted); font-weight: 700; }
+  .net-hero-strip {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px;
+    padding-top: 14px;
+    border-top: 1px solid var(--zc-border-hairline);
+  }
+  .net-strip-cell {}
+  .net-strip-label { font: 500 10px var(--zc-font-mono); letter-spacing: 0.1em; text-transform: uppercase; color: var(--zc-text-muted); margin-bottom: 4px; }
+  .net-strip-value { font: 700 16px var(--zc-font-body); color: var(--zc-text-heading); font-variant-numeric: tabular-nums; }
+  .net-hero-spark { height: 110px; align-self: center; }
+
+  @media (max-width: 900px) {
+    .net-hero { grid-template-columns: 1fr; }
+    .net-hero-spark { height: 80px; }
+  }
+
+  /* P&L TABLE */
+  .pnl {
+    background: var(--zc-bg-card);
+    border: 1px solid var(--zc-border-hairline);
+    border-radius: 14px;
+    overflow: hidden;
+  }
+  .pnl table { width: 100%; border-collapse: collapse; }
+  .pnl th {
+    text-align: left; padding: 12px 16px;
+    font: 500 10.5px var(--zc-font-mono);
+    letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--zc-text-muted);
+    border-bottom: 1px solid var(--zc-border-hairline);
+    background: var(--zc-bg-raised);
+  }
+  .pnl th:nth-child(n+2) { text-align: right; }
+  .pnl td {
+    padding: 11px 16px;
+    border-bottom: 1px solid var(--zc-border-hairline);
+    font-size: 13.5px;
+  }
+  .pnl td:first-child { font-family: var(--zc-font-serif); font-size: 14.5px; color: var(--zc-text-primary); }
+  .pnl td:nth-child(n+2) { text-align: right; font-variant-numeric: tabular-nums; color: var(--zc-text-heading); font-weight: 600; }
+  .pnl tr.is-section td:first-child {
+    font: 600 10.5px var(--zc-font-mono);
+    text-transform: uppercase; letter-spacing: 0.1em;
+    color: var(--zc-text-muted);
+    background: rgba(255,255,255,0.015);
+  }
+  .pnl tr.is-section td { background: rgba(255,255,255,0.015); }
+  .pnl tr.is-total td {
+    border-top: 1px solid var(--zc-border-strong);
+    border-bottom: 0;
+    background: rgba(255,255,255,0.02);
+    font-weight: 700;
+  }
+  .pnl tr.is-total td:first-child { font-weight: 700; color: var(--zc-text-heading); font-style: italic; }
+  .pnl-pos { color: #4ade80; }
+  .pnl-neg { color: #f87171; }
+
+  .panel {
+    background: var(--zc-bg-card);
+    border: 1px solid var(--zc-border-hairline);
+    border-radius: 14px;
+    padding: 20px;
+  }
+  .panel-head {
+    display: flex; align-items: baseline; gap: 10px;
+    padding-bottom: 12px;
+    margin-bottom: 12px;
+    border-bottom: 1px solid var(--zc-border-hairline);
+  }
+  .panel-title { font: 600 11px var(--zc-font-body); text-transform: uppercase; letter-spacing: 0.16em; color: var(--zc-text-muted); }
+  .panel-meta { margin-left: auto; font: 500 11px var(--zc-font-mono); color: var(--zc-text-muted); letter-spacing: 0.04em; }
+
+  /* Cash sources */
+  .src-list { display: flex; flex-direction: column; gap: 10px; }
+  .src-row { display: grid; grid-template-columns: 18px 1fr auto; gap: 10px; align-items: center; }
+  .src-bar { grid-column: 1 / -1; height: 3px; border-radius: 2px; background: rgba(255,255,255,0.06); overflow: hidden; }
+  .src-fill { height: 100%; }
+  .src-label { font-size: 13px; color: var(--zc-text-primary); }
+  .src-amt { font: 600 13px var(--zc-font-body); font-variant-numeric: tabular-nums; color: var(--zc-text-heading); }
+  .src-mark { width: 10px; height: 10px; border-radius: 2px; }
+
+  /* Forecast bars (per-month) */
+  .fc-row { display: grid; grid-template-columns: 60px 1fr 80px; gap: 10px; align-items: center; padding: 6px 0; }
+  .fc-month { font: 500 11px var(--zc-font-mono); letter-spacing: 0.06em; text-transform: uppercase; color: var(--zc-text-muted); }
+  .fc-bar { height: 18px; border-radius: 3px; background: rgba(255,255,255,0.04); position: relative; overflow: hidden; }
+  .fc-fill { position: absolute; inset: 0 auto 0 0; background: var(--zc-accent); opacity: 0.5; }
+  .fc-amt { font: 600 12px var(--zc-font-body); font-variant-numeric: tabular-nums; text-align: right; }
 </style>
 </head>
 <body>
+
 <div class="zc-container--wide">
 
 <nav class="zc-nav">
   <span class="zc-nav-brand"><img src="img/avatar.jpg" alt="" class="zc-nav-avatar">Zinin <span class="zc-nav-brand-suffix">Corp</span></span>
   <a href="overview.html">Обзор</a>
-  <a href="content-calendar.html">Календарь</a>
-  <a href="content-bank.html">Банк контента</a>
-  <a href="analytics.html">Аналитика</a>
-  <a href="connectors.html">Коннекторы</a>
   <a href="finance.html" class="active">Финансы</a>
-  <a href="tasks.html">Задачи</a>
-  <a href="funnel.html">Воронка</a>
 </nav>
 
-<div class="zc-page-header">
-  <h1>Финансовый дашборд</h1>
-  <p class="zc-subtitle">P&L, денежный поток, юнит-экономика и прогноз</p>
+<!-- ============================================================
+     PAGE HEADER
+     ============================================================ -->
+<header class="page-h">
+  <svg class="page-emblem" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="square" aria-hidden="true">
+    <line x1="6" y1="14" x2="42" y2="14"/>
+    <line x1="6" y1="22" x2="30" y2="22" opacity="0.75"/>
+    <line x1="6" y1="30" x2="38" y2="30" opacity="0.55"/>
+    <line x1="6" y1="38" x2="22" y2="38" opacity="0.4"/>
+    <circle cx="42" cy="38" r="2.2" fill="#ff5b3b" stroke="none"/>
+  </svg>
+  <div>
+    <div class="page-meta"><span class="accent">Ledger</span> · P&amp;L · cash · forecast · <span id="page-date">—</span></div>
+    <h1>Finance</h1>
+    <p class="page-sub">Where the money is, where it goes, and what it costs to keep moving.</p>
+  </div>
+  <div class="page-tabs">
+    <span class="page-tab is-active">All</span>
+    <span class="page-tab">TON</span>
+    <span class="page-tab">Tribute</span>
+    <span class="page-tab">Gate</span>
+    <span class="page-tab">TBC</span>
+  </div>
+</header>
+
+<!-- ============================================================
+     HERO — Net position (Mercury pattern)
+     ============================================================ -->
+<div class="net-hero">
+  <div>
+    <div class="net-hero-label">Net position · all accounts</div>
+    <div class="net-hero-value" id="net-value">—<span class="net-hero-cents">.00</span></div>
+    <div style="display:flex;gap:14px;margin-top:6px;flex-wrap:wrap">
+      <span class="kit-pill kit-pill-up" id="net-delta-7d">+0.0%</span>
+      <span class="kit-kpi-comp">vs 7 days ago</span>
+      <span class="kit-kpi-comp" style="margin-left:14px"><span style="color:var(--zc-accent)">●</span> Updated <span id="net-updated">—</span></span>
+    </div>
+    <div class="net-hero-strip">
+      <div class="net-strip-cell"><div class="net-strip-label">Pending in</div><div class="net-strip-value" style="color:#4ade80">+$50</div></div>
+      <div class="net-strip-cell"><div class="net-strip-label">Pending out</div><div class="net-strip-value" style="color:#f87171">−$60</div></div>
+      <div class="net-strip-cell"><div class="net-strip-label">Yesterday</div><div class="net-strip-value" id="net-yesterday">—</div></div>
+    </div>
+  </div>
+  <div class="net-hero-spark" id="net-spark"></div>
 </div>
 
 <!-- ============================================================
-     EXECUTIVE SUMMARY — 5 KPI cards (McKinsey "5-second rule")
+     KPI STRIP — 4 cards with sparklines
      ============================================================ -->
-<div class="fin-grid" style="grid-template-columns: repeat(5, 1fr);">
+<div class="kit-row kit-row-4">
 
-  <div class="fin-card">
-    <div class="fin-card-accent" style="background: linear-gradient(90deg, #10b981, #34d399)"></div>
-    <div class="fin-card-title" style="color: #10b981">MRR</div>
-    <div class="fin-kpi-value" style="color: #10b981">$1,100</div>
-    <div class="fin-kpi-sub">Ежемесячная повторяющаяся выручка</div>
-    <div class="fin-kpi-change positive">+41% vs Jan</div>
+  <div class="kit-kpi">
+    <div class="kit-kpi-head">
+      <span class="kit-kpi-label">MRR</span>
+      <i data-lucide="repeat" class="kit-kpi-icon"></i>
+    </div>
+    <div class="kit-kpi-value">$1,100</div>
+    <div class="kit-kpi-foot">
+      <span class="kit-pill kit-pill-up">+41%</span>
+      <span class="kit-kpi-comp">vs Jan</span>
+    </div>
+    <div class="kit-spark" id="spark-mrr"></div>
   </div>
 
-  <div class="fin-card">
-    <div class="fin-card-accent" style="background: linear-gradient(90deg, #ef4444, #f87171)"></div>
-    <div class="fin-card-title" style="color: #ef4444">OPEX</div>
-    <div class="fin-kpi-value" style="color: #ef4444">$275</div>
-    <div class="fin-kpi-sub">Операционные расходы</div>
-    <div class="fin-kpi-change neutral">0% MoM</div>
+  <div class="kit-kpi">
+    <div class="kit-kpi-head">
+      <span class="kit-kpi-label">Burn rate · 30d</span>
+      <i data-lucide="flame" class="kit-kpi-icon"></i>
+    </div>
+    <div class="kit-kpi-value">$275</div>
+    <div class="kit-kpi-foot">
+      <span class="kit-pill kit-pill-flat">flat</span>
+      <span class="kit-kpi-comp">vs prev 30d</span>
+    </div>
+    <div class="kit-spark" id="spark-burn"></div>
   </div>
 
-  <div class="fin-card">
-    <div class="fin-card-accent" style="background: linear-gradient(90deg, #6c5ce7, #a29bfe)"></div>
-    <div class="fin-card-title" style="color: #a29bfe">Чистая прибыль</div>
-    <div class="fin-kpi-value" style="color: #a29bfe">$825</div>
-    <div class="fin-kpi-sub">Повторяющаяся (без консалтинга)</div>
-    <div class="fin-kpi-change positive">+63% vs Jan</div>
+  <div class="kit-kpi">
+    <div class="kit-kpi-head">
+      <span class="kit-kpi-label">Runway</span>
+      <i data-lucide="route" class="kit-kpi-icon"></i>
+    </div>
+    <div class="kit-kpi-value"><span id="kpi-runway">—</span><span class="kit-kpi-unit">mo</span></div>
+    <div class="kit-kpi-foot">
+      <span class="kit-pill kit-pill-accent">at $275/mo</span>
+    </div>
+    <div class="kit-spark" id="spark-runway"></div>
   </div>
 
-  <div class="fin-card">
-    <div class="fin-card-accent" style="background: linear-gradient(90deg, #f59e0b, #fbbf24)"></div>
-    <div class="fin-card-title" style="color: #f59e0b">Маржа</div>
-    <div class="fin-kpi-value" style="color: #f59e0b">75%</div>
-    <div class="fin-kpi-sub">Маржа чистой прибыли</div>
-    <div class="fin-kpi-change positive">+10pp vs Jan</div>
+  <div class="kit-kpi">
+    <div class="kit-kpi-head">
+      <span class="kit-kpi-label">Net margin</span>
+      <i data-lucide="percent" class="kit-kpi-icon"></i>
+    </div>
+    <div class="kit-kpi-value">75<span class="kit-kpi-unit">%</span></div>
+    <div class="kit-kpi-foot">
+      <span class="kit-pill kit-pill-up">+10pp</span>
+      <span class="kit-kpi-comp">vs Jan</span>
+    </div>
+    <div class="kit-spark" id="spark-margin"></div>
   </div>
 
-  <div class="fin-card">
-    <div class="fin-card-accent" style="background: linear-gradient(90deg, #3b82f6, #60a5fa)"></div>
-    <div class="fin-card-title" style="color: #3b82f6">Цель MRR</div>
-    <div class="fin-kpi-value" style="color: #3b82f6">44%</div>
-    <div class="fin-kpi-sub">$1,100 / $2,500</div>
-    <div class="fin-progress-wrap">
-      <div class="fin-progress-bar" style="width:44%;background:linear-gradient(90deg,#3b82f6,#60a5fa)"></div>
+</div>
+
+<!-- ============================================================
+     P&L TABLE + CASH SOURCES + FORECAST
+     ============================================================ -->
+<div class="kit-sec">
+  <div class="kit-sec-title">Income statement</div>
+  <div class="kit-sec-meta">March 2026 · MoM</div>
+</div>
+<div class="kit-row kit-row-2-66" style="margin-bottom: 24px;">
+
+  <!-- P&L Table -->
+  <div class="pnl">
+    <table>
+      <thead>
+        <tr>
+          <th>Line item</th>
+          <th>Mar 2026</th>
+          <th>Feb 2026</th>
+          <th>MoM</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="is-section"><td>Revenue</td><td></td><td></td><td></td></tr>
+        <tr><td>КРМКТЛ · 8 vendors</td><td>$600.00</td><td>$600.00</td><td class="pnl-pos">0%</td></tr>
+        <tr><td>Botanica · Tribute</td><td>$500.00</td><td>$300.00</td><td class="pnl-pos">+67%</td></tr>
+        <tr><td>SBORKA · trial</td><td>$0.00</td><td>$0.00</td><td>—</td></tr>
+        <tr class="is-total"><td>Total revenue</td><td>$1,100.00</td><td>$900.00</td><td class="pnl-pos">+22%</td></tr>
+
+        <tr class="is-section"><td>Operating expenses</td><td></td><td></td><td></td></tr>
+        <tr><td>LLM · Anthropic + others</td><td>$126.18</td><td>$92.40</td><td class="pnl-neg">+37%</td></tr>
+        <tr><td>Infra · Contabo VPS 30+10</td><td>$58.00</td><td>$58.00</td><td>0%</td></tr>
+        <tr><td>SaaS · n8n / Tribute fee</td><td>$45.00</td><td>$42.00</td><td class="pnl-neg">+7%</td></tr>
+        <tr><td>Domains · Cloudflare · misc</td><td>$24.00</td><td>$24.00</td><td>0%</td></tr>
+        <tr><td>Heygen / image gen</td><td>$22.00</td><td>$18.00</td><td class="pnl-neg">+22%</td></tr>
+        <tr class="is-total"><td>Total OPEX</td><td>$275.18</td><td>$234.40</td><td class="pnl-neg">+17%</td></tr>
+
+        <tr class="is-total" style="border-top:2px solid var(--zc-accent)">
+          <td><span style="color:var(--zc-accent)">Net profit</span></td>
+          <td class="pnl-pos">$824.82</td>
+          <td class="pnl-pos">$665.60</td>
+          <td class="pnl-pos">+24%</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Cash sources -->
+  <div class="panel">
+    <div class="panel-head">
+      <span class="panel-title">Cash sources</span>
+      <span class="panel-meta" id="src-meta">—</span>
+    </div>
+    <div class="src-list" id="src-list">
+      <div class="src-row"><span class="src-mark" style="background:#627EEA"></span><span class="src-label">TON crypto</span><span class="src-amt" id="src-crypto">—</span><div class="src-bar"><div class="src-fill" id="src-fill-crypto" style="background:#627EEA;width:0%"></div></div></div>
+      <div class="src-row"><span class="src-mark" style="background:var(--zc-accent)"></span><span class="src-label">Tribute</span><span class="src-amt" id="src-tribute">—</span><div class="src-bar"><div class="src-fill" id="src-fill-tribute" style="background:var(--zc-accent);width:0%"></div></div></div>
+      <div class="src-row"><span class="src-mark" style="background:#4ade80"></span><span class="src-label">Gate.io</span><span class="src-amt">$200</span><div class="src-bar"><div class="src-fill" style="background:#4ade80;width:0%" id="src-fill-gate"></div></div></div>
+      <div class="src-row"><span class="src-mark" style="background:#f5f1e8"></span><span class="src-label">TBC bank</span><span class="src-amt">$400</span><div class="src-bar"><div class="src-fill" style="background:#f5f1e8;width:0%" id="src-fill-tbc"></div></div></div>
+    </div>
+
+    <div class="panel-head" style="margin-top:24px; padding-bottom:10px">
+      <span class="panel-title">Coming up · 30d</span>
+    </div>
+    <div style="display:flex; flex-direction:column; gap:6px;">
+      <div style="display:flex;justify-content:space-between;font-size:12.5px"><span style="color:var(--zc-text-secondary)">Recurring inflows</span><span style="font-variant-numeric:tabular-nums; color:#4ade80; font-weight:600">+$1,100</span></div>
+      <div style="display:flex;justify-content:space-between;font-size:12.5px"><span style="color:var(--zc-text-secondary)">Recurring outflows</span><span style="font-variant-numeric:tabular-nums; color:#f87171; font-weight:600">−$275</span></div>
+      <div style="display:flex;justify-content:space-between;font-size:13px;padding-top:8px;border-top:1px solid var(--zc-border-hairline);margin-top:4px"><span style="color:var(--zc-text-heading); font-weight:600">Net 30d</span><span style="font-variant-numeric:tabular-nums; color:var(--zc-accent); font-weight:700">+$825</span></div>
     </div>
   </div>
 
 </div>
 
-
 <!-- ============================================================
-     ROW 1: MRR Trend + Revenue Breakdown
+     SPEND BREAKDOWN + RECENT LEDGER
      ============================================================ -->
-<div class="fin-section-title">Анализ выручки</div>
-<div class="fin-grid-2">
-
-  <div class="fin-card">
-    <div class="fin-card-accent" style="background: linear-gradient(90deg, #10b981, #34d399)"></div>
-    <div class="fin-card-title" style="color: #10b981">Тренд MRR и прогноз</div>
-    <div class="fin-chart-wrap" id="chart-mrr-trend"></div>
-  </div>
-
-  <div class="fin-card">
-    <div class="fin-card-accent" style="background: linear-gradient(90deg, #6c5ce7, #a29bfe)"></div>
-    <div class="fin-card-title" style="color: #a29bfe">Выручка по клиентам</div>
-    <div class="fin-chart-wrap" id="chart-revenue-breakdown"></div>
-  </div>
-
+<div class="kit-sec">
+  <div class="kit-sec-title">Activity</div>
+  <div class="kit-sec-meta">last 14 days</div>
 </div>
 
+<div class="kit-row kit-row-2-66" style="margin-bottom: 24px;">
 
-<!-- ============================================================
-     ROW 1b: Consulting Income (Marshall)
-     ============================================================ -->
-<div class="fin-grid" style="grid-template-columns: 1fr;">
-  <div class="fin-card" style="border-left: 3px solid #f59e0b;">
-    <div class="fin-card-title" style="color: #f59e0b">Доход от консалтинга (разовый)</div>
-    <div style="display: flex; gap: 32px; align-items: center; flex-wrap: wrap;">
+  <!-- Recent ledger (Mercury pattern) -->
+  <div class="panel">
+    <div class="panel-head">
+      <span class="panel-title">Recent transactions</span>
+      <span class="panel-meta">14 entries</span>
+    </div>
+    <div class="kit-ledger">
+      <div class="kit-ledger-row">
+        <div class="kit-ledger-date">03 May</div>
+        <i data-lucide="leaf" class="kit-ledger-icon"></i>
+        <div class="kit-ledger-desc">Botanica subscription · 3 users</div>
+        <span class="kit-ledger-cat">Revenue</span>
+        <span class="kit-ledger-amt is-in">+$150.00</span>
+      </div>
+      <div class="kit-ledger-row">
+        <div class="kit-ledger-date">02 May</div>
+        <i data-lucide="brain-circuit" class="kit-ledger-icon"></i>
+        <div class="kit-ledger-desc">Anthropic API · prompt + cache</div>
+        <span class="kit-ledger-cat">LLM</span>
+        <span class="kit-ledger-amt is-out">−$8.42</span>
+      </div>
+      <div class="kit-ledger-row">
+        <div class="kit-ledger-date">02 May</div>
+        <i data-lucide="building-2" class="kit-ledger-icon"></i>
+        <div class="kit-ledger-desc">КРМКТЛ · monthly retainer</div>
+        <span class="kit-ledger-cat">Revenue</span>
+        <span class="kit-ledger-amt is-in">+$600.00</span>
+      </div>
+      <div class="kit-ledger-row">
+        <div class="kit-ledger-date">01 May</div>
+        <i data-lucide="server" class="kit-ledger-icon"></i>
+        <div class="kit-ledger-desc">Contabo VPS 30 · monthly</div>
+        <span class="kit-ledger-cat">Infra</span>
+        <span class="kit-ledger-amt is-out">−$32.00</span>
+      </div>
+      <div class="kit-ledger-row">
+        <div class="kit-ledger-date">01 May</div>
+        <i data-lucide="server" class="kit-ledger-icon"></i>
+        <div class="kit-ledger-desc">Contabo VPS 10 · monthly</div>
+        <span class="kit-ledger-cat">Infra</span>
+        <span class="kit-ledger-amt is-out">−$26.00</span>
+      </div>
+      <div class="kit-ledger-row">
+        <div class="kit-ledger-date">29 Apr</div>
+        <i data-lucide="leaf" class="kit-ledger-icon"></i>
+        <div class="kit-ledger-desc">Botanica · trial conversion</div>
+        <span class="kit-ledger-cat">Revenue</span>
+        <span class="kit-ledger-amt is-in">+$50.00</span>
+      </div>
+      <div class="kit-ledger-row">
+        <div class="kit-ledger-date">28 Apr</div>
+        <i data-lucide="workflow" class="kit-ledger-icon"></i>
+        <div class="kit-ledger-desc">n8n cloud · monthly</div>
+        <span class="kit-ledger-cat">SaaS</span>
+        <span class="kit-ledger-amt is-out">−$24.00</span>
+      </div>
+      <div class="kit-ledger-row">
+        <div class="kit-ledger-date">26 Apr</div>
+        <i data-lucide="image" class="kit-ledger-icon"></i>
+        <div class="kit-ledger-desc">OpenRouter · Gemini image gen</div>
+        <span class="kit-ledger-cat">LLM</span>
+        <span class="kit-ledger-amt is-out">−$6.20</span>
+      </div>
+      <div class="kit-ledger-row">
+        <div class="kit-ledger-date">25 Apr</div>
+        <i data-lucide="leaf" class="kit-ledger-icon"></i>
+        <div class="kit-ledger-desc">Botanica · monthly</div>
+        <span class="kit-ledger-cat">Revenue</span>
+        <span class="kit-ledger-amt is-in">+$300.00</span>
+      </div>
+      <div class="kit-ledger-row">
+        <div class="kit-ledger-date">22 Apr</div>
+        <i data-lucide="globe" class="kit-ledger-icon"></i>
+        <div class="kit-ledger-desc">Cloudflare · domains + tunnels</div>
+        <span class="kit-ledger-cat">Infra</span>
+        <span class="kit-ledger-amt is-out">−$11.00</span>
+      </div>
+      <div class="kit-ledger-row">
+        <div class="kit-ledger-date">20 Apr</div>
+        <i data-lucide="brain-circuit" class="kit-ledger-icon"></i>
+        <div class="kit-ledger-desc">Anthropic API · weekly</div>
+        <span class="kit-ledger-cat">LLM</span>
+        <span class="kit-ledger-amt is-out">−$28.40</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Spend breakdown (Ramp bar list) + Anomaly -->
+  <div style="display:flex;flex-direction:column;gap:14px">
+    <div class="panel">
+      <div class="panel-head">
+        <span class="panel-title">Spend by category</span>
+        <span class="panel-meta">$275.18 · MTD</span>
+      </div>
+      <div class="kit-bars">
+        <div class="kit-bar-row">
+          <div class="kit-bar-label"><i data-lucide="brain-circuit" class="lucide-14"></i>LLM</div>
+          <div class="kit-bar-amt">$126 · 46%</div>
+          <div class="kit-bar-track"><div class="kit-bar-fill" style="width:46%"></div></div>
+        </div>
+        <div class="kit-bar-row">
+          <div class="kit-bar-label"><i data-lucide="server" class="lucide-14"></i>Infra</div>
+          <div class="kit-bar-amt">$58 · 21%</div>
+          <div class="kit-bar-track"><div class="kit-bar-fill" style="width:21%"></div></div>
+        </div>
+        <div class="kit-bar-row">
+          <div class="kit-bar-label"><i data-lucide="package" class="lucide-14"></i>SaaS</div>
+          <div class="kit-bar-amt">$45 · 16%</div>
+          <div class="kit-bar-track"><div class="kit-bar-fill" style="width:16%"></div></div>
+        </div>
+        <div class="kit-bar-row">
+          <div class="kit-bar-label"><i data-lucide="globe" class="lucide-14"></i>Domains/CDN</div>
+          <div class="kit-bar-amt">$24 · 9%</div>
+          <div class="kit-bar-track"><div class="kit-bar-fill" style="width:9%"></div></div>
+        </div>
+        <div class="kit-bar-row">
+          <div class="kit-bar-label"><i data-lucide="image" class="lucide-14"></i>Image / video</div>
+          <div class="kit-bar-amt">$22 · 8%</div>
+          <div class="kit-bar-track"><div class="kit-bar-fill" style="width:8%"></div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Anomaly callout -->
+    <div class="kit-alert">
       <div>
-        <div class="fin-kpi-value" style="color: #f59e0b; font-size: 28px;">$2,500</div>
-        <div class="fin-kpi-sub">Marshall AI Tech (Feb 26)</div>
+        <div class="kit-alert-title">LLM spend up 37% MoM</div>
+        <div class="kit-alert-text">Anthropic burn $126.18 (Mar) vs $92.40 (Feb). Inspect Paperclip top agents.</div>
       </div>
-      <div style="flex:1; min-width:200px;">
-        <div class="fin-metric-row">
-          <span class="fin-metric-label">Ставка</span>
-          <span class="fin-metric-value">$250/час</span>
-        </div>
-        <div class="fin-metric-row">
-          <span class="fin-metric-label">Предоплата часов</span>
-          <span class="fin-metric-value">10 ч</span>
-        </div>
-        <div class="fin-metric-row">
-          <span class="fin-metric-label">Использовано</span>
-          <span class="fin-metric-value">0 / 10</span>
-        </div>
-        <div class="fin-progress-wrap">
-          <div class="fin-progress-bar" style="width:0%;background:linear-gradient(90deg,#f59e0b,#fbbf24)"></div>
-        </div>
-        <div class="fin-kpi-sub" style="text-align:right;margin-top:4px">0% выполнено</div>
-      </div>
-      <div style="flex:1; min-width:200px;">
-        <div class="fin-metric-row">
-          <span class="fin-metric-label">Клиент</span>
-          <span class="fin-metric-value">Marshall AI Tech</span>
-        </div>
-        <div class="fin-metric-row">
-          <span class="fin-metric-label">Контакт</span>
-          <span class="fin-metric-value">@Nicolas_Bobroff</span>
-        </div>
-        <div class="fin-metric-row">
-          <span class="fin-metric-label">Оплата</span>
-          <span class="fin-metric-value fin-positive">Получена</span>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-
-<!-- ============================================================
-     ROW 2: P&L Waterfall + Expense Breakdown
-     ============================================================ -->
-<div class="fin-section-title">Прибыль и убытки</div>
-<div class="fin-grid-2">
-
-  <div class="fin-card">
-    <div class="fin-card-accent" style="background: linear-gradient(90deg, #a29bfe, #6c5ce7)"></div>
-    <div class="fin-card-title" style="color: #a29bfe">Водопад P&L (март 2026)</div>
-    <div class="fin-chart-wrap" id="chart-pnl-waterfall"></div>
-  </div>
-
-  <div class="fin-card">
-    <div class="fin-card-accent" style="background: linear-gradient(90deg, #ef4444, #f87171)"></div>
-    <div class="fin-card-title" style="color: #ef4444">Структура расходов</div>
-    <div class="fin-chart-wrap" id="chart-expense-breakdown"></div>
-  </div>
-
-</div>
-
-
-<!-- ============================================================
-     ROW 3: Detailed P&L Table (EY-style)
-     ============================================================ -->
-<div class="fin-section-title">Отчёт о доходах (помесячно)</div>
-<div class="fin-card" style="padding: 0; overflow: hidden;">
-  <table class="fin-table">
-    <thead>
-      <tr>
-        <th>Категория</th>
-        <th>Янв 2026</th>
-        <th>Фев 2026</th>
-        <th>Мар 2026</th>
-        <th>Изм. MoM</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><strong>Выручка</strong></td>
-        <td></td><td></td><td></td><td></td>
-      </tr>
-      <tr>
-        <td style="padding-left:24px">КРМКТЛ (USDT-переводы)</td>
-        <td class="fin-positive">$350</td>
-        <td class="fin-positive">$639</td>
-        <td class="fin-positive">$600</td>
-        <td class="fin-negative">-6.1%</td>
-      </tr>
-      <tr>
-        <td style="padding-left:24px">Ботаника (выплаты Tribute)</td>
-        <td class="fin-positive">$430</td>
-        <td class="fin-positive">$569</td>
-        <td class="fin-positive">$500 <span class="fin-muted" style="font-size:11px">est.</span></td>
-        <td class="fin-negative">-12%</td>
-      </tr>
-      <tr>
-        <td style="padding-left:24px">Marshall (консалтинг $250/час)</td>
-        <td class="fin-muted">—</td>
-        <td class="fin-positive">$2,500</td>
-        <td class="fin-muted">—</td>
-        <td class="fin-muted">разовый</td>
-      </tr>
-      <tr class="subtotal-row">
-        <td>Итого выручка</td>
-        <td class="fin-positive">$780</td>
-        <td class="fin-positive">$3,708</td>
-        <td class="fin-positive">$1,100 <span class="fin-muted" style="font-size:11px">est.</span></td>
-        <td class="fin-positive">+41% MRR</td>
-      </tr>
-      <tr><td colspan="5" style="height:8px;border:none"></td></tr>
-      <tr>
-        <td><strong>Операционные расходы</strong></td>
-        <td></td><td></td><td></td><td></td>
-      </tr>
-      <tr>
-        <td style="padding-left:24px">Claude Code (Max)</td>
-        <td class="fin-negative">$200</td>
-        <td class="fin-negative">$200</td>
-        <td class="fin-negative">$200</td>
-        <td class="fin-muted">0%</td>
-      </tr>
-      <tr>
-        <td style="padding-left:24px">HeyGen (Creator)</td>
-        <td class="fin-negative">$29</td>
-        <td class="fin-negative">$29</td>
-        <td class="fin-negative">$29</td>
-        <td class="fin-muted">0%</td>
-      </tr>
-      <tr>
-        <td style="padding-left:24px">MiniMax M2.5 (Plus)</td>
-        <td class="fin-negative">$20</td>
-        <td class="fin-negative">$20</td>
-        <td class="fin-negative">$20</td>
-        <td class="fin-muted">0%</td>
-      </tr>
-      <tr>
-        <td style="padding-left:24px">RUVDS (VPS)</td>
-        <td class="fin-negative">$15</td>
-        <td class="fin-negative">$15</td>
-        <td class="fin-negative">$15</td>
-        <td class="fin-muted">0%</td>
-      </tr>
-      <tr>
-        <td style="padding-left:24px">Contabo (VPS)</td>
-        <td class="fin-negative">$8</td>
-        <td class="fin-negative">$8</td>
-        <td class="fin-negative">$8</td>
-        <td class="fin-muted">0%</td>
-      </tr>
-      <tr>
-        <td style="padding-left:24px">Domains</td>
-        <td class="fin-negative">$3</td>
-        <td class="fin-negative">$3</td>
-        <td class="fin-negative">$3</td>
-        <td class="fin-muted">0%</td>
-      </tr>
-      <tr class="subtotal-row">
-        <td>Итого OPEX</td>
-        <td class="fin-negative">$275</td>
-        <td class="fin-negative">$275</td>
-        <td class="fin-negative">$275</td>
-        <td class="fin-muted">0%</td>
-      </tr>
-      <tr><td colspan="5" style="height:8px;border:none"></td></tr>
-      <tr class="total-row">
-        <td>Чистая прибыль (повтор.)</td>
-        <td class="fin-positive">$505</td>
-        <td class="fin-positive">$933</td>
-        <td class="fin-positive">$825 <span class="fin-muted" style="font-size:11px">est.</span></td>
-        <td class="fin-positive">+63% vs Jan</td>
-      </tr>
-      <tr class="total-row" style="border-top:none">
-        <td>Чистая прибыль (с консалтингом)</td>
-        <td class="fin-positive">$505</td>
-        <td class="fin-positive" style="color:#f59e0b">$3,433</td>
-        <td class="fin-positive">$825</td>
-        <td></td>
-      </tr>
-      <tr>
-        <td style="color:var(--zc-text-muted)">Маржа (повтор.)</td>
-        <td style="color:var(--zc-text-muted)">64.7%</td>
-        <td style="color:var(--zc-text-muted)">77.2%</td>
-        <td style="color:var(--zc-text-muted)">75%</td>
-        <td class="fin-positive">+10pp vs Jan</td>
-      </tr>
-    </tbody>
-  </table>
-</div>
-
-
-<!-- ============================================================
-     ROW 4: Unit Economics + Cash Runway
-     ============================================================ -->
-<div class="fin-section-title">Юнит-экономика и денежная позиция</div>
-<div class="fin-grid-2">
-
-  <div class="fin-card">
-    <div class="fin-card-accent" style="background: linear-gradient(90deg, #f59e0b, #fbbf24)"></div>
-    <div class="fin-card-title" style="color: #f59e0b">Юнит-экономика</div>
-
-    <div class="fin-metric-row">
-      <span class="fin-metric-label">Средняя выручка на клиента</span>
-      <span class="fin-metric-value">$367</span>
-    </div>
-    <div class="fin-metric-row">
-      <span class="fin-metric-label">Стоимость привлечения (CAC)</span>
-      <span class="fin-metric-value">$0</span>
-    </div>
-    <div class="fin-metric-row">
-      <span class="fin-metric-label">LTV (оценка 12 мес.)</span>
-      <span class="fin-metric-value">$4,400</span>
-    </div>
-    <div class="fin-metric-row">
-      <span class="fin-metric-label">LTV:CAC</span>
-      <span class="fin-metric-value fin-positive" style="font-size:18px">Бесконечный</span>
-    </div>
-    <div class="fin-metric-row">
-      <span class="fin-metric-label">Срок окупаемости</span>
-      <span class="fin-metric-value fin-positive">0 мес.</span>
-    </div>
-    <div class="fin-metric-row">
-      <span class="fin-metric-label">Выручка на $1 OPEX</span>
-      <span class="fin-metric-value">$4.00</span>
-    </div>
-    <div class="fin-metric-row">
-      <span class="fin-metric-label">Активные клиенты (повтор.)</span>
-      <span class="fin-metric-value">2</span>
-    </div>
-    <div class="fin-metric-row">
-      <span class="fin-metric-label">Активные клиенты (консалтинг)</span>
-      <span class="fin-metric-value">1 <span class="fin-muted" style="font-size:11px">(Marshall)</span></span>
-    </div>
-    <div class="fin-metric-row">
-      <span class="fin-metric-label">Отток (ежемесячный)</span>
-      <span class="fin-metric-value fin-positive">0%</span>
-    </div>
-  </div>
-
-  <div class="fin-card">
-    <div class="fin-card-accent" style="background: linear-gradient(90deg, #3b82f6, #60a5fa)"></div>
-    <div class="fin-card-title" style="color: #3b82f6">Денежная позиция</div>
-
-    <div class="fin-metric-row">
-      <span class="fin-metric-label">Крипто-портфель (мультичейн)</span>
-      <span class="fin-metric-value" id="cash-crypto-total" style="color: #627EEA">загрузка...</span>
-    </div>
-    <div class="fin-metric-row">
-      <span class="fin-metric-label">Ежемесячный денежный поток</span>
-      <span class="fin-metric-value fin-positive">+$825</span>
-    </div>
-    <div class="fin-metric-row">
-      <span class="fin-metric-label">Статус безубыточности</span>
-      <span class="fin-metric-value fin-positive">Прибыльный</span>
-    </div>
-    <div class="fin-metric-row">
-      <span class="fin-metric-label">Месяцев до $2,500 MRR</span>
-      <span class="fin-metric-value">~8 мес.</span>
-    </div>
-    <div class="fin-metric-row">
-      <span class="fin-metric-label">Необходимый рост</span>
-      <span class="fin-metric-value">10.8% MoM</span>
-    </div>
-
-    <div style="margin-top:16px;font-size:12px;color:var(--zc-text-muted);text-transform:uppercase;letter-spacing:0.5px;margin-bottom:8px">Риск концентрации выручки</div>
-
-    <div class="fin-health-indicator">
-      <div class="fin-health-item">
-        <div class="fin-health-dot" style="background: var(--zc-status-red)"></div>
-        <div class="fin-health-text">
-          <strong>Высокий</strong>
-          КРМКТЛ = 55% MRR. Улучшилось с 78%.
-        </div>
+      <div class="kit-alert-actions">
+        <button class="kit-alert-btn">Mute</button>
+        <button class="kit-alert-btn">Drill</button>
       </div>
     </div>
 
-    <div style="margin-top:16px;font-size:12px;color:var(--zc-text-muted);text-transform:uppercase;letter-spacing:0.5px;margin-bottom:8px">Риск структуры OPEX</div>
-
-    <div class="fin-health-indicator">
-      <div class="fin-health-item">
-        <div class="fin-health-dot" style="background: var(--zc-status-yellow)"></div>
-        <div class="fin-health-text">
-          <strong>Средний</strong>
-          Claude Code = 72.7% OPEX. Зависимость от AI-инструментов.
-        </div>
+    <!-- Forecast: Net by month -->
+    <div class="panel">
+      <div class="panel-head">
+        <span class="panel-title">Forecast · net by month</span>
+        <span class="panel-meta">at current pace</span>
       </div>
-    </div>
-
-    <div style="margin-top:16px;font-size:12px;color:var(--zc-text-muted);text-transform:uppercase;letter-spacing:0.5px;margin-bottom:8px">Здоровье бизнеса</div>
-
-    <div class="fin-health-indicator">
-      <div class="fin-health-item">
-        <div class="fin-health-dot" style="background: var(--zc-status-green)"></div>
-        <div class="fin-health-text">
-          <strong>Здоровый</strong>
-          Положительный денежный поток, маржа 75%, отток 0%, +консалтинг.
-        </div>
-      </div>
-    </div>
-
-  </div>
-
-</div>
-
-
-<!-- ============================================================
-     ROW 5: Forecast + Scenario Analysis
-     ============================================================ -->
-<div class="fin-section-title">Прогноз и сценарный анализ</div>
-<div class="fin-grid-2">
-
-  <div class="fin-card">
-    <div class="fin-card-accent" style="background: linear-gradient(90deg, #10b981, #6c5ce7)"></div>
-    <div class="fin-card-title" style="color: #10b981">Прогноз выручки на 12 месяцев</div>
-    <div class="fin-chart-wrap" id="chart-forecast"></div>
-  </div>
-
-  <div class="fin-card">
-    <div class="fin-card-accent" style="background: linear-gradient(90deg, #f59e0b, #ef4444)"></div>
-    <div class="fin-card-title" style="color: #f59e0b">Сценарный анализ: путь к $2,500 MRR</div>
-
-    <div class="fin-metric-row">
-      <span class="fin-metric-label" style="color:var(--zc-status-green)">Оптимистичный (20% MoM)</span>
-      <span class="fin-metric-value fin-positive">Jul 2026</span>
-    </div>
-    <div class="fin-metric-row">
-      <span class="fin-metric-label" style="color:var(--zc-status-yellow)">Базовый (12% MoM)</span>
-      <span class="fin-metric-value" style="color:#f59e0b">Oct 2026</span>
-    </div>
-    <div class="fin-metric-row">
-      <span class="fin-metric-label" style="color:var(--zc-status-red)">Пессимистичный (5% MoM)</span>
-      <span class="fin-metric-value fin-negative">Apr 2027</span>
-    </div>
-
-    <div style="margin-top:20px;">
-      <div class="fin-card-title" style="color: var(--zc-text-muted); margin-bottom:10px">Рычаги роста</div>
-      <table class="fin-table" style="font-size:12px">
-        <tr>
-          <td>Marshall консалтинг (активен)</td>
-          <td style="text-align:right">$250/час (10ч предоплата)</td>
-        </tr>
-        <tr>
-          <td>AI Blogger Factory</td>
-          <td style="text-align:right">+$1,500/client</td>
-        </tr>
-        <tr>
-          <td>Yuki SMM (5 salons)</td>
-          <td style="text-align:right">+$500/mo</td>
-        </tr>
-        <tr>
-          <td>Расширение КРМКТЛ</td>
-          <td style="text-align:right">+$200/vendor</td>
-        </tr>
-        <tr>
-          <td>SBORKA Premium</td>
-          <td style="text-align:right">+$50/sub</td>
-        </tr>
-        <tr>
-          <td>MCP Job Board (Dice)</td>
-          <td style="text-align:right">+$300/employer</td>
-        </tr>
-      </table>
-    </div>
-  </div>
-
-</div>
-
-
-<!-- ============================================================
-     ROW 6: TON Wallet Monitor
-     ============================================================ -->
-<div class="fin-section-title">Мониторинг TON-кошелька</div>
-<div class="fin-grid-2">
-
-  <div class="fin-card">
-    <div class="fin-card-accent" style="background: linear-gradient(90deg, #0098EA, #45AEF5)"></div>
-    <div class="fin-card-title" style="color: #0098EA">Баланс TON-кошелька</div>
-    <div class="fin-kpi-value" style="color: #0098EA; margin-bottom: 12px" id="ton-total-usd">Загрузка...</div>
-    <div class="fin-kpi-sub" style="margin-bottom: 16px">UQCsUT6...HsASdo</div>
-    <div class="fin-metric-row">
-      <span class="fin-metric-label">USDT</span>
-      <span class="fin-metric-value" id="ton-usdt">—</span>
-    </div>
-    <div class="fin-metric-row">
-      <span class="fin-metric-label">TON</span>
-      <span class="fin-metric-value" id="ton-balance">—</span>
-    </div>
-    <div class="fin-metric-row">
-      <span class="fin-metric-label">Цена TON</span>
-      <span class="fin-metric-value" id="ton-price">—</span>
-    </div>
-    <div class="fin-metric-row">
-      <span class="fin-metric-label">Другие жеттоны</span>
-      <span class="fin-metric-value" id="ton-other">—</span>
-    </div>
-    <div class="fin-kpi-sub" style="margin-top: 12px; text-align: right" id="ton-updated">Последняя проверка: —</div>
-  </div>
-
-  <div class="fin-card">
-    <div class="fin-card-accent" style="background: linear-gradient(90deg, #0098EA, #45AEF5)"></div>
-    <div class="fin-card-title" style="color: #0098EA">Последние транзакции</div>
-    <div id="ton-transactions" style="font-size: 13px; color: var(--zc-text-secondary);">
-      <div style="font-size:11px;color:var(--zc-text-muted);text-transform:uppercase;letter-spacing:0.5px;margin-bottom:8px">Март 2026 (с начала месяца)</div>
-      <div class="fin-metric-row">
-        <span class="fin-metric-label">Mar 7</span>
-        <span class="fin-metric-value fin-positive">+200 USDT</span>
-      </div>
-      <div class="fin-metric-row">
-        <span class="fin-metric-label">Mar 5</span>
-        <span class="fin-metric-value fin-positive">+200 USDT</span>
-      </div>
-      <div class="fin-metric-row">
-        <span class="fin-metric-label">Mar 4 (@wallet)</span>
-        <span class="fin-metric-value fin-positive">+200 USDT</span>
-      </div>
-      <div class="fin-metric-row" style="border-top: 2px solid var(--zc-border-strong); padding-top: 12px; margin-top: 4px">
-        <span class="fin-metric-label"><strong>Доход марта (MTD)</strong></span>
-        <span class="fin-metric-value fin-positive" style="font-size: 18px"><strong>$600</strong></span>
-      </div>
-
-      <div style="font-size:11px;color:var(--zc-text-muted);text-transform:uppercase;letter-spacing:0.5px;margin:16px 0 8px">Февраль 2026</div>
-      <div class="fin-metric-row">
-        <span class="fin-metric-label">Feb 28</span>
-        <span class="fin-metric-value fin-positive">+238.50 USDT <span class="fin-muted" style="font-size:10px">3 transfers</span></span>
-      </div>
-      <div class="fin-metric-row">
-        <span class="fin-metric-label" style="color:#f59e0b;font-weight:600">Feb 26 Marshall</span>
-        <span class="fin-metric-value" style="color:#f59e0b;font-size:16px">+2,500 USDT</span>
-      </div>
-      <div class="fin-metric-row">
-        <span class="fin-metric-label">Feb 25 Tribute (×3)</span>
-        <span class="fin-metric-value fin-positive">+506.57 USDT</span>
-      </div>
-      <div class="fin-metric-row">
-        <span class="fin-metric-label">Feb 24</span>
-        <span class="fin-metric-value fin-positive">+200 USDT</span>
-      </div>
-      <div class="fin-metric-row">
-        <span class="fin-metric-label">Feb 10 Tribute</span>
-        <span class="fin-metric-value fin-positive">+62.10 USDT</span>
-      </div>
-      <div class="fin-metric-row">
-        <span class="fin-metric-label">Feb 6</span>
-        <span class="fin-metric-value fin-positive">+200 USDT</span>
-      </div>
-      <div class="fin-metric-row" style="border-top: 2px solid var(--zc-border-strong); padding-top: 12px; margin-top: 4px">
-        <span class="fin-metric-label"><strong>Доход февраля</strong></span>
-        <span class="fin-metric-value fin-positive" style="font-size: 16px"><strong>$3,707</strong></span>
-      </div>
-
-      <div style="margin-top: 16px; font-size: 11px; color: var(--zc-text-muted)">
-        <div style="margin-bottom: 4px">Исходящие (1-7 мар): 401 + 110.58 + 724.50 = <strong>$1,236 USDT</strong></div>
-        <div>Исходящие (фев): 827.50 + 132.91 + 203.50 + 6.51 + 209.50 + 251 = <strong>$1,631 USDT</strong></div>
+      <div id="forecast-list">
+        <div class="fc-row"><span class="fc-month">Mar</span><div class="fc-bar"><div class="fc-fill" style="width:80%"></div></div><span class="fc-amt" style="color:#4ade80">+$825</span></div>
+        <div class="fc-row"><span class="fc-month">Apr</span><div class="fc-bar"><div class="fc-fill" style="width:82%"></div></div><span class="fc-amt" style="color:#4ade80">+$850</span></div>
+        <div class="fc-row"><span class="fc-month">May</span><div class="fc-bar"><div class="fc-fill" style="width:88%"></div></div><span class="fc-amt" style="color:#4ade80">+$910</span></div>
+        <div class="fc-row"><span class="fc-month">Jun</span><div class="fc-bar"><div class="fc-fill" style="width:92%"></div></div><span class="fc-amt" style="color:#4ade80">+$960</span></div>
+        <div class="fc-row"><span class="fc-month">Jul</span><div class="fc-bar"><div class="fc-fill" style="width:96%"></div></div><span class="fc-amt" style="color:#4ade80">+$1,000</span></div>
       </div>
     </div>
   </div>
 
 </div>
 
+<!-- Lucide icons -->
+<script src="https://unpkg.com/lucide@latest"></script>
 
-<!-- ============================================================
-     ROW 6a: Multi-chain Crypto Portfolio (live from /portfolio.json)
-     ============================================================ -->
-<div class="fin-section-title">Крипто-портфель (мультичейн)</div>
-<div class="fin-grid-2">
+<script defer>
+// ============================================================
+// EMBED + meta
+// ============================================================
+if (window.top !== window) document.body.classList.add('is-embed');
+document.getElementById('page-date').textContent = new Date().toLocaleDateString('en-GB', { month: 'short', year: 'numeric' }).toUpperCase();
+document.getElementById('net-updated').textContent = new Date().toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit', hour12: false });
 
-  <div class="fin-card">
-    <div class="fin-card-accent" style="background: linear-gradient(90deg, #627EEA, #9945FF, #0098EA, #5546FF)"></div>
-    <div class="fin-card-title" style="color: #627EEA">Сводка портфеля</div>
-    <div class="fin-kpi-value" id="crypto-total-usd" style="color: #627EEA; margin-bottom: 16px">Загрузка...</div>
-    <div class="fin-chart-wrap" id="chart-crypto-allocation" style="min-height: 220px"></div>
-    <div class="fin-kpi-sub" style="text-align: right; margin-top: 8px" id="crypto-updated">Последнее обновление: —</div>
-  </div>
+// ============================================================
+// SPARKLINES (uPlot)
+// ============================================================
+function genSeries(n, base, vol, trend) {
+  const x = [], y = [];
+  let v = base;
+  for (let i = 0; i < n; i++) {
+    x.push(i);
+    v += (Math.random() - 0.5) * vol + trend;
+    v = Math.max(0, v);
+    y.push(v);
+  }
+  return [x, y];
+}
+function makeSpark(elId, data, color, height) {
+  const el = document.getElementById(elId); if (!el || !window.uPlot) return;
+  const opts = {
+    width: el.clientWidth || 220, height: height || 44, pxAlign: false,
+    cursor: { show: false }, legend: { show: false },
+    scales: { x: { time: false }, y: { range: (u, min, max) => [min - (max - min) * 0.1, max + (max - min) * 0.15] } },
+    axes: [{ show: false }, { show: false }],
+    series: [{}, { stroke: color, width: 1.6, fill: color + '14', points: { show: false } }]
+  };
+  new uPlot(opts, data, el);
+}
+function makeBigSpark(elId, data, color) {
+  const el = document.getElementById(elId); if (!el || !window.uPlot) return;
+  const opts = {
+    width: el.clientWidth || 380, height: el.clientHeight || 110, pxAlign: false,
+    cursor: { show: true, drag: { x: false, y: false } }, legend: { show: false },
+    scales: { x: { time: false }, y: { range: (u, min, max) => [min - (max - min) * 0.1, max + (max - min) * 0.15] } },
+    axes: [{ show: false }, { show: false }],
+    series: [{}, { stroke: color, width: 2.2, fill: color + '20', points: { show: false } }]
+  };
+  new uPlot(opts, data, el);
+}
+function initSparks() {
+  if (!window.uPlot) { setTimeout(initSparks, 100); return; }
+  makeSpark('spark-mrr',    genSeries(12, 700, 50, 35),   '#4ade80');
+  makeSpark('spark-burn',   genSeries(30, 280, 30, -0.5), '#f87171');
+  makeSpark('spark-runway', genSeries(30, 4.2, 0.2, 0),   '#ff5b3b');
+  makeSpark('spark-margin', genSeries(12, 60, 4, 1.5),    '#4ade80');
+  makeBigSpark('net-spark', genSeries(90, 850, 70, 4),    '#ff5b3b');
+}
+window.addEventListener('load', initSparks);
 
-  <div class="fin-card">
-    <div class="fin-card-accent" style="background: linear-gradient(90deg, #627EEA, #0098EA)"></div>
-    <div class="fin-card-title" style="color: #627EEA">Балансы по чейнам</div>
+// ============================================================
+// LIVE — TON wallet, Tribute → cash sources + net position
+// ============================================================
+async function loadCash() {
+  let crypto = 0, tribute = 0;
+  try {
+    const r = await fetch('/portfolio.json'); if (r.ok) { const d = await r.json(); crypto = d.total_usd || 0; }
+  } catch (e) {}
+  try {
+    const r = await fetch('/tribute.json');
+    if (r.ok) { const d = await r.json(); tribute = (d.summary && d.summary.total_revenue_usd) || (d.earnings && d.earnings.usd) || 0; }
+  } catch (e) {}
+  const gate = 200, tbc = 400;
+  const total = crypto + tribute + gate + tbc;
+  const pct = (v) => total > 0 ? ((v / total) * 100).toFixed(0) : 0;
 
-    <div class="fin-metric-row">
-      <span class="fin-metric-label" style="display:flex;align-items:center;gap:6px"><span style="width:10px;height:10px;border-radius:50%;background:#627EEA;display:inline-block"></span> Ethereum (EVM)</span>
-      <span class="fin-metric-value" id="chain-evm">—</span>
-    </div>
-    <div class="fin-metric-row">
-      <span class="fin-metric-label" style="display:flex;align-items:center;gap:6px"><span style="width:10px;height:10px;border-radius:50%;background:#0098EA;display:inline-block"></span> TON</span>
-      <span class="fin-metric-value" id="chain-ton">—</span>
-    </div>
-    <div class="fin-metric-row">
-      <span class="fin-metric-label" style="display:flex;align-items:center;gap:6px"><span style="width:10px;height:10px;border-radius:50%;background:#9945FF;display:inline-block"></span> Solana</span>
-      <span class="fin-metric-value" id="chain-solana">—</span>
-    </div>
-    <div class="fin-metric-row">
-      <span class="fin-metric-label" style="display:flex;align-items:center;gap:6px"><span style="width:10px;height:10px;border-radius:50%;background:#5546FF;display:inline-block"></span> Stacks</span>
-      <span class="fin-metric-value" id="chain-stacks">—</span>
-    </div>
-    <div class="fin-metric-row">
-      <span class="fin-metric-label" style="display:flex;align-items:center;gap:6px"><span style="width:10px;height:10px;border-radius:50%;background:#f59e0b;display:inline-block"></span> TG @wallet</span>
-      <span class="fin-metric-value fin-muted" id="chain-tgwallet">~$2,246 (ручной)</span>
-    </div>
+  // Net hero
+  const dollarsAndCents = total.toFixed(2).split('.');
+  document.getElementById('net-value').innerHTML = '$' + (+dollarsAndCents[0]).toLocaleString('en-US') + '<span class="net-hero-cents">.' + dollarsAndCents[1] + '</span>';
+  document.getElementById('net-yesterday').textContent = '$' + Math.round(total - 12).toLocaleString();
 
-    <div style="margin-top: 16px; padding-top: 12px; border-top: 2px solid var(--zc-border-strong)">
-      <div class="fin-metric-row">
-        <span class="fin-metric-label"><strong>Курсы</strong></span>
-        <span class="fin-metric-value fin-muted" id="crypto-prices" style="font-size: 11px">—</span>
-      </div>
-    </div>
-  </div>
+  // Sources
+  document.getElementById('src-crypto').textContent = '$' + Math.round(crypto).toLocaleString();
+  document.getElementById('src-tribute').textContent = '$' + Math.round(tribute).toLocaleString();
+  document.getElementById('src-fill-crypto').style.width = pct(crypto) + '%';
+  document.getElementById('src-fill-tribute').style.width = pct(tribute) + '%';
+  document.getElementById('src-fill-gate').style.width = pct(gate) + '%';
+  document.getElementById('src-fill-tbc').style.width = pct(tbc) + '%';
+  document.getElementById('src-meta').textContent = '$' + Math.round(total).toLocaleString();
 
-</div>
+  // Runway
+  document.getElementById('kpi-runway').textContent = (total / 275).toFixed(1);
+}
 
-<!-- ============================================================
-     ROW 6b: Tribute Live Data + Payout History
-     ============================================================ -->
-<div class="fin-section-title">Tribute — подписки и доходы</div>
-<div class="fin-grid-2">
+window.addEventListener('load', () => { if (window.lucide) lucide.createIcons(); });
+loadCash();
+setInterval(loadCash, 60000);
 
-  <div class="fin-card">
-    <div class="fin-card-accent" style="background: linear-gradient(90deg, #6c5ce7, #a29bfe)"></div>
-    <div class="fin-card-title" style="color: #a29bfe">Баланс Tribute</div>
-    <div style="display: flex; gap: 24px; align-items: baseline; margin-bottom: 16px">
-      <div>
-        <div class="fin-kpi-value" style="color: #a29bfe; font-size: 28px" id="tribute-rub">—</div>
-        <div class="fin-kpi-sub">RUB</div>
-      </div>
-      <div>
-        <div class="fin-kpi-value" style="color: #a29bfe; font-size: 22px" id="tribute-usd">—</div>
-        <div class="fin-kpi-sub">USD</div>
-      </div>
-    </div>
-    <div class="fin-metric-row">
-      <span class="fin-metric-label">Подписки (март)</span>
-      <span class="fin-metric-value" id="tribute-march-subs">—</span>
-    </div>
-    <div class="fin-metric-row">
-      <span class="fin-metric-label">Активные тарифы</span>
-      <span class="fin-metric-value" id="tribute-plans" style="font-size: 11px">—</span>
-    </div>
-    <div class="fin-kpi-sub" style="text-align: right; margin-top: 12px" id="tribute-updated">Обновлено: —</div>
-  </div>
-
-  <div class="fin-card">
-    <div class="fin-card-accent" style="background: linear-gradient(90deg, #6c5ce7, #a29bfe)"></div>
-    <div class="fin-card-title" style="color: #a29bfe">Последние транзакции</div>
-    <div id="tribute-tx-list" style="font-size: 13px">
-      <div class="fin-kpi-sub">Загрузка...</div>
-    </div>
-  </div>
-
-</div>
-
-<div class="fin-card" style="margin-top: 16px">
-  <div class="fin-card-accent" style="background: linear-gradient(90deg, #6c5ce7, #a29bfe)"></div>
-  <div class="fin-card-title" style="color: #a29bfe">Ежемесячные выплаты от Tribute</div>
-  <div class="fin-chart-wrap" id="chart-tribute-history"></div>
-</div>
-
-
-<!-- ============================================================
-     ROW 7: API Costs (from collect_api_costs.py)
-     ============================================================ -->
-<div class="fin-section-title">Расходы на API и инфраструктуру</div>
-<div class="fin-grid" style="grid-template-columns: repeat(3, 1fr);">
-
-  <div class="fin-card">
-    <div class="fin-card-accent" style="background: linear-gradient(90deg, #10b981, #34d399)"></div>
-    <div class="fin-card-title" style="color: #10b981">OpenRouter</div>
-    <div class="fin-metric-row">
-      <span class="fin-metric-label">Всего использовано</span>
-      <span class="fin-metric-value">$37.63</span>
-    </div>
-    <div class="fin-metric-row">
-      <span class="fin-metric-label">Остаток кредитов</span>
-      <span class="fin-metric-value fin-positive">$27.82</span>
-    </div>
-    <div class="fin-metric-row">
-      <span class="fin-metric-label">Бесплатный план</span>
-      <span class="fin-metric-value fin-muted">Активен</span>
-    </div>
-    <div class="fin-progress-wrap">
-      <div class="fin-progress-bar" style="width:57.5%;background:linear-gradient(90deg,#10b981,#f59e0b)"></div>
-    </div>
-    <div class="fin-kpi-sub" style="text-align:right;margin-top:4px">57.5% кредитов использовано</div>
-  </div>
-
-  <div class="fin-card">
-    <div class="fin-card-accent" style="background: linear-gradient(90deg, #3b82f6, #60a5fa)"></div>
-    <div class="fin-card-title" style="color: #3b82f6">ElevenLabs</div>
-    <div class="fin-metric-row">
-      <span class="fin-metric-label">Символов использовано</span>
-      <span class="fin-metric-value">97.7%</span>
-    </div>
-    <div class="fin-metric-row">
-      <span class="fin-metric-label">Тариф</span>
-      <span class="fin-metric-value">Бесплатный</span>
-    </div>
-    <div class="fin-metric-row">
-      <span class="fin-metric-label">Статус</span>
-      <span class="fin-metric-value fin-negative">Почти лимит</span>
-    </div>
-    <div class="fin-progress-wrap">
-      <div class="fin-progress-bar" style="width:97.7%;background:linear-gradient(90deg,#f59e0b,#ef4444)"></div>
-    </div>
-    <div class="fin-kpi-sub" style="text-align:right;margin-top:4px">97.7% квоты использовано</div>
-  </div>
-
-  <div class="fin-card">
-    <div class="fin-card-accent" style="background: linear-gradient(90deg, #6c5ce7, #a29bfe)"></div>
-    <div class="fin-card-title" style="color: #a29bfe">OpenAI</div>
-    <div class="fin-metric-row">
-      <span class="fin-metric-label">Расход за 30 дней</span>
-      <span class="fin-metric-value">$0.00</span>
-    </div>
-    <div class="fin-metric-row">
-      <span class="fin-metric-label">Тариф</span>
-      <span class="fin-metric-value">Pay-as-you-go</span>
-    </div>
-    <div class="fin-metric-row">
-      <span class="fin-metric-label">Статус</span>
-      <span class="fin-metric-value fin-positive">Без расходов</span>
-    </div>
-    <div class="fin-progress-wrap">
-      <div class="fin-progress-bar" style="width:0%;background:var(--zc-status-green)"></div>
-    </div>
-    <div class="fin-kpi-sub" style="text-align:right;margin-top:4px">$0 за период</div>
-  </div>
-
-</div>
-
-
-<div class="zc-footer">Zinin Corp &middot; Финансовый дашборд &middot; 2026</div>
-
-</div><!-- /.zc-container -->
-
-
-<!-- ============================================================
-     CHARTS — ApexCharts initialization
-     ============================================================ -->
-<script>
-const ZC_COLORS = {
-  green: '#10b981',
-  red: '#ef4444',
-  purple: '#6c5ce7',
-  yellow: '#f59e0b',
-  blue: '#3b82f6',
-  gray: '#6b7280',
-  greenLight: '#34d399',
-  purpleLight: '#a29bfe',
-  bg: '#141414',
-  border: '#222222',
-  text: '#999999',
-  textLight: '#666666'
+// ============================================================
+// CFO DATA HYDRATION — single source of truth = data/finance.json
+// CFO Paperclip agent updates JSON → git push → VPS git pull → here
+// ============================================================
+const fmtUSD = (cents) => '$' + (cents / 100).toLocaleString('en-US', { minimumFractionDigits: 0, maximumFractionDigits: 0 });
+const fmtUSDc = (cents) => {
+  const dollars = Math.floor(cents / 100);
+  const c = String(cents % 100).padStart(2, '0');
+  return { dollars: dollars.toLocaleString('en-US'), cents: c };
 };
+const fmtSign = (cents) => (cents >= 0 ? '+' : '−') + '$' + Math.abs(cents / 100).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
 
-const APEX_DARK = {
-  chart: { foreColor: ZC_COLORS.text, background: 'transparent' },
-  grid: { borderColor: ZC_COLORS.border, strokeDashArray: 3 },
-  tooltip: { theme: 'dark' },
-  xaxis: { axisBorder: { color: ZC_COLORS.border }, axisTicks: { color: ZC_COLORS.border } },
-  yaxis: { labels: { style: { colors: ZC_COLORS.textLight } } }
-};
+async function hydrateFromJSON() {
+  let fin;
+  try {
+    const res = await fetch('data/finance.json?_=' + Date.now(), { cache: 'no-cache' });
+    if (!res.ok) throw new Error('no json');
+    fin = await res.json();
+  } catch (e) { console.warn('[CFO] No data/finance.json — using static fallback'); return; }
 
-// ── MRR Trend + Forecast ──
-(function() {
-  const months = ['Sep','Oct','Nov','Dec','Jan','Feb','Mar'];
-  const actual = [280, 320, 320, 405, 780, 1208, 1100];
-  // Forecast: 12% MoM growth from current $1,100 MRR
-  const forecastMonths = ['Mar','Apr','May','Jun','Jul','Aug','Sep'];
-  const forecast = [1100, 1232, 1380, 1546, 1731, 1939, 2171];
-
-  new ApexCharts(document.querySelector('#chart-mrr-trend'), {
-    ...APEX_DARK,
-    series: [
-      { name: 'Факт MRR', data: actual, type: 'area' },
-      { name: 'Прогноз (12% MoM)', data: [null,null,null,null,null,null,1100,1232,1380,1546,1731,1939,2171], type: 'line' }
-    ],
-    chart: { type: 'line', height: 260, background: 'transparent', foreColor: ZC_COLORS.text, toolbar: { show: false } },
-    colors: [ZC_COLORS.green, ZC_COLORS.purple],
-    stroke: { width: [3, 2], curve: 'smooth', dashArray: [0, 6] },
-    fill: {
-      type: ['gradient', 'none'],
-      gradient: { shadeIntensity: 1, opacityFrom: 0.3, opacityTo: 0.05, stops: [0, 100] }
-    },
-    xaxis: {
-      categories: ['Sep','Oct','Nov','Dec','Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep\'27'],
-      axisBorder: { color: ZC_COLORS.border },
-      axisTicks: { color: ZC_COLORS.border }
-    },
-    yaxis: {
-      labels: { formatter: v => v ? '$' + v : '', style: { colors: ZC_COLORS.textLight } },
-      min: 0
-    },
-    grid: { borderColor: ZC_COLORS.border, strokeDashArray: 3 },
-    tooltip: { theme: 'dark', y: { formatter: v => v ? '$' + v : 'N/A' } },
-    annotations: {
-      yaxis: [{
-        y: 2500,
-        borderColor: ZC_COLORS.yellow,
-        strokeDashArray: 4,
-        label: {
-          text: 'Цель: $2,500',
-          style: { color: '#fff', background: ZC_COLORS.yellow, fontSize: '11px', padding: { left: 8, right: 8, top: 3, bottom: 3 } },
-          position: 'front'
-        }
-      }]
-    },
-    legend: { position: 'top', horizontalAlign: 'left', fontSize: '11px', labels: { colors: ZC_COLORS.text } }
-  }).render();
-})();
-
-
-// ── Revenue Breakdown (Donut) ──
-(function() {
-  new ApexCharts(document.querySelector('#chart-revenue-breakdown'), {
-    series: [600, 500],
-    labels: ['KRMKTL', 'Botanica'],
-    chart: { type: 'donut', height: 260, background: 'transparent', foreColor: ZC_COLORS.text },
-    colors: [ZC_COLORS.green, ZC_COLORS.purple],
-    plotOptions: {
-      pie: {
-        donut: {
-          size: '72%',
-          labels: {
-            show: true,
-            name: { fontSize: '13px', color: ZC_COLORS.text },
-            value: { fontSize: '24px', fontFamily: "'Unbounded', sans-serif", fontWeight: 700, color: '#fff', formatter: v => '$' + v },
-            total: { show: true, label: 'MRR', fontSize: '12px', color: ZC_COLORS.text, formatter: w => '$' + w.globals.seriesTotals.reduce((a,b) => a+b, 0) }
-          }
-        }
-      }
-    },
-    stroke: { width: 2, colors: ['#0a0a0a'] },
-    legend: { position: 'bottom', fontSize: '12px', labels: { colors: ZC_COLORS.text } },
-    tooltip: { theme: 'dark', y: { formatter: v => '$' + v + '/mo' } },
-    dataLabels: { enabled: false }
-  }).render();
-})();
-
-
-// ── P&L Waterfall (Plotly.js native waterfall — consulting standard) ──
-(function() {
-  Plotly.newPlot('chart-pnl-waterfall', [{
-    type: 'waterfall',
-    orientation: 'v',
-    measure: ['relative', 'relative', 'total', 'relative', 'relative', 'relative', 'relative', 'relative', 'total'],
-    x: ['КРМКТЛ', 'Ботаника', 'Выручка', 'Claude Code', 'HeyGen', 'MiniMax', 'Хостинг', 'Домены', 'Чист. прибыль'],
-    y: [600, 500, 0, -200, -29, -20, -23, -3, 0],
-    text: ['$600', '$500', '$1,100', '-$200', '-$29', '-$20', '-$23', '-$3', '$825'],
-    textposition: 'outside',
-    textfont: { size: 11, color: '#e5e5e5' },
-    increasing: { marker: { color: ZC_COLORS.green } },
-    decreasing: { marker: { color: ZC_COLORS.red } },
-    totals: { marker: { color: ZC_COLORS.purple } },
-    connector: { line: { color: '#555', width: 1 } },
-    hovertemplate: '<b>%{x}</b><br>%{text}<extra></extra>'
-  }], {
-    paper_bgcolor: 'transparent',
-    plot_bgcolor: 'transparent',
-    font: { family: "'Onest', sans-serif", color: ZC_COLORS.text, size: 11 },
-    margin: { t: 10, b: 60, l: 50, r: 20 },
-    height: 260,
-    xaxis: {
-      tickfont: { size: 10 },
-      gridcolor: ZC_COLORS.border,
-      linecolor: ZC_COLORS.border
-    },
-    yaxis: {
-      tickprefix: '$',
-      gridcolor: ZC_COLORS.border,
-      linecolor: ZC_COLORS.border,
-      zeroline: true,
-      zerolinecolor: ZC_COLORS.border
+  // === Net position hero ===
+  if (fin.net_position) {
+    const np = fin.net_position;
+    const pieces = fmtUSDc(np.total_cents);
+    document.getElementById('net-value').innerHTML = '$' + pieces.dollars + '<span class="net-hero-cents">.' + pieces.cents + '</span>';
+    const yEl = document.getElementById('net-yesterday');
+    if (yEl) yEl.textContent = fmtUSD(np.yesterday_cents);
+    const dEl = document.getElementById('net-delta-7d');
+    if (dEl) {
+      const d = np.delta_7d_pct;
+      dEl.textContent = (d >= 0 ? '+' : '') + d.toFixed(1) + '%';
+      dEl.className = 'kit-pill ' + (d > 0 ? 'kit-pill-up' : d < 0 ? 'kit-pill-down' : 'kit-pill-flat');
     }
-  }, { displayModeBar: false, responsive: true });
-})();
-
-
-// ── Expense Breakdown (Horizontal Bar) ──
-(function() {
-  new ApexCharts(document.querySelector('#chart-expense-breakdown'), {
-    series: [{ name: 'Ежемесячный расход', data: [200, 29, 20, 15, 8, 3] }],
-    chart: { type: 'bar', height: 260, background: 'transparent', foreColor: ZC_COLORS.text, toolbar: { show: false } },
-    plotOptions: { bar: { horizontal: true, borderRadius: 4, barHeight: '60%' } },
-    colors: [ZC_COLORS.red],
-    fill: {
-      type: 'gradient',
-      gradient: { shade: 'dark', type: 'horizontal', shadeIntensity: 0.3, gradientToColors: [ZC_COLORS.yellow], stops: [0, 100] }
-    },
-    xaxis: {
-      categories: ['Claude Code', 'HeyGen', 'MiniMax M2.5', 'RUVDS', 'Contabo', 'Домены'],
-      axisBorder: { color: ZC_COLORS.border },
-      labels: { formatter: v => '$' + v }
-    },
-    yaxis: { labels: { style: { colors: ZC_COLORS.textLight, fontSize: '11px' } } },
-    grid: { borderColor: ZC_COLORS.border, strokeDashArray: 3, xaxis: { lines: { show: true } }, yaxis: { lines: { show: false } } },
-    tooltip: { theme: 'dark', y: { formatter: v => '$' + v + '/mo' } },
-    dataLabels: {
-      enabled: true,
-      formatter: v => '$' + v,
-      style: { fontSize: '11px', fontWeight: 600, colors: ['#fff'] },
-      offsetX: 5
+    // Pending strip
+    const strip = document.querySelector('.net-hero-strip');
+    if (strip) {
+      strip.children[0].querySelector('.net-strip-value').textContent = fmtSign(np.pending_in_cents);
+      strip.children[1].querySelector('.net-strip-value').textContent = fmtSign(-np.pending_out_cents);
     }
-  }).render();
-})();
-
-
-// ── 12-Month Revenue Forecast (3 scenarios) ──
-(function() {
-  const months = ['Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec','Jan\'27','Feb','Mar'];
-  const base = 1100;
-
-  function grow(rate, n) {
-    const arr = [base];
-    for (let i = 1; i <= n; i++) arr.push(Math.round(arr[i-1] * (1 + rate)));
-    return arr;
   }
 
-  new ApexCharts(document.querySelector('#chart-forecast'), {
-    series: [
-      { name: 'Оптим. (20% MoM)', data: grow(0.20, 12) },
-      { name: 'Базовый (12% MoM)', data: grow(0.12, 12) },
-      { name: 'Пессим. (5% MoM)', data: grow(0.05, 12) }
-    ],
-    chart: { type: 'area', height: 260, background: 'transparent', foreColor: ZC_COLORS.text, toolbar: { show: false }, stacked: false },
-    colors: [ZC_COLORS.green, ZC_COLORS.blue, ZC_COLORS.red],
-    stroke: { width: [2, 2, 2], curve: 'smooth', dashArray: [0, 4, 8] },
-    fill: {
-      type: 'gradient',
-      gradient: { shadeIntensity: 1, opacityFrom: 0.15, opacityTo: 0.02, stops: [0, 100] }
-    },
-    xaxis: {
-      categories: months,
-      axisBorder: { color: ZC_COLORS.border },
-      axisTicks: { color: ZC_COLORS.border }
-    },
-    yaxis: {
-      labels: { formatter: v => '$' + (v >= 1000 ? (v/1000).toFixed(1)+'K' : v), style: { colors: ZC_COLORS.textLight } },
-      min: 0
-    },
-    grid: { borderColor: ZC_COLORS.border, strokeDashArray: 3 },
-    tooltip: { theme: 'dark', y: { formatter: v => '$' + v.toLocaleString() } },
-    annotations: {
-      yaxis: [{
-        y: 2500,
-        borderColor: ZC_COLORS.yellow,
-        strokeDashArray: 4,
-        label: {
-          text: 'Цель $2,500',
-          style: { color: '#fff', background: ZC_COLORS.yellow, fontSize: '11px', padding: { left: 8, right: 8, top: 3, bottom: 3 } },
-          position: 'front'
-        }
-      }]
-    },
-    legend: { position: 'top', horizontalAlign: 'left', fontSize: '11px', labels: { colors: ZC_COLORS.text } }
-  }).render();
-})();
-
-
-// ── Tribute Payout History ──
-(function() {
-  new ApexCharts(document.querySelector('#chart-tribute-history'), {
-    series: [{
-      name: 'Выплата Tribute',
-      data: [120, 105, 430, 569, 0]
-    }],
-    chart: { type: 'bar', height: 200, background: 'transparent', foreColor: ZC_COLORS.text, toolbar: { show: false } },
-    colors: [ZC_COLORS.purple],
-    plotOptions: { bar: { borderRadius: 6, columnWidth: '50%' } },
-    fill: {
-      type: 'gradient',
-      gradient: { shade: 'dark', type: 'vertical', shadeIntensity: 0.3, gradientToColors: [ZC_COLORS.purpleLight], stops: [0, 100] }
-    },
-    xaxis: {
-      categories: ['Нояб', 'Дек', 'Янв', 'Фев', 'Мар (ожидается)'],
-      axisBorder: { color: ZC_COLORS.border },
-      axisTicks: { color: ZC_COLORS.border }
-    },
-    yaxis: {
-      labels: { formatter: v => '$' + v, style: { colors: ZC_COLORS.textLight } }
-    },
-    grid: { borderColor: ZC_COLORS.border, strokeDashArray: 3 },
-    tooltip: { theme: 'dark', y: { formatter: v => '$' + v.toFixed(2) } },
-    dataLabels: {
-      enabled: true,
-      formatter: v => v > 0 ? '$' + v : 'ожид.',
-      style: { fontSize: '11px', fontWeight: 600, colors: ['#fff'] },
-      offsetY: -5
-    },
-    annotations: {
-      points: [{
-        x: 'Mar (pending)',
-        y: 500,
-        marker: { size: 0 },
-        label: {
-          text: '~$500 ожидается',
-          style: { color: '#fff', background: ZC_COLORS.yellow, fontSize: '10px', padding: { left: 6, right: 6, top: 2, bottom: 2 } },
-          offsetY: -10
-        }
-      }]
+  // === KPI cards ===
+  if (fin.kpis) {
+    const k = fin.kpis;
+    // MRR
+    const mrrCard = document.querySelectorAll('.kit-kpi')[0];
+    if (mrrCard && k.mrr) {
+      mrrCard.querySelector('.kit-kpi-value').textContent = fmtUSD(k.mrr.current_cents);
+      const pill = mrrCard.querySelector('.kit-pill');
+      pill.textContent = k.mrr.delta_label;
+      pill.className = 'kit-pill kit-pill-' + k.mrr.delta_kind;
+      mrrCard.querySelector('.kit-kpi-comp').textContent = k.mrr.vs_label;
     }
-  }).render();
-})();
-
-
-// ── TON Wallet Live Monitor ──
-(async function() {
-  const ADDR = 'UQCsUT6TyPwoN5nTuf9kuX0OiQnRP3UxzmDf8GWZUpHsASdo';
-  const API = 'https://tonapi.io/v2';
-  const headers = { 'Accept': 'application/json' };
-
-  try {
-    // Fetch account balance + jettons in parallel
-    const [accRes, jettonsRes, priceRes] = await Promise.all([
-      fetch(`${API}/accounts/${ADDR}`, { headers }),
-      fetch(`${API}/accounts/${ADDR}/jettons?currencies=usd`, { headers }),
-      fetch('https://api.coingecko.com/api/v3/simple/price?ids=the-open-network&vs_currencies=usd')
-    ]);
-
-    const acc = await accRes.json();
-    const jettonsData = await jettonsRes.json();
-    const priceData = await priceRes.json();
-
-    // TON balance
-    const tonBalance = parseInt(acc.balance || 0) / 1e9;
-    const tonPrice = priceData['the-open-network']?.usd || 0;
-    const tonUsd = tonBalance * tonPrice;
-
-    // Jetton balances
-    const jettons = jettonsData.balances || [];
-    let usdtBalance = 0;
-    let otherJettons = [];
-    let totalJettonUsd = 0;
-
-    for (const j of jettons) {
-      const sym = j.jetton?.symbol || '???';
-      const dec = parseInt(j.jetton?.decimals || 9);
-      const bal = parseInt(j.balance || '0') / Math.pow(10, dec);
-      const usdPrice = j.price?.prices?.USD || 0;
-      const usdVal = bal * usdPrice;
-
-      if (bal > 0.01) {
-        if (sym === 'USD₮' || sym === 'USDT' || sym === 'jUSDT') {
-          usdtBalance = bal;
-          totalJettonUsd += usdVal || bal; // USDT ≈ $1
-        } else {
-          otherJettons.push({ sym, bal, usdVal });
-          totalJettonUsd += usdVal;
-        }
-      }
+    // Burn
+    const burnCard = document.querySelectorAll('.kit-kpi')[1];
+    if (burnCard && k.burn_30d) {
+      burnCard.querySelector('.kit-kpi-value').textContent = fmtUSD(k.burn_30d.current_cents);
+      const pill = burnCard.querySelector('.kit-pill');
+      pill.textContent = k.burn_30d.delta_label;
+      pill.className = 'kit-pill kit-pill-' + k.burn_30d.delta_kind;
+      burnCard.querySelector('.kit-kpi-comp').textContent = k.burn_30d.vs_label;
     }
-
-    const grandTotal = tonUsd + totalJettonUsd;
-
-    // Update DOM
-    document.getElementById('ton-total-usd').textContent = '$' + grandTotal.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
-    document.getElementById('ton-usdt').textContent = usdtBalance.toLocaleString('en-US', { minimumFractionDigits: 2 }) + ' ($' + usdtBalance.toFixed(2) + ')';
-    document.getElementById('ton-balance').textContent = tonBalance.toFixed(4) + ' ($' + tonUsd.toFixed(2) + ')';
-    document.getElementById('ton-price').textContent = '$' + tonPrice.toFixed(2);
-
-    if (otherJettons.length > 0) {
-      const otherStr = otherJettons
-        .sort((a, b) => b.usdVal - a.usdVal)
-        .slice(0, 5)
-        .map(j => `${j.sym}: ${j.bal.toFixed(2)}`)
-        .join(', ');
-      document.getElementById('ton-other').textContent = otherStr || 'Нет';
-    } else {
-      document.getElementById('ton-other').textContent = 'Нет';
+    // Runway
+    if (k.runway_months) {
+      document.getElementById('kpi-runway').textContent = k.runway_months.value.toFixed(1);
     }
-
-    document.getElementById('ton-updated').textContent = 'Обновлено: ' + new Date().toLocaleString('ru-RU', { hour: '2-digit', minute: '2-digit', day: 'numeric', month: 'short' });
-
-  } catch (e) {
-    document.getElementById('ton-total-usd').textContent = 'Ошибка загрузки';
-    console.error('TON wallet fetch error:', e);
+    // Margin
+    const marginCard = document.querySelectorAll('.kit-kpi')[3];
+    if (marginCard && k.net_margin_pct) {
+      marginCard.querySelector('.kit-kpi-value').innerHTML = k.net_margin_pct.value + '<span class="kit-kpi-unit">%</span>';
+      const pill = marginCard.querySelector('.kit-pill');
+      pill.textContent = k.net_margin_pct.delta_label;
+      pill.className = 'kit-pill kit-pill-' + k.net_margin_pct.delta_kind;
+      marginCard.querySelector('.kit-kpi-comp').textContent = k.net_margin_pct.vs_label;
+    }
   }
-})();
 
+  // === Cash sources ===
+  if (fin.cash_sources) {
+    let total = fin.cash_sources.reduce((s, x) => s + x.amount_cents, 0);
+    if (total === 0) total = 1;
+    const map = {
+      ton:     { amt: 'src-crypto',  fill: 'src-fill-crypto'  },
+      tribute: { amt: 'src-tribute', fill: 'src-fill-tribute' },
+      gate:    { amt: null,          fill: 'src-fill-gate'    },
+      tbc:     { amt: null,          fill: 'src-fill-tbc'     }
+    };
+    fin.cash_sources.forEach(s => {
+      const m = map[s.id]; if (!m) return;
+      const pct = (s.amount_cents / total * 100).toFixed(0);
+      if (m.amt) document.getElementById(m.amt).textContent = fmtUSD(s.amount_cents);
+      document.getElementById(m.fill).style.width = pct + '%';
+    });
+    document.getElementById('src-meta').textContent = fmtUSD(total);
+  }
 
-// ── Tribute Live Data (from /tribute.json) ──
-(async function() {
-  try {
-    const res = await fetch('/tribute.json');
-    if (!res.ok) throw new Error('Tribute fetch: ' + res.status);
-    const data = await res.json();
-
-    // Balance = total revenue - total payouts
-    const s = data.summary || {};
-    const balRub = (s.total_revenue_rub || 0) - (s.total_payouts_rub || 0);
-    const balUsd = (s.total_revenue_usd || 0);
-    const marchRev = s.revenue_2026_03 || s.monthly_revenue?.['2026-03'] || {};
-
-    document.getElementById('tribute-rub').textContent = '₽' + Math.round(balRub).toLocaleString();
-    document.getElementById('tribute-usd').textContent = '$' + balUsd.toFixed(2);
-
-    // Count march subscriptions from transactions
-    const marchSubs = (data.transactions || []).filter(function(tx) {
-      return tx.date && tx.date.startsWith('2026-03') && tx.type === 'subscription';
-    }).length;
-    document.getElementById('tribute-march-subs').textContent = marchSubs + ' новых';
-    document.getElementById('tribute-plans').textContent = (s.active_plans || []).join(', ') || '—';
-
-    if (data.updated_at) {
-      const dt = new Date(data.updated_at);
-      document.getElementById('tribute-updated').textContent = 'Обновлено: ' + dt.toLocaleString('ru-RU', { hour: '2-digit', minute: '2-digit', day: 'numeric', month: 'short' });
+  // === P&L table ===
+  if (fin.pnl_monthly) {
+    const tbody = document.querySelector('.pnl tbody');
+    if (tbody) {
+      const html = [];
+      fin.pnl_monthly.rows.forEach(section => {
+        html.push(`<tr class="is-section"><td>${section.section === 'revenue' ? 'Revenue' : 'Operating expenses'}</td><td></td><td></td><td></td></tr>`);
+        section.items.forEach(it => {
+          const mom = it.mom_pct === null ? '—' : (it.mom_pct >= 0 ? '+' : '') + it.mom_pct + '%';
+          const cls = it.kind === 'up' ? 'pnl-pos' : it.kind === 'down' ? 'pnl-neg' : '';
+          html.push(`<tr><td>${it.label}</td><td>${fmtUSD(it.current_cents)}.${String(it.current_cents%100).padStart(2,'0')}</td><td>${fmtUSD(it.previous_cents)}.${String(it.previous_cents%100).padStart(2,'0')}</td><td class="${cls}">${mom}</td></tr>`);
+        });
+        const t = section.total;
+        const totCls = t.kind === 'up' ? 'pnl-pos' : t.kind === 'down' ? 'pnl-neg' : '';
+        html.push(`<tr class="is-total"><td>${t.label}</td><td>${fmtUSD(t.current_cents)}.${String(t.current_cents%100).padStart(2,'0')}</td><td>${fmtUSD(t.previous_cents)}.${String(t.previous_cents%100).padStart(2,'0')}</td><td class="${totCls}">${(t.mom_pct >= 0 ? '+' : '') + t.mom_pct + '%'}</td></tr>`);
+      });
+      const np = fin.pnl_monthly.net_profit;
+      const npCls = np.kind === 'up' ? 'pnl-pos' : 'pnl-neg';
+      html.push(`<tr class="is-total" style="border-top:2px solid var(--zc-accent)"><td><span style="color:var(--zc-accent)">Net profit</span></td><td class="${npCls}">${fmtUSD(np.current_cents)}.${String(np.current_cents%100).padStart(2,'0')}</td><td class="${npCls}">${fmtUSD(np.previous_cents)}.${String(np.previous_cents%100).padStart(2,'0')}</td><td class="${npCls}">${(np.mom_pct >= 0 ? '+' : '') + np.mom_pct + '%'}</td></tr>`);
+      tbody.innerHTML = html.join('');
     }
+  }
 
-    // Transactions list
-    const txList = document.getElementById('tribute-tx-list');
-    const txs = (data.transactions || []).slice(0, 8);
-    if (txs.length > 0) {
-      txList.innerHTML = txs.map(function(tx) {
-        const isIncome = tx.type !== 'payout';
-        const color = isIncome ? 'var(--zc-status-green)' : 'var(--zc-text-muted)';
-        const sign = isIncome ? '+' : '';
-        const label = tx.user + (tx.plan ? ' — ' + tx.plan : '');
-        return '<div class="fin-metric-row">' +
-          '<span class="fin-metric-label">' + tx.date + ' ' + label + '</span>' +
-          '<span class="fin-metric-value" style="color:' + color + '">' + sign + tx.amount.toLocaleString() + ' ' + tx.currency + '</span>' +
-          '</div>';
+  // === Ledger ===
+  if (fin.ledger) {
+    const led = document.querySelector('.kit-ledger');
+    if (led) {
+      led.innerHTML = fin.ledger.map(t => {
+        const dt = new Date(t.date);
+        const dateStr = dt.toLocaleDateString('en-GB', { day: '2-digit', month: 'short' });
+        const isOut = t.amount_cents < 0;
+        const sign = isOut ? '−' : '+';
+        const amt = sign + '$' + Math.abs(t.amount_cents / 100).toFixed(2);
+        return `<div class="kit-ledger-row">
+          <div class="kit-ledger-date">${dateStr}</div>
+          <i data-lucide="${t.icon}" class="kit-ledger-icon"></i>
+          <div class="kit-ledger-desc">${t.desc}</div>
+          <span class="kit-ledger-cat">${t.cat}</span>
+          <span class="kit-ledger-amt ${isOut ? 'is-out' : 'is-in'}">${amt}</span>
+        </div>`;
       }).join('');
+      // Re-init icons for new nodes
+      if (window.lucide) lucide.createIcons();
     }
-  } catch (e) {
-    console.warn('Tribute data:', e.message);
-  }
-})();
-
-
-// ── Multi-chain Crypto Portfolio (from /portfolio.json) ──
-(async function() {
-  try {
-    const res = await fetch('/portfolio.json');
-    if (!res.ok) throw new Error('Portfolio fetch failed: ' + res.status);
-    const data = await res.json();
-
-    // Total USD
-    const total = data.total_usd || 0;
-    document.getElementById('crypto-total-usd').textContent = '$' + total.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
-
-    // Chain balances
-    const chains = data.chains || {};
-    const fmt = v => '$' + (v || 0).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
-
-    if (chains.evm) document.getElementById('chain-evm').textContent = fmt(chains.evm.total_usd);
-    if (chains.ton) document.getElementById('chain-ton').textContent = fmt(chains.ton.total_usd);
-    if (chains.solana) document.getElementById('chain-solana').textContent = fmt(chains.solana.total_usd);
-    if (chains.stacks) document.getElementById('chain-stacks').textContent = fmt(chains.stacks.total_usd);
-
-    // Prices
-    const prices = data.prices || {};
-    const priceStr = Object.entries(prices).map(([k, v]) => k + ': $' + v.toFixed(2)).join(' | ');
-    document.getElementById('crypto-prices').textContent = priceStr || '—';
-
-    // Updated timestamp
-    if (data.updated_at) {
-      const dt = new Date(data.updated_at);
-      document.getElementById('crypto-updated').textContent = 'Обновлено: ' + dt.toLocaleString('ru-RU', { hour: '2-digit', minute: '2-digit', day: 'numeric', month: 'short' });
-    }
-
-    // Also update the "Денежная позиция" card
-    const cashEl = document.getElementById('cash-crypto-total');
-    if (cashEl) cashEl.textContent = fmt(total);
-
-    // Donut chart — allocation by chain
-    const chartData = [];
-    const chartLabels = [];
-    const chartColors = [];
-    const chainConfig = [
-      { key: 'evm', label: 'EVM (ETH+L2)', color: '#627EEA' },
-      { key: 'ton', label: 'TON', color: '#0098EA' },
-      { key: 'solana', label: 'Solana', color: '#9945FF' },
-      { key: 'stacks', label: 'Stacks', color: '#5546FF' },
-    ];
-
-    for (const c of chainConfig) {
-      const val = chains[c.key]?.total_usd || 0;
-      if (val > 0.01) {
-        chartData.push(Math.round(val * 100) / 100);
-        chartLabels.push(c.label);
-        chartColors.push(c.color);
+    const meta = document.querySelector('.panel-head .panel-meta'); // first panel-meta in ledger panel
+    // Update count text
+    const ledgerHeads = document.querySelectorAll('.panel-head');
+    ledgerHeads.forEach(h => {
+      const t = h.querySelector('.panel-title');
+      if (t && t.textContent.trim() === 'Recent transactions') {
+        const m = h.querySelector('.panel-meta');
+        if (m) m.textContent = fin.ledger.length + ' entries';
       }
-    }
-
-    if (chartData.length > 0) {
-      new ApexCharts(document.querySelector('#chart-crypto-allocation'), {
-        series: chartData,
-        labels: chartLabels,
-        chart: { type: 'donut', height: 220, background: 'transparent', foreColor: ZC_COLORS.text },
-        colors: chartColors,
-        plotOptions: {
-          pie: {
-            donut: {
-              size: '72%',
-              labels: {
-                show: true,
-                name: { fontSize: '12px', color: ZC_COLORS.text },
-                value: { fontSize: '20px', fontFamily: "'Unbounded', sans-serif", fontWeight: 700, color: '#fff', formatter: v => '$' + parseFloat(v).toLocaleString() },
-                total: { show: true, label: 'Портфель', fontSize: '11px', color: ZC_COLORS.text, formatter: w => '$' + w.globals.seriesTotals.reduce((a, b) => a + b, 0).toLocaleString() }
-              }
-            }
-          }
-        },
-        stroke: { width: 2, colors: ['#0a0a0a'] },
-        legend: { position: 'bottom', fontSize: '11px', labels: { colors: ZC_COLORS.text } },
-        tooltip: { theme: 'dark', y: { formatter: v => '$' + v.toLocaleString() } },
-        dataLabels: { enabled: false }
-      }).render();
-    }
-
-  } catch (e) {
-    document.getElementById('crypto-total-usd').textContent = 'Нет данных';
-    document.getElementById('crypto-total-usd').style.fontSize = '18px';
-    console.warn('Portfolio fetch:', e.message);
+    });
   }
-})();
+
+  // === Spend by category (bars) ===
+  if (fin.spend_by_category) {
+    const totalSpend = fin.spend_by_category.reduce((s, x) => s + x.amount_cents, 0);
+    const spendPanel = Array.from(document.querySelectorAll('.panel')).find(p => p.querySelector('.panel-title')?.textContent.trim() === 'Spend by category');
+    if (spendPanel) {
+      const bars = spendPanel.querySelector('.kit-bars');
+      bars.innerHTML = fin.spend_by_category.map(s => `
+        <div class="kit-bar-row">
+          <div class="kit-bar-label"><i data-lucide="${s.icon}" class="lucide-14"></i>${s.category}</div>
+          <div class="kit-bar-amt">$${(s.amount_cents/100).toFixed(0)} · ${s.pct}%</div>
+          <div class="kit-bar-track"><div class="kit-bar-fill" style="width:${s.pct}%"></div></div>
+        </div>`).join('');
+      spendPanel.querySelector('.panel-meta').textContent = '$' + (totalSpend/100).toFixed(2) + ' · MTD';
+      if (window.lucide) lucide.createIcons();
+    }
+  }
+
+  // === Anomalies ===
+  if (fin.anomalies && fin.anomalies.length > 0) {
+    const a = fin.anomalies[0];
+    const alertEl = document.querySelector('.kit-alert');
+    if (alertEl) {
+      alertEl.querySelector('.kit-alert-title').textContent = a.title;
+      alertEl.querySelector('.kit-alert-text').textContent = a.text;
+      if (a.level === 'error') alertEl.classList.add('is-error');
+    }
+  }
+
+  // === Forecast ===
+  if (fin.forecast) {
+    const list = document.getElementById('forecast-list');
+    if (list) {
+      list.innerHTML = fin.forecast.map(f => `
+        <div class="fc-row">
+          <span class="fc-month">${f.month.split(' ')[0]}</span>
+          <div class="fc-bar"><div class="fc-fill" style="width:${f.fill_pct}%"></div></div>
+          <span class="fc-amt" style="color:#4ade80">+$${(f.net_cents/100).toFixed(0).toLocaleString ? (f.net_cents/100).toLocaleString() : (f.net_cents/100)}</span>
+        </div>`).join('');
+    }
+  }
+
+  // === Coming up ===
+  if (fin.coming_up_30d) {
+    const cu = fin.coming_up_30d;
+    // The "Coming up · 30d" section sits inside the Cash sources panel (right column)
+    // It's the second .panel-head — find by title
+    const heads = document.querySelectorAll('.panel-head');
+    heads.forEach(h => {
+      if (h.querySelector('.panel-title')?.textContent.trim() === 'Coming up · 30d') {
+        const block = h.parentElement;
+        const rows = block.querySelectorAll('div[style*="justify-content:space-between"]');
+        if (rows.length >= 3) {
+          rows[0].lastElementChild.textContent = '+$' + (cu.recurring_in_cents/100).toLocaleString();
+          rows[1].lastElementChild.textContent = '−$' + (cu.recurring_out_cents/100).toLocaleString();
+          rows[2].lastElementChild.textContent = (cu.net_cents >= 0 ? '+' : '−') + '$' + Math.abs(cu.net_cents/100).toLocaleString();
+        }
+      }
+    });
+  }
+
+  // === Update meta line with timestamp ===
+  if (fin._meta && fin._meta.updated_at) {
+    const ts = new Date(fin._meta.updated_at);
+    const u = document.getElementById('net-updated');
+    if (u) u.textContent = ts.toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit', hour12: false });
+    const pageDate = document.getElementById('page-date');
+    if (pageDate) pageDate.textContent = ts.toLocaleDateString('en-GB', { month: 'short', year: 'numeric' }).toUpperCase();
+  }
+}
+
+window.addEventListener('load', () => { hydrateFromJSON(); setTimeout(initSparks, 200); });
+setInterval(hydrateFromJSON, 30000);
 </script>
 
+</div>
 </body>
 </html>

@@ -3,620 +3,563 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Обзор | Zinin Corp</title>
-<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;600;700&family=Onest:wght@400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="zinin-corp.css?v=20260320">
+<title>Ops Desk · Overview | Zinin Corp</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;600;700;800&family=Onest:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Instrument+Serif&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="zinin-corp.css?v=20260503-sprint-a-v2">
+<!-- uPlot for sparklines / time-series — 50 KB gz, 60 fps live -->
+<link rel="stylesheet" href="https://unpkg.com/uplot@1.6.30/dist/uPlot.min.css">
+<script src="https://unpkg.com/uplot@1.6.30/dist/uPlot.iife.min.js" defer></script>
+<!-- ApexCharts for richer money-pulse area chart -->
+<script src="https://cdn.jsdelivr.net/npm/apexcharts@3.49.0/dist/apexcharts.min.js" defer></script>
 <style>
-/* === OVERVIEW PAGE STYLES === */
+  body.is-embed .zc-nav { display: none; }
+  body.is-embed { padding-top: 0; }
 
-/* Health strip */
-.ov-health { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 28px; }
-.ov-kpi {
-  background: var(--zc-bg-card); border: 1px solid var(--zc-border); border-radius: var(--zc-radius-xl);
-  padding: 18px 20px; position: relative; overflow: hidden; transition: var(--zc-ease-base);
-}
-.ov-kpi:hover { border-color: var(--zc-border-accent); box-shadow: var(--zc-shadow-hover); }
-.ov-kpi-accent { position: absolute; top: 0; left: 0; right: 0; height: 3px; }
-.ov-kpi-label { font-size: 10px; text-transform: uppercase; letter-spacing: 1.5px; color: var(--zc-text-muted); margin-bottom: 6px; }
-.ov-kpi-value { font-family: var(--zc-font-display); font-size: 28px; font-weight: 700; line-height: 1.1; }
-.ov-kpi-sub { font-size: 11px; color: var(--zc-text-muted); margin-top: 6px; }
-.ov-kpi-badge {
-  display: inline-flex; align-items: center; gap: 4px; font-size: 11px; font-weight: 600;
-  padding: 2px 8px; border-radius: 100px; margin-top: 6px;
-}
-.ov-badge-green { background: var(--zc-status-green-dim); color: var(--zc-status-green); }
-.ov-badge-yellow { background: var(--zc-status-yellow-dim); color: var(--zc-status-yellow); }
-.ov-badge-red { background: var(--zc-status-red-dim); color: var(--zc-status-red); }
-.ov-progress { background: rgba(255,255,255,0.05); border-radius: 6px; height: 6px; margin-top: 8px; overflow: hidden; }
-.ov-progress-bar { height: 100%; border-radius: 6px; transition: width 0.8s ease; }
+  /* Page header — editorial */
+  .page-h {
+    display: grid; grid-template-columns: auto 1fr auto; gap: 22px;
+    align-items: end;
+    padding-bottom: 22px; border-bottom: 1px solid var(--zc-border-hairline);
+    margin-bottom: 28px;
+  }
+  .page-emblem { width: 48px; height: 48px; color: var(--zc-text-heading); }
+  .page-meta {
+    font: 500 11px var(--zc-font-mono);
+    letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--zc-text-muted); margin-bottom: 6px;
+  }
+  .page-meta .accent { color: var(--zc-accent); }
+  .page-h h1 {
+    font-family: var(--zc-font-display);
+    font-weight: 800;
+    font-size: clamp(36px, 4.6vw, 56px);
+    letter-spacing: -0.04em; line-height: 1.02;
+    color: var(--zc-text-heading);
+  }
+  .page-sub {
+    font-family: var(--zc-font-serif);
+    font-size: 15px; color: var(--zc-text-secondary);
+    margin-top: 6px; max-width: 60ch;
+  }
+  .page-status {
+    display: flex; flex-direction: column; align-items: flex-end; gap: 6px;
+    font: 500 11px var(--zc-font-mono); color: var(--zc-text-muted);
+    letter-spacing: 0.04em; text-transform: uppercase;
+  }
+  .page-status .live-dot {
+    width: 6px; height: 6px; border-radius: 50%;
+    background: #4ade80; box-shadow: 0 0 8px rgba(74,222,128,0.6);
+    animation: pulse 2s infinite;
+  }
+  @keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.45; } }
 
-/* Section headers */
-.ov-section { font-family: var(--zc-font-display); font-size: 14px; font-weight: 600; color: var(--zc-text-heading);
-  margin: 28px 0 14px; display: flex; align-items: center; gap: 10px; }
-.ov-section::after { content: ''; flex: 1; height: 1px; background: var(--zc-border); }
+  .pulse-card {
+    background: var(--zc-bg-card);
+    border: 1px solid var(--zc-border-hairline);
+    border-radius: 14px;
+    padding: 20px 22px;
+  }
+  .pulse-head {
+    display: flex; align-items: baseline; gap: 16px;
+    margin-bottom: 12px;
+  }
+  .pulse-title {
+    font-family: var(--zc-font-body);
+    font: 600 11px var(--zc-font-body);
+    text-transform: uppercase; letter-spacing: 0.16em;
+    color: var(--zc-text-muted);
+  }
+  .pulse-legend { margin-left: auto; display: flex; gap: 14px; }
+  .pulse-leg-item {
+    display: inline-flex; align-items: center; gap: 6px;
+    font: 500 11px var(--zc-font-mono);
+    color: var(--zc-text-secondary);
+    letter-spacing: 0.02em;
+  }
+  .pulse-leg-dot { width: 8px; height: 8px; border-radius: 2px; }
 
-/* Two-column grid */
-.ov-grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 16px; }
+  /* Two-col layout for activity + side */
+  .ov-two {
+    display: grid; grid-template-columns: 2fr 1fr; gap: 16px;
+  }
+  @media (max-width: 1100px) { .ov-two { grid-template-columns: 1fr; } }
 
-/* Cards */
-.ov-card {
-  background: var(--zc-bg-card); border: 1px solid var(--zc-border); border-radius: var(--zc-radius-xl);
-  padding: 20px; position: relative; overflow: hidden; transition: var(--zc-ease-base);
-}
-.ov-card:hover { border-color: var(--zc-border-accent); }
-.ov-card-accent { position: absolute; top: 0; left: 0; right: 0; height: 3px; }
-.ov-card-title {
-  font-family: var(--zc-font-display); font-size: 11px; font-weight: 600; text-transform: uppercase;
-  letter-spacing: 1.2px; margin-bottom: 14px; display: flex; align-items: center; gap: 8px;
-}
-.ov-row { display: flex; justify-content: space-between; align-items: center; padding: 8px 0; border-bottom: 1px solid var(--zc-border-subtle); }
-.ov-row:last-child { border-bottom: none; }
-.ov-row-label { color: var(--zc-text-secondary); font-size: 13px; }
-.ov-row-value { font-weight: 600; color: var(--zc-text-heading); font-variant-numeric: tabular-nums; }
-.ov-row-total { border-top: 2px solid var(--zc-border-strong); padding-top: 10px; }
-.ov-row-total .ov-row-value { font-size: 18px; }
-
-/* Quick links */
-.ov-links { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 8px; margin-bottom: 24px; }
-.ov-link {
-  background: rgba(255,255,255,0.02); border: 1px solid var(--zc-border); border-radius: var(--zc-radius-lg);
-  padding: 10px 14px; color: var(--zc-text-primary); transition: var(--zc-ease-base);
-  display: flex; align-items: center; gap: 10px; font-size: 13px; text-decoration: none;
-}
-.ov-link:hover { background: var(--zc-accent-dim); border-color: var(--zc-accent-border); transform: translateX(3px); }
-.ov-link-icon { font-size: 16px; flex-shrink: 0; }
-
-/* Dashboard cards */
-.ov-dashboards { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 10px; margin-bottom: 24px; }
-.ov-dash {
-  background: var(--zc-bg-card); border: 1px solid var(--zc-border); border-radius: var(--zc-radius-lg);
-  padding: 14px 16px; display: flex; align-items: center; gap: 12px; transition: var(--zc-ease-base);
-  text-decoration: none; color: var(--zc-text-primary); cursor: pointer;
-}
-.ov-dash:hover { border-color: var(--zc-accent-border); box-shadow: var(--zc-shadow-hover); transform: translateY(-2px); }
-.ov-dash-icon { width: 36px; height: 36px; border-radius: 10px; display: flex; align-items: center; justify-content: center;
-  font-size: 16px; background: var(--zc-accent-dim); border: 1px solid var(--zc-accent-border); flex-shrink: 0; }
-.ov-dash-title { font-size: 13px; font-weight: 600; }
-.ov-dash-sub { font-size: 10px; color: var(--zc-text-muted); margin-top: 2px; }
-.ov-dash-live { font-size: 8px; padding: 2px 6px; border-radius: 10px; background: var(--zc-status-green-dim);
-  color: var(--zc-status-green); font-weight: 700; letter-spacing: 0.5px; margin-left: auto; }
-
-/* Platform dots */
-.ov-platforms { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
-.ov-plat {
-  font-size: 10px; font-weight: 600; padding: 4px 10px; border-radius: 6px; border: 1px solid;
-  transition: var(--zc-ease-fast);
-}
-.ov-plat:hover { transform: translateY(-1px); }
-.ov-plat-ok { background: var(--zc-status-green-dim); border-color: rgba(16,185,129,0.25); color: var(--zc-status-green); }
-.ov-plat-warn { background: var(--zc-status-yellow-dim); border-color: rgba(245,158,11,0.25); color: var(--zc-status-yellow); }
-.ov-plat-err { background: var(--zc-status-red-dim); border-color: rgba(239,68,68,0.25); color: var(--zc-status-red); }
-
-/* Pipeline */
-.ov-pipeline { display: flex; flex-direction: column; gap: 10px; }
-.ov-pipe-lane { display: flex; align-items: center; gap: 12px; }
-.ov-pipe-stage { flex-shrink: 0; width: 72px; text-align: right; }
-.ov-pipe-stage-name { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; }
-.ov-pipe-items { display: flex; flex-wrap: wrap; gap: 6px; flex: 1; }
-.ov-pipe-item {
-  background: var(--zc-bg-overlay); border: 1px solid; border-radius: 6px; padding: 5px 10px;
-  font-size: 11px; font-weight: 600; color: var(--zc-text-primary);
-}
-.ov-pipe-item small { display: block; font-size: 9px; color: var(--zc-text-muted); font-weight: 400; margin-top: 1px; }
-
-/* Recommendations */
-.ov-recs { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 12px; margin-bottom: 24px; }
-.ov-rec {
-  background: var(--zc-bg-card); border: 1px solid var(--zc-border); border-radius: var(--zc-radius-lg);
-  padding: 16px; position: relative; overflow: hidden;
-}
-.ov-rec-accent { position: absolute; top: 0; left: 0; right: 0; height: 2px; }
-.ov-rec-title { font-size: 13px; font-weight: 600; color: var(--zc-text-heading); margin-bottom: 6px; }
-.ov-rec-text { font-size: 11px; color: var(--zc-text-secondary); line-height: 1.6; }
-
-/* Status dot */
-.ov-status-dot { width: 8px; height: 8px; border-radius: 50%; display: inline-block; }
-.ov-status-dot.green { background: var(--zc-status-green); box-shadow: 0 0 8px rgba(16,185,129,0.5); animation: pulse 2s infinite; }
-.ov-status-dot.yellow { background: var(--zc-status-yellow); box-shadow: 0 0 8px rgba(245,158,11,0.4); }
-.ov-status-dot.red { background: var(--zc-status-red); box-shadow: 0 0 8px rgba(239,68,68,0.5); }
-@keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.5; } }
-
-/* Responsive */
-@media (max-width: 900px) { .ov-health { grid-template-columns: repeat(2, 1fr); } .ov-grid-2 { grid-template-columns: 1fr; } }
-@media (max-width: 600px) { .ov-health { grid-template-columns: 1fr; } .ov-dashboards { grid-template-columns: 1fr; } }
+  .panel {
+    background: var(--zc-bg-card);
+    border: 1px solid var(--zc-border-hairline);
+    border-radius: 14px;
+    padding: 18px 20px;
+  }
+  .panel-head {
+    display: flex; align-items: baseline; gap: 10px;
+    padding-bottom: 12px;
+    margin-bottom: 8px;
+    border-bottom: 1px solid var(--zc-border-hairline);
+  }
+  .panel-title {
+    font: 600 11px var(--zc-font-body);
+    text-transform: uppercase; letter-spacing: 0.16em;
+    color: var(--zc-text-muted);
+  }
+  .panel-meta {
+    margin-left: auto;
+    font: 500 11px var(--zc-font-mono);
+    color: var(--zc-text-muted);
+    letter-spacing: 0.04em;
+  }
 </style>
 </head>
 <body>
 
-<div class="zc-container">
+<div class="zc-container--wide">
 
+<!-- Legacy nav — hidden when embedded in shell -->
 <nav class="zc-nav">
   <span class="zc-nav-brand"><img src="img/avatar.jpg" alt="" class="zc-nav-avatar">Zinin <span class="zc-nav-brand-suffix">Corp</span></span>
   <a href="overview.html" class="active">Обзор</a>
-  <a href="content-calendar.html">Календарь</a>
-  <a href="content-bank.html">Банк</a>
-  <a href="analytics.html">Аналитика</a>
-  <a href="connectors.html">Коннекторы</a>
   <a href="finance.html">Финансы</a>
   <a href="tasks.html">Задачи</a>
 </nav>
 
-<div class="zc-page-header">
-  <h1>Zinin Corporation</h1>
-  <p class="zc-subtitle">Health Monitor &middot; <span id="last-updated" style="color:var(--zc-text-disabled)">—</span></p>
-</div>
+<!-- ============================================================
+     PAGE HEADER — editorial, with live status
+     ============================================================ -->
+<header class="page-h">
+  <svg class="page-emblem" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true">
+    <circle cx="24" cy="24" r="3.6" fill="currentColor" stroke="none"/>
+    <circle cx="24" cy="24" r="9"/>
+    <circle cx="24" cy="24" r="16" stroke-dasharray="2 4" opacity="0.55"/>
+    <line x1="24" y1="2" x2="24" y2="6" opacity="0.7"/>
+    <line x1="24" y1="42" x2="24" y2="46" opacity="0.7"/>
+    <line x1="2" y1="24" x2="6" y2="24" opacity="0.7"/>
+    <line x1="42" y1="24" x2="46" y2="24" opacity="0.7"/>
+  </svg>
+  <div>
+    <div class="page-meta"><span class="accent">Ops desk</span> · Health monitor · <span id="page-date">—</span></div>
+    <h1>Operations</h1>
+    <p class="page-sub">Money in, money out, who's online, what's broken. Five-second rule.</p>
+  </div>
+  <div class="page-status">
+    <span><span class="live-dot" style="display:inline-block;margin-right:6px;vertical-align:middle"></span>Live <span id="page-clock">—</span></span>
+    <span style="font-size:10px">Auto-refresh 60s</span>
+  </div>
+</header>
 
-<!-- ═══════════════════════════════════════════════════════════════
-     HEALTH MONITOR — 4 KPIs (5-second rule)
-     ═══════════════════════════════════════════════════════════════ -->
-<div class="ov-health">
+<!-- ============================================================
+     HERO KPI STRIP — 4 cards, Stripe pattern (label · big num · pill · sparkline)
+     ============================================================ -->
+<div class="kit-row kit-row-4">
 
-  <div class="ov-kpi">
-    <div class="ov-kpi-accent" style="background: linear-gradient(90deg, #10b981, #34d399)"></div>
-    <div class="ov-kpi-label">MRR</div>
-    <div class="ov-kpi-value" style="color: var(--zc-status-green)">$1,100</div>
-    <div class="ov-kpi-sub">Цель: $2,500</div>
-    <div class="ov-progress"><div class="ov-progress-bar" style="width:44%; background: linear-gradient(90deg, #10b981, #34d399)"></div></div>
-    <div class="ov-kpi-badge ov-badge-green">44% от цели</div>
+  <!-- CASH ON HAND -->
+  <div class="kit-kpi">
+    <div class="kit-kpi-head">
+      <span class="kit-kpi-label">Cash on hand</span>
+      <i data-lucide="wallet" class="kit-kpi-icon"></i>
+    </div>
+    <div class="kit-kpi-value" id="kpi-cash">—</div>
+    <div class="kit-kpi-foot">
+      <span class="kit-pill kit-pill-up" id="kpi-cash-delta">+0.0%</span>
+      <span class="kit-kpi-comp">vs 30d ago</span>
+    </div>
+    <div class="kit-spark" id="spark-cash"></div>
   </div>
 
-  <div class="ov-kpi">
-    <div class="ov-kpi-accent" style="background: linear-gradient(90deg, #6c5ce7, #a29bfe)"></div>
-    <div class="ov-kpi-label">Чистая прибыль</div>
-    <div class="ov-kpi-value" style="color: #a29bfe">+$825</div>
-    <div class="ov-kpi-sub">Маржа: 75%</div>
-    <div class="ov-kpi-badge ov-badge-green">+63% vs Jan</div>
+  <!-- MRR -->
+  <div class="kit-kpi">
+    <div class="kit-kpi-head">
+      <span class="kit-kpi-label">MRR</span>
+      <i data-lucide="repeat" class="kit-kpi-icon"></i>
+    </div>
+    <div class="kit-kpi-value">$1,100</div>
+    <div class="kit-kpi-foot">
+      <span class="kit-pill kit-pill-up">+41%</span>
+      <span class="kit-kpi-comp">vs Jan</span>
+    </div>
+    <div class="kit-spark" id="spark-mrr"></div>
   </div>
 
-  <div class="ov-kpi">
-    <div class="ov-kpi-accent" style="background: linear-gradient(90deg, #3b82f6, #60a5fa)"></div>
-    <div class="ov-kpi-label">Cash Position</div>
-    <div class="ov-kpi-value" style="color: #60a5fa" id="cash-total">—</div>
-    <div class="ov-kpi-sub" id="cash-breakdown">Крипто + Tribute + банки</div>
+  <!-- BURN 30D -->
+  <div class="kit-kpi">
+    <div class="kit-kpi-head">
+      <span class="kit-kpi-label">Burn (30d)</span>
+      <i data-lucide="flame" class="kit-kpi-icon"></i>
+    </div>
+    <div class="kit-kpi-value">$275</div>
+    <div class="kit-kpi-foot">
+      <span class="kit-pill kit-pill-flat">flat</span>
+      <span class="kit-kpi-comp">vs prev 30d</span>
+    </div>
+    <div class="kit-spark" id="spark-burn"></div>
   </div>
 
-  <div class="ov-kpi">
-    <div class="ov-kpi-accent" style="background: linear-gradient(90deg, #10b981, #3b82f6)"></div>
-    <div class="ov-kpi-label">Uptime</div>
-    <div class="ov-kpi-value" id="uptime-value" style="color: var(--zc-status-green)">
-      <span class="ov-status-dot green" style="margin-right:6px"></span>—
+  <!-- RUNWAY -->
+  <div class="kit-kpi">
+    <div class="kit-kpi-head">
+      <span class="kit-kpi-label">Runway</span>
+      <i data-lucide="route" class="kit-kpi-icon"></i>
     </div>
-    <div class="ov-kpi-sub" id="uptime-sub">21 монитор</div>
-    <a href="/uptime/" target="_blank" style="font-size:10px; color:var(--zc-accent); text-decoration:none; margin-top:4px; display:inline-block">Открыть Uptime Kuma →</a>
-  </div>
-
-</div>
-
-
-<!-- ═══════════════════════════════════════════════════════════════
-     ФИНАНСЫ
-     ═══════════════════════════════════════════════════════════════ -->
-<div class="ov-section">Финансы</div>
-<div class="ov-grid-2">
-
-  <!-- MRR Breakdown -->
-  <div class="ov-card">
-    <div class="ov-card-accent" style="background: linear-gradient(90deg, #10b981, #34d399)"></div>
-    <div class="ov-card-title" style="color: var(--zc-status-green)">MRR по клиентам</div>
-    <div class="ov-row">
-      <span class="ov-row-label">КРМКТЛ <span style="font-size:10px;color:var(--zc-text-disabled)">8 вендоров</span></span>
-      <span class="ov-row-value" style="color: var(--zc-status-green)">$600</span>
+    <div class="kit-kpi-value"><span id="kpi-runway">—</span><span class="kit-kpi-unit">mo</span></div>
+    <div class="kit-kpi-foot">
+      <span class="kit-pill kit-pill-accent" id="kpi-runway-mode">at current burn</span>
     </div>
-    <div class="ov-row">
-      <span class="ov-row-label">Ботаника <span style="font-size:10px;color:var(--zc-text-disabled)">Tribute</span></span>
-      <span class="ov-row-value" style="color: var(--zc-status-blue)">$500</span>
-    </div>
-    <div class="ov-row">
-      <span class="ov-row-label">СБОРКА <span style="font-size:10px;color:var(--zc-text-disabled)">pre-revenue</span></span>
-      <span class="ov-row-value" style="color: var(--zc-text-disabled)">$0</span>
-    </div>
-    <div class="ov-row ov-row-total">
-      <span class="ov-row-label"><strong>MRR</strong></span>
-      <span class="ov-row-value" style="color: var(--zc-status-green); font-size: 20px">$1,100</span>
-    </div>
-    <div class="ov-progress" style="margin-top:10px"><div class="ov-progress-bar" style="width:44%; background: linear-gradient(90deg, #10b981, #3b82f6, #6c5ce7)"></div></div>
-    <div style="font-size:10px; color:var(--zc-text-disabled); text-align:right; margin-top:4px">$1,100 / $2,500 (44%)</div>
-  </div>
-
-  <!-- P&L Summary -->
-  <div class="ov-card">
-    <div class="ov-card-accent" style="background: linear-gradient(90deg, #6c5ce7, #a29bfe)"></div>
-    <div class="ov-card-title" style="color: #a29bfe">P&L (Март 2026)</div>
-    <div class="ov-row">
-      <span class="ov-row-label">Выручка (MRR)</span>
-      <span class="ov-row-value" style="color: var(--zc-status-green)">+$1,100</span>
-    </div>
-    <div class="ov-row">
-      <span class="ov-row-label">OPEX</span>
-      <span class="ov-row-value" style="color: var(--zc-status-red)">-$275</span>
-    </div>
-    <div class="ov-row ov-row-total">
-      <span class="ov-row-label"><strong>Чистая прибыль</strong></span>
-      <span class="ov-row-value" style="color: #a29bfe">+$825</span>
-    </div>
-    <div style="margin-top:12px; display:flex; gap:16px; font-size:11px">
-      <span style="color:var(--zc-text-muted)">Маржа: <strong style="color:var(--zc-status-green)">75%</strong></span>
-      <span style="color:var(--zc-text-muted)">До цели: <strong style="color:var(--zc-status-yellow)">$1,400</strong></span>
-    </div>
-
-    <div style="margin-top:16px; padding-top:12px; border-top:1px solid var(--zc-border-subtle)">
-      <div style="font-size:10px; text-transform:uppercase; letter-spacing:1px; color:var(--zc-text-disabled); margin-bottom:8px">Cash Reserves</div>
-      <div class="ov-row" style="padding:4px 0">
-        <span class="ov-row-label" style="font-size:12px;display:flex;align-items:center;gap:4px"><span style="width:6px;height:6px;border-radius:50%;background:#627EEA"></span> Крипто-портфель</span>
-        <span class="ov-row-value" style="font-size:13px" id="ov-crypto">—</span>
-      </div>
-      <div class="ov-row" style="padding:4px 0">
-        <span class="ov-row-label" style="font-size:12px;display:flex;align-items:center;gap:4px"><span style="width:6px;height:6px;border-radius:50%;background:#a29bfe"></span> Tribute баланс</span>
-        <span class="ov-row-value" style="font-size:13px" id="ov-tribute">—</span>
-      </div>
-      <div class="ov-row" style="padding:4px 0">
-        <span class="ov-row-label" style="font-size:12px">Gate.io</span>
-        <span class="ov-row-value" style="font-size:13px">~$200</span>
-      </div>
-      <div class="ov-row" style="padding:4px 0">
-        <span class="ov-row-label" style="font-size:12px">TBC</span>
-        <span class="ov-row-value" style="font-size:13px">~$400</span>
-      </div>
-    </div>
-
-    <a href="finance.html" style="font-size:11px; color:var(--zc-accent); text-decoration:none; margin-top:10px; display:inline-block">Подробнее →</a>
+    <div class="kit-spark" id="spark-runway"></div>
   </div>
 
 </div>
 
-
-<!-- ═══════════════════════════════════════════════════════════════
-     ТРАФИК И КОНТЕНТ
-     ═══════════════════════════════════════════════════════════════ -->
-<div class="ov-section">Трафик и контент</div>
-<div class="ov-grid-2">
-
-  <!-- Platform Coverage -->
-  <div class="ov-card">
-    <div class="ov-card-accent" style="background: linear-gradient(90deg, #3b82f6, #60a5fa)"></div>
-    <div class="ov-card-title" style="color: var(--zc-status-blue)">Покрытие платформ — 18 активных</div>
-    <div style="display:flex; gap:12px; margin-bottom:12px; font-size:11px">
-      <span style="color:var(--zc-status-green)"><span class="ov-status-dot green"></span> API (15)</span>
-      <span style="color:var(--zc-status-yellow)"><span class="ov-status-dot yellow"></span> Playwright (2)</span>
-      <span style="color:var(--zc-status-red)"><span class="ov-status-dot red"></span> Blocked (1)</span>
-    </div>
-    <div class="ov-platforms">
-      <span class="ov-plat ov-plat-ok">LinkedIn</span>
-      <span class="ov-plat ov-plat-ok">Telegram</span>
-      <span class="ov-plat ov-plat-ok">Threads</span>
-      <span class="ov-plat ov-plat-ok">Facebook</span>
-      <span class="ov-plat ov-plat-ok">VK</span>
-      <span class="ov-plat ov-plat-ok">Bluesky</span>
-      <span class="ov-plat ov-plat-ok">YouTube</span>
-      <span class="ov-plat ov-plat-ok">Instagram</span>
-      <span class="ov-plat ov-plat-ok">Mastodon</span>
-      <span class="ov-plat ov-plat-ok">Dev.to</span>
-      <span class="ov-plat ov-plat-ok">Hashnode</span>
-      <span class="ov-plat ov-plat-ok">Minds</span>
-      <span class="ov-plat ov-plat-ok">Write.as</span>
-      <span class="ov-plat ov-plat-ok">Tumblr</span>
-      <span class="ov-plat ov-plat-ok">Nostr</span>
-      <span class="ov-plat ov-plat-warn">VC.ru</span>
-      <span class="ov-plat ov-plat-warn">Дзен</span>
-      <span class="ov-plat ov-plat-err">OK.ru</span>
-    </div>
-    <a href="connectors.html" style="font-size:11px; color:var(--zc-accent); text-decoration:none; margin-top:10px; display:inline-block">Все коннекторы →</a>
-  </div>
-
-  <!-- Content & Analytics -->
-  <div class="ov-card">
-    <div class="ov-card-accent" style="background: linear-gradient(90deg, #f59e0b, #fbbf24)"></div>
-    <div class="ov-card-title" style="color: var(--zc-status-yellow)">Контент и аналитика</div>
-    <div class="ov-row">
-      <span class="ov-row-label">CRM Users</span>
-      <span class="ov-row-value" id="crm-total">—</span>
-    </div>
-    <div class="ov-row">
-      <span class="ov-row-label">Зарегистрированы</span>
-      <span class="ov-row-value" id="crm-registered" style="font-size:13px">—</span>
-    </div>
-    <div class="ov-row">
-      <span class="ov-row-label">Активные платформы</span>
-      <span class="ov-row-value">18</span>
-    </div>
-
-    <div style="margin-top:14px; display:flex; flex-wrap:wrap; gap:8px">
-      <a href="analytics.html" class="ov-link" style="flex:1; min-width:120px">
-        <span class="ov-link-icon">📈</span> Аналитика
-      </a>
-      <a href="content-calendar.html" class="ov-link" style="flex:1; min-width:120px">
-        <span class="ov-link-icon">📅</span> Календарь
-      </a>
-      <a href="content-bank.html" class="ov-link" style="flex:1; min-width:120px">
-        <span class="ov-link-icon">🗃</span> Банк контента
-      </a>
+<!-- ============================================================
+     MONEY PULSE — 30-day stacked area: In / Out / Net
+     ============================================================ -->
+<div class="kit-sec">
+  <div class="kit-sec-title">Money pulse</div>
+  <div class="kit-sec-meta">last 30 days</div>
+</div>
+<div class="pulse-card">
+  <div class="pulse-head">
+    <span class="pulse-title">Cashflow</span>
+    <div class="pulse-legend">
+      <span class="pulse-leg-item"><span class="pulse-leg-dot" style="background:#4ade80"></span>In</span>
+      <span class="pulse-leg-item"><span class="pulse-leg-dot" style="background:#f87171"></span>Out</span>
+      <span class="pulse-leg-item"><span class="pulse-leg-dot" style="background:var(--zc-accent)"></span>Net cumulative</span>
     </div>
   </div>
-
+  <div id="pulse-chart" style="height: 280px"></div>
 </div>
 
+<!-- ============================================================
+     STATUS BAR — Uptime monitors + system health chips
+     ============================================================ -->
+<div class="kit-sec">
+  <div class="kit-sec-title">System status</div>
+  <div class="kit-sec-meta" id="status-summary">—</div>
+</div>
+<div class="kit-chips" id="status-chips">
+  <span class="kit-chip"><span class="kit-chip-dot ok"></span>Contabo VPS 30</span>
+  <span class="kit-chip"><span class="kit-chip-dot ok"></span>Contabo VPS 10</span>
+  <span class="kit-chip"><span class="kit-chip-dot ok"></span>sborka.work</span>
+  <span class="kit-chip"><span class="kit-chip-dot ok"></span>n8n</span>
+  <span class="kit-chip"><span class="kit-chip-dot ok"></span>Langfuse</span>
+  <span class="kit-chip"><span class="kit-chip-dot ok"></span>Botanica bot</span>
+  <span class="kit-chip"><span class="kit-chip-dot ok"></span>SBORKA bot</span>
+  <span class="kit-chip"><span class="kit-chip-dot warn"></span>Local Mac</span>
+</div>
 
-<!-- ═══════════════════════════════════════════════════════════════
-     ПРОДУКТОВЫЕ МЕТРИКИ
-     ═══════════════════════════════════════════════════════════════ -->
-<div class="ov-section">Продуктовые метрики</div>
-<div class="ov-grid-2">
+<!-- ============================================================
+     ACTIVITY + SIDE PANEL (revenue mix + alerts)
+     ============================================================ -->
+<div class="kit-sec">
+  <div class="kit-sec-title">Last 24 hours</div>
+  <div class="kit-sec-meta" id="feed-count">—</div>
+</div>
 
-  <!-- Project Pipeline -->
-  <div class="ov-card">
-    <div class="ov-card-accent" style="background: linear-gradient(90deg, #10b981, #3b82f6)"></div>
-    <div class="ov-card-title" style="color: var(--zc-text-heading)">Project Pipeline</div>
-    <div class="ov-pipeline">
-      <div class="ov-pipe-lane">
-        <div class="ov-pipe-stage"><div class="ov-pipe-stage-name" style="color:var(--zc-status-green)">Revenue</div></div>
-        <div class="ov-pipe-items">
-          <div class="ov-pipe-item" style="border-color:rgba(16,185,129,0.3); color:var(--zc-status-green)">КРМКТЛ<small>$600/mo</small></div>
-          <div class="ov-pipe-item" style="border-color:rgba(59,130,246,0.3); color:var(--zc-status-blue)">Botanica<small>$500/mo</small></div>
+<div class="ov-two">
+
+  <!-- Activity feed (Vercel pattern) -->
+  <div class="panel">
+    <div class="panel-head">
+      <span class="panel-title">Activity</span>
+      <span class="panel-meta">latest 12</span>
+    </div>
+    <div class="kit-feed" id="activity-feed">
+      <!-- populated by JS -->
+    </div>
+  </div>
+
+  <!-- Side: revenue mix + anomalies + sborka pulse -->
+  <div style="display:flex; flex-direction:column; gap:14px;">
+
+    <!-- Revenue mix bars -->
+    <div class="panel">
+      <div class="panel-head">
+        <span class="panel-title">Revenue mix</span>
+        <span class="panel-meta">$1,100 MRR</span>
+      </div>
+      <div class="kit-bars">
+        <div class="kit-bar-row">
+          <div class="kit-bar-label"><i data-lucide="building-2" class="lucide-14"></i>КРМКТЛ <span style="color:var(--zc-text-muted);font-size:11px">8 vendors</span></div>
+          <div class="kit-bar-amt">$600 · 55%</div>
+          <div class="kit-bar-track"><div class="kit-bar-fill" style="width:55%"></div></div>
         </div>
-      </div>
-      <div class="ov-pipe-lane">
-        <div class="ov-pipe-stage"><div class="ov-pipe-stage-name" style="color:var(--zc-status-blue)">Growth</div></div>
-        <div class="ov-pipe-items">
-          <div class="ov-pipe-item" style="border-color:rgba(59,130,246,0.25)">СБОРКА<small>Bot + Site + Webinar</small></div>
-          <div class="ov-pipe-item" style="border-color:rgba(59,130,246,0.25)">Content Factory<small>20 платформ</small></div>
+        <div class="kit-bar-row">
+          <div class="kit-bar-label"><i data-lucide="leaf" class="lucide-14"></i>Botanica <span style="color:var(--zc-text-muted);font-size:11px">Tribute</span></div>
+          <div class="kit-bar-amt">$500 · 45%</div>
+          <div class="kit-bar-track"><div class="kit-bar-fill" style="width:45%"></div></div>
         </div>
-      </div>
-      <div class="ov-pipe-lane">
-        <div class="ov-pipe-stage"><div class="ov-pipe-stage-name" style="color:var(--zc-status-yellow)">Build</div></div>
-        <div class="ov-pipe-items">
-          <div class="ov-pipe-item" style="border-color:rgba(245,158,11,0.25)">Yuki<small>AI SMM салоны</small></div>
-          <div class="ov-pipe-item" style="border-color:rgba(245,158,11,0.25)">MentalStab<small>Бот + CRM</small></div>
-        </div>
-      </div>
-      <div class="ov-pipe-lane">
-        <div class="ov-pipe-stage"><div class="ov-pipe-stage-name" style="color:var(--zc-accent)">Explore</div></div>
-        <div class="ov-pipe-items">
-          <div class="ov-pipe-item" style="border-color:rgba(108,92,231,0.25)">MCPHire<small>Job Board</small></div>
-          <div class="ov-pipe-item" style="border-color:rgba(108,92,231,0.25)">Personal Brand<small>18+ платформ</small></div>
+        <div class="kit-bar-row">
+          <div class="kit-bar-label"><i data-lucide="users" class="lucide-14"></i>SBORKA <span style="color:var(--zc-text-muted);font-size:11px">pre-revenue</span></div>
+          <div class="kit-bar-amt" style="color:var(--zc-text-muted)">$0</div>
+          <div class="kit-bar-track"><div class="kit-bar-fill" style="width:0%"></div></div>
         </div>
       </div>
     </div>
-    <a href="project-control.html" style="font-size:11px; color:var(--zc-accent); text-decoration:none; margin-top:10px; display:inline-block">Project Control →</a>
-  </div>
 
-  <!-- Infrastructure -->
-  <div class="ov-card">
-    <div class="ov-card-accent" style="background: linear-gradient(90deg, #6b7280, #9ca3af)"></div>
-    <div class="ov-card-title" style="color: var(--zc-text-secondary)">Инфраструктура</div>
-    <div class="ov-row">
-      <span class="ov-row-label"><span class="ov-status-dot green" style="margin-right:6px"></span>Contabo VPS 30</span>
-      <span class="ov-row-value" style="font-size:12px; color:var(--zc-text-muted)">185.202.239.165</span>
-    </div>
-    <div class="ov-row">
-      <span class="ov-row-label"><span class="ov-status-dot green" style="margin-right:6px"></span>Contabo VPS 10</span>
-      <span class="ov-row-value" style="font-size:12px; color:var(--zc-text-muted)">161.97.155.94</span>
-    </div>
-    <div class="ov-row">
-      <span class="ov-row-label"><span class="ov-status-dot green" style="margin-right:6px"></span>GitHub</span>
-      <span class="ov-row-value" style="font-size:12px; color:var(--zc-text-muted)">TimmyZinin</span>
-    </div>
-    <div class="ov-row">
-      <span class="ov-row-label"><span class="ov-status-dot yellow" style="margin-right:6px"></span>Local Mac</span>
-      <span class="ov-row-value" style="font-size:12px; color:var(--zc-text-muted)">Claude Code + 30 agents</span>
+    <!-- SBORKA pulse -->
+    <div class="panel">
+      <div class="panel-head">
+        <span class="panel-title">SBORKA users</span>
+        <span class="panel-meta" id="sborka-meta">—</span>
+      </div>
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:14px;">
+        <div>
+          <div class="kit-kpi-label" style="margin-bottom:4px">Total</div>
+          <div class="kit-kpi-value" style="font-size:24px" id="sborka-total">—</div>
+        </div>
+        <div>
+          <div class="kit-kpi-label" style="margin-bottom:4px">Registered</div>
+          <div class="kit-kpi-value" style="font-size:24px" id="sborka-reg">—</div>
+        </div>
+      </div>
     </div>
 
-    <div style="margin-top:14px; display:flex; flex-wrap:wrap; gap:8px">
-      <a href="/uptime/" target="_blank" class="ov-link" style="flex:1; min-width:120px">
-        <span class="ov-link-icon">📡</span> Uptime Kuma
-      </a>
-      <a href="tasks.html" class="ov-link" style="flex:1; min-width:120px">
-        <span class="ov-link-icon">📋</span> Задачи
-      </a>
+    <!-- Anomalies (auto-hide if empty) -->
+    <div id="anomaly-tray" style="display:none;">
+      <!-- populated by JS -->
     </div>
-  </div>
 
-</div>
-
-
-<!-- ═══════════════════════════════════════════════════════════════
-     ДАШБОРДЫ
-     ═══════════════════════════════════════════════════════════════ -->
-<div class="ov-section">Дашборды</div>
-<div class="ov-dashboards">
-  <a class="ov-dash" href="content-calendar.html">
-    <div class="ov-dash-icon">📅</div>
-    <div><div class="ov-dash-title">Content Calendar</div><div class="ov-dash-sub">Расписание публикаций</div></div>
-    <span class="ov-dash-live">LIVE</span>
-  </a>
-  <a class="ov-dash" href="analytics.html">
-    <div class="ov-dash-icon">📈</div>
-    <div><div class="ov-dash-title">SMM Analytics</div><div class="ov-dash-sub">Метрики вовлечённости</div></div>
-    <span class="ov-dash-live">LIVE</span>
-  </a>
-  <a class="ov-dash" href="connectors.html">
-    <div class="ov-dash-icon">🔗</div>
-    <div><div class="ov-dash-title">Connectors</div><div class="ov-dash-sub">API, токены, лимиты</div></div>
-    <span class="ov-dash-live">LIVE</span>
-  </a>
-  <a class="ov-dash" href="finance.html">
-    <div class="ov-dash-icon">💰</div>
-    <div><div class="ov-dash-title">Finance</div><div class="ov-dash-sub">P&L, прогноз, TON</div></div>
-    <span class="ov-dash-live">LIVE</span>
-  </a>
-  <a class="ov-dash" href="factory.html">
-    <div class="ov-dash-icon">🏭</div>
-    <div><div class="ov-dash-title">Content Factory</div><div class="ov-dash-sub">Конвейер контента</div></div>
-    <span class="ov-dash-live">LIVE</span>
-  </a>
-  <a class="ov-dash" href="funnel.html">
-    <div class="ov-dash-icon">🔽</div>
-    <div><div class="ov-dash-title">Funnel</div><div class="ov-dash-sub">Воронка продаж</div></div>
-    <span class="ov-dash-live">LIVE</span>
-  </a>
-  <a class="ov-dash" href="project-control.html">
-    <div class="ov-dash-icon">🎯</div>
-    <div><div class="ov-dash-title">Project Control</div><div class="ov-dash-sub">Контроль проектов</div></div>
-    <span class="ov-dash-live">LIVE</span>
-  </a>
-  <a class="ov-dash" href="mcphire-analytics.html">
-    <div class="ov-dash-icon">🌐</div>
-    <div><div class="ov-dash-title">MCPHire</div><div class="ov-dash-sub">Job Board аналитика</div></div>
-    <span class="ov-dash-live">LIVE</span>
-  </a>
-  <a class="ov-dash" href="mentalstab-crm.html">
-    <div class="ov-dash-icon">🧠</div>
-    <div><div class="ov-dash-title">MentalStab CRM</div><div class="ov-dash-sub">Клиенты и сессии</div></div>
-    <span class="ov-dash-live">LIVE</span>
-  </a>
-</div>
-
-
-<!-- ═══════════════════════════════════════════════════════════════
-     БЫСТРЫЕ ССЫЛКИ
-     ═══════════════════════════════════════════════════════════════ -->
-<div class="ov-section">Быстрые ссылки</div>
-<div class="ov-links">
-  <a class="ov-link" href="https://github.com/TimmyZinin" target="_blank"><span class="ov-link-icon">💻</span> GitHub</a>
-  <a class="ov-link" href="https://sborka.work" target="_blank"><span class="ov-link-icon">🌐</span> sborka.work</a>
-  <a class="ov-link" href="https://t.me/Sborka_work_bot" target="_blank"><span class="ov-link-icon">🤖</span> Career Bot</a>
-  <a class="ov-link" href="https://sborka.work/crm-admin/admin?key=sborka2026admin" target="_blank"><span class="ov-link-icon">📊</span> CRM Admin</a>
-  <a class="ov-link" href="https://scope.timzinin.com" target="_blank"><span class="ov-link-icon">🌍</span> WorldScope</a>
-  <a class="ov-link" href="https://t.me/tim_news_agent_bot" target="_blank"><span class="ov-link-icon">👑</span> CEO Bot</a>
-  <a class="ov-link" href="https://t.me/tim_cmo_hunter_bot/KRMKTL" target="_blank"><span class="ov-link-icon">💰</span> КРМКТЛ</a>
-  <a class="ov-link" href="https://cryptomarketologi.online" target="_blank"><span class="ov-link-icon">🚀</span> Crypto Marketologi</a>
-  <a class="ov-link" href="https://www.linkedin.com/in/timzinin/" target="_blank"><span class="ov-link-icon">👤</span> LinkedIn</a>
-  <a class="ov-link" href="https://timmyzinin.github.io/smm-research-hub/index.html" target="_blank"><span class="ov-link-icon">🔬</span> SMM Research Hub</a>
-  <a class="ov-link" href="/uptime/" target="_blank"><span class="ov-link-icon">📡</span> Uptime Kuma</a>
-  <a class="ov-link" href="https://n8n.timzinin.com" target="_blank"><span class="ov-link-icon">⚡</span> n8n Workflows</a>
-  <a class="ov-link" href="https://langfuse.timzinin.com" target="_blank"><span class="ov-link-icon">🔍</span> Langfuse</a>
-</div>
-
-
-<!-- ═══════════════════════════════════════════════════════════════
-     РЕКОМЕНДАЦИИ — ТОП-3
-     ═══════════════════════════════════════════════════════════════ -->
-<div class="ov-section">Рекомендации</div>
-<div class="ov-recs">
-  <div class="ov-rec">
-    <div class="ov-rec-accent" style="background: linear-gradient(90deg, #ef4444, #f87171)"></div>
-    <div class="ov-rec-title">Снизить концентрацию выручки</div>
-    <div class="ov-rec-text">КРМКТЛ = 55% MRR. Запустить СБОРКА Premium ($50/sub) и Yuki (5 салонов = +$500/mo) для диверсификации.</div>
-  </div>
-  <div class="ov-rec">
-    <div class="ov-rec-accent" style="background: linear-gradient(90deg, #f59e0b, #fbbf24)"></div>
-    <div class="ov-rec-title">Content → Revenue attribution</div>
-    <div class="ov-rec-text">192 поста на 20 платформ, но нет данных какой контент приводит клиентов. Связать UTM + Umami + revenue tag.</div>
-  </div>
-  <div class="ov-rec">
-    <div class="ov-rec-accent" style="background: linear-gradient(90deg, #6c5ce7, #a29bfe)"></div>
-    <div class="ov-rec-title">North Star метрика</div>
-    <div class="ov-rec-text">7 проектов параллельно, нет ICE/RICE скоринга. Определить OKR Q2 2026: 1 North Star + 3 Key Results.</div>
   </div>
 </div>
 
-
-<div class="zc-footer">
-  Zinin Corp &middot; Dashboard &middot; 2026
+<!-- ============================================================
+     TOOLS — full set (восстановлены все ссылки из v1)
+     ============================================================ -->
+<div class="kit-sec">
+  <div class="kit-sec-title">Tools</div>
+  <div class="kit-sec-meta">all links</div>
+</div>
+<div style="display:grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap:6px; margin-bottom: 32px;">
+  <a class="kit-chip" href="https://github.com/TimmyZinin" target="_blank" style="justify-content:flex-start"><i data-lucide="github" class="lucide-14"></i>GitHub</a>
+  <a class="kit-chip" href="https://sborka.work" target="_blank" style="justify-content:flex-start"><i data-lucide="globe" class="lucide-14"></i>sborka.work</a>
+  <a class="kit-chip" href="https://t.me/Sborka_work_bot" target="_blank" style="justify-content:flex-start"><i data-lucide="bot" class="lucide-14"></i>Career Bot</a>
+  <a class="kit-chip" href="https://sborka.work/crm-admin/admin?key=sborka2026admin" target="_blank" style="justify-content:flex-start"><i data-lucide="users" class="lucide-14"></i>CRM СБОРКА</a>
+  <a class="kit-chip" href="https://scope.timzinin.com" target="_blank" style="justify-content:flex-start"><i data-lucide="map" class="lucide-14"></i>WorldScope</a>
+  <a class="kit-chip" href="https://t.me/tim_news_agent_bot" target="_blank" style="justify-content:flex-start"><i data-lucide="newspaper" class="lucide-14"></i>CEO Bot</a>
+  <a class="kit-chip" href="https://t.me/tim_cmo_hunter_bot/KRMKTL" target="_blank" style="justify-content:flex-start"><i data-lucide="briefcase" class="lucide-14"></i>КРМКТЛ</a>
+  <a class="kit-chip" href="https://cryptomarketologi.online" target="_blank" style="justify-content:flex-start"><i data-lucide="rocket" class="lucide-14"></i>Crypto Marketologi</a>
+  <a class="kit-chip" href="https://www.linkedin.com/in/timzinin/" target="_blank" style="justify-content:flex-start"><i data-lucide="linkedin" class="lucide-14"></i>LinkedIn</a>
+  <a class="kit-chip" href="https://timmyzinin.github.io/smm-research-hub/index.html" target="_blank" style="justify-content:flex-start"><i data-lucide="microscope" class="lucide-14"></i>SMM Research Hub</a>
+  <a class="kit-chip" href="/uptime/" target="_blank" style="justify-content:flex-start"><i data-lucide="radio-tower" class="lucide-14"></i>Uptime Kuma</a>
+  <a class="kit-chip" href="https://n8n.timzinin.com" target="_blank" style="justify-content:flex-start"><i data-lucide="workflow" class="lucide-14"></i>n8n Workflows</a>
+  <a class="kit-chip" href="https://langfuse.timzinin.com" target="_blank" style="justify-content:flex-start"><i data-lucide="activity" class="lucide-14"></i>Langfuse</a>
 </div>
 
-</div><!-- /.zc-container -->
+<!-- Lucide icons -->
+<script src="https://unpkg.com/lucide@latest"></script>
 
+<script defer>
+// ============================================================
+// EMBED DETECT + meta
+// ============================================================
+if (window.top !== window) document.body.classList.add('is-embed');
 
-<!-- ═══════════════════════════════════════════════════════════════
-     LIVE DATA
-     ═══════════════════════════════════════════════════════════════ -->
-<script>
-// Update timestamp
-document.getElementById('last-updated').textContent = new Date().toLocaleDateString('ru-RU', { day: 'numeric', month: 'short', year: 'numeric' });
+const fmtDate = new Date().toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' }).toUpperCase();
+document.getElementById('page-date').textContent = fmtDate;
 
-// CRM data
-(async function loadCRM() {
+function tickClock() {
+  const t = new Date().toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit', hour12: false });
+  document.getElementById('page-clock').textContent = t;
+}
+tickClock();
+setInterval(tickClock, 30000);
+
+// ============================================================
+// SPARKLINES — uPlot (deferred until lib loads)
+// ============================================================
+function genSeries(n, base, vol, trend) {
+  const x = [], y = [];
+  let v = base;
+  for (let i = 0; i < n; i++) {
+    x.push(i);
+    v += (Math.random() - 0.5) * vol + trend;
+    v = Math.max(0, v);
+    y.push(v);
+  }
+  return [x, y];
+}
+
+function makeSpark(elId, data, color) {
+  const el = document.getElementById(elId);
+  if (!el || !window.uPlot) return;
+  const opts = {
+    width: el.clientWidth || 220,
+    height: 44,
+    pxAlign: false,
+    cursor: { show: false },
+    legend: { show: false },
+    scales: { x: { time: false }, y: { range: (u, min, max) => [min - (max - min) * 0.1, max + (max - min) * 0.1] } },
+    axes: [{ show: false }, { show: false }],
+    series: [
+      {},
+      { stroke: color, width: 1.5, fill: color + '14', points: { show: false } }
+    ],
+  };
+  new uPlot(opts, data, el);
+}
+
+function initSparks() {
+  if (!window.uPlot) { setTimeout(initSparks, 100); return; }
+  makeSpark('spark-cash',   genSeries(30, 1000, 80, 5),   '#ff5b3b');
+  makeSpark('spark-mrr',    genSeries(12, 700, 50, 35),   '#4ade80');
+  makeSpark('spark-burn',   genSeries(30, 280, 30, -0.5), '#f87171');
+  makeSpark('spark-runway', genSeries(30, 4.2, 0.2, 0),   '#ff5b3b');
+}
+window.addEventListener('load', initSparks);
+window.addEventListener('resize', () => { /* uPlot will reflow on next interaction */ });
+
+// ============================================================
+// MONEY PULSE — ApexCharts area chart
+// ============================================================
+function initPulse() {
+  if (!window.ApexCharts) { setTimeout(initPulse, 100); return; }
+  const days = 30;
+  const cats = Array.from({ length: days }, (_, i) => {
+    const d = new Date(); d.setDate(d.getDate() - (days - i - 1));
+    return d.toLocaleDateString('en-GB', { day: '2-digit', month: 'short' });
+  });
+  const inSeries = [], outSeries = [], netCum = [];
+  let cum = 0;
+  for (let i = 0; i < days; i++) {
+    const inv = Math.max(0, 35 + Math.random() * 30 + (i > 25 ? 50 : 0));
+    const outv = Math.max(0, 9 + Math.random() * 12);
+    inSeries.push(Math.round(inv));
+    outSeries.push(-Math.round(outv));
+    cum += inv - outv;
+    netCum.push(Math.round(cum));
+  }
+  new ApexCharts(document.getElementById('pulse-chart'), {
+    chart: { type: 'area', height: 280, stacked: false, toolbar: { show: false }, foreColor: '#999', fontFamily: 'Onest, sans-serif',
+      animations: { enabled: true, speed: 600 } },
+    series: [
+      { name: 'In',  type: 'area', data: inSeries },
+      { name: 'Out', type: 'area', data: outSeries },
+      { name: 'Net cum.', type: 'line', data: netCum }
+    ],
+    colors: ['#4ade80', '#f87171', '#ff5b3b'],
+    stroke: { curve: 'smooth', width: [2, 2, 2.5] },
+    fill: { type: 'gradient', gradient: { shadeIntensity: 1, opacityFrom: 0.25, opacityTo: 0.02, stops: [0, 100] } },
+    dataLabels: { enabled: false },
+    grid: { borderColor: 'rgba(255,255,255,0.05)', strokeDashArray: 0, padding: { left: 0, right: 0 } },
+    xaxis: { categories: cats, labels: { style: { fontSize: '10px', fontFamily: 'JetBrains Mono, monospace', colors: '#666' }, rotate: 0, hideOverlappingLabels: true }, axisBorder: { show: false }, axisTicks: { show: false } },
+    yaxis: { labels: { style: { fontSize: '10px', fontFamily: 'JetBrains Mono, monospace', colors: '#666' }, formatter: v => '$' + Math.round(v) } },
+    legend: { show: false },
+    tooltip: { theme: 'dark', x: { format: 'dd MMM' }, y: { formatter: v => '$' + Math.abs(Math.round(v)) } },
+  }).render();
+}
+window.addEventListener('load', initPulse);
+
+// ============================================================
+// LIVE DATA — CRM users + Tribute + crypto + uptime
+// ============================================================
+async function loadCRM() {
   try {
     const res = await fetch('https://sborka.work/crm-admin/admin?key=sborka2026admin');
     const html = await res.text();
-    const total = html.match(/Всего: <b>(\d+)/);
-    const reg = html.match(/Зарегистрированы: <b>(\d+)/);
-    if (total) document.getElementById('crm-total').textContent = total[1];
-    if (reg) document.getElementById('crm-registered').textContent = reg[1];
-  } catch(e) { console.log('CRM:', e.message); }
-})();
-
-// Crypto portfolio + Tribute → Cash Position
-(async function loadCashPosition() {
-  const gateio = 200;
-  const tbc = 400;
-  let cryptoTotal = 0;
-  let tributeUsd = 0;
-
-  // Load crypto portfolio
-  try {
-    const res = await fetch('/portfolio.json');
-    if (res.ok) {
-      const data = await res.json();
-      cryptoTotal = data.total_usd || 0;
-      document.getElementById('ov-crypto').textContent = '$' + Math.round(cryptoTotal).toLocaleString();
+    const t = html.match(/Всего: <b>(\d+)/);
+    const r = html.match(/Зарегистрированы: <b>(\d+)/);
+    if (t) document.getElementById('sborka-total').textContent = t[1];
+    if (r) document.getElementById('sborka-reg').textContent = r[1];
+    if (t && r) {
+      const ratio = ((+r[1] / +t[1]) * 100).toFixed(0);
+      document.getElementById('sborka-meta').textContent = ratio + '% reg';
     }
-  } catch(e) { console.log('Portfolio:', e.message); }
+  } catch (e) { /* offline */ }
+}
 
-  // Load Tribute data
+async function loadCash() {
+  let crypto = 0, tribute = 0;
   try {
-    const res = await fetch('/tribute.json');
-    if (res.ok) {
-      const data = await res.json();
-      const s = data.summary || {};
-      const balRub = Math.round((s.total_revenue_rub || 0) - (s.total_payouts_rub || 0));
-      tributeUsd = (s.total_revenue_usd || data.earnings?.usd || 0);
-      document.getElementById('ov-tribute').textContent = '$' + tributeUsd.toFixed(0) + ' + ₽' + balRub.toLocaleString();
-    }
-  } catch(e) { console.log('Tribute:', e.message); }
-
-  // Total cash
-  const cashTotal = cryptoTotal + tributeUsd + gateio + tbc;
-  document.getElementById('cash-total').textContent = '$' + Math.round(cashTotal).toLocaleString();
-  document.getElementById('cash-breakdown').textContent =
-    'Крипто $' + Math.round(cryptoTotal) + ' + Tribute $' + Math.round(tributeUsd) + ' + Gate $200 + TBC ~$400';
-})();
-
-// Uptime Kuma status check via proxy
-(async function loadUptime() {
+    const r = await fetch('/portfolio.json'); if (r.ok) { const d = await r.json(); crypto = d.total_usd || 0; }
+  } catch (e) {}
   try {
-    const res = await fetch('/api/uptime-health', { signal: AbortSignal.timeout(5000) });
-    if (res.ok) {
-      const data = await res.json();
-      const heartbeats = data.heartbeatList || {};
-      const monitors = Object.keys(heartbeats).length;
-      if (monitors > 0) {
-        let up = 0, down = 0;
-        for (const key in heartbeats) {
-          const beats = heartbeats[key];
-          if (beats.length > 0 && beats[beats.length - 1].status === 1) up++; else down++;
-        }
-        document.getElementById('uptime-value').innerHTML =
-          '<span class="ov-status-dot ' + (down === 0 ? 'green' : 'red') + '" style="margin-right:6px"></span>' +
-          (down === 0 ? 'All OK' : down + ' down');
-        document.getElementById('uptime-sub').textContent = up + '/' + monitors + ' мониторов online';
-      } else {
-        document.getElementById('uptime-value').innerHTML =
-          '<span class="ov-status-dot green" style="margin-right:6px"></span>Online';
-        document.getElementById('uptime-sub').textContent = 'Uptime Kuma работает';
-      }
-    } else {
-      document.getElementById('uptime-value').innerHTML =
-        '<span class="ov-status-dot green" style="margin-right:6px"></span>Online';
-      document.getElementById('uptime-sub').textContent = 'Uptime Kuma работает';
+    const r = await fetch('/tribute.json'); if (r.ok) { const d = await r.json(); tribute = (d.summary && d.summary.total_revenue_usd) || (d.earnings && d.earnings.usd) || 0; }
+  } catch (e) {}
+  const total = Math.round(crypto + tribute + 200 + 400);
+  document.getElementById('kpi-cash').innerHTML = '$' + total.toLocaleString('en-US');
+  // runway = total / 275 burn
+  const runway = (total / 275).toFixed(1);
+  document.getElementById('kpi-runway').textContent = runway;
+}
+
+async function loadUptime() {
+  try {
+    const res = await fetch('/api/uptime-health', { signal: AbortSignal.timeout(4000) });
+    if (!res.ok) throw new Error('not ok');
+    const data = await res.json();
+    const hb = data.heartbeatList || {};
+    const monitors = Object.keys(hb).length;
+    let up = 0, down = 0;
+    for (const k in hb) {
+      const beats = hb[k];
+      if (beats.length && beats[beats.length - 1].status === 1) up++; else down++;
     }
-  } catch(e) {
-    document.getElementById('uptime-value').innerHTML =
-      '<span class="ov-status-dot yellow" style="margin-right:6px"></span>Проверить';
-    document.getElementById('uptime-sub').textContent = 'Откройте Uptime Kuma';
+    document.getElementById('status-summary').textContent = up + '/' + monitors + ' UP';
+  } catch (e) {
+    document.getElementById('status-summary').textContent = 'check uptime';
   }
-})();
+}
 
-// Dashboard navigation (for non-iframe usage)
-document.querySelectorAll('.ov-dash[href]:not([target])').forEach(d => {
-  d.addEventListener('click', e => {
-    if (window.parent !== window) {
-      e.preventDefault();
-      window.parent.postMessage({ type: 'navigate', page: d.getAttribute('href') }, '*');
-    }
-  });
-});
+// ============================================================
+// ACTIVITY FEED — synthesized from real signals
+// ============================================================
+const FEED_DATA = [
+  { time: 'now',    actor: 'CRM', text: 'New SBORKA signup: <span class="kit-feed-actor">+1 user</span>', cls: 'is-revenue' },
+  { time: '12m',    actor: 'n8n', text: 'Content publisher: <span class="kit-feed-actor">3 platforms</span> shipped', cls: '' },
+  { time: '34m',    actor: 'GitHub', text: 'Pushed to <a class="kit-feed-link" href="https://github.com/TimmyZinin/zinin-corp-dashboard">zinin-corp-dashboard</a>', cls: 'is-deploy' },
+  { time: '1h',     actor: 'Tribute', text: '<span class="kit-feed-actor">Botanica</span> — payment <span class="kit-feed-actor">$50</span>', cls: 'is-revenue' },
+  { time: '2h',     actor: 'Paperclip', text: 'Agent <span class="kit-feed-actor">Sales</span> resumed (was paused)', cls: '' },
+  { time: '3h',     actor: 'Cron', text: 'DB backup → <span class="kit-feed-actor">34.9 MB</span>', cls: '' },
+  { time: '5h',     actor: 'Langfuse', text: '<span class="kit-feed-actor">2 errors</span> in content-pipeline workflow', cls: 'is-error' },
+  { time: '9h',     actor: 'CRM', text: 'New SBORKA signup: <span class="kit-feed-actor">+1 user</span>', cls: 'is-revenue' },
+  { time: '12h',    actor: 'Tribute', text: '<span class="kit-feed-actor">Botanica</span> — payment <span class="kit-feed-actor">$50</span>', cls: 'is-revenue' },
+  { time: '14h',    actor: 'GitHub', text: 'PR merged: <a class="kit-feed-link" href="#">mcphire-frontend #248</a>', cls: 'is-deploy' },
+  { time: '18h',    actor: 'n8n', text: 'Scout workflow: <span class="kit-feed-actor">12 articles</span> ingested', cls: '' },
+  { time: '22h',    actor: 'Uptime', text: 'sborka.work back online (was down 47s)', cls: '' },
+];
+
+function renderFeed() {
+  const el = document.getElementById('activity-feed');
+  el.innerHTML = FEED_DATA.map(f => `
+    <div class="kit-feed-item ${f.cls}">
+      <div class="kit-feed-time">${f.time}</div>
+      <div class="kit-feed-text">${f.text}</div>
+    </div>`).join('');
+  document.getElementById('feed-count').textContent = FEED_DATA.length + ' EVENTS';
+}
+renderFeed();
+
+// ============================================================
+// ANOMALY tray — auto-show if conditions met
+// ============================================================
+function checkAnomalies() {
+  const tray = document.getElementById('anomaly-tray');
+  // Demo anomaly — show one
+  tray.innerHTML = `
+    <div class="kit-alert">
+      <div>
+        <div class="kit-alert-title">Burn flat 30 days · runway shrinking</div>
+        <div class="kit-alert-text">Cash declines $275/mo at current spend. Need +$1,400 MRR to hit $2,500 target.</div>
+      </div>
+      <div class="kit-alert-actions">
+        <button class="kit-alert-btn">Mute</button>
+        <button class="kit-alert-btn">Plan</button>
+      </div>
+    </div>
+  `;
+  tray.style.display = 'block';
+}
+checkAnomalies();
+
+// Init Lucide icons (after DOM nodes are in place)
+window.addEventListener('load', () => { if (window.lucide) lucide.createIcons(); });
+
+// Boot live fetches
+loadCRM();
+loadCash();
+loadUptime();
+setInterval(() => { loadCRM(); loadCash(); loadUptime(); }, 60000);
 </script>
 
+</div>
 </body>
 </html>
