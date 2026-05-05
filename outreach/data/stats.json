@@ -1,0 +1,179 @@
+{
+  "date": "2026-05-05",
+  "generated_at": "17:37:57 UTC",
+  "totals_today": {
+    "sent": 19,
+    "replies": 2,
+    "hot": 2,
+    "errors": 0
+  },
+  "by_platform": {
+    "avito_rabota": {
+      "label": "Avito Работа",
+      "short": "avito",
+      "sent": 9,
+      "sent_total": 100,
+      "replies": 1,
+      "hot": 1,
+      "errors": 0,
+      "daily_quota_used": 9,
+      "daily_quota_max": 20,
+      "last_action_ts": "10:52:42",
+      "status": "idle",
+      "lead_pipeline": {
+        "sent_waiting": 8,
+        "no_reaction": 86,
+        "replied_neutral": 0,
+        "hr_invite": 0,
+        "interested": 1,
+        "proposal_sent": 0,
+        "declined": 5,
+        "won": 0
+      }
+    },
+    "superjob": {
+      "label": "SuperJob",
+      "short": "sj",
+      "sent": 10,
+      "sent_total": 10,
+      "replies": 1,
+      "hot": 1,
+      "errors": 0,
+      "daily_quota_used": 10,
+      "daily_quota_max": 30,
+      "last_action_ts": "12:46:08",
+      "status": "idle",
+      "lead_pipeline": {
+        "sent_waiting": 9,
+        "no_reaction": 0,
+        "replied_neutral": 0,
+        "hr_invite": 0,
+        "interested": 1,
+        "proposal_sent": 0,
+        "declined": 0,
+        "won": 0
+      }
+    },
+    "gulftalent": {
+      "label": "GulfTalent",
+      "short": "gt",
+      "sent": 0,
+      "sent_total": 0,
+      "replies": 0,
+      "hot": 0,
+      "errors": 0,
+      "daily_quota_used": 0,
+      "daily_quota_max": 15,
+      "last_action_ts": "",
+      "status": "idle",
+      "lead_pipeline": {
+        "sent_waiting": 0,
+        "no_reaction": 0,
+        "replied_neutral": 0,
+        "hr_invite": 0,
+        "interested": 0,
+        "proposal_sent": 0,
+        "declined": 0,
+        "won": 0
+      }
+    },
+    "hh": {
+      "label": "HeadHunter",
+      "short": "hh",
+      "sent": 0,
+      "sent_total": 0,
+      "replies": 0,
+      "hot": 0,
+      "errors": 0,
+      "daily_quota_used": 0,
+      "daily_quota_max": 50,
+      "last_action_ts": "",
+      "status": "idle",
+      "lead_pipeline": {
+        "sent_waiting": 0,
+        "no_reaction": 0,
+        "replied_neutral": 0,
+        "hr_invite": 0,
+        "interested": 0,
+        "proposal_sent": 0,
+        "declined": 0,
+        "won": 0
+      }
+    },
+    "kariyer": {
+      "label": "Kariyer.net",
+      "short": "kar",
+      "sent": 0,
+      "sent_total": 0,
+      "replies": 0,
+      "hot": 0,
+      "errors": 0,
+      "daily_quota_used": 0,
+      "daily_quota_max": 30,
+      "last_action_ts": "",
+      "status": "idle",
+      "lead_pipeline": {
+        "sent_waiting": 0,
+        "no_reaction": 0,
+        "replied_neutral": 0,
+        "hr_invite": 0,
+        "interested": 0,
+        "proposal_sent": 0,
+        "declined": 0,
+        "won": 0
+      }
+    },
+    "habr": {
+      "label": "Habr Career",
+      "short": "habr",
+      "sent": 0,
+      "sent_total": 0,
+      "replies": 0,
+      "hot": 0,
+      "errors": 0,
+      "daily_quota_used": 0,
+      "daily_quota_max": 20,
+      "last_action_ts": "",
+      "status": "idle",
+      "lead_pipeline": {
+        "sent_waiting": 0,
+        "no_reaction": 0,
+        "replied_neutral": 0,
+        "hr_invite": 0,
+        "interested": 0,
+        "proposal_sent": 0,
+        "declined": 0,
+        "won": 0
+      }
+    }
+  },
+  "twenty": {
+    "opportunities_total": 110,
+    "by_stage": {
+      "SCREENING": 103,
+      "MEETING": 2,
+      "PROPOSAL": 0,
+      "NOT_NOW": 5,
+      "CUSTOMER": 0,
+      "REMIND": 0
+    }
+  },
+  "funnel": {
+    "scanned": 0,
+    "filtered": 0,
+    "sent": 19,
+    "replied": 2,
+    "hot": 2,
+    "meeting": 2
+  },
+  "lead_pipeline": {
+    "sent_waiting": 17,
+    "no_reaction": 86,
+    "replied_neutral": 0,
+    "hr_invite": 0,
+    "interested": 2,
+    "proposal_sent": 0,
+    "declined": 5,
+    "won": 0
+  }
+}

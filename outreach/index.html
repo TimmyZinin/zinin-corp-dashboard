@@ -1,0 +1,1628 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Outreach Ops · timzinin</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:ital,wght@0,400;0,500;0,600;1,400&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<style>
+  /* ===== Tokens ===== */
+  :root {
+    --bg:           oklch(98.5% 0.005 75);
+    --bg-grain:    url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.06 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+    --surface:      oklch(100% 0 0);
+    --surface-2:    oklch(96.5% 0.008 75);
+    --border:       oklch(91% 0.008 75);
+    --border-2:     oklch(85% 0.012 75);
+    --text:         oklch(15% 0.012 250);
+    --text-muted:   oklch(48% 0.012 250);
+    --text-faint:   oklch(70% 0.012 250);
+
+    --accent:       oklch(64% 0.21 38);     /* sunset orange — HOT / active */
+    --accent-soft:  oklch(94% 0.06 40);
+    --ok:           oklch(58% 0.16 145);    /* terminal green */
+    --ok-soft:      oklch(94% 0.05 145);
+    --info:         oklch(58% 0.13 240);    /* cool blue */
+    --info-soft:    oklch(94% 0.04 240);
+    --warn:         oklch(72% 0.16 80);     /* amber */
+    --warn-soft:    oklch(94% 0.06 80);
+    --err:          oklch(55% 0.20 25);     /* red */
+    --err-soft:     oklch(95% 0.05 25);
+    --hot:          oklch(64% 0.22 32);     /* hot lead = same family as accent, slightly redder */
+
+    --r-sm: 6px;
+    --r-md: 10px;
+    --r-lg: 14px;
+
+    --font-ui:   'Space Grotesk', system-ui, -apple-system, sans-serif;
+    --font-mono: 'IBM Plex Mono', 'JetBrains Mono', ui-monospace, monospace;
+    --font-display: 'Space Grotesk', sans-serif;
+
+    --shadow-1: 0 1px 0 oklch(0% 0 0 / .03), 0 1px 2px oklch(0% 0 0 / .04);
+    --shadow-2: 0 1px 0 oklch(0% 0 0 / .04), 0 8px 24px -8px oklch(0% 0 0 / .08);
+  }
+  *, *::before, *::after { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; height: 100%; }
+  body {
+    font-family: var(--font-ui);
+    color: var(--text);
+    background: var(--bg);
+    background-image: var(--bg-grain);
+    background-size: 240px 240px;
+    font-size: 13px;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow: hidden;
+  }
+  ::selection { background: var(--accent); color: #fff; }
+  button { font: inherit; cursor: pointer; border: 0; background: none; color: inherit; padding: 0; }
+  /* ===== Layout ===== */
+  .app {
+    height: 100vh;
+    display: grid;
+    grid-template-rows: 56px 1fr 84px;
+    gap: 14px;
+    padding: 14px 18px;
+    max-width: 1800px;
+    margin: 0 auto;
+  }
+
+  /* ===== Top Bar ===== */
+  .topbar {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+    gap: 24px;
+    padding: 0 14px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--r-md);
+    box-shadow: var(--shadow-1);
+    height: 100%;
+  }
+  .brand {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+    font-family: var(--font-display);
+    font-weight: 700;
+    letter-spacing: -0.04em;
+    font-size: 20px;
+  }
+  .brand .dot {
+    width: 8px; height: 8px;
+    background: var(--accent);
+    border-radius: 50%;
+    margin-right: 4px;
+    box-shadow: 0 0 0 3px var(--accent-soft);
+  }
+  .brand i {
+    font-family: 'Instrument Serif', serif;
+    font-weight: 400;
+    font-style: italic;
+    color: var(--text-muted);
+    font-size: 18px;
+    letter-spacing: 0;
+  }
+  .kpis {
+    display: flex;
+    gap: 4px;
+    justify-content: center;
+    flex-wrap: nowrap;
+  }
+  .kpi {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 6px;
+    padding: 6px 12px;
+    border-right: 1px solid var(--border);
+    font-family: var(--font-mono);
+    font-size: 12px;
+  }
+  .kpi:last-child { border-right: 0; }
+  .kpi b {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 17px;
+    letter-spacing: -0.02em;
+    color: var(--text);
+  }
+  .kpi span { color: var(--text-muted); text-transform: lowercase; }
+  .kpi.hot b { color: var(--accent); }
+  .kpi.err b { color: var(--err); }
+  .clock {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--text-muted);
+    letter-spacing: 0.04em;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .clock .live-dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--ok);
+    box-shadow: 0 0 0 3px var(--ok-soft);
+    animation: pulse 1.6s ease-in-out infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.55; transform: scale(0.92); }
+  }
+
+  /* ===== Main Grid ===== */
+  .main {
+    display: grid;
+    grid-template-columns: minmax(280px, 4fr) 8fr;
+    gap: 14px;
+    min-height: 0;
+  }
+
+  /* ===== Stats Column ===== */
+  .stats { display: flex; flex-direction: column; gap: 14px; min-height: 0; overflow: auto; }
+  .stats::-webkit-scrollbar { width: 0; }
+  #platform-cards { display: flex; flex-direction: column; gap: 14px; }
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--r-md);
+    padding: 14px 16px 16px;
+    box-shadow: var(--shadow-1);
+    position: relative;
+    overflow: hidden;
+  }
+  .card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--border-2), transparent);
+  }
+  .card-h {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+  .card-title {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--text-muted);
+    font-weight: 600;
+  }
+  .status {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    font-family: var(--font-mono);
+    font-size: 10.5px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--text-muted);
+  }
+  .status .d {
+    width: 7px; height: 7px;
+    border-radius: 50%;
+    background: var(--text-faint);
+  }
+  .status[data-status="running"] { color: var(--ok); }
+  .status[data-status="running"] .d {
+    background: var(--ok);
+    box-shadow: 0 0 0 3px var(--ok-soft);
+    animation: pulse 1.6s ease-in-out infinite;
+  }
+  .status[data-status="idle"] { color: var(--text-muted); }
+  .status[data-status="idle"] .d { background: var(--text-faint); }
+  .status[data-status="error"] { color: var(--err); }
+  .status[data-status="error"] .d { background: var(--err); box-shadow: 0 0 0 3px var(--err-soft); }
+  .status[data-status="warn"] { color: var(--warn); }
+  .status[data-status="warn"] .d { background: var(--warn); box-shadow: 0 0 0 3px var(--warn-soft); }
+
+  .big-num {
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+    margin: 4px 0 6px;
+    font-family: var(--font-display);
+    line-height: 1;
+  }
+  .big-num .n {
+    font-size: 38px;
+    font-weight: 700;
+    letter-spacing: -0.04em;
+    color: var(--text);
+    font-variant-numeric: tabular-nums;
+  }
+  .big-num .of {
+    font-family: var(--font-mono);
+    font-size: 13px;
+    color: var(--text-muted);
+    font-weight: 500;
+  }
+  .big-num .lbl {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--text-muted);
+    margin-left: auto;
+  }
+  .meter {
+    height: 4px;
+    background: var(--surface-2);
+    border-radius: 2px;
+    overflow: hidden;
+    margin: 6px 0 12px;
+  }
+  .meter > i {
+    display: block;
+    height: 100%;
+    background: var(--ok);
+    border-radius: 2px;
+    transition: width .6s ease;
+  }
+  .meter > i.warn { background: var(--warn); }
+  .meter > i.err  { background: var(--err); }
+  .meter > i.hot  { background: var(--accent); }
+
+  .row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    padding: 5px 0;
+    border-top: 1px dashed var(--border);
+    color: var(--text-muted);
+  }
+  .row:first-of-type { border-top: 0; padding-top: 2px; }
+  .row .v {
+    color: var(--text);
+    font-weight: 500;
+    font-variant-numeric: tabular-nums;
+  }
+  .row .v.hot { color: var(--accent); font-weight: 600; }
+  .row .v.err { color: var(--err); }
+
+  /* ===== Lead Pipeline ===== */
+  .pipeline {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin-top: 6px;
+  }
+  .ppl-row {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 8px;
+    align-items: baseline;
+    font-size: 12px;
+    padding-bottom: 2px;
+    position: relative;
+  }
+  .ppl-row .lbl {
+    color: var(--text);
+    font-family: var(--font-ui);
+    font-size: 12.5px;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .ppl-row .lbl::before {
+    content: '';
+    width: 7px; height: 7px;
+    border-radius: 50%;
+    background: var(--bar);
+    flex-shrink: 0;
+  }
+  .ppl-row .lbl small {
+    color: var(--text-faint);
+    font-family: var(--font-mono);
+    font-size: 10.5px;
+    margin-left: 2px;
+  }
+  .ppl-row .v {
+    font-family: var(--font-mono);
+    font-weight: 600;
+    font-size: 13px;
+    color: var(--text);
+    font-variant-numeric: tabular-nums;
+  }
+  .ppl-bar {
+    grid-column: 1 / -1;
+    height: 3px;
+    background: var(--surface-2);
+    border-radius: 2px;
+    overflow: hidden;
+    margin-top: 1px;
+  }
+  .ppl-bar > i {
+    display: block;
+    height: 100%;
+    background: var(--bar, var(--text-faint));
+    transition: width .6s ease;
+  }
+  .ppl-row[data-key="sent_waiting"]    { --bar: oklch(62% 0.13 240); }   /* blue   */
+  .ppl-row[data-key="no_reaction"]     { --bar: oklch(72% 0.05 80); }    /* faded  */
+  .ppl-row[data-key="replied_neutral"] { --bar: oklch(72% 0.16 80); }    /* amber  */
+  .ppl-row[data-key="hr_invite"]       { --bar: oklch(64% 0.21 38); }    /* orange */
+  .ppl-row[data-key="interested"]      { --bar: oklch(72% 0.16 80); }    /* amber/warm */
+  .ppl-row[data-key="proposal_sent"]   { --bar: oklch(55% 0.16 240); }   /* deep blue */
+  .ppl-row[data-key="booked"]          { --bar: oklch(58% 0.16 145); }   /* green  */
+  .ppl-row[data-key="declined"]        { --bar: oklch(55% 0.20 25); opacity: .82; } /* red    */
+  .ppl-row[data-key="won"]             { --bar: oklch(50% 0.20 145); }   /* deep green */
+  .ppl-summary {
+    margin-top: 8px;
+    padding-top: 10px;
+    border-top: 1px dashed var(--border);
+    font-family: var(--font-mono);
+    font-size: 11.5px;
+    color: var(--text-muted);
+    display: flex;
+    justify-content: space-between;
+  }
+  .ppl-summary b {
+    color: var(--accent);
+    font-weight: 600;
+  }
+
+  /* ===== Conversations card ===== */
+  .conv-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    margin-top: 6px;
+    max-height: 360px;
+    overflow-y: auto;
+  }
+  .conv-list::-webkit-scrollbar { width: 6px; }
+  .conv-list::-webkit-scrollbar-thumb { background: var(--border-2); border-radius: 3px; }
+  .conv-row {
+    display: grid;
+    grid-template-columns: 4px 1fr;
+    gap: 10px;
+    padding: 9px 0;
+    border-top: 1px dashed var(--border);
+    cursor: pointer;
+    transition: background .12s ease;
+  }
+  .conv-row:first-of-type { border-top: 0; padding-top: 4px; }
+  .conv-row:hover { background: var(--surface-2); margin: 0 -10px; padding-left: 14px; padding-right: 10px; border-radius: 4px; }
+  .conv-row .stripe {
+    background: var(--text-faint);
+    border-radius: 2px;
+  }
+  .conv-row[data-status="invited"]  .stripe { background: var(--accent); }
+  .conv-row[data-status="meeting"]  .stripe { background: var(--ok); }
+  .conv-row[data-status="declined"] .stripe { background: var(--err); }
+  .conv-row[data-status="replied_neutral"] .stripe { background: var(--warn); }
+  .conv-row[data-status="won"]      .stripe { background: oklch(45% 0.20 145); }
+  .conv-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 8px;
+    margin-bottom: 3px;
+  }
+  .conv-head .who {
+    font-family: var(--font-ui);
+    font-weight: 600;
+    font-size: 13px;
+    color: var(--text);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .conv-head .who .pl-tag {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--text-muted);
+    font-weight: 500;
+    margin-left: 6px;
+  }
+  .conv-head .who .dir {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    padding: 1px 5px;
+    border-radius: 3px;
+    margin-right: 4px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    font-weight: 600;
+  }
+  .conv-head .who .dir[data-d="in"]  { background: var(--accent-soft); color: var(--accent); }
+  .conv-head .who .dir[data-d="out"] { background: var(--ok-soft); color: var(--ok); }
+  .conv-head .ts {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--text-faint);
+    flex-shrink: 0;
+  }
+  .conv-body {
+    font-family: var(--font-ui);
+    font-size: 12.5px;
+    color: var(--text-muted);
+    font-style: italic;
+    line-height: 1.4;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+  }
+  .conv-row.expanded .conv-body {
+    -webkit-line-clamp: unset;
+    display: block;
+    white-space: pre-wrap;
+    color: var(--text);
+    font-style: normal;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    padding: 6px 10px;
+    margin-top: 4px;
+    background: var(--surface-2);
+    border-radius: 4px;
+    border-left: 2px solid var(--border-2);
+  }
+
+  /* ===== Lead status badge in log feed ===== */
+  .lstat {
+    font-family: var(--font-mono);
+    font-size: 9.5px;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    padding: 1px 6px;
+    border-radius: 999px;
+    text-transform: uppercase;
+    border: 1px solid transparent;
+    white-space: nowrap;
+    text-align: center;
+  }
+  .lstat[data-s="sent_waiting"]    { color: oklch(45% 0.13 240); background: oklch(96% 0.04 240); border-color: oklch(85% 0.05 240); }
+  .lstat[data-s="no_reaction"]     { color: var(--text-muted); background: var(--surface-2); border-color: var(--border); }
+  .lstat[data-s="replied_neutral"] { color: oklch(45% 0.15 75); background: var(--warn-soft); border-color: oklch(80% 0.10 75); }
+  .lstat[data-s="hr_invite"],
+  .lstat[data-s="invited"]         { color: #fff; background: var(--accent); border-color: var(--accent); }
+  .lstat[data-s="interested"],
+  .lstat[data-s="meeting"]         { color: var(--warn-text, oklch(45% 0.15 75)); background: var(--warn-soft); border-color: oklch(80% 0.10 75); }
+  .lstat[data-s="proposal_sent"]   { color: oklch(45% 0.15 240); background: oklch(96% 0.04 240); border-color: oklch(75% 0.10 240); }
+  .lstat[data-s="booked"]          { color: var(--ok); background: var(--ok-soft); border-color: var(--ok); }
+  .lstat[data-s="declined"]        { color: var(--err); background: var(--err-soft); border-color: var(--err); opacity: .8; }
+  .lstat[data-s="won"]             { color: #fff; background: oklch(45% 0.20 145); border-color: oklch(45% 0.20 145); }
+
+  .stage-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6px 12px;
+    margin-top: 4px;
+  }
+  .stage {
+    display: flex;
+    justify-content: space-between;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    padding: 3px 0;
+  }
+  .stage span:first-child {
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-size: 10.5px;
+  }
+  .stage span:last-child {
+    color: var(--text);
+    font-weight: 600;
+    font-variant-numeric: tabular-nums;
+  }
+  .stage[data-key="MEETING"] span:last-child { color: var(--accent); }
+
+  .agent-row {
+    display: grid;
+    grid-template-columns: 12px 1fr auto;
+    gap: 8px;
+    align-items: center;
+    padding: 6px 0;
+    border-top: 1px dashed var(--border);
+    font-family: var(--font-mono);
+    font-size: 12px;
+    cursor: pointer;
+    transition: background .15s ease;
+  }
+  .agent-row:first-of-type { border-top: 0; }
+  .agent-row:hover { background: var(--surface-2); margin: 0 -8px; padding-left: 8px; padding-right: 8px; border-radius: 4px; }
+  .agent-row.active { background: var(--accent-soft); margin: 0 -8px; padding-left: 8px; padding-right: 8px; border-radius: 4px; }
+  .agent-row .d {
+    width: 7px; height: 7px;
+    border-radius: 50%;
+    background: var(--text-faint);
+  }
+  .agent-row[data-status="running"] .d {
+    background: var(--ok);
+    box-shadow: 0 0 0 3px var(--ok-soft);
+    animation: pulse 1.6s ease-in-out infinite;
+  }
+  .agent-row[data-status="idle"] .d { background: var(--text-faint); }
+  .agent-row[data-status="error"] .d { background: var(--err); }
+  .agent-row .nm { color: var(--text); }
+  .agent-row .t  { color: var(--text-muted); font-variant-numeric: tabular-nums; }
+
+  /* ===== Terminal Log ===== */
+  .terminal {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--r-md);
+    box-shadow: var(--shadow-1);
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+    overflow: hidden;
+  }
+  .term-h {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 10px 16px;
+    border-bottom: 1px solid var(--border);
+    background: linear-gradient(180deg, var(--surface) 0%, var(--surface-2) 100%);
+    font-size: 11px;
+  }
+  .term-h .lbl {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--text-muted);
+    font-weight: 600;
+  }
+  .filters {
+    display: flex;
+    gap: 4px;
+  }
+  .chip {
+    font-family: var(--font-mono);
+    font-size: 10.5px;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    padding: 4px 10px;
+    border-radius: 999px;
+    border: 1px solid var(--border-2);
+    background: var(--surface);
+    color: var(--text-muted);
+    text-transform: uppercase;
+    transition: all .15s ease;
+    user-select: none;
+  }
+  .chip:hover { border-color: var(--text-faint); color: var(--text); }
+  .chip.on[data-l="info"] { background: var(--info-soft); color: var(--info); border-color: var(--info); }
+  .chip.on[data-l="ok"]   { background: var(--ok-soft);   color: var(--ok);   border-color: var(--ok);   }
+  .chip.on[data-l="warn"] { background: var(--warn-soft); color: oklch(45% 0.15 75); border-color: var(--warn); }
+  .chip.on[data-l="err"]  { background: var(--err-soft);  color: var(--err);  border-color: var(--err);  }
+  .chip.on[data-l="hot"]  { background: var(--accent-soft); color: var(--accent); border-color: var(--accent); }
+  .term-h .right {
+    margin-left: auto;
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--text-muted);
+  }
+  .pause-btn {
+    font-family: var(--font-mono);
+    font-size: 10.5px;
+    padding: 4px 10px;
+    border: 1px solid var(--border-2);
+    border-radius: var(--r-sm);
+    color: var(--text-muted);
+    background: var(--surface);
+    transition: all .15s;
+  }
+  .pause-btn:hover { color: var(--text); border-color: var(--text-faint); }
+  .pause-btn.paused {
+    color: var(--warn);
+    background: var(--warn-soft);
+    border-color: var(--warn);
+  }
+  .term-h .live {
+    display: flex; align-items: center; gap: 5px;
+  }
+  .term-h .live i {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--ok);
+    box-shadow: 0 0 0 3px var(--ok-soft);
+    animation: pulse 1.6s ease-in-out infinite;
+  }
+
+  .term-body {
+    flex: 1;
+    overflow-y: auto;
+    overflow-x: hidden;
+    font-family: var(--font-mono);
+    font-size: 12.5px;
+    line-height: 1.55;
+    padding: 8px 0;
+    background:
+      repeating-linear-gradient(0deg, transparent 0, transparent 19px, oklch(0% 0 0 / .015) 19px, oklch(0% 0 0 / .015) 20px);
+  }
+  .term-body::-webkit-scrollbar { width: 8px; height: 8px; }
+  .term-body::-webkit-scrollbar-thumb { background: var(--border-2); border-radius: 4px; }
+  .term-body::-webkit-scrollbar-track { background: transparent; }
+
+  .log-row {
+    display: grid;
+    grid-template-columns: 70px 50px 70px 60px 78px minmax(0, 1fr);
+    gap: 8px;
+    padding: 2px 16px;
+    align-items: baseline;
+    transition: background .1s ease;
+    cursor: default;
+    position: relative;
+    color: var(--text);
+  }
+  .log-row > * { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .log-row:hover { background: var(--surface-2); }
+  .log-row.hot { background: linear-gradient(90deg, var(--accent-soft) 0%, transparent 70%); }
+  .log-row.hot:hover { background: linear-gradient(90deg, var(--accent-soft) 0%, var(--surface-2) 70%); }
+  .log-row.hot::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 3px;
+    background: var(--accent);
+  }
+  .log-row.err { background: linear-gradient(90deg, var(--err-soft) 0%, transparent 60%); }
+  .log-row.err::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 3px;
+    background: var(--err);
+  }
+  /* Older events (not today) — slightly faded so they don't visually
+     compete with current activity. Their ts also widens to fit "May 04 22:32". */
+  .log-row.older { opacity: 0.65; }
+  .log-row.older .ts { color: var(--text-faint); font-size: 11px; }
+
+  .ts { color: var(--text-faint); font-size: 11.5px; }
+  .lvl {
+    font-weight: 600;
+    font-size: 10.5px;
+    letter-spacing: 0.04em;
+    text-align: center;
+    padding: 1px 0;
+    border-radius: 3px;
+  }
+  .lvl[data-l="INFO"] { color: var(--info);  background: var(--info-soft); }
+  .lvl[data-l="OK"]   { color: var(--ok);    background: var(--ok-soft); }
+  .lvl[data-l="WARN"] { color: oklch(40% 0.15 75); background: var(--warn-soft); }
+  .lvl[data-l="ERR"]  { color: var(--err);   background: var(--err-soft); }
+  .lvl[data-l="HOT"]  { color: #fff; background: var(--accent); }
+  .pl { color: var(--text-muted); font-size: 11.5px; }
+  .ag { color: var(--text-muted); font-size: 11.5px; }
+  .tp { color: var(--info); font-size: 11.5px; }
+  .msg { color: var(--text); font-size: 12.5px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .log-row:hover .msg { white-space: normal; }
+  /* Floating tooltip — fixed position relative to viewport, mouse-anchored.
+     Doesn't expand the row so log layout stays stable. */
+  #log-tooltip {
+    position: fixed;
+    display: none;
+    background: var(--text);
+    color: var(--bg);
+    padding: 10px 12px;
+    border-radius: var(--r-sm);
+    font-family: var(--font-mono);
+    font-size: 11px;
+    line-height: 1.5;
+    white-space: pre-wrap;
+    z-index: 1000;
+    box-shadow: var(--shadow-2);
+    max-width: 480px;
+    pointer-events: none;
+    border: 1px solid oklch(25% 0.02 250);
+  }
+  #log-tooltip.show { display: block; }
+  #log-tooltip .key { color: oklch(75% 0.10 60); }
+
+  .empty {
+    padding: 60px 16px;
+    text-align: center;
+    color: var(--text-muted);
+    font-family: var(--font-mono);
+    font-size: 12px;
+  }
+  .empty b {
+    display: block;
+    font-family: 'Instrument Serif', serif;
+    font-style: italic;
+    font-size: 28px;
+    color: var(--text-muted);
+    margin-bottom: 6px;
+    font-weight: 400;
+    letter-spacing: -0.01em;
+  }
+
+  /* ===== Funnel ===== */
+  .funnel {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--r-md);
+    padding: 14px 20px;
+    box-shadow: var(--shadow-1);
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 24px;
+    align-items: center;
+    overflow: hidden;
+  }
+  .funnel-h {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--text-muted);
+    font-weight: 600;
+    white-space: nowrap;
+  }
+  .funnel-h .small {
+    display: block;
+    font-family: 'Instrument Serif', serif;
+    font-size: 14px;
+    font-style: italic;
+    text-transform: none;
+    letter-spacing: 0;
+    color: var(--text-faint);
+    margin-top: 2px;
+    font-weight: 400;
+  }
+  .funnel-track {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 4px;
+    height: 56px;
+    align-items: stretch;
+  }
+  .stage-bar {
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    border-radius: var(--r-sm);
+    padding: 8px 12px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: all .25s ease;
+    position: relative;
+    overflow: hidden;
+  }
+  .stage-bar:hover { border-color: var(--text-faint); }
+  .stage-bar > .lbl {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    font-weight: 600;
+  }
+  .stage-bar > .nm {
+    font-family: var(--font-display);
+    font-size: 22px;
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    color: var(--text);
+    line-height: 1;
+    font-variant-numeric: tabular-nums;
+  }
+  .stage-bar::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: var(--ok-soft);
+    transform-origin: left;
+    transform: scaleX(var(--p, 0));
+    z-index: 0;
+    opacity: 0.6;
+    transition: transform .8s cubic-bezier(.2,.8,.2,1);
+  }
+  .stage-bar > * { position: relative; z-index: 1; }
+  .stage-bar[data-key="HOT"]::after { background: var(--accent-soft); }
+  .stage-bar[data-key="HOT"] > .nm { color: var(--accent); }
+  .stage-bar[data-key="MEETING"]::after { background: var(--accent-soft); }
+  .stage-bar[data-key="MEETING"] > .nm { color: var(--accent); }
+
+  /* ===== utility / responsive ===== */
+  @media (max-width: 980px) {
+    .main { grid-template-columns: 1fr; }
+    .stats { flex-direction: row; overflow-x: auto; }
+    #platform-cards { flex-direction: row; }
+    .card { flex: 0 0 240px; }
+    .funnel { grid-template-columns: 1fr; }
+    .log-row { grid-template-columns: 70px 50px 60px 56px 1fr; }
+    .ag, .tp { display: none; }
+  }
+</style>
+</head>
+<body>
+<div class="app">
+  <!-- ===== TOP BAR ===== -->
+  <header class="topbar">
+    <div class="brand">
+      <span class="dot"></span>
+      OUTREACH OPS
+      <i>· operations terminal</i>
+    </div>
+    <div class="kpis" id="kpis">
+      <div class="kpi"><b id="kpi-sent">—</b><span>sent today</span></div>
+      <div class="kpi"><b id="kpi-replies">—</b><span>replies</span></div>
+      <div class="kpi hot"><b id="kpi-hot">—</b><span>hot</span></div>
+      <div class="kpi err"><b id="kpi-err">—</b><span>errors</span></div>
+    </div>
+    <div class="clock">
+      <span class="live-dot"></span>
+      <span id="clock">--:--:--</span>
+    </div>
+  </header>
+
+  <!-- ===== MAIN GRID ===== -->
+  <section class="main">
+    <!-- LEFT: Stats column -->
+    <aside class="stats">
+      <!-- Platform cards rendered dynamically from stats.by_platform -->
+      <div id="platform-cards"></div>
+
+      <!-- Lead Pipeline card -->
+      <div class="card" id="pipeline-card">
+        <div class="card-h">
+          <div class="card-title">Lead Pipeline</div>
+          <div class="status" data-status="running"><span class="d"></span><span>Live</span></div>
+        </div>
+        <div class="pipeline" id="pipeline-rows">
+          <div class="ppl-row" data-key="sent_waiting">
+            <span class="lbl">Отправлено · ждут ответа <small>(&lt;72ч)</small></span>
+            <span class="v">0</span>
+            <div class="ppl-bar"><i></i></div>
+          </div>
+          <div class="ppl-row" data-key="no_reaction">
+            <span class="lbl">Нет реакции <small>(&gt;72ч, остыло)</small></span>
+            <span class="v">0</span>
+            <div class="ppl-bar"><i></i></div>
+          </div>
+          <div class="ppl-row" data-key="replied_neutral">
+            <span class="lbl">Ответили · неясно</span>
+            <span class="v">0</span>
+            <div class="ppl-bar"><i></i></div>
+          </div>
+          <div class="ppl-row" data-key="hr_invite">
+            <span class="lbl">HR-приглашение</span>
+            <span class="v">0</span>
+            <div class="ppl-bar"><i></i></div>
+          </div>
+          <div class="ppl-row" data-key="interested">
+            <span class="lbl">Положительный ответ</span>
+            <span class="v">0</span>
+            <div class="ppl-bar"><i></i></div>
+          </div>
+          <div class="ppl-row" data-key="proposal_sent">
+            <span class="lbl">Отправлено КП</span>
+            <span class="v">0</span>
+            <div class="ppl-bar"><i></i></div>
+          </div>
+          <div class="ppl-row" data-key="booked">
+            <span class="lbl">Встреча забронирована</span>
+            <span class="v">0</span>
+            <div class="ppl-bar"><i></i></div>
+          </div>
+          <div class="ppl-row" data-key="declined">
+            <span class="lbl">Отказ</span>
+            <span class="v">0</span>
+            <div class="ppl-bar"><i></i></div>
+          </div>
+          <div class="ppl-row" data-key="won">
+            <span class="lbl">Закрыто · клиент</span>
+            <span class="v">0</span>
+            <div class="ppl-bar"><i></i></div>
+          </div>
+        </div>
+        <div class="ppl-summary">
+          <span>conversion (replied / sent)</span>
+          <span><b id="ppl-conv">0%</b></span>
+        </div>
+      </div>
+
+      <!-- Conversations card — actual reply texts -->
+      <div class="card" id="conv-card">
+        <div class="card-h">
+          <div class="card-title">Conversations</div>
+          <div class="status" data-status="running"><span class="d"></span><span><span id="conv-count">0</span> messages</span></div>
+        </div>
+        <div class="conv-list" id="conv-list">
+          <div class="empty" style="padding:14px 0"><b>—</b>no replies yet</div>
+        </div>
+      </div>
+
+      <!-- Twenty CRM card -->
+      <div class="card" data-platform="twenty">
+        <div class="card-h">
+          <div class="card-title">Twenty CRM</div>
+          <div class="status" data-status="running"><span class="d"></span><span>Live</span></div>
+        </div>
+        <div class="big-num">
+          <span class="n" id="tw-total">0</span>
+          <span class="lbl">opportunities</span>
+        </div>
+        <div class="stage-grid" id="tw-stages">
+          <div class="stage" data-key="SCREENING"><span>Screening</span><span>0</span></div>
+          <div class="stage" data-key="MEETING"><span>Meeting</span><span>0</span></div>
+          <div class="stage" data-key="PROPOSAL"><span>Proposal</span><span>0</span></div>
+          <div class="stage" data-key="NOT_NOW"><span>Not now</span><span>0</span></div>
+        </div>
+      </div>
+
+      <!-- Active agents card -->
+      <div class="card">
+        <div class="card-h">
+          <div class="card-title">Agents</div>
+          <div class="status" data-status="idle" id="agents-status">
+            <span class="d"></span><span><span id="agents-running-n">0</span> running</span>
+          </div>
+        </div>
+        <div id="agents-list">
+          <div class="empty" style="padding:14px 0">
+            <b>—</b>
+            no agents tracked yet
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- RIGHT: Terminal -->
+    <div class="terminal">
+      <div class="term-h">
+        <div class="lbl">live log</div>
+        <div class="filters" id="filters">
+          <button class="chip on" data-l="info">Info</button>
+          <button class="chip on" data-l="ok">OK</button>
+          <button class="chip on" data-l="warn">Warn</button>
+          <button class="chip on" data-l="err">Err</button>
+          <button class="chip on" data-l="hot">Hot</button>
+        </div>
+        <div class="right">
+          <span id="filter-active"></span>
+          <button class="pause-btn" id="pause-btn">⏸ pause autoscroll</button>
+          <span class="live"><i></i><span>polling 5s</span></span>
+        </div>
+      </div>
+      <div class="term-body" id="log-body">
+        <!-- log rows injected here -->
+      </div>
+      <div id="log-tooltip"></div>
+    </div>
+  </section>
+
+  <!-- ===== FUNNEL ===== -->
+  <footer class="funnel">
+    <div class="funnel-h">
+      pipeline funnel
+      <span class="small">today's flow</span>
+    </div>
+    <div class="funnel-track" id="funnel-track">
+      <div class="stage-bar" data-key="SCANNED"  style="--p:1"><div class="lbl">scanned</div><div class="nm" data-k="scanned">0</div></div>
+      <div class="stage-bar" data-key="FILTERED" style="--p:0"><div class="lbl">filtered in</div><div class="nm" data-k="filtered">0</div></div>
+      <div class="stage-bar" data-key="SENT"     style="--p:0"><div class="lbl">sent</div><div class="nm" data-k="sent">0</div></div>
+      <div class="stage-bar" data-key="REPLIED"  style="--p:0"><div class="lbl">replied</div><div class="nm" data-k="replied">0</div></div>
+      <div class="stage-bar" data-key="HOT"      style="--p:0"><div class="lbl">hot lead</div><div class="nm" data-k="hot">0</div></div>
+      <div class="stage-bar" data-key="MEETING"  style="--p:0"><div class="lbl">positive</div><div class="nm" data-k="meeting">0</div></div>
+    </div>
+  </footer>
+</div>
+
+<script>
+/* ====================================================================
+   Outreach Ops Dashboard
+   Polling-based, vanilla JS, no build step.
+   Reads ./data/agents.json, ./data/stats.json, ./data/events-recent.json.
+   Falls back to inline mock data when files are missing (file:// preview).
+==================================================================== */
+(() => {
+  'use strict';
+
+  // Auth-key passthrough: corp.timzinin.com/outreach/?key=outreach_ops_2026
+  // The same `key` query param is appended to every JSON fetch so nginx's
+  // `if ($arg_key != ...)` check allows them through. Local file:// runs
+  // without a key — fetches still work because the auth check is server-side only.
+  const _AUTH_KEY = new URLSearchParams(location.search).get('key') || '';
+  const _q = _AUTH_KEY ? ('?key=' + encodeURIComponent(_AUTH_KEY)) : '';
+  const DATA = {
+    agents:  './data/agents.json' + _q,
+    stats:   './data/stats.json' + _q,
+    events:  './data/events-recent.json' + _q,
+    convs:   './data/conversations.json' + _q,
+  };
+  const POLL_MS = 5000;
+
+  // ---------- Inline mock (used when fetch fails / file://) ----------
+  // NOTE: platform card rendering is dynamic — adding a new key under
+  // `by_platform` automatically renders a card. Required keys per platform:
+  //   { label, sent, replies, hot, errors, daily_quota_used, daily_quota_max,
+  //     last_action_ts, status }
+  const MOCK = {
+    stats: {
+      date: '2026-05-05',
+      totals_today: { sent: 16, replies: 8, hot: 2, errors: 1 },
+      by_platform: {
+        avito_rabota: {
+          label: 'Avito Работа', short: 'avito',
+          sent: 14, replies: 2, hot: 1, errors: 0,
+          daily_quota_used: 14, daily_quota_max: 20,
+          last_action_ts: '15:00:01',
+          status: 'idle',
+        },
+        superjob: {
+          label: 'SuperJob', short: 'sj',
+          sent: 6, replies: 5, hot: 1, errors: 0,
+          daily_quota_used: 6, daily_quota_max: 30,
+          last_action_ts: '11:46:55',
+          status: 'idle',
+        },
+        gulftalent: {
+          label: 'GulfTalent', short: 'gt',
+          sent: 0, replies: 1, hot: 0, errors: 1,
+          daily_quota_used: 0, daily_quota_max: 15,
+          last_action_ts: '15:18:42',
+          status: 'running',
+        },
+      },
+      twenty: {
+        opportunities_total: 1004,
+        by_stage: { SCREENING: 14, MEETING: 2, PROPOSAL: 0, NOT_NOW: 8 },
+      },
+      funnel: { scanned: 471, filtered: 92, sent: 16, replied: 8, hot: 2, meeting: 2 },
+      lead_pipeline: { sent_waiting: 14, no_reaction: 86, replied_neutral: 0, invited: 5, meeting: 2, declined: 0, won: 0 },
+    },
+    convs: [
+      { ts:'14:12:00', level:'HOT',  platform:'avito_rabota', agent:'outreach-avito', type:'reply_received', lead_status:'invited',  message:'PGM · «Интересно. Можно обсудить»', meta:{company:'PGM', body:'Интересно. Можно обсудить', vacancy:'Смм специалист, маркетолог'} },
+      { ts:'14:41:47', level:'OK',   platform:'avito_rabota', agent:'manual',         type:'reply_sent',     lead_status:'meeting',  message:'PGM · Calendly + pivot', meta:{company:'PGM', body:'Спасибо за быстрый ответ! Удобно созвониться 30 минут — посмотрим ваши задачи и какую часть SMM можно перевести на AI-агентов. Слот: https://calendly.com/timzinin\n\nЕсли перепиской удобнее — расскажите коротко, что сейчас руками делает специалист (контент, постинг, креативы, аналитика). Пришлю кейсы под ваш стек.\n\nТим'} },
+    ],
+    agents: [
+      { id: 'a1', name: 'outreach-avito',     status: 'idle',    started_at: '11:15:00', last_heartbeat: '15:00:01', current_action: 'completed (9 sent)',     sent: 9, errors: 0 },
+      { id: 'a2', name: 'outreach-superjob',  status: 'idle',    started_at: '11:14:32', last_heartbeat: '11:46:55', current_action: 'completed (2 sent)',     sent: 2, errors: 0 },
+      { id: 'a3', name: 'outreach-gulftalent',status: 'running', started_at: '14:55:00', last_heartbeat: '15:18:42', current_action: 'scan: filtering 47 results', sent: 0, errors: 1 },
+    ],
+    // events show full agent lifecycle — heartbeats, scan/filter/enrich, send,
+    // CRM writes, replies, errors. Tim wants ALL agent activity visible, not
+    // only successful sends.
+    events: [
+      // ---- Avito morning run ----
+      { ts:'11:15:00', level:'INFO', platform:'avito_rabota', agent:'outreach-avito',    type:'agent_start',     message:'agent_start run_id=avito-am keyword="маркетолог" window=24h max=10', meta:{} },
+      { ts:'11:15:02', level:'INFO', platform:'avito_rabota', agent:'outreach-avito',    type:'session_open',    message:'playwright session=av opened (persistent profile)', meta:{ profile:'~/outreach-hunt/state/browser-profiles/avito' } },
+      { ts:'11:15:05', level:'INFO', platform:'avito_rabota', agent:'outreach-avito',    type:'replies_poll_start', message:'polling messenger for unread replies', meta:{} },
+      { ts:'11:15:14', level:'OK',   platform:'avito_rabota', agent:'outreach-avito',    type:'replies_poll_done',  message:'0 unread conversations', meta:{ unread:0 } },
+      { ts:'11:15:20', level:'INFO', platform:'avito_rabota', agent:'outreach-avito',    type:'scan_start',      message:'scan keyword="маркетолог" + 8 P1 sub-keywords', meta:{ keywords:9 } },
+      { ts:'11:15:55', level:'INFO', platform:'avito_rabota', agent:'outreach-avito',    type:'scan_done',       message:'collected 113 vacancies (raw)', meta:{ raw:113 } },
+      { ts:'11:15:56', level:'INFO', platform:'avito_rabota', agent:'outreach-avito',    type:'filter_dedup',    message:'dedup against past sends → 113 unique', meta:{} },
+      { ts:'11:15:57', level:'WARN', platform:'avito_rabota', agent:'outreach-avito',    type:'blacklist_drop',  message:'«Охрана тыла ЛНР/ДНР» dropped → defense_and_military', meta:{ rule:'defense_and_military', match:'военнослуж' } },
+      { ts:'11:15:57', level:'WARN', platform:'avito_rabota', agent:'outreach-avito',    type:'blacklist_drop',  message:'Яндекс ×2 dropped → it_dev_companies', meta:{ rule:'it_dev_companies' } },
+      { ts:'11:15:57', level:'WARN', platform:'avito_rabota', agent:'outreach-avito',    type:'blacklist_drop',  message:'ФСО dropped → state_companies', meta:{ rule:'state_companies' } },
+      { ts:'11:15:58', level:'INFO', platform:'avito_rabota', agent:'outreach-avito',    type:'filter_salary',   message:'20 vacancies dropped (salary < 100k)', meta:{ dropped:20 } },
+      { ts:'11:15:59', level:'INFO', platform:'avito_rabota', agent:'outreach-avito',    type:'filter_resume',   message:'3 candidate-resumes dropped (not vacancies)', meta:{} },
+      { ts:'11:16:00', level:'INFO', platform:'avito_rabota', agent:'outreach-avito',    type:'score_compute',   message:'scored 9 vacancies (title-only, P1 tier_bonus +25)', meta:{ scored:9, threshold:25 } },
+      { ts:'11:16:01', level:'INFO', platform:'avito_rabota', agent:'outreach-avito',    type:'send_queue',      message:'queued 9 for live send (max=10)', meta:{ queued:9 } },
+      { ts:'12:52:00', level:'INFO', platform:'avito_rabota', agent:'outreach-avito',    type:'send_attempt',    message:'send 1/9 → hlebnaya-usadba', meta:{ vacancy_id:'8018669014' } },
+      { ts:'12:52:14', level:'OK',   platform:'avito_rabota', agent:'outreach-avito',    type:'send_done',       message:'hlebnaya-usadba — Маркетолог (180k₽) DELIVERED', meta:{ vacancy_id:'8018669014', score:25, channel:'avito-messenger' } },
+      { ts:'12:52:15', level:'OK',   platform:'twenty',       agent:'outreach-avito',    type:'crm_upsert',      message:'Opportunity created (SCREENING) hlebnaya-usadba', meta:{ opp_id:'d9a908e5-5d27-4a41-8877-202eb429a563' } },
+      { ts:'12:52:16', level:'OK',   platform:'twenty',       agent:'outreach-avito',    type:'crm_touch',       message:'hhTouch event logged (MESSAGE_SENT)', meta:{ touch_id:'a3b8bfd7' } },
+      { ts:'12:52:17', level:'INFO', platform:'avito_rabota', agent:'outreach-avito',    type:'send_throttle',   message:'throttle 102s before next send', meta:{ delay_s:102 } },
+      { ts:'12:55:14', level:'INFO', platform:'avito_rabota', agent:'outreach-avito',    type:'enrich_detail',   message:'description loader: 9/10 enriched (Sprint 3)', meta:{ count:9 } },
+      { ts:'12:57:01', level:'WARN', platform:'avito_rabota', agent:'outreach-avito',    type:'blacklist_drop',  message:'СПб ГУП «Горэлектротранс» dropped → state_companies', meta:{ company:'Горэлектротранс' } },
+      { ts:'12:59:15', level:'OK',   platform:'avito_rabota', agent:'outreach-avito',    type:'send_done',       message:'РУСАГРО — Бренд-менеджер (102k₽) DELIVERED', meta:{ vacancy_id:'8096037086' } },
+      { ts:'13:01:42', level:'OK',   platform:'avito_rabota', agent:'outreach-avito',    type:'send_done',       message:'ФИЛЬТРОБАЗА — Маркетолог (115k₽) DELIVERED', meta:{ vacancy_id:'8039042913' } },
+      { ts:'13:04:20', level:'OK',   platform:'avito_rabota', agent:'outreach-avito',    type:'send_done',       message:'ПРО-Вакансии — Проджект-маркетолог (110k₽) DELIVERED', meta:{ vacancy_id:'4137151532' } },
+      { ts:'13:06:55', level:'OK',   platform:'avito_rabota', agent:'outreach-avito',    type:'send_done',       message:'UpGrade Your Home — Маркетолог (100k₽) DELIVERED', meta:{ vacancy_id:'8021518531' } },
+      { ts:'13:08:30', level:'OK',   platform:'avito_rabota', agent:'outreach-avito',    type:'send_done',       message:'МИСТЕР СУШИ — Маркетолог + SMM (125k₽) DELIVERED', meta:{ vacancy_id:'7801056770' } },
+      { ts:'13:11:05', level:'OK',   platform:'avito_rabota', agent:'outreach-avito',    type:'send_done',       message:'Волхов — Маркетолог DELIVERED', meta:{} },
+      { ts:'13:12:18', level:'OK',   platform:'avito_rabota', agent:'outreach-avito',    type:'send_done',       message:'PGM — Смм специалист, маркетолог DELIVERED', meta:{ vacancy_id:'8127854796' } },
+      { ts:'13:26:01', level:'OK',   platform:'avito_rabota', agent:'outreach-avito',    type:'send_done',       message:'Черника — Маркетолог / Контент-продюсер (80–120k) DELIVERED', meta:{} },
+      { ts:'13:26:30', level:'INFO', platform:'avito_rabota', agent:'outreach-avito',    type:'agent_done',      message:'agent finished — 9 sent, 0 errors, run_time=2h11m', meta:{ sent:9, errors:0 } },
+      // ---- SuperJob morning run ----
+      { ts:'09:42:00', level:'INFO', platform:'superjob',     agent:'outreach-superjob', type:'agent_start',     message:'agent_start run_id=sj-am tier=P1→P3 max=10', meta:{} },
+      { ts:'09:42:05', level:'OK',   platform:'superjob',     agent:'outreach-superjob', type:'auth_check',      message:'token valid, resume_id=56434305 published, photo OK', meta:{ resume_id:'56434305' } },
+      { ts:'09:42:48', level:'OK',   platform:'superjob',     agent:'outreach-superjob', type:'send_done',       message:'XHUNTER — Менеджер по продажам AI-контента (170k₽) DELIVERED', meta:{ score:88, opp_id:'5d9f0f4d' } },
+      { ts:'09:44:04', level:'OK',   platform:'superjob',     agent:'outreach-superjob', type:'send_done',       message:'Точка банк — Маркетолог сайта DELIVERED', meta:{ score:73 } },
+      { ts:'09:44:51', level:'OK',   platform:'superjob',     agent:'outreach-superjob', type:'send_done',       message:'Точка банк — Продуктовый маркетолог DELIVERED', meta:{ score:73 } },
+      { ts:'09:45:05', level:'OK',   platform:'superjob',     agent:'outreach-superjob', type:'send_done',       message:'Nickelodeon — Менеджер по маркетингу DELIVERED', meta:{ score:53 } },
+      { ts:'09:45:30', level:'WARN', platform:'superjob',     agent:'outreach-superjob', type:'review_hold',     message:'KStar Head of Growth $5k/mo — privacy red flag (passport+video+crypto), HITL', meta:{ flag:'data_harvesting_pattern' } },
+      { ts:'09:46:00', level:'INFO', platform:'superjob',     agent:'outreach-superjob', type:'agent_done',      message:'agent finished — 4 sent, 6 in review-bucket', meta:{ sent:4 } },
+      // ---- Replies ----
+      { ts:'13:35:00', level:'WARN', platform:'avito_rabota', agent:'outreach-avito',    type:'reply_classify',  message:'Черника reply classified as soft_decline («посмотрите похожие»)', meta:{ classified:'soft_decline' } },
+      { ts:'14:12:00', level:'HOT',  platform:'avito_rabota', agent:'outreach-avito',    type:'reply_received',  message:'PGM: «Интересно. Можно обсудить»', meta:{ vacancy_id:'8127854796', stage_to:'MEETING' } },
+      { ts:'14:41:47', level:'OK',   platform:'avito_rabota', agent:'manual',            type:'reply_sent',      message:'Reply to PGM — Calendly + AI-services pivot', meta:{ template:'pgm_v1' } },
+      { ts:'14:42:00', level:'OK',   platform:'twenty',       agent:'manual',            type:'stage_transition', message:'PGM Opportunity SCREENING → MEETING + replyReceivedAt', meta:{ opp_id:'b5a28f47' } },
+      { ts:'14:46:36', level:'OK',   platform:'superjob',     agent:'manual',            type:'reply_sent',      message:'АВС Рус — reply to April invitation, Calendly sent', meta:{ stage_to:'MEETING' } },
+      // ---- GulfTalent (parallel session, in flight) ----
+      { ts:'14:55:00', level:'INFO', platform:'gulftalent',   agent:'outreach-gulftalent', type:'agent_start',   message:'agent_start run_id=gt-1 region=UAE keyword="marketing manager"', meta:{} },
+      { ts:'14:55:02', level:'INFO', platform:'gulftalent',   agent:'outreach-gulftalent', type:'session_open',  message:'playwright session=gt opened', meta:{} },
+      { ts:'14:55:08', level:'INFO', platform:'gulftalent',   agent:'outreach-gulftalent', type:'auth_check',    message:'login state OK (cookie persisted)', meta:{} },
+      { ts:'14:55:30', level:'INFO', platform:'gulftalent',   agent:'outreach-gulftalent', type:'scan_start',    message:'scan keyword="marketing" location=UAE/SA window=7d', meta:{} },
+      { ts:'14:58:14', level:'INFO', platform:'gulftalent',   agent:'outreach-gulftalent', type:'scan_done',     message:'47 vacancies collected (raw)', meta:{ raw:47 } },
+      { ts:'14:58:50', level:'ERR',  platform:'gulftalent',   agent:'outreach-gulftalent', type:'detail_fetch_fail', message:'detail fetch failed for vacancy 7782 (timeout)', meta:{ vacancy_id:'7782', err:'timeout' } },
+      { ts:'15:00:14', level:'INFO', platform:'gulftalent',   agent:'outreach-gulftalent', type:'enrich_detail', message:'description fetched: 38/47 (4 timeouts, 5 hidden)', meta:{ ok:38, timeouts:4, hidden:5 } },
+      { ts:'15:08:00', level:'WARN', platform:'gulftalent',   agent:'outreach-gulftalent', type:'blacklist_drop',message:'Saudi Aramco dropped → state_companies (SA gov-linked)', meta:{ rule:'state_companies' } },
+      { ts:'15:08:30', level:'INFO', platform:'gulftalent',   agent:'outreach-gulftalent', type:'filter_salary', message:'12 dropped (salary < $3k/mo)', meta:{ dropped:12 } },
+      { ts:'15:14:02', level:'HOT',  platform:'gulftalent',   agent:'outreach-gulftalent', type:'reply_received',message:'Talabat — recruiter requested call (inbound, prior application)', meta:{ company:'Talabat' } },
+      { ts:'15:18:42', level:'INFO', platform:'gulftalent',   agent:'outreach-gulftalent', type:'heartbeat',     message:'alive · scan filtering 47 results', meta:{ uptime_s:1422 } },
+    ],
+  };
+
+  // ---------- State ----------
+  const state = {
+    autoScroll: true,
+    activeFilters: new Set(['INFO', 'OK', 'WARN', 'ERR', 'HOT']),
+    activeAgentFilter: null,  // string agent.id when filtering by agent
+    lastEventTs: null,
+    paused: false,
+    loaded: { stats: false, agents: false, events: false },
+  };
+
+  // ---------- DOM helpers ----------
+  const $ = (sel, root = document) => root.querySelector(sel);
+  const $$ = (sel, root = document) => Array.from(root.querySelectorAll(sel));
+  const num = (n) => (n == null ? '—' : Number(n).toLocaleString('en-US'));
+
+  // ---------- Fetch with mock fallback ----------
+  async function fetchData(url, mockKey) {
+    try {
+      const r = await fetch(url, { cache: 'no-store' });
+      if (!r.ok) throw new Error(r.status);
+      return await r.json();
+    } catch (_e) {
+      return MOCK[mockKey];
+    }
+  }
+
+  // ---------- Renderers ----------
+  function renderTopKPIs(stats) {
+    const t = stats.totals_today || {};
+    $('#kpi-sent').textContent    = num(t.sent);
+    $('#kpi-replies').textContent = num(t.replies);
+    $('#kpi-hot').textContent     = num(t.hot);
+    $('#kpi-err').textContent     = num(t.errors);
+  }
+
+  // Render platform cards dynamically from stats.by_platform.
+  // Adding a new platform key (e.g. "kariyer", "habr") auto-renders a new card.
+  function renderPlatformCards(byPlatform) {
+    const root = $('#platform-cards');
+    if (!root || !byPlatform) return;
+    const keys = Object.keys(byPlatform);
+    const existing = new Set(Array.from(root.children).map(el => el.dataset.platform));
+    const incoming = new Set(keys);
+
+    // Remove cards no longer present
+    Array.from(root.children).forEach(el => {
+      if (!incoming.has(el.dataset.platform)) el.remove();
+    });
+
+    // Render or update each
+    keys.forEach(key => {
+      const data = byPlatform[key];
+      const label = data.label || key.replace(/_/g, ' ');
+      let card = root.querySelector(`[data-platform="${CSS.escape(key)}"]`);
+      if (!card) {
+        card = document.createElement('div');
+        card.className = 'card';
+        card.dataset.platform = key;
+        card.innerHTML = `
+          <div class="card-h">
+            <div class="card-title"></div>
+            <div class="status" data-status="idle"><span class="d"></span><span>Idle</span></div>
+          </div>
+          <div class="big-num">
+            <span class="n">0</span>
+            <span class="of">/ <span class="quota">0</span></span>
+            <span class="lbl">sent · quota</span>
+          </div>
+          <div class="meter"><i style="width:0%"></i></div>
+          <div class="row"><span>replies</span><span class="v" data-k="replies">0</span></div>
+          <div class="row"><span>hot leads</span><span class="v hot" data-k="hot">0</span></div>
+          <div class="row"><span>errors</span><span class="v" data-k="errors">0</span></div>
+          <div class="row"><span>last action</span><span class="v" data-k="last">—</span></div>
+        `;
+        root.appendChild(card);
+      }
+      // Update card contents
+      card.querySelector('.card-title').textContent = label;
+      const st = card.querySelector('.status');
+      st.dataset.status = data.status || 'idle';
+      st.querySelector('span:last-child').textContent =
+        (data.status || 'idle').replace(/^./, c => c.toUpperCase());
+      card.querySelector('.n').textContent = num(data.sent);
+      card.querySelector('.quota').textContent = num(data.daily_quota_max);
+      card.querySelector('[data-k="replies"]').textContent = num(data.replies);
+      card.querySelector('[data-k="hot"]').textContent = num(data.hot);
+      const errEl = card.querySelector('[data-k="errors"]');
+      errEl.textContent = num(data.errors);
+      errEl.classList.toggle('err', (data.errors || 0) > 0);
+      card.querySelector('[data-k="last"]').textContent = data.last_action_ts || '—';
+      const pct = data.daily_quota_max
+        ? Math.min(100, Math.round((data.daily_quota_used / data.daily_quota_max) * 100))
+        : 0;
+      const meter = card.querySelector('.meter > i');
+      meter.style.width = pct + '%';
+      meter.className = pct >= 90 ? 'err' : pct >= 70 ? 'warn' : '';
+    });
+  }
+
+  // Render lead pipeline overall counts + bars + conversion summary.
+  function renderPipeline(pipeline, totals) {
+    if (!pipeline) return;
+    const total = Object.values(pipeline).reduce((a, b) => a + b, 0) || 1;
+    const root = $('#pipeline-rows');
+    if (!root) return;
+    $$('.ppl-row', root).forEach(row => {
+      const k = row.dataset.key;
+      const v = pipeline[k] || 0;
+      row.querySelector('.v').textContent = num(v);
+      const pct = (v / total) * 100;
+      row.querySelector('.ppl-bar > i').style.width = pct.toFixed(1) + '%';
+    });
+    // Conversion: any non-cold bucket / total
+    const replied = (pipeline.hr_invite || pipeline.invited || 0)
+                  + (pipeline.interested || pipeline.meeting || 0)
+                  + (pipeline.proposal_sent || 0)
+                  + (pipeline.booked || 0)
+                  + (pipeline.replied_neutral || 0)
+                  + (pipeline.won || 0)
+                  + (pipeline.declined || 0);
+    const conv = total > 0 ? (replied / total * 100) : 0;
+    $('#ppl-conv').textContent = `${replied}/${total} · ${conv.toFixed(1)}%`;
+  }
+
+  function renderTwenty(twenty) {
+    if (!twenty) return;
+    $('#tw-total').textContent = num(twenty.opportunities_total);
+    const stages = twenty.by_stage || {};
+    $$('.stage', $('#tw-stages')).forEach(s => {
+      const k = s.dataset.key;
+      const v = stages[k] || 0;
+      s.querySelector('span:last-child').textContent = num(v);
+    });
+  }
+
+  function renderFunnel(funnel) {
+    if (!funnel) return;
+    const max = Math.max(funnel.scanned || 1, 1);
+    $$('.stage-bar', $('#funnel-track')).forEach(b => {
+      const k = b.dataset.key.toLowerCase();
+      const v = funnel[k] || 0;
+      b.querySelector('.nm').textContent = num(v);
+      b.style.setProperty('--p', (v / max).toFixed(3));
+    });
+  }
+
+  function renderAgents(agents) {
+    const list = $('#agents-list');
+    if (!agents || !agents.length) {
+      list.innerHTML = '<div class="empty" style="padding:14px 0"><b>—</b>no agents</div>';
+      $('#agents-running-n').textContent = '0';
+      $('#agents-status').dataset.status = 'idle';
+      return;
+    }
+    // Support both formats:
+    //  legacy: { id, name, status: 'running'|..., started_at, current_action }
+    //  v2 (events.jsonl): { platform, agent_id, sent_today, replies_today, errors_today,
+    //                        last_event_ts, last_event_type, last_event_message, status: 'active'|'idle' }
+    const isV2 = (a) => 'sent_today' in a;
+    const activeCount = agents.filter(a => isV2(a) ? (a.status === 'active') : (a.status === 'running')).length;
+    $('#agents-running-n').textContent = activeCount;
+    $('#agents-status').dataset.status = activeCount > 0 ? 'running' : 'idle';
+
+    list.innerHTML = agents.map(a => {
+      if (isV2(a)) {
+        const aid = a.platform;
+        const isActive = state.activeAgentFilter === aid;
+        const isActiveStatus = a.status === 'active';
+        const lastTs = (a.last_event_ts || '').slice(11,19);
+        const lastMsg = a.last_event_message || (isActiveStatus ? 'active' : 'idle · no events today');
+        const counts = `${a.sent_today}↑ ${a.replies_today}↩ ${a.errors_today}✗`;
+        return `
+          <div class="agent-row${isActive ? ' active' : ''}" data-agent="${aid}" data-status="${isActiveStatus ? 'running' : 'idle'}" title="${escapeAttr(lastMsg)}">
+            <span class="d"></span>
+            <span class="nm">${escape(a.agent_id || aid)}</span>
+            <span class="t" style="font-variant-numeric:tabular-nums">${counts}${lastTs ? ' · ' + lastTs : ''}</span>
+          </div>`;
+      } else {
+        const startMs = parseTime(a.started_at);
+        const elapsed = startMs ? formatElapsed(Date.now() - startMs) : '—';
+        const isActive = state.activeAgentFilter === a.id;
+        return `
+          <div class="agent-row${isActive ? ' active' : ''}" data-agent="${a.id}" data-status="${a.status}" title="${escapeAttr(a.current_action || '')}">
+            <span class="d"></span>
+            <span class="nm">${escape(a.name)}</span>
+            <span class="t">${elapsed}</span>
+          </div>`;
+      }
+    }).join('');
+
+    $$('#agents-list .agent-row').forEach(row => {
+      row.addEventListener('click', () => {
+        const aid = row.dataset.agent;
+        state.activeAgentFilter = (state.activeAgentFilter === aid) ? null : aid;
+        renderAgents(agents);
+        renderEvents(window._lastEvents || []);
+        updateFilterIndicator();
+      });
+    });
+  }
+
+  // Render conversations card — recent inbound replies + outbound sent.
+  // Each row: status stripe, who+platform+time, body preview, click to expand.
+  function renderConversations(convs) {
+    const list = $('#conv-list');
+    const counter = $('#conv-count');
+    if (!list) return;
+    if (!convs || !convs.length) {
+      list.innerHTML = '<div class="empty" style="padding:14px 0"><b>—</b>no replies yet</div>';
+      if (counter) counter.textContent = '0';
+      return;
+    }
+    if (counter) counter.textContent = convs.length;
+    // Show newest first
+    const ordered = [...convs].reverse();
+    list.innerHTML = ordered.map((c, i) => {
+      const meta = c.meta || {};
+      const company = meta.company || meta.firm || c.message.split('·')[0].trim() || '—';
+      const platform = shortPlatform(c.platform);
+      const isOut = c.type === 'reply_sent';
+      const dir = isOut
+        ? '<span class="dir" data-d="out">SENT</span>'
+        : '<span class="dir" data-d="in">IN</span>';
+      const body = meta.body || c.message.split('·').slice(1).join('·').trim() || '—';
+      const ls = c.lead_status || 'unknown';
+      return `<div class="conv-row" data-status="${ls}" data-i="${i}">
+        <div class="stripe"></div>
+        <div>
+          <div class="conv-head">
+            <span class="who">${dir}<span>${escape(company)}</span><span class="pl-tag">· ${escape(platform)}</span></span>
+            <span class="ts">${escape(c.ts)}</span>
+          </div>
+          <div class="conv-body">${escape(body)}</div>
+        </div>
+      </div>`;
+    }).join('');
+    $$('#conv-list .conv-row').forEach(row => {
+      row.addEventListener('click', () => row.classList.toggle('expanded'));
+    });
+  }
+
+  function renderEvents(events) {
+    window._lastEvents = events;
+    const body = $('#log-body');
+    if (!events || !events.length) {
+      body.innerHTML = '<div class="empty"><b>quiet line</b>events will appear here as agents run</div>';
+      return;
+    }
+    const filtered = events.filter(e => {
+      if (!state.activeFilters.has(e.level)) return false;
+      if (state.activeAgentFilter) {
+        // match agent by id or by name (events store name)
+        const a = window._lastAgents?.find(x => x.id === state.activeAgentFilter);
+        if (a && e.agent !== a.name) return false;
+      }
+      return true;
+    });
+    if (!filtered.length) {
+      body.innerHTML = '<div class="empty"><b>filtered</b>no events match the current filter</div>';
+      return;
+    }
+
+    body.innerHTML = filtered.map((e, idx) => {
+      const cls = e.level === 'HOT' ? ' hot' : e.level === 'ERR' ? ' err' : '';
+      const olderCls = e._is_today === false ? ' older' : '';
+      const ls = e.lead_status
+        ? `<span class="lstat" data-s="${e.lead_status}" title="${LEAD_STATUS_LABELS[e.lead_status] || e.lead_status}">${LEAD_STATUS_SHORT[e.lead_status] || e.lead_status}</span>`
+        : '<span></span>';
+      const hasMeta = e.meta && Object.keys(e.meta).length ? '1' : '0';
+      const metaJson = e.meta ? JSON.stringify(e.meta) : '{}';
+      return `<div class="log-row${cls}${olderCls}" data-i="${idx}" data-meta='${escape(metaJson)}'>
+        <span class="ts">${escape(e.ts)}</span>
+        <span class="lvl" data-l="${e.level}">${e.level}</span>
+        <span class="pl">${escape(shortPlatform(e.platform))}</span>
+        ${ls}
+        <span class="tp">${escape(e.type || '')}</span>
+        <span class="msg">${escape(e.message || '')}</span>
+      </div>`;
+    }).join('');
+
+    // Mouse-following tooltip — bound once per re-render.
+    const tt = $('#log-tooltip');
+    $$('#log-body .log-row').forEach(row => {
+      const metaRaw = row.getAttribute('data-meta');
+      let metaObj = {};
+      try { metaObj = JSON.parse(metaRaw.replace(/&quot;/g, '"').replace(/&amp;/g, '&').replace(/&lt;/g, '<').replace(/&gt;/g, '>')); } catch {}
+      const formatted = Object.entries(metaObj)
+        .map(([k, v]) => `<span class="key">${escape(k)}</span>: ${escape(typeof v === 'string' ? v : JSON.stringify(v))}`)
+        .join('\n');
+      row.addEventListener('mouseenter', (ev) => {
+        if (!Object.keys(metaObj).length) return;
+        tt.innerHTML = formatted;
+        tt.classList.add('show');
+      });
+      row.addEventListener('mousemove', (ev) => {
+        if (!tt.classList.contains('show')) return;
+        const x = ev.clientX + 14;
+        const y = ev.clientY + 14;
+        const tw = tt.offsetWidth;
+        const th = tt.offsetHeight;
+        const vw = window.innerWidth;
+        const vh = window.innerHeight;
+        tt.style.left = Math.min(x, vw - tw - 12) + 'px';
+        tt.style.top = Math.min(y, vh - th - 12) + 'px';
+      });
+      row.addEventListener('mouseleave', () => tt.classList.remove('show'));
+    });
+
+    if (state.autoScroll) body.scrollTop = body.scrollHeight;
+  }
+
+  // Lead status semantics — what each status means for Tim:
+  //   sent_waiting    — отправили, ждём ответа (<72ч)
+  //   no_reaction     — отправили, тишина >72ч (cold)
+  //   replied_neutral — пришёл ответ, но не ясно интерес или нет
+  //   invited         — пригласили на интервью / выразили интерес
+  //   meeting         — конкретно идёт разговор / Calendly бронь
+  //   declined        — отказ
+  //   won             — закрыли в клиента
+  const LEAD_STATUS_SHORT = {
+    sent_waiting:    'WAIT',
+    no_reaction:     'COLD',
+    replied_neutral: 'REPLY',
+    hr_invite:       'INVITE',
+    interested:      'WARM',     // positive reply, no meeting yet
+    proposal_sent:   'OFFER',
+    booked:          'MEETING',  // actual Calendly slot booked
+    declined:        'DECLINE',
+    won:             'WON',
+    // legacy aliases (older events)
+    invited:         'INVITE',
+    meeting:         'WARM',
+  };
+  const LEAD_STATUS_LABELS = {
+    sent_waiting:    'Отправлено, ждём ответа',
+    no_reaction:     'Нет реакции (>72ч)',
+    replied_neutral: 'Ответили — неясно',
+    hr_invite:       'HR-приглашение',
+    interested:      'Положительный ответ',
+    proposal_sent:   'Отправлено КП',
+    booked:          'Встреча забронирована',
+    declined:        'Отказ',
+    won:             'Закрыто · клиент',
+    invited:         'HR-приглашение (legacy)',
+    meeting:         'Положительный ответ (legacy)',
+  };
+
+  // Map full platform key → short display tag (3-5 chars).
+  // Falls back to first segment of the key. Pulls override from stats.by_platform[].short
+  // when available (set by adapter when registering).
+  const PLATFORM_SHORT = {
+    avito_rabota: 'avito',
+    superjob:     'sj',
+    gulftalent:   'gt',
+    hh:           'hh',
+    kariyer:      'kar',
+    habr:         'habr',
+    workspace:    'ws',
+    twenty:       'crm',
+  };
+  function shortPlatform(p) {
+    if (!p) return '—';
+    if (PLATFORM_SHORT[p]) return PLATFORM_SHORT[p];
+    const stats = window._lastStats;
+    const ov = stats?.by_platform?.[p]?.short;
+    if (ov) return ov;
+    return p.split('_')[0].slice(0, 6);
+  }
+  function shortAgent(a) {
+    if (!a) return '—';
+    return a.replace('outreach-', '');
+  }
+  function parseTime(t) {
+    if (!t) return null;
+    const today = new Date();
+    const [h, m, s] = t.split(':').map(Number);
+    return new Date(today.getFullYear(), today.getMonth(), today.getDate(), h, m || 0, s || 0).getTime();
+  }
+  function formatElapsed(ms) {
+    if (!ms || ms < 0) return '—';
+    const s = Math.floor(ms / 1000);
+    const h = Math.floor(s / 3600);
+    const m = Math.floor((s % 3600) / 60);
+    const sec = s % 60;
+    if (h) return `${h}h${m.toString().padStart(2,'0')}m`;
+    return `${m}'${sec.toString().padStart(2,'0')}"`;
+  }
+  function escape(str) {
+    return String(str).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[c]));
+  }
+  function escapeAttr(str) { return escape(str); }
+
+  // ---------- Filter chips ----------
+  $$('#filters .chip').forEach(chip => {
+    chip.addEventListener('click', () => {
+      const lvl = chip.dataset.l.toUpperCase();
+      if (state.activeFilters.has(lvl)) {
+        state.activeFilters.delete(lvl);
+        chip.classList.remove('on');
+      } else {
+        state.activeFilters.add(lvl);
+        chip.classList.add('on');
+      }
+      renderEvents(window._lastEvents || []);
+      updateFilterIndicator();
+    });
+  });
+
+  function updateFilterIndicator() {
+    const ind = $('#filter-active');
+    const parts = [];
+    if (state.activeFilters.size < 5) parts.push(`${state.activeFilters.size}/5 levels`);
+    if (state.activeAgentFilter) {
+      const a = window._lastAgents?.find(x => x.id === state.activeAgentFilter);
+      parts.push(`agent: ${a?.name || state.activeAgentFilter}`);
+    }
+    ind.textContent = parts.length ? '· ' + parts.join(' · ') : '';
+    ind.style.color = parts.length ? 'var(--accent)' : 'var(--text-muted)';
+  }
+
+  // ---------- Pause/resume autoscroll ----------
+  $('#pause-btn').addEventListener('click', () => {
+    state.autoScroll = !state.autoScroll;
+    const btn = $('#pause-btn');
+    btn.classList.toggle('paused', !state.autoScroll);
+    btn.textContent = state.autoScroll ? '⏸ pause autoscroll' : '▶ resume autoscroll';
+    if (state.autoScroll) $('#log-body').scrollTop = $('#log-body').scrollHeight;
+  });
+
+  // ---------- Clock ----------
+  function tickClock() {
+    const d = new Date();
+    const z = (n) => n.toString().padStart(2, '0');
+    $('#clock').textContent = `${z(d.getHours())}:${z(d.getMinutes())}:${z(d.getSeconds())}`;
+  }
+  setInterval(tickClock, 1000);
+  tickClock();
+
+  // ---------- Polling ----------
+  async function refresh() {
+    if (state.paused) return;
+    const [stats, agents, events, convs] = await Promise.all([
+      fetchData(DATA.stats, 'stats'),
+      fetchData(DATA.agents, 'agents'),
+      fetchData(DATA.events, 'events'),
+      fetchData(DATA.convs, 'convs'),
+    ]);
+
+    window._lastStats = stats;
+    renderTopKPIs(stats);
+    renderPlatformCards(stats.by_platform);
+    renderPipeline(stats.lead_pipeline, stats.totals_today);
+    renderConversations(convs || []);
+    renderTwenty(stats.twenty);
+    renderFunnel(stats.funnel);
+    window._lastAgents = agents;
+    renderAgents(agents);
+    renderEvents(events);
+    updateFilterIndicator();
+  }
+  refresh();
+  setInterval(refresh, POLL_MS);
+})();
+</script>
+</body>
+</html>

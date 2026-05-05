@@ -1,0 +1,562 @@
+[
+  {
+    "ts": "09:47:04",
+    "_date": "2026-05-05",
+    "_is_today": true,
+    "level": "OK",
+    "platform": "superjob",
+    "agent": "outreach-superjob",
+    "type": "send_done",
+    "lead_status": "sent_waiting",
+    "message": "XHUNTER — Менеджер по продажам AI-контента",
+    "meta": {
+      "opp_id": "5d9f0f4d-03e0-4661-ad9d-6620e758fa54",
+      "url": "https://www.superjob.ru/vakansii/menedzher-po-prodazham-ai-kontenta-51902426.html"
+    }
+  },
+  {
+    "ts": "09:47:04",
+    "_date": "2026-05-05",
+    "_is_today": true,
+    "level": "OK",
+    "platform": "superjob",
+    "agent": "outreach-superjob",
+    "type": "send_done",
+    "lead_status": "sent_waiting",
+    "message": "Точка банк — Маркетолог сайта",
+    "meta": {
+      "opp_id": "975086c4-ae96-4926-84bd-24fe2a34996c",
+      "url": "https://www.superjob.ru/vakansii/marketolog-sajta-51921986.html"
+    }
+  },
+  {
+    "ts": "09:47:05",
+    "_date": "2026-05-05",
+    "_is_today": true,
+    "level": "OK",
+    "platform": "superjob",
+    "agent": "outreach-superjob",
+    "type": "send_done",
+    "lead_status": "sent_waiting",
+    "message": "Точка банк — Продуктовый маркетолог",
+    "meta": {
+      "opp_id": "2b7d4f25-4ea8-4577-9e8d-8155e84426ba",
+      "url": "https://www.superjob.ru/vakansii/produktovyj-marketolog-51922024.html"
+    }
+  },
+  {
+    "ts": "09:47:05",
+    "_date": "2026-05-05",
+    "_is_today": true,
+    "level": "OK",
+    "platform": "superjob",
+    "agent": "outreach-superjob",
+    "type": "send_done",
+    "lead_status": "sent_waiting",
+    "message": "Nickelodeon — Менеджер по маркетингу",
+    "meta": {
+      "opp_id": "d9e44a42-5f78-4686-80d2-a081e9acc625",
+      "url": "https://www.superjob.ru/vakansii/menedzher-po-marketingu-51905391.html"
+    }
+  },
+  {
+    "ts": "10:12:00",
+    "_date": "2026-05-05",
+    "_is_today": true,
+    "level": "HOT",
+    "platform": "avito_rabota",
+    "agent": "system",
+    "type": "reply_received",
+    "lead_status": "interested",
+    "message": "Invited / interest · PGM — Смм специалист, маркетолог",
+    "meta": {
+      "opp_id": "b5a28f47-18b0-4dc4-9e6e-28f9f1434f27",
+      "stage": "MEETING"
+    }
+  },
+  {
+    "ts": "10:20:19",
+    "level": "INFO",
+    "platform": "superjob",
+    "agent": "outreach-superjob",
+    "type": "invitation_received",
+    "lead_status": "invited",
+    "message": "Вегас · Анкета для менеджера МП удаленно Спортмастер и М-Видео",
+    "meta": {
+      "thread_id": 168303642,
+      "status_text": null,
+      "firm": "Вегас",
+      "body": "Анкета для менеджера МП удаленно Спортмастер и М-Видео\nЗдравствуйте, Тимофей.\nСпасибо за отклик на нашу вакансию \"Менеджер по работе с маркетплейсами Спортмастер и М-Видео\".\nДля назначения времени и даты собеседования, просим Вас заполнить небольшую анкету по ссылке: \nhttps://forms.gle/VuT4yJSJ9uHzGVAo7\n\nС уважением,\nКоманда ООО \"Вегас\".",
+      "date_sent": 1776324019
+    }
+  },
+  {
+    "ts": "10:52:34",
+    "_date": "2026-05-05",
+    "_is_today": true,
+    "level": "OK",
+    "platform": "avito_rabota",
+    "agent": "outreach-avito",
+    "type": "send_done",
+    "lead_status": "sent_waiting",
+    "message": "hlebnaya-usadba — Маркетолог в производственно-торговую компанию",
+    "meta": {
+      "opp_id": "d9a908e5-5d27-4a41-8877-202eb429a563",
+      "url": "https://www.avito.ru/sankt-peterburg/vakansii/marketolog_v_proizvodstvenno-torgovuyu_kompaniyu_8018669014?context=H4sIAAAAAAAA_wE_AMD_YToyOntzOjEzOiJsb2NhbFByaW9yaXR5IjtiOjA7czoxOiJ4IjtzOjE2OiJnU1VmSUpEOUtlTDlZSFRSIjt9axl9nD8AAAA"
+    }
+  },
+  {
+    "ts": "10:52:35",
+    "_date": "2026-05-05",
+    "_is_today": true,
+    "level": "OK",
+    "platform": "avito_rabota",
+    "agent": "outreach-avito",
+    "type": "send_done",
+    "lead_status": "sent_waiting",
+    "message": "Avito employer — Маркетолог / Контент-продюсер (HoReCa)",
+    "meta": {
+      "opp_id": "e0b9d90e-523c-46ec-bba4-e0a057bf9cb3",
+      "url": "https://www.avito.ru/chelyabinsk/vakansii/marketolog_kontent-prodyuser_horeca_8173128766?context=H4sIAAAAAAAA_wE_AMD_YToyOntzOjEzOiJsb2NhbFByaW9yaXR5IjtiOjA7czoxOiJ4IjtzOjE2OiJySzJIQVRXUGxpVGFnbkM4Ijt9q9SpuT8AAAA"
+    }
+  },
+  {
+    "ts": "10:52:36",
+    "_date": "2026-05-05",
+    "_is_today": true,
+    "level": "OK",
+    "platform": "avito_rabota",
+    "agent": "outreach-avito",
+    "type": "send_done",
+    "lead_status": "interested",
+    "message": "PGM — Смм специалист, маркетолог",
+    "meta": {
+      "opp_id": "b5a28f47-18b0-4dc4-9e6e-28f9f1434f27",
+      "url": "https://www.avito.ru/krasnodar/vakansii/smm_spetsialist_marketolog_8127854796?context=H4sIAAAAAAAA_wE_AMD_YToyOntzOjEzOiJsb2NhbFByaW9yaXR5IjtiOjA7czoxOiJ4IjtzOjE2OiJySzJIQVRXUGxpVGFnbkM4Ijt9q9SpuT8AAAA"
+    }
+  },
+  {
+    "ts": "10:52:37",
+    "_date": "2026-05-05",
+    "_is_today": true,
+    "level": "OK",
+    "platform": "avito_rabota",
+    "agent": "outreach-avito",
+    "type": "send_done",
+    "lead_status": "sent_waiting",
+    "message": "Группа Компаний РУСАГРО — Бренд-менеджер",
+    "meta": {
+      "opp_id": "8e870f32-6a74-4abb-98a4-76c0e3f8b492",
+      "url": "https://www.avito.ru/nizhniy_novgorod/vakansii/brend-menedzher_8096037086?context=H4sIAAAAAAAA_wE_AMD_YToyOntzOjEzOiJsb2NhbFByaW9yaXR5IjtiOjA7czoxOiJ4IjtzOjE2OiJkRWF2VzRtS0ZzTko0Wk5WIjt9nGYWKz8AAAA"
+    }
+  },
+  {
+    "ts": "10:52:38",
+    "_date": "2026-05-05",
+    "_is_today": true,
+    "level": "OK",
+    "platform": "avito_rabota",
+    "agent": "outreach-avito",
+    "type": "send_done",
+    "lead_status": "sent_waiting",
+    "message": "\"ФИЛЬТРОБАЗА\" Сеть магазинов — Маркетолог",
+    "meta": {
+      "opp_id": "1132b338-c0f5-4208-ab77-a41c0e9702f2",
+      "url": "https://www.avito.ru/sankt-peterburg/vakansii/marketolog_8039042913?context=H4sIAAAAAAAA_wE_AMD_YToyOntzOjEzOiJsb2NhbFByaW9yaXR5IjtiOjA7czoxOiJ4IjtzOjE2OiJCRzFnWTN1VUlTM1JMNVNMIjt9f-S35z8AAAA"
+    }
+  },
+  {
+    "ts": "10:52:39",
+    "_date": "2026-05-05",
+    "_is_today": true,
+    "level": "OK",
+    "platform": "avito_rabota",
+    "agent": "outreach-avito",
+    "type": "send_done",
+    "lead_status": "sent_waiting",
+    "message": "ПРО-Вакансии — Проджект менеджер (project manager) Маркетолог",
+    "meta": {
+      "opp_id": "4e992f67-56c7-47e9-87e5-53ea864a1260",
+      "url": "https://www.avito.ru/rostov-na-donu/vakansii/prodzhekt_menedzher_project_manager_marketolog_4137151532?context=H4sIAAAAAAAA_wE_AMD_YToyOntzOjEzOiJsb2NhbFByaW9yaXR5IjtiOjA7czoxOiJ4IjtzOjE2OiJDRGlSb0xhbkpEeDBnR3ZVIjt9MAHPgz8AAAA"
+    }
+  },
+  {
+    "ts": "10:52:40",
+    "_date": "2026-05-05",
+    "_is_today": true,
+    "level": "OK",
+    "platform": "avito_rabota",
+    "agent": "outreach-avito",
+    "type": "send_done",
+    "lead_status": "sent_waiting",
+    "message": "UpGrade Your Home — Маркетолог",
+    "meta": {
+      "opp_id": "2b6c9a56-0630-47f3-afe6-3d953ef807b5",
+      "url": "https://www.avito.ru/moskva/vakansii/marketolog_8021518531?context=H4sIAAAAAAAA_wE_AMD_YToyOntzOjEzOiJsb2NhbFByaW9yaXR5IjtiOjA7czoxOiJ4IjtzOjE2OiJzV3BLQ1FmaHptaXB3VnhiIjt9EVw9xT8AAAA"
+    }
+  },
+  {
+    "ts": "10:52:41",
+    "_date": "2026-05-05",
+    "_is_today": true,
+    "level": "OK",
+    "platform": "avito_rabota",
+    "agent": "outreach-avito",
+    "type": "send_done",
+    "lead_status": "sent_waiting",
+    "message": "Суши-бар МИСТЕР СУШИ — Маркетолог + SMM в ресторане доставки суши",
+    "meta": {
+      "opp_id": "faf6b3b9-65e3-42f7-a261-b25cb1fade9b",
+      "url": "https://www.avito.ru/voronezh/vakansii/marketolog_smm_v_restorane_dostavki_sushi_7801056770?context=H4sIAAAAAAAA_wE_AMD_YToyOntzOjEzOiJsb2NhbFByaW9yaXR5IjtiOjA7czoxOiJ4IjtzOjE2OiJzV3BLQ1FmaHptaXB3VnhiIjt9EVw9xT8AAAA"
+    }
+  },
+  {
+    "ts": "10:52:42",
+    "_date": "2026-05-05",
+    "_is_today": true,
+    "level": "OK",
+    "platform": "avito_rabota",
+    "agent": "outreach-avito",
+    "type": "send_done",
+    "lead_status": "sent_waiting",
+    "message": "Avito employer — Маркетолог",
+    "meta": {
+      "opp_id": "feb62df1-e9de-4bbd-b168-4c31fa23d564",
+      "url": "https://www.avito.ru/velikiy_novgorod/vakansii/marketolog_7466678628?context=H4sIAAAAAAAA_wE_AMD_YToyOntzOjEzOiJsb2NhbFByaW9yaXR5IjtiOjA7czoxOiJ4IjtzOjE2OiJzV3BLQ1FmaHptaXB3VnhiIjt9EVw9xT8AAAA"
+    }
+  },
+  {
+    "ts": "10:53:29",
+    "_date": "2026-05-05",
+    "_is_today": true,
+    "level": "OK",
+    "platform": "superjob",
+    "agent": "outreach-superjob",
+    "type": "send_done",
+    "lead_status": "interested",
+    "message": "АВС Рус — Менеджер по работе с маркетплейсами",
+    "meta": {
+      "opp_id": "c0631136-618e-4ff2-a91c-22a2f8920fc5",
+      "url": "https://www.superjob.ru/vakansii/menedzher-po-rabote-s-marketplejsami-28496698.html"
+    }
+  },
+  {
+    "ts": "11:01:12",
+    "level": "INFO",
+    "platform": "superjob",
+    "agent": "outreach-superjob",
+    "type": "invitation_received",
+    "lead_status": "invited",
+    "message": "ООО «ПК Техномикс» · Приглашение на собеседование",
+    "meta": {
+      "thread_id": 168303839,
+      "status_text": "invited",
+      "firm": "ООО «ПК Техномикс»",
+      "body": "Приглашение на собеседование\nЗдравствуйте, Зинин Тимофей!\n\nКомпания ООО «ПК Техномикс» ищет кандидата на вакансию \"Менеджер маркетплейсов\".\nВаше резюме показалось нам очень интересным.\nЕсли наше предложение Вам интересно, перезвоните, пожалуйста, в рабочее время по телефону +7 (925) 395-61-74 \nС уважением,\nБлаженкова Ольга, HR менеджер\nООО «ПК Техномикс»",
+      "date_sent": 1776326472
+    }
+  },
+  {
+    "ts": "11:13:36",
+    "_date": "2026-05-05",
+    "_is_today": true,
+    "level": "OK",
+    "platform": "superjob",
+    "agent": "outreach-superjob",
+    "type": "send_done",
+    "lead_status": "sent_waiting",
+    "message": "XHUNTER — AI-креатор в студию видеопродакшн",
+    "meta": {
+      "opp_id": "1bc8995f-6123-4a44-a1e0-785c902426fb",
+      "url": "https://www.superjob.ru/vakansii/ai-kreator-v-studiyu-videoprodakshn-51902960.html"
+    }
+  },
+  {
+    "ts": "11:13:50",
+    "_date": "2026-05-05",
+    "_is_today": true,
+    "level": "OK",
+    "platform": "superjob",
+    "agent": "outreach-superjob",
+    "type": "send_done",
+    "lead_status": "sent_waiting",
+    "message": "Duolingo — Старший копирайтер по продуктам",
+    "meta": {
+      "opp_id": "2a7fa64d-3fdd-4810-94b6-31d7e35c2342",
+      "url": "https://www.superjob.ru/vakansii/starshij-kopirajter-po-produktam-51699614.html"
+    }
+  },
+  {
+    "ts": "12:45:35",
+    "_date": "2026-05-05",
+    "_is_today": true,
+    "level": "OK",
+    "platform": "superjob",
+    "agent": "outreach-superjob",
+    "type": "send_done",
+    "lead_status": "sent_waiting",
+    "message": "SKIMS — Продакт-менеджер",
+    "meta": {
+      "opp_id": "c15d9ec6-3cea-401c-b9ea-f5ee9f5c6f28",
+      "url": "https://www.superjob.ru/vakansii/prodakt-menedzher-51742427.html"
+    }
+  },
+  {
+    "ts": "12:45:52",
+    "_date": "2026-05-05",
+    "_is_today": true,
+    "level": "OK",
+    "platform": "superjob",
+    "agent": "outreach-superjob",
+    "type": "send_done",
+    "lead_status": "sent_waiting",
+    "message": "Disney — Ассоциированный продюсер социальных сетей",
+    "meta": {
+      "opp_id": "754772c4-fb67-401e-9d1f-68dbe8ffeb98",
+      "url": "https://www.superjob.ru/vakansii/associirovannyj-prodyuser-socialnyh-setej-51785215.html"
+    }
+  },
+  {
+    "ts": "12:46:08",
+    "_date": "2026-05-05",
+    "_is_today": true,
+    "level": "OK",
+    "platform": "superjob",
+    "agent": "outreach-superjob",
+    "type": "send_done",
+    "lead_status": "sent_waiting",
+    "message": "Forbes — Менеджер по корпоративным коммуникациям",
+    "meta": {
+      "opp_id": "eff02bab-a226-4e3c-8ce5-04f4cd1451ea",
+      "url": "https://www.superjob.ru/vakansii/menedzher-po-korporativnym-kommunikaciyam-51933281.html"
+    }
+  },
+  {
+    "ts": "13:35:00",
+    "level": "WARN",
+    "platform": "avito_rabota",
+    "agent": "outreach-avito",
+    "type": "reply_received",
+    "lead_status": "declined",
+    "message": "Черника · «Посмотрите похожие вакансии — среди них может найтись подходящая»",
+    "meta": {
+      "company": "Черника",
+      "vacancy": "Маркетолог / Контент-продюсер (HoReCa)",
+      "salary": "80–120k₽",
+      "body": "Посмотрите похожие вакансии — среди них может найтись подходящая.",
+      "classification": "soft_decline"
+    }
+  },
+  {
+    "ts": "14:12:00",
+    "level": "HOT",
+    "platform": "avito_rabota",
+    "agent": "outreach-avito",
+    "type": "reply_received",
+    "lead_status": "invited",
+    "message": "PGM · «Интересно. Можно обсудить»",
+    "meta": {
+      "company": "PGM",
+      "vacancy": "Смм специалист, маркетолог",
+      "body": "Интересно. Можно обсудить",
+      "classification": "interest",
+      "stage_to": "MEETING"
+    }
+  },
+  {
+    "ts": "14:41:47",
+    "level": "OK",
+    "platform": "avito_rabota",
+    "agent": "manual",
+    "type": "reply_sent",
+    "lead_status": "meeting",
+    "message": "PGM · отправлен Calendly + AI-services pivot",
+    "meta": {
+      "company": "PGM",
+      "body": "Спасибо за быстрый ответ! Удобно созвониться 30 минут — посмотрим ваши задачи и какую часть SMM можно перевести на AI-агентов. Слот: https://calendly.com/timzinin\n\nЕсли перепиской удобнее — расскажите коротко, что сейчас руками делает специалист (контент, постинг, креативы, аналитика). Пришлю кейсы под ваш стек.\n\nТим",
+      "template": "pgm_v1_calendly"
+    }
+  },
+  {
+    "ts": "14:46:36",
+    "level": "OK",
+    "platform": "superjob",
+    "agent": "manual",
+    "type": "reply_sent",
+    "lead_status": "meeting",
+    "message": "АВС Рус · pivot на AI-services + Calendly",
+    "meta": {
+      "company": "АВС Рус",
+      "body": "Александр, спасибо за приглашение! Уточню по своей стороне: я фокусируюсь на консалтинге AI-интеграции в маркетинговые процессы (ИП, удалённо), а не на штатной позиции менеджера. Если у АВС Рус есть задача внедрить AI-агентов в работу с маркетплейсами или в маркетинг (контент, аналитика, ассортимент) — давайте 30 минут созвонимся: https://calendly.com/timzinin\n\nЕсли вакансия требует именно штатного менеджера — спасибо, тогда не подойду по формату.\nТим Зинин",
+      "template": "sj_avs_v1_pivot"
+    }
+  },
+  {
+    "ts": "15:18:57",
+    "level": "INFO",
+    "platform": "superjob",
+    "agent": "outreach-superjob",
+    "type": "invitation_received",
+    "lead_status": "invited",
+    "message": "Инновационные технологии · Приглашение на собеседование",
+    "meta": {
+      "thread_id": 168305411,
+      "status_text": "invited",
+      "firm": "Инновационные технологии",
+      "body": "Приглашение на собеседование\nЗдравствуйте! После согласования свяжемся с Вами.\nС   уважением, Клинико-диагностический центр 24 (КДЦ 24): \n+7 495 159 30 03 (доб. 230), +7 996 678 30 33 WhatsApp.\nhr@kdc24.ru\nwww.kdc24.ru.\nАдрес: г. Москва, ул. Фабрициуса д.13\nАдрес: г. Москва, г. Зеленоград, Сосновая аллея, 2А.\nАдрес: г. Мытищи, ул. Колпакова, д.25",
+      "date_sent": 1776341937
+    }
+  },
+  {
+    "ts": "15:33:25",
+    "level": "INFO",
+    "platform": "superjob",
+    "agent": "outreach-superjob",
+    "type": "invitation_received",
+    "lead_status": "invited",
+    "message": "Трест Росспецэнергомонтаж · Приглашение на собеседование",
+    "meta": {
+      "thread_id": 168338030,
+      "status_text": "invited",
+      "firm": "Трест Росспецэнергомонтаж",
+      "body": "Приглашение на собеседование\nЗдравствуйте! \n\nУ вас интересное резюме. Хотели бы с вами связаться и обсудить детали. \nПозвоните, пожалуйста, в рабочее время по телефону 8 910 310 60 77\n\nЗятикова Ольга, компания ООО \"Трест РосСЭМ\"",
+      "date_sent": 1777379605
+    }
+  },
+  {
+    "ts": "15:54:52",
+    "level": "INFO",
+    "platform": "superjob",
+    "agent": "outreach-superjob",
+    "type": "invitation_received",
+    "lead_status": "invited",
+    "message": "АВС Рус · Приглашение на собеседование",
+    "meta": {
+      "thread_id": 168330370,
+      "status_text": "invited",
+      "firm": "АВС Рус",
+      "body": "Приглашение на собеседование\nЗдравствуйте,\nТимофей.\n\nВаше резюме показалось нам интересным. Приглашаем вас на собеседование.\nПожалуйста, перезвоните нам, чтобы договориться о встрече.\n\n\nС уважением,\nРузавин Александр Григорьевич, АВС Рус\n+79032865931\nwww.avs-el.ru",
+      "date_sent": 1777035292
+    }
+  },
+  {
+    "ts": "17:37:00",
+    "_date": "2026-05-05",
+    "_is_today": true,
+    "level": "HOT",
+    "platform": "superjob",
+    "agent": "outreach-superjob",
+    "type": "pending_outbox",
+    "message": "⚡ ОТВЕТЬ → АВС Рус · Здравствуйте!\n\nСпасибо за приглашение. Звонком сложно — я в ",
+    "meta": {
+      "opp_id": null,
+      "vacancy_id": "sj:28496698",
+      "url": "https://www.superjob.ru/clients/vacancy-28496698.html"
+    }
+  },
+  {
+    "ts": "17:37:00",
+    "_date": "2026-05-05",
+    "_is_today": true,
+    "level": "HOT",
+    "platform": "superjob",
+    "agent": "outreach-superjob",
+    "type": "pending_outbox",
+    "message": "⚡ ОТВЕТЬ → Инновационные технологии · Здравствуйте!\n\nСпасибо за приглашение на собеседование. Я ра",
+    "meta": {
+      "opp_id": null,
+      "vacancy_id": "sj:31957706",
+      "url": "https://www.superjob.ru/clients/vacancy-31957706.html"
+    }
+  },
+  {
+    "ts": "17:37:00",
+    "_date": "2026-05-05",
+    "_is_today": true,
+    "level": "HOT",
+    "platform": "superjob",
+    "agent": "outreach-superjob",
+    "type": "pending_outbox",
+    "message": "⚡ ОТВЕТЬ → ООО «ПК Техномикс» · Здравствуйте!\n\nСпасибо за приглашение. Удобнее всего обсудит",
+    "meta": {
+      "opp_id": null,
+      "vacancy_id": "sj:51872634",
+      "url": "https://www.superjob.ru/clients/vacancy-51872634.html"
+    }
+  },
+  {
+    "ts": "17:37:00",
+    "_date": "2026-05-05",
+    "_is_today": true,
+    "level": "HOT",
+    "platform": "superjob",
+    "agent": "outreach-superjob",
+    "type": "pending_outbox",
+    "message": "⚡ ОТВЕТЬ → Вегас · Здравствуйте, спасибо за анкету и контакт!\n\nПрежде чем запол",
+    "meta": {
+      "opp_id": null,
+      "vacancy_id": "sj:51690949",
+      "url": "https://www.superjob.ru/clients/vacancy-51690949.html"
+    }
+  },
+  {
+    "ts": "May 04 22:32",
+    "_date": "2026-05-04",
+    "_is_today": false,
+    "level": "OK",
+    "platform": "avito_rabota",
+    "agent": "outreach-avito",
+    "type": "send_done",
+    "lead_status": "declined",
+    "message": "Сергей/Алёнка — Ассистент AI+Нейро+Био+IT +Агент в семью",
+    "meta": {
+      "opp_id": "bfc18172-aed8-42b5-9ece-96fddf5a35f6",
+      "url": "https://www.avito.ru/rossiya/vakansii/assistent_ai_nejro_bio_it_agent_v_semyu_8026822495"
+    }
+  },
+  {
+    "ts": "May 04 22:32",
+    "_date": "2026-05-04",
+    "_is_today": false,
+    "level": "OK",
+    "platform": "avito_rabota",
+    "agent": "outreach-avito",
+    "type": "send_done",
+    "lead_status": "declined",
+    "message": "AthenAI — AI-контент мейкер / SMM/Маркетолог/Reels мейкер",
+    "meta": {
+      "opp_id": "208d9cac-4099-439e-9c83-1a422d91ea12",
+      "url": "https://www.avito.ru/rossiya/vakansii/ai-kontent_meyker_smm_marketolog_reels_meyker_7921286870"
+    }
+  },
+  {
+    "ts": "May 04 22:32",
+    "_date": "2026-05-04",
+    "_is_today": false,
+    "level": "OK",
+    "platform": "avito_rabota",
+    "agent": "outreach-avito",
+    "type": "send_done",
+    "lead_status": "declined",
+    "message": "ООО \"Фабрика Карнавала\" — SMM -специалист (без ответов на комментарии)",
+    "meta": {
+      "opp_id": "1ad59cb3-d219-4e5c-a078-5245d1f4ea02",
+      "url": "https://www.avito.ru/nizhniy_novgorod/vakansii/smm_-spetsialist_bez_otvetov_na_kommentarii_8064120851"
+    }
+  },
+  {
+    "ts": "May 04 22:32",
+    "_date": "2026-05-04",
+    "_is_today": false,
+    "level": "OK",
+    "platform": "avito_rabota",
+    "agent": "outreach-avito",
+    "type": "send_done",
+    "lead_status": "declined",
+    "message": "Виталик — Помощник руководителя + SMM-специалист",
+    "meta": {
+      "opp_id": "ae7a5c7a-38ea-4533-beac-bc32849a74fd",
+      "url": "https://www.avito.ru/krasnodar/vakansii/pomoschnik_rukovoditelya_smm-spetsialist_8101204688"
+    }
+  }
+]
