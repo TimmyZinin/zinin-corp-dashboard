@@ -1,6 +1,6 @@
 {
   "date": "2026-05-05",
-  "generated_at": "17:37:57 UTC",
+  "generated_at": "17:51:56 UTC",
   "totals_today": {
     "sent": 19,
     "replies": 2,
@@ -18,7 +18,7 @@
       "errors": 0,
       "daily_quota_used": 9,
       "daily_quota_max": 20,
-      "last_action_ts": "10:52:42",
+      "last_action_ts": "13:52:42",
       "status": "idle",
       "lead_pipeline": {
         "sent_waiting": 8,
@@ -29,7 +29,8 @@
         "proposal_sent": 0,
         "declined": 5,
         "won": 0
-      }
+      },
+      "last_action_ts_iso": "2026-05-05T10:52:42.828Z"
     },
     "superjob": {
       "label": "SuperJob",
@@ -41,8 +42,8 @@
       "errors": 0,
       "daily_quota_used": 10,
       "daily_quota_max": 30,
-      "last_action_ts": "12:46:08",
-      "status": "idle",
+      "last_action_ts": "20:37:00",
+      "status": "active",
       "lead_pipeline": {
         "sent_waiting": 9,
         "no_reaction": 0,
@@ -52,20 +53,21 @@
         "proposal_sent": 0,
         "declined": 0,
         "won": 0
-      }
+      },
+      "last_action_ts_iso": "2026-05-05T17:37:00.623Z"
     },
     "gulftalent": {
       "label": "GulfTalent",
       "short": "gt",
-      "sent": 0,
+      "sent": 15,
       "sent_total": 0,
-      "replies": 0,
+      "replies": 15,
       "hot": 0,
       "errors": 0,
       "daily_quota_used": 0,
       "daily_quota_max": 15,
-      "last_action_ts": "",
-      "status": "idle",
+      "last_action_ts": "20:42:12",
+      "status": "active",
       "lead_pipeline": {
         "sent_waiting": 0,
         "no_reaction": 0,
@@ -75,7 +77,8 @@
         "proposal_sent": 0,
         "declined": 0,
         "won": 0
-      }
+      },
+      "last_action_ts_iso": "2026-05-05T17:42:12.739Z"
     },
     "hh": {
       "label": "HeadHunter",

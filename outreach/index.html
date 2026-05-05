@@ -135,13 +135,20 @@
   .kpi.err b { color: var(--err); }
   .clock {
     font-family: var(--font-mono);
-    font-size: 12px;
-    color: var(--text-muted);
-    letter-spacing: 0.04em;
+    font-size: 13px;
+    color: var(--text);
+    letter-spacing: 0.02em;
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: 10px;
+    font-weight: 600;
   }
+  .clock #clock { font-size: 14px; font-variant-numeric: tabular-nums; }
+  .clock .tz { font-size: 10.5px; color: var(--text-muted); font-weight: 500;
+               text-transform: uppercase; letter-spacing: 0.06em;
+               border-left: 1px solid var(--border); padding-left: 10px; }
+  .clock .tz-alt { font-size: 10.5px; color: var(--text-faint); font-weight: 500;
+                   font-variant-numeric: tabular-nums; }
   .clock .live-dot {
     width: 6px; height: 6px;
     border-radius: 50%;
@@ -190,10 +197,10 @@
   }
   .card-title {
     font-family: var(--font-mono);
-    font-size: 11px;
-    text-transform: uppercase;
-    letter-spacing: 0.12em;
-    color: var(--text-muted);
+    font-size: 11.5px;
+    text-transform: none;
+    letter-spacing: 0.04em;
+    color: var(--text);
     font-weight: 600;
   }
   .status {
@@ -658,7 +665,7 @@
 
   .log-row {
     display: grid;
-    grid-template-columns: 70px 50px 70px 60px 78px minmax(0, 1fr);
+    grid-template-columns: 70px 50px 92px 60px 88px minmax(0, 1fr);
     gap: 8px;
     padding: 2px 16px;
     align-items: baseline;
@@ -668,6 +675,7 @@
     color: var(--text);
   }
   .log-row > * { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .pl { font-weight: 500; }
   .log-row:hover { background: var(--surface-2); }
   .log-row.hot { background: linear-gradient(90deg, var(--accent-soft) 0%, transparent 70%); }
   .log-row.hot:hover { background: linear-gradient(90deg, var(--accent-soft) 0%, var(--surface-2) 70%); }
@@ -781,6 +789,24 @@
     letter-spacing: 0;
     color: var(--text-faint);
     margin-top: 2px;
+  }
+  .footer-clock {
+    display: flex; align-items: center; gap: 8px;
+    margin-top: 6px;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--text-muted);
+    text-transform: none;
+    letter-spacing: 0.02em;
+    font-weight: 500;
+  }
+  .footer-clock #footer-clock { font-size: 12.5px; color: var(--text); font-weight: 600; font-variant-numeric: tabular-nums; }
+  .footer-clock .tz { border-left: 1px solid var(--border); padding-left: 8px; font-size: 10px; text-transform: uppercase; letter-spacing: 0.06em; }
+  .footer-clock .tz-alt { font-size: 10px; color: var(--text-faint); font-variant-numeric: tabular-nums; }
+  .footer-clock .live-dot {
+    width: 6px; height: 6px; border-radius: 50%;
+    background: var(--ok); box-shadow: 0 0 0 3px var(--ok-soft);
+    animation: pulse 1.6s ease-in-out infinite;
     font-weight: 400;
   }
   .funnel-track {
@@ -867,6 +893,8 @@
     <div class="clock">
       <span class="live-dot"></span>
       <span id="clock">--:--:--</span>
+      <span id="clock-tz" class="tz">Europe/Istanbul · UTC+3</span>
+      <span id="clock-utc" class="tz-alt">UTC --:--</span>
     </div>
   </header>
 
@@ -1011,6 +1039,12 @@
     <div class="funnel-h">
       pipeline funnel
       <span class="small">today's flow</span>
+      <span class="footer-clock">
+        <span class="live-dot"></span>
+        <span id="footer-clock">--:--:--</span>
+        <span class="tz" id="footer-tz">local · UTC</span>
+        <span class="tz-alt" id="footer-utc">UTC --:--</span>
+      </span>
     </div>
     <div class="funnel-track" id="funnel-track">
       <div class="stage-bar" data-key="SCANNED"  style="--p:1"><div class="lbl">scanned</div><div class="nm" data-k="scanned">0</div></div>
@@ -1511,14 +1545,16 @@
   // Falls back to first segment of the key. Pulls override from stats.by_platform[].short
   // when available (set by adapter when registering).
   const PLATFORM_SHORT = {
-    avito_rabota: 'avito',
-    superjob:     'sj',
-    gulftalent:   'gt',
-    hh:           'hh',
-    kariyer:      'kar',
-    habr:         'habr',
-    workspace:    'ws',
-    twenty:       'crm',
+    avito_rabota: 'Avito',
+    avito_uslugi: 'Avito',
+    avito_messenger: 'Avito',
+    superjob:     'SuperJob',
+    gulftalent:   'GulfTalent',
+    hh:           'HH',
+    kariyer:      'Kariyer',
+    habr:         'Habr',
+    workspace:    'Workspace',
+    twenty:       'Twenty',
   };
   function shortPlatform(p) {
     if (!p) return '—';
@@ -1590,10 +1626,27 @@
   });
 
   // ---------- Clock ----------
+  // Show local time (browser TZ — typically Europe/Istanbul for Tim) plus UTC,
+  // so it's unambiguous which timezone the timestamps in the log feed are in.
   function tickClock() {
     const d = new Date();
     const z = (n) => n.toString().padStart(2, '0');
     $('#clock').textContent = `${z(d.getHours())}:${z(d.getMinutes())}:${z(d.getSeconds())}`;
+    const tz = Intl.DateTimeFormat().resolvedOptions().timeZone || 'local';
+    const offsetMin = -d.getTimezoneOffset();   // minutes ahead of UTC
+    const offsetH = Math.floor(Math.abs(offsetMin) / 60);
+    const offsetSign = offsetMin >= 0 ? '+' : '-';
+    const tzEl = $('#clock-tz');
+    if (tzEl) tzEl.textContent = `${tz} · UTC${offsetSign}${offsetH}`;
+    const utcEl = $('#clock-utc');
+    if (utcEl) utcEl.textContent = `UTC ${z(d.getUTCHours())}:${z(d.getUTCMinutes())}`;
+    // Mirror to footer clock too
+    const fc = $('#footer-clock');
+    if (fc) fc.textContent = `${z(d.getHours())}:${z(d.getMinutes())}:${z(d.getSeconds())}`;
+    const ftz = $('#footer-tz');
+    if (ftz) ftz.textContent = `${tz} · UTC${offsetSign}${offsetH}`;
+    const futc = $('#footer-utc');
+    if (futc) futc.textContent = `UTC ${z(d.getUTCHours())}:${z(d.getUTCMinutes())}`;
   }
   setInterval(tickClock, 1000);
   tickClock();

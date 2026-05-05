@@ -231,17 +231,19 @@ def opp_to_events(opps, days_back=2):
         return iso_ts[:10]
 
     def _evt_ts(iso_ts):
-        """Return display ts. Today → 'HH:MM:SS'. Older → 'Mon DD HH:MM'."""
+        """Return display ts in **local TZ** (Mac/Tim's box = Europe/Istanbul).
+        Today → 'HH:MM:SS'. Older → 'Mon DD HH:MM'.
+        Source ISO is UTC — converting to local makes 17:42Z render as 20:42."""
         if not iso_ts or len(iso_ts) < 19: return ""
-        date_part = iso_ts[:10]
-        time_part = iso_ts[11:19]
-        if date_part == today:
-            return time_part
-        # Older: "May 04 22:32" style
         try:
-            dt = datetime.fromisoformat(iso_ts.replace("Z", "+00:00"))
+            dt = datetime.fromisoformat(iso_ts.replace("Z", "+00:00")).astimezone()
+            local_date = dt.strftime("%Y-%m-%d")
+            if local_date == today:
+                return dt.strftime("%H:%M:%S")
             return dt.strftime("%b %d %H:%M")
         except Exception:
+            date_part = iso_ts[:10]
+            time_part = iso_ts[11:19]
             return f"{date_part[5:]} {time_part[:5]}"
 
     for source, arr in opps.items():
@@ -299,8 +301,8 @@ def opp_to_events(opps, days_back=2):
                     "meta": {"opp_id": opp_id, "stage": stage},
                 })
     events.sort(key=lambda e: e.get("_sort") or "", reverse=False)
-    for e in events:
-        e.pop("_sort", None)
+    # NOTE: keep `_sort` here — it's needed by build_agents_from_events()
+    # to filter events to today only. main() strips it before writing JSON.
     return events[-200:]
 
 # ─── SJ replies-state additions ───────────────────────────────────────────────
@@ -375,7 +377,6 @@ def sj_replies_events():
             },
         })
     out.sort(key=lambda e: e.get("_sort") or "", reverse=False)
-    for e in out: e.pop("_sort", None)
     return out
 
 # ─── Manual conversation injections (Avito doesn't expose easy API) ──────────
@@ -556,14 +557,16 @@ def load_events_jsonl(days_back: int = 1):
                 if etype == "pending_outbox":
                     bp = d_data.get("body_preview") or ""
                     msg = f"⚡ ОТВЕТЬ → {co}" + (f" · {bp[:60]}" if bp else "")
-                if date_part == today_local:
-                    disp_ts = time_part
-                else:
-                    try:
-                        dt = datetime.fromisoformat(ts.replace("Z","+00:00"))
-                        disp_ts = dt.strftime("%b %d %H:%M")
-                    except Exception:
-                        disp_ts = f"{date_part[5:]} {time_part[:5]}"
+                # Convert UTC ts → local TZ (server == Tim's Mac == Europe/Istanbul).
+                try:
+                    dt_local = datetime.fromisoformat(ts.replace("Z", "+00:00")).astimezone()
+                    local_date = dt_local.strftime("%Y-%m-%d")
+                    if local_date == today_local:
+                        disp_ts = dt_local.strftime("%H:%M:%S")
+                    else:
+                        disp_ts = dt_local.strftime("%b %d %H:%M")
+                except Exception:
+                    disp_ts = time_part if date_part == today_local else f"{date_part[5:]} {time_part[:5]}"
                 out.append({
                     "ts": disp_ts,
                     "_sort": ts,
@@ -613,9 +616,12 @@ def build_agents_from_events(events, opps):
             "last_event_ts": "", "last_event_type": "", "last_event_message": "",
         })
         et = e.get("type")
-        if et == "send_ok": c["sent_today"] += 1
-        elif et == "reply_received": c["replies_today"] += 1
-        elif et in ("send_fail","agent_error","twenty_sync_fail"): c["errors_today"] += 1
+        if et in ("send_ok", "send_done"):  # send_done from Twenty opp_to_events
+            c["sent_today"] += 1
+        elif et in ("reply_received", "invitation_received"):
+            c["replies_today"] += 1
+        elif et in ("send_fail", "agent_error", "twenty_sync_fail"):
+            c["errors_today"] += 1
         if sort_ts > c["last_event_ts"]:
             c["last_event_ts"] = sort_ts
             c["last_event_type"] = et or ""
@@ -661,8 +667,43 @@ def main():
     convs_path = DASH_DIR / "conversations.json"
     convs_path.write_text(json.dumps(convs[-30:], ensure_ascii=False, indent=2), encoding="utf-8")
 
-    # Build per-agent cards BEFORE stripping _sort (it relies on raw ISO ts).
-    agents = build_agents_from_events(events_jsonl, opps)
+    # Build per-agent cards from the FULL merged events list (jsonl + Twenty
+    # opp_to_events + sj_replies). This gives accurate counts for boards that
+    # haven't been instrumented yet (e.g. legacy morning Avito sends — they
+    # exist as Twenty Opportunities but weren't in events.jsonl).
+    agents = build_agents_from_events(events, opps)
+
+    # Merge agent counts back into stats.by_platform — frontend platform
+    # cards read sent/replies/hot/errors from there. Twenty alone misses
+    # boards that don't write to CRM yet (GulfTalent today).
+    bp = stats.get("by_platform", {})
+    for c in agents:
+        pkey = c.get("platform")
+        if not pkey:
+            continue
+        cur = bp.setdefault(pkey, {
+            "label": c.get("label") or pkey,
+            "short": c.get("short") or pkey.split("_")[0],
+            "sent": 0, "sent_total": 0, "replies": 0, "hot": 0, "errors": 0,
+            "daily_quota_used": 0, "daily_quota_max": c.get("quota_max", 0),
+            "last_action_ts": "", "status": "idle",
+            "lead_pipeline": {},
+        })
+        # Take the max of Twenty-derived sent and event-stream sent.
+        # If a board writes to BOTH (Avito does), counts match. If only one,
+        # we get the available number.
+        cur["sent"] = max(cur.get("sent", 0), c.get("sent_today", 0))
+        cur["replies"] = max(cur.get("replies", 0), c.get("replies_today", 0))
+        cur["errors"] = max(cur.get("errors", 0), c.get("errors_today", 0))
+        cur["status"] = "active" if c.get("status") == "active" else cur.get("status", "idle")
+        last_ev_ts = c.get("last_event_ts") or ""
+        if last_ev_ts and last_ev_ts > (cur.get("last_action_ts_iso") or ""):
+            try:
+                dt_local = datetime.fromisoformat(last_ev_ts.replace("Z","+00:00")).astimezone()
+                cur["last_action_ts"] = dt_local.strftime("%H:%M:%S")
+                cur["last_action_ts_iso"] = last_ev_ts
+            except Exception:
+                pass
 
     # Strip helper keys from output (frontend doesn't need them)
     for e in events:

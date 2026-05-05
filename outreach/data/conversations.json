@@ -1,52 +1,5 @@
 [
   {
-    "ts": "10:12:00",
-    "_date": "2026-05-05",
-    "_is_today": true,
-    "level": "HOT",
-    "platform": "avito_rabota",
-    "agent": "system",
-    "type": "reply_received",
-    "lead_status": "interested",
-    "message": "Invited / interest · PGM — Смм специалист, маркетолог",
-    "meta": {
-      "opp_id": "b5a28f47-18b0-4dc4-9e6e-28f9f1434f27",
-      "stage": "MEETING"
-    }
-  },
-  {
-    "ts": "10:20:19",
-    "level": "INFO",
-    "platform": "superjob",
-    "agent": "outreach-superjob",
-    "type": "invitation_received",
-    "lead_status": "invited",
-    "message": "Вегас · Анкета для менеджера МП удаленно Спортмастер и М-Видео",
-    "meta": {
-      "thread_id": 168303642,
-      "status_text": null,
-      "firm": "Вегас",
-      "body": "Анкета для менеджера МП удаленно Спортмастер и М-Видео\nЗдравствуйте, Тимофей.\nСпасибо за отклик на нашу вакансию \"Менеджер по работе с маркетплейсами Спортмастер и М-Видео\".\nДля назначения времени и даты собеседования, просим Вас заполнить небольшую анкету по ссылке: \nhttps://forms.gle/VuT4yJSJ9uHzGVAo7\n\nС уважением,\nКоманда ООО \"Вегас\".",
-      "date_sent": 1776324019
-    }
-  },
-  {
-    "ts": "11:01:12",
-    "level": "INFO",
-    "platform": "superjob",
-    "agent": "outreach-superjob",
-    "type": "invitation_received",
-    "lead_status": "invited",
-    "message": "ООО «ПК Техномикс» · Приглашение на собеседование",
-    "meta": {
-      "thread_id": 168303839,
-      "status_text": "invited",
-      "firm": "ООО «ПК Техномикс»",
-      "body": "Приглашение на собеседование\nЗдравствуйте, Зинин Тимофей!\n\nКомпания ООО «ПК Техномикс» ищет кандидата на вакансию \"Менеджер маркетплейсов\".\nВаше резюме показалось нам очень интересным.\nЕсли наше предложение Вам интересно, перезвоните, пожалуйста, в рабочее время по телефону +7 (925) 395-61-74 \nС уважением,\nБлаженкова Ольга, HR менеджер\nООО «ПК Техномикс»",
-      "date_sent": 1776326472
-    }
-  },
-  {
     "ts": "13:35:00",
     "level": "WARN",
     "platform": "avito_rabota",
@@ -107,7 +60,42 @@
     }
   },
   {
+    "ts": "10:20:19",
+    "_sort": "2026-04-16T07:20:19+00:00",
+    "level": "INFO",
+    "platform": "superjob",
+    "agent": "outreach-superjob",
+    "type": "invitation_received",
+    "lead_status": "invited",
+    "message": "Вегас · Анкета для менеджера МП удаленно Спортмастер и М-Видео",
+    "meta": {
+      "thread_id": 168303642,
+      "status_text": null,
+      "firm": "Вегас",
+      "body": "Анкета для менеджера МП удаленно Спортмастер и М-Видео\nЗдравствуйте, Тимофей.\nСпасибо за отклик на нашу вакансию \"Менеджер по работе с маркетплейсами Спортмастер и М-Видео\".\nДля назначения времени и даты собеседования, просим Вас заполнить небольшую анкету по ссылке: \nhttps://forms.gle/VuT4yJSJ9uHzGVAo7\n\nС уважением,\nКоманда ООО \"Вегас\".",
+      "date_sent": 1776324019
+    }
+  },
+  {
+    "ts": "11:01:12",
+    "_sort": "2026-04-16T08:01:12+00:00",
+    "level": "INFO",
+    "platform": "superjob",
+    "agent": "outreach-superjob",
+    "type": "invitation_received",
+    "lead_status": "invited",
+    "message": "ООО «ПК Техномикс» · Приглашение на собеседование",
+    "meta": {
+      "thread_id": 168303839,
+      "status_text": "invited",
+      "firm": "ООО «ПК Техномикс»",
+      "body": "Приглашение на собеседование\nЗдравствуйте, Зинин Тимофей!\n\nКомпания ООО «ПК Техномикс» ищет кандидата на вакансию \"Менеджер маркетплейсов\".\nВаше резюме показалось нам очень интересным.\nЕсли наше предложение Вам интересно, перезвоните, пожалуйста, в рабочее время по телефону +7 (925) 395-61-74 \nС уважением,\nБлаженкова Ольга, HR менеджер\nООО «ПК Техномикс»",
+      "date_sent": 1776326472
+    }
+  },
+  {
     "ts": "15:18:57",
+    "_sort": "2026-04-16T12:18:57+00:00",
     "level": "INFO",
     "platform": "superjob",
     "agent": "outreach-superjob",
@@ -123,7 +111,25 @@
     }
   },
   {
+    "ts": "15:54:52",
+    "_sort": "2026-04-24T12:54:52+00:00",
+    "level": "INFO",
+    "platform": "superjob",
+    "agent": "outreach-superjob",
+    "type": "invitation_received",
+    "lead_status": "invited",
+    "message": "АВС Рус · Приглашение на собеседование",
+    "meta": {
+      "thread_id": 168330370,
+      "status_text": "invited",
+      "firm": "АВС Рус",
+      "body": "Приглашение на собеседование\nЗдравствуйте,\nТимофей.\n\nВаше резюме показалось нам интересным. Приглашаем вас на собеседование.\nПожалуйста, перезвоните нам, чтобы договориться о встрече.\n\n\nС уважением,\nРузавин Александр Григорьевич, АВС Рус\n+79032865931\nwww.avs-el.ru",
+      "date_sent": 1777035292
+    }
+  },
+  {
     "ts": "15:33:25",
+    "_sort": "2026-04-28T12:33:25+00:00",
     "level": "INFO",
     "platform": "superjob",
     "agent": "outreach-superjob",
@@ -139,19 +145,274 @@
     }
   },
   {
-    "ts": "15:54:52",
-    "level": "INFO",
-    "platform": "superjob",
-    "agent": "outreach-superjob",
-    "type": "invitation_received",
-    "lead_status": "invited",
-    "message": "АВС Рус · Приглашение на собеседование",
+    "ts": "13:12:00",
+    "_sort": "2026-05-05T10:12:00.000Z",
+    "_date": "2026-05-05",
+    "_is_today": true,
+    "level": "HOT",
+    "platform": "avito_rabota",
+    "agent": "system",
+    "type": "reply_received",
+    "lead_status": "interested",
+    "message": "Invited / interest · PGM — Смм специалист, маркетолог",
     "meta": {
-      "thread_id": 168330370,
-      "status_text": "invited",
-      "firm": "АВС Рус",
-      "body": "Приглашение на собеседование\nЗдравствуйте,\nТимофей.\n\nВаше резюме показалось нам интересным. Приглашаем вас на собеседование.\nПожалуйста, перезвоните нам, чтобы договориться о встрече.\n\n\nС уважением,\nРузавин Александр Григорьевич, АВС Рус\n+79032865931\nwww.avs-el.ru",
-      "date_sent": 1777035292
+      "opp_id": "b5a28f47-18b0-4dc4-9e6e-28f9f1434f27",
+      "stage": "MEETING"
+    }
+  },
+  {
+    "ts": "20:42:12",
+    "_sort": "2026-05-05T17:42:12.739Z",
+    "_date": "2026-05-05",
+    "_is_today": true,
+    "level": "INFO",
+    "platform": "gulftalent",
+    "agent": "outreach-gulftalent",
+    "type": "reply_received",
+    "message": "[unclear] ",
+    "meta": {
+      "opp_id": null,
+      "vacancy_id": null,
+      "url": null,
+      "intent": "unclear"
+    }
+  },
+  {
+    "ts": "20:42:12",
+    "_sort": "2026-05-05T17:42:12.739Z",
+    "_date": "2026-05-05",
+    "_is_today": true,
+    "level": "INFO",
+    "platform": "gulftalent",
+    "agent": "outreach-gulftalent",
+    "type": "reply_received",
+    "message": "[unclear] ",
+    "meta": {
+      "opp_id": null,
+      "vacancy_id": null,
+      "url": null,
+      "intent": "unclear"
+    }
+  },
+  {
+    "ts": "20:42:12",
+    "_sort": "2026-05-05T17:42:12.739Z",
+    "_date": "2026-05-05",
+    "_is_today": true,
+    "level": "INFO",
+    "platform": "gulftalent",
+    "agent": "outreach-gulftalent",
+    "type": "reply_received",
+    "message": "[unclear] ",
+    "meta": {
+      "opp_id": null,
+      "vacancy_id": null,
+      "url": null,
+      "intent": "unclear"
+    }
+  },
+  {
+    "ts": "20:42:12",
+    "_sort": "2026-05-05T17:42:12.739Z",
+    "_date": "2026-05-05",
+    "_is_today": true,
+    "level": "INFO",
+    "platform": "gulftalent",
+    "agent": "outreach-gulftalent",
+    "type": "reply_received",
+    "message": "[unclear] ",
+    "meta": {
+      "opp_id": null,
+      "vacancy_id": null,
+      "url": null,
+      "intent": "unclear"
+    }
+  },
+  {
+    "ts": "20:42:12",
+    "_sort": "2026-05-05T17:42:12.739Z",
+    "_date": "2026-05-05",
+    "_is_today": true,
+    "level": "INFO",
+    "platform": "gulftalent",
+    "agent": "outreach-gulftalent",
+    "type": "reply_received",
+    "message": "[unclear] ",
+    "meta": {
+      "opp_id": null,
+      "vacancy_id": null,
+      "url": null,
+      "intent": "unclear"
+    }
+  },
+  {
+    "ts": "20:42:12",
+    "_sort": "2026-05-05T17:42:12.739Z",
+    "_date": "2026-05-05",
+    "_is_today": true,
+    "level": "INFO",
+    "platform": "gulftalent",
+    "agent": "outreach-gulftalent",
+    "type": "reply_received",
+    "message": "[unclear] ",
+    "meta": {
+      "opp_id": null,
+      "vacancy_id": null,
+      "url": null,
+      "intent": "unclear"
+    }
+  },
+  {
+    "ts": "20:42:12",
+    "_sort": "2026-05-05T17:42:12.739Z",
+    "_date": "2026-05-05",
+    "_is_today": true,
+    "level": "INFO",
+    "platform": "gulftalent",
+    "agent": "outreach-gulftalent",
+    "type": "reply_received",
+    "message": "[unclear] ",
+    "meta": {
+      "opp_id": null,
+      "vacancy_id": null,
+      "url": null,
+      "intent": "unclear"
+    }
+  },
+  {
+    "ts": "20:42:12",
+    "_sort": "2026-05-05T17:42:12.739Z",
+    "_date": "2026-05-05",
+    "_is_today": true,
+    "level": "INFO",
+    "platform": "gulftalent",
+    "agent": "outreach-gulftalent",
+    "type": "reply_received",
+    "message": "[unclear] ",
+    "meta": {
+      "opp_id": null,
+      "vacancy_id": null,
+      "url": null,
+      "intent": "unclear"
+    }
+  },
+  {
+    "ts": "20:42:12",
+    "_sort": "2026-05-05T17:42:12.739Z",
+    "_date": "2026-05-05",
+    "_is_today": true,
+    "level": "INFO",
+    "platform": "gulftalent",
+    "agent": "outreach-gulftalent",
+    "type": "reply_received",
+    "message": "[unclear] ",
+    "meta": {
+      "opp_id": null,
+      "vacancy_id": null,
+      "url": null,
+      "intent": "unclear"
+    }
+  },
+  {
+    "ts": "20:42:12",
+    "_sort": "2026-05-05T17:42:12.739Z",
+    "_date": "2026-05-05",
+    "_is_today": true,
+    "level": "INFO",
+    "platform": "gulftalent",
+    "agent": "outreach-gulftalent",
+    "type": "reply_received",
+    "message": "[unclear] ",
+    "meta": {
+      "opp_id": null,
+      "vacancy_id": null,
+      "url": null,
+      "intent": "unclear"
+    }
+  },
+  {
+    "ts": "20:42:12",
+    "_sort": "2026-05-05T17:42:12.739Z",
+    "_date": "2026-05-05",
+    "_is_today": true,
+    "level": "INFO",
+    "platform": "gulftalent",
+    "agent": "outreach-gulftalent",
+    "type": "reply_received",
+    "message": "[unclear] ",
+    "meta": {
+      "opp_id": null,
+      "vacancy_id": null,
+      "url": null,
+      "intent": "unclear"
+    }
+  },
+  {
+    "ts": "20:42:12",
+    "_sort": "2026-05-05T17:42:12.739Z",
+    "_date": "2026-05-05",
+    "_is_today": true,
+    "level": "INFO",
+    "platform": "gulftalent",
+    "agent": "outreach-gulftalent",
+    "type": "reply_received",
+    "message": "[unclear] ",
+    "meta": {
+      "opp_id": null,
+      "vacancy_id": null,
+      "url": null,
+      "intent": "unclear"
+    }
+  },
+  {
+    "ts": "20:42:12",
+    "_sort": "2026-05-05T17:42:12.739Z",
+    "_date": "2026-05-05",
+    "_is_today": true,
+    "level": "INFO",
+    "platform": "gulftalent",
+    "agent": "outreach-gulftalent",
+    "type": "reply_received",
+    "message": "[unclear] ",
+    "meta": {
+      "opp_id": null,
+      "vacancy_id": null,
+      "url": null,
+      "intent": "unclear"
+    }
+  },
+  {
+    "ts": "20:42:12",
+    "_sort": "2026-05-05T17:42:12.739Z",
+    "_date": "2026-05-05",
+    "_is_today": true,
+    "level": "INFO",
+    "platform": "gulftalent",
+    "agent": "outreach-gulftalent",
+    "type": "reply_received",
+    "message": "[unclear] ",
+    "meta": {
+      "opp_id": null,
+      "vacancy_id": null,
+      "url": null,
+      "intent": "unclear"
+    }
+  },
+  {
+    "ts": "20:42:12",
+    "_sort": "2026-05-05T17:42:12.739Z",
+    "_date": "2026-05-05",
+    "_is_today": true,
+    "level": "INFO",
+    "platform": "gulftalent",
+    "agent": "outreach-gulftalent",
+    "type": "reply_received",
+    "message": "[unclear] ",
+    "meta": {
+      "opp_id": null,
+      "vacancy_id": null,
+      "url": null,
+      "intent": "unclear"
     }
   }
 ]
