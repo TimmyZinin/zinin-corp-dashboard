@@ -2,12 +2,12 @@
   {
     "platform": "superjob",
     "agent_id": "outreach-superjob",
-    "sent_today": 10,
-    "replies_today": 0,
-    "errors_today": 0,
-    "last_event_ts": "2026-05-05T17:37:00.623Z",
-    "last_event_type": "pending_outbox",
-    "last_event_message": "⚡ ОТВЕТЬ → Инновационные технологии · Здравствуйте!\n\nСпасибо за приглашение на собеседование. Я ра",
+    "sent_today": 13,
+    "replies_today": 18,
+    "errors_today": 1,
+    "last_event_ts": "2026-05-05T19:37:58.372Z",
+    "last_event_type": "reply_sent",
+    "last_event_message": "Инновационные технологии",
     "label": "SuperJob",
     "short": "sj",
     "quota_max": 30,
@@ -39,7 +39,7 @@
     "label": "GulfTalent",
     "short": "gt",
     "quota_max": 15,
-    "status": "active"
+    "status": "idle"
   },
   {
     "platform": "hh",

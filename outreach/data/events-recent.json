@@ -500,66 +500,6 @@
     }
   },
   {
-    "ts": "20:37:00",
-    "_date": "2026-05-05",
-    "_is_today": true,
-    "level": "HOT",
-    "platform": "superjob",
-    "agent": "outreach-superjob",
-    "type": "pending_outbox",
-    "message": "⚡ ОТВЕТЬ → АВС Рус · Здравствуйте!\n\nСпасибо за приглашение. Звонком сложно — я в ",
-    "meta": {
-      "opp_id": null,
-      "vacancy_id": "sj:28496698",
-      "url": "https://www.superjob.ru/clients/vacancy-28496698.html"
-    }
-  },
-  {
-    "ts": "20:37:00",
-    "_date": "2026-05-05",
-    "_is_today": true,
-    "level": "HOT",
-    "platform": "superjob",
-    "agent": "outreach-superjob",
-    "type": "pending_outbox",
-    "message": "⚡ ОТВЕТЬ → Инновационные технологии · Здравствуйте!\n\nСпасибо за приглашение на собеседование. Я ра",
-    "meta": {
-      "opp_id": null,
-      "vacancy_id": "sj:31957706",
-      "url": "https://www.superjob.ru/clients/vacancy-31957706.html"
-    }
-  },
-  {
-    "ts": "20:37:00",
-    "_date": "2026-05-05",
-    "_is_today": true,
-    "level": "HOT",
-    "platform": "superjob",
-    "agent": "outreach-superjob",
-    "type": "pending_outbox",
-    "message": "⚡ ОТВЕТЬ → ООО «ПК Техномикс» · Здравствуйте!\n\nСпасибо за приглашение. Удобнее всего обсудит",
-    "meta": {
-      "opp_id": null,
-      "vacancy_id": "sj:51872634",
-      "url": "https://www.superjob.ru/clients/vacancy-51872634.html"
-    }
-  },
-  {
-    "ts": "20:37:00",
-    "_date": "2026-05-05",
-    "_is_today": true,
-    "level": "HOT",
-    "platform": "superjob",
-    "agent": "outreach-superjob",
-    "type": "pending_outbox",
-    "message": "⚡ ОТВЕТЬ → Вегас · Здравствуйте, спасибо за анкету и контакт!\n\nПрежде чем запол",
-    "meta": {
-      "opp_id": null,
-      "vacancy_id": "sj:51690949",
-      "url": "https://www.superjob.ru/clients/vacancy-51690949.html"
-    }
-  },
-  {
     "ts": "20:42:12",
     "_date": "2026-05-05",
     "_is_today": true,
@@ -1022,6 +962,365 @@
       "vacancy_id": null,
       "url": null,
       "intent": "unclear"
+    }
+  },
+  {
+    "ts": "20:55:11",
+    "_date": "2026-05-05",
+    "_is_today": true,
+    "level": "HOT",
+    "platform": "superjob",
+    "agent": "outreach-superjob",
+    "type": "reply_received",
+    "message": "[interest] Трест Росспецэнергомонтаж: invited",
+    "meta": {
+      "opp_id": null,
+      "vacancy_id": "sj:168338030",
+      "url": null,
+      "intent": "interest"
+    }
+  },
+  {
+    "ts": "20:55:11",
+    "_date": "2026-05-05",
+    "_is_today": true,
+    "level": "HOT",
+    "platform": "superjob",
+    "agent": "outreach-superjob",
+    "type": "reply_received",
+    "message": "[interest] АВС Рус: invited",
+    "meta": {
+      "opp_id": null,
+      "vacancy_id": "sj:28496698",
+      "url": null,
+      "intent": "interest"
+    }
+  },
+  {
+    "ts": "20:55:12",
+    "_date": "2026-05-05",
+    "_is_today": true,
+    "level": "HOT",
+    "platform": "superjob",
+    "agent": "outreach-superjob",
+    "type": "reply_received",
+    "message": "[interest] Инновационные технологии: invited",
+    "meta": {
+      "opp_id": null,
+      "vacancy_id": "sj:31957706",
+      "url": null,
+      "intent": "interest"
+    }
+  },
+  {
+    "ts": "20:55:12",
+    "_date": "2026-05-05",
+    "_is_today": true,
+    "level": "WARN",
+    "platform": "superjob",
+    "agent": "outreach-superjob",
+    "type": "reply_received",
+    "message": "[decline] Магнит, Розничная сеть",
+    "meta": {
+      "opp_id": null,
+      "vacancy_id": "sj:51846835",
+      "url": null,
+      "intent": "decline"
+    }
+  },
+  {
+    "ts": "20:55:12",
+    "_date": "2026-05-05",
+    "_is_today": true,
+    "level": "HOT",
+    "platform": "superjob",
+    "agent": "outreach-superjob",
+    "type": "reply_received",
+    "message": "[interest] ООО «ПК Техномикс»: invited",
+    "meta": {
+      "opp_id": null,
+      "vacancy_id": "sj:51872634",
+      "url": null,
+      "intent": "interest"
+    }
+  },
+  {
+    "ts": "20:55:12",
+    "_date": "2026-05-05",
+    "_is_today": true,
+    "level": "HOT",
+    "platform": "superjob",
+    "agent": "outreach-superjob",
+    "type": "reply_received",
+    "message": "[interest] Вегас",
+    "meta": {
+      "opp_id": null,
+      "vacancy_id": "sj:51690949",
+      "url": null,
+      "intent": "interest"
+    }
+  },
+  {
+    "ts": "20:55:13",
+    "_date": "2026-05-05",
+    "_is_today": true,
+    "level": "WARN",
+    "platform": "superjob",
+    "agent": "outreach-superjob",
+    "type": "reply_received",
+    "message": "[decline] ИП Коледа Дмитрий Михайлович: refused",
+    "meta": {
+      "opp_id": null,
+      "vacancy_id": "sj:51876249",
+      "url": null,
+      "intent": "decline"
+    }
+  },
+  {
+    "ts": "20:58:25",
+    "_date": "2026-05-05",
+    "_is_today": true,
+    "level": "HOT",
+    "platform": "superjob",
+    "agent": "outreach-superjob",
+    "type": "reply_received",
+    "message": "[interest] Трест Росспецэнергомонтаж: invited",
+    "meta": {
+      "opp_id": null,
+      "vacancy_id": "sj:168338030",
+      "url": null,
+      "intent": "interest"
+    }
+  },
+  {
+    "ts": "20:58:25",
+    "_date": "2026-05-05",
+    "_is_today": true,
+    "level": "HOT",
+    "platform": "superjob",
+    "agent": "outreach-superjob",
+    "type": "reply_received",
+    "message": "[interest] АВС Рус: invited",
+    "meta": {
+      "opp_id": null,
+      "vacancy_id": "sj:28496698",
+      "url": null,
+      "intent": "interest"
+    }
+  },
+  {
+    "ts": "20:58:26",
+    "_date": "2026-05-05",
+    "_is_today": true,
+    "level": "HOT",
+    "platform": "superjob",
+    "agent": "outreach-superjob",
+    "type": "reply_received",
+    "message": "[interest] Инновационные технологии: invited",
+    "meta": {
+      "opp_id": null,
+      "vacancy_id": "sj:31957706",
+      "url": null,
+      "intent": "interest"
+    }
+  },
+  {
+    "ts": "20:58:26",
+    "_date": "2026-05-05",
+    "_is_today": true,
+    "level": "WARN",
+    "platform": "superjob",
+    "agent": "outreach-superjob",
+    "type": "reply_received",
+    "message": "[decline] Магнит, Розничная сеть",
+    "meta": {
+      "opp_id": null,
+      "vacancy_id": "sj:51846835",
+      "url": null,
+      "intent": "decline"
+    }
+  },
+  {
+    "ts": "20:58:26",
+    "_date": "2026-05-05",
+    "_is_today": true,
+    "level": "HOT",
+    "platform": "superjob",
+    "agent": "outreach-superjob",
+    "type": "reply_received",
+    "message": "[interest] ООО «ПК Техномикс»: invited",
+    "meta": {
+      "opp_id": null,
+      "vacancy_id": "sj:51872634",
+      "url": null,
+      "intent": "interest"
+    }
+  },
+  {
+    "ts": "20:58:27",
+    "_date": "2026-05-05",
+    "_is_today": true,
+    "level": "HOT",
+    "platform": "superjob",
+    "agent": "outreach-superjob",
+    "type": "reply_received",
+    "message": "[interest] Вегас",
+    "meta": {
+      "opp_id": null,
+      "vacancy_id": "sj:51690949",
+      "url": null,
+      "intent": "interest"
+    }
+  },
+  {
+    "ts": "20:58:27",
+    "_date": "2026-05-05",
+    "_is_today": true,
+    "level": "WARN",
+    "platform": "superjob",
+    "agent": "outreach-superjob",
+    "type": "reply_received",
+    "message": "[decline] ИП Коледа Дмитрий Михайлович: refused",
+    "meta": {
+      "opp_id": null,
+      "vacancy_id": "sj:51876249",
+      "url": null,
+      "intent": "decline"
+    }
+  },
+  {
+    "ts": "21:04:06",
+    "_date": "2026-05-05",
+    "_is_today": true,
+    "level": "OK",
+    "platform": "superjob",
+    "agent": "outreach-superjob",
+    "type": "send_done",
+    "lead_status": "interested",
+    "message": "Инновационные технологии — Маркетолог / медицинское направление",
+    "meta": {
+      "opp_id": "ba14a787-2ceb-44c3-8efc-a7b98f5db9ed",
+      "url": "https://www.superjob.ru/clients/vacancy-31957706.html"
+    }
+  },
+  {
+    "ts": "21:04:06",
+    "_date": "2026-05-05",
+    "_is_today": true,
+    "level": "OK",
+    "platform": "superjob",
+    "agent": "outreach-superjob",
+    "type": "send_done",
+    "lead_status": "interested",
+    "message": "ООО «ПК Техномикс» — Менеджер маркетплейсов",
+    "meta": {
+      "opp_id": "1f7a0be1-551c-4ab7-9402-4f70d1c2306f",
+      "url": "https://www.superjob.ru/clients/vacancy-51872634.html"
+    }
+  },
+  {
+    "ts": "21:04:07",
+    "_date": "2026-05-05",
+    "_is_today": true,
+    "level": "OK",
+    "platform": "superjob",
+    "agent": "outreach-superjob",
+    "type": "send_done",
+    "lead_status": "interested",
+    "message": "Вегас — Менеджер по работе с маркетплейсами",
+    "meta": {
+      "opp_id": "b8715091-6c5d-4aac-9414-23b9a23f416f",
+      "url": "https://www.superjob.ru/clients/vacancy-51690949.html"
+    }
+  },
+  {
+    "ts": "21:04:25",
+    "_date": "2026-05-05",
+    "_is_today": true,
+    "level": "HOT",
+    "platform": "superjob",
+    "agent": "system",
+    "type": "reply_received",
+    "lead_status": "interested",
+    "message": "Invited / interest · Вегас — Менеджер по работе с маркетплейсами",
+    "meta": {
+      "opp_id": "b8715091-6c5d-4aac-9414-23b9a23f416f",
+      "stage": "MEETING"
+    }
+  },
+  {
+    "ts": "21:04:25",
+    "_date": "2026-05-05",
+    "_is_today": true,
+    "level": "HOT",
+    "platform": "superjob",
+    "agent": "system",
+    "type": "reply_received",
+    "lead_status": "interested",
+    "message": "Invited / interest · ООО «ПК Техномикс» — Менеджер маркетплейсов",
+    "meta": {
+      "opp_id": "1f7a0be1-551c-4ab7-9402-4f70d1c2306f",
+      "stage": "MEETING"
+    }
+  },
+  {
+    "ts": "21:04:25",
+    "_date": "2026-05-05",
+    "_is_today": true,
+    "level": "HOT",
+    "platform": "superjob",
+    "agent": "system",
+    "type": "reply_received",
+    "lead_status": "interested",
+    "message": "Invited / interest · Инновационные технологии — Маркетолог / медицинское направление",
+    "meta": {
+      "opp_id": "ba14a787-2ceb-44c3-8efc-a7b98f5db9ed",
+      "stage": "MEETING"
+    }
+  },
+  {
+    "ts": "21:04:25",
+    "_date": "2026-05-05",
+    "_is_today": true,
+    "level": "HOT",
+    "platform": "superjob",
+    "agent": "system",
+    "type": "reply_received",
+    "lead_status": "interested",
+    "message": "Invited / interest · АВС Рус — Менеджер по работе с маркетплейсами",
+    "meta": {
+      "opp_id": "c0631136-618e-4ff2-a91c-22a2f8920fc5",
+      "stage": "MEETING"
+    }
+  },
+  {
+    "ts": "21:28:56",
+    "_date": "2026-05-05",
+    "_is_today": true,
+    "level": "ERR",
+    "platform": "superjob",
+    "agent": "outreach-superjob",
+    "type": "agent_error",
+    "message": "SJ-audit",
+    "meta": {
+      "opp_id": null,
+      "vacancy_id": null,
+      "url": null
+    }
+  },
+  {
+    "ts": "22:37:58",
+    "_date": "2026-05-05",
+    "_is_today": true,
+    "level": "INFO",
+    "platform": "superjob",
+    "agent": "outreach-superjob",
+    "type": "reply_sent",
+    "message": "Инновационные технологии",
+    "meta": {
+      "opp_id": null,
+      "vacancy_id": null,
+      "url": null
     }
   }
 ]

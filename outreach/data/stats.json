@@ -1,10 +1,10 @@
 {
   "date": "2026-05-05",
-  "generated_at": "17:51:56 UTC",
+  "generated_at": "19:44:40 UTC",
   "totals_today": {
-    "sent": 19,
-    "replies": 2,
-    "hot": 2,
+    "sent": 22,
+    "replies": 5,
+    "hot": 5,
     "errors": 0
   },
   "by_platform": {
@@ -35,26 +35,26 @@
     "superjob": {
       "label": "SuperJob",
       "short": "sj",
-      "sent": 10,
-      "sent_total": 10,
-      "replies": 1,
-      "hot": 1,
-      "errors": 0,
-      "daily_quota_used": 10,
+      "sent": 13,
+      "sent_total": 13,
+      "replies": 18,
+      "hot": 4,
+      "errors": 1,
+      "daily_quota_used": 13,
       "daily_quota_max": 30,
-      "last_action_ts": "20:37:00",
+      "last_action_ts": "22:37:58",
       "status": "active",
       "lead_pipeline": {
         "sent_waiting": 9,
         "no_reaction": 0,
         "replied_neutral": 0,
         "hr_invite": 0,
-        "interested": 1,
+        "interested": 4,
         "proposal_sent": 0,
         "declined": 0,
         "won": 0
       },
-      "last_action_ts_iso": "2026-05-05T17:37:00.623Z"
+      "last_action_ts_iso": "2026-05-05T19:37:58.372Z"
     },
     "gulftalent": {
       "label": "GulfTalent",
@@ -67,7 +67,7 @@
       "daily_quota_used": 0,
       "daily_quota_max": 15,
       "last_action_ts": "20:42:12",
-      "status": "active",
+      "status": "idle",
       "lead_pipeline": {
         "sent_waiting": 0,
         "no_reaction": 0,
@@ -151,10 +151,10 @@
     }
   },
   "twenty": {
-    "opportunities_total": 110,
+    "opportunities_total": 113,
     "by_stage": {
       "SCREENING": 103,
-      "MEETING": 2,
+      "MEETING": 5,
       "PROPOSAL": 0,
       "NOT_NOW": 5,
       "CUSTOMER": 0,
@@ -164,17 +164,17 @@
   "funnel": {
     "scanned": 0,
     "filtered": 0,
-    "sent": 19,
-    "replied": 2,
-    "hot": 2,
-    "meeting": 2
+    "sent": 22,
+    "replied": 5,
+    "hot": 5,
+    "meeting": 5
   },
   "lead_pipeline": {
     "sent_waiting": 17,
     "no_reaction": 86,
     "replied_neutral": 0,
     "hr_invite": 0,
-    "interested": 2,
+    "interested": 5,
     "proposal_sent": 0,
     "declined": 5,
     "won": 0
