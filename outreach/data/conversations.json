@@ -51,57 +51,6 @@
     }
   },
   {
-    "ts": "May 05 20:42",
-    "_sort": "2026-05-05T17:42:12.739Z",
-    "_date": "2026-05-05",
-    "_is_today": false,
-    "level": "INFO",
-    "platform": "gulftalent",
-    "agent": "outreach-gulftalent",
-    "type": "reply_received",
-    "message": "[unclear] ",
-    "meta": {
-      "opp_id": null,
-      "vacancy_id": null,
-      "url": null,
-      "intent": "unclear"
-    }
-  },
-  {
-    "ts": "May 05 20:42",
-    "_sort": "2026-05-05T17:42:12.739Z",
-    "_date": "2026-05-05",
-    "_is_today": false,
-    "level": "INFO",
-    "platform": "gulftalent",
-    "agent": "outreach-gulftalent",
-    "type": "reply_received",
-    "message": "[unclear] ",
-    "meta": {
-      "opp_id": null,
-      "vacancy_id": null,
-      "url": null,
-      "intent": "unclear"
-    }
-  },
-  {
-    "ts": "May 05 20:42",
-    "_sort": "2026-05-05T17:42:12.739Z",
-    "_date": "2026-05-05",
-    "_is_today": false,
-    "level": "INFO",
-    "platform": "gulftalent",
-    "agent": "outreach-gulftalent",
-    "type": "reply_received",
-    "message": "[unclear] ",
-    "meta": {
-      "opp_id": null,
-      "vacancy_id": null,
-      "url": null,
-      "intent": "unclear"
-    }
-  },
-  {
     "ts": "May 05 20:55",
     "_sort": "2026-05-05T17:55:11.157Z",
     "_date": "2026-05-05",
@@ -497,6 +446,57 @@
     "agent": "outreach-avito",
     "type": "reply_received",
     "message": "[unclear] : Работодатель получил ваше резюме AI-инженер, автоматизация маркетинга и контента",
+    "meta": {
+      "opp_id": null,
+      "vacancy_id": null,
+      "url": null,
+      "intent": "unclear"
+    }
+  },
+  {
+    "ts": "13:50:29",
+    "_sort": "2026-05-06T10:50:29.623Z",
+    "_date": "2026-05-06",
+    "_is_today": true,
+    "level": "INFO",
+    "platform": "gulftalent",
+    "agent": "outreach-gulftalent",
+    "type": "reply_received",
+    "message": "[unclear] ",
+    "meta": {
+      "opp_id": null,
+      "vacancy_id": null,
+      "url": null,
+      "intent": "unclear"
+    }
+  },
+  {
+    "ts": "13:50:29",
+    "_sort": "2026-05-06T10:50:29.623Z",
+    "_date": "2026-05-06",
+    "_is_today": true,
+    "level": "INFO",
+    "platform": "gulftalent",
+    "agent": "outreach-gulftalent",
+    "type": "reply_received",
+    "message": "[unclear] ",
+    "meta": {
+      "opp_id": null,
+      "vacancy_id": null,
+      "url": null,
+      "intent": "unclear"
+    }
+  },
+  {
+    "ts": "22:08:06",
+    "_sort": "2026-05-06T19:08:06.499Z",
+    "_date": "2026-05-06",
+    "_is_today": true,
+    "level": "INFO",
+    "platform": "gulftalent",
+    "agent": "outreach-gulftalent",
+    "type": "reply_received",
+    "message": "[unclear] ",
     "meta": {
       "opp_id": null,
       "vacancy_id": null,

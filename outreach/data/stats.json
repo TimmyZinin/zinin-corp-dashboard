@@ -1,8 +1,8 @@
 {
   "date": "2026-05-06",
-  "generated_at": "10:21:10 UTC",
+  "generated_at": "20:18:11 UTC",
   "totals_today": {
-    "sent": 90,
+    "sent": 96,
     "replies": 5,
     "hot": 5,
     "errors": 0
@@ -11,18 +11,18 @@
     "avito_rabota": {
       "label": "Avito Работа",
       "short": "avito",
-      "sent": 76,
+      "sent": 92,
       "sent_total": 100,
       "replies": 5,
       "hot": 1,
       "errors": 1,
-      "daily_quota_used": 76,
+      "daily_quota_used": 82,
       "daily_quota_max": 20,
-      "last_action_ts": "13:09:53",
-      "status": "active",
+      "last_action_ts": "13:46:33",
+      "status": "idle",
       "lead_pipeline": {
-        "sent_waiting": 84,
-        "no_reaction": 11,
+        "sent_waiting": 90,
+        "no_reaction": 5,
         "replied_neutral": 0,
         "hr_invite": 0,
         "interested": 1,
@@ -30,7 +30,7 @@
         "declined": 4,
         "won": 0
       },
-      "last_action_ts_iso": "2026-05-06T10:09:53.082Z"
+      "last_action_ts_iso": "2026-05-06T10:46:33.137Z"
     },
     "superjob": {
       "label": "SuperJob",
@@ -43,7 +43,7 @@
       "daily_quota_used": 14,
       "daily_quota_max": 30,
       "last_action_ts": "13:19:44",
-      "status": "active",
+      "status": "idle",
       "lead_pipeline": {
         "sent_waiting": 34,
         "no_reaction": 0,
@@ -59,14 +59,14 @@
     "gulftalent": {
       "label": "GulfTalent",
       "short": "gt",
-      "sent": 0,
+      "sent": 10,
       "sent_total": 0,
-      "replies": 0,
+      "replies": 3,
       "hot": 0,
       "errors": 0,
       "daily_quota_used": 0,
       "daily_quota_max": 15,
-      "last_action_ts": "",
+      "last_action_ts": "22:08:06",
       "status": "idle",
       "lead_pipeline": {
         "sent_waiting": 0,
@@ -77,7 +77,8 @@
         "proposal_sent": 0,
         "declined": 0,
         "won": 0
-      }
+      },
+      "last_action_ts_iso": "2026-05-06T19:08:06.499Z"
     },
     "bayt": {
       "label": "Bayt",
@@ -186,14 +187,14 @@
   "funnel": {
     "scanned": 0,
     "filtered": 0,
-    "sent": 90,
+    "sent": 96,
     "replied": 5,
     "hot": 5,
     "meeting": 5
   },
   "lead_pipeline": {
-    "sent_waiting": 118,
-    "no_reaction": 11,
+    "sent_waiting": 124,
+    "no_reaction": 5,
     "replied_neutral": 0,
     "hr_invite": 0,
     "interested": 5,

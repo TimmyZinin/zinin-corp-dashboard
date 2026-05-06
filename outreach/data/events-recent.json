@@ -2337,10 +2337,10 @@
     "agent": "outreach-avito",
     "type": "send_done",
     "lead_status": "sent_waiting",
-    "message": "Avito employer — Руководитель отдела продаж",
+    "message": "Avito employer — Маркетолог",
     "meta": {
       "opp_id": "d4e6911b-4ae3-48bb-80bd-52753bdf9476",
-      "url": "https://www.avito.ru/aprelevka/vakansii/rukovoditel_otdela_prodazh_8173666102?context=H4sIAAAAAAAA_wE_AMD_YToyOntzOjEzOiJsb2NhbFByaW9yaXR5IjtiOjA7czoxOiJ4IjtzOjE2OiJhbmJOUWhlT1NCN1F0aVVkIjt9v4grvD8AAAA"
+      "url": "https://www.avito.ru/moskva/vakansii/marketolog_8173666102"
     }
   },
   {
@@ -2367,10 +2367,10 @@
     "agent": "outreach-avito",
     "type": "send_done",
     "lead_status": "sent_waiting",
-    "message": "Avito employer — Руководитель отдела маркетинга",
+    "message": "Бани с Чехова ПРОИЗВОДСТВО — Руководитель отдела маркетинга",
     "meta": {
       "opp_id": "2c9c3696-8c86-422e-9d48-1d831a140c69",
-      "url": "https://www.avito.ru/moskva/vakansii/rukovoditel_otdela_marketinga_8089077519?context=H4sIAAAAAAAA_wE_AMD_YToyOntzOjEzOiJsb2NhbFByaW9yaXR5IjtiOjA7czoxOiJ4IjtzOjE2OiJhbmJOUWhlT1NCN1F0aVVkIjt9v4grvD8AAAA"
+      "url": "https://www.avito.ru/moskva/vakansii/rukovoditel_otdela_marketinga_8089077519"
     }
   },
   {
@@ -2382,10 +2382,10 @@
     "agent": "outreach-avito",
     "type": "send_done",
     "lead_status": "sent_waiting",
-    "message": "Avito employer — Руководитель отдела маркетинга",
+    "message": "Бани с Чехова ПРОИЗВОДСТВО — Руководитель отдела маркетинга",
     "meta": {
       "opp_id": "2fd5813d-9477-4c7a-88c0-68beebd6ca92",
-      "url": "https://www.avito.ru/moskva/vakansii/rukovoditel_otdela_marketinga_8089162205?context=H4sIAAAAAAAA_wE_AMD_YToyOntzOjEzOiJsb2NhbFByaW9yaXR5IjtiOjA7czoxOiJ4IjtzOjE2OiJhbmJOUWhlT1NCN1F0aVVkIjt9v4grvD8AAAA"
+      "url": "https://www.avito.ru/moskva/vakansii/rukovoditel_otdela_marketinga_8089162205"
     }
   },
   {
@@ -2547,10 +2547,10 @@
     "agent": "outreach-avito",
     "type": "send_done",
     "lead_status": "sent_waiting",
-    "message": "Avito employer — Маркетолог",
+    "message": "UpGrade Your Home — Маркетолог",
     "meta": {
       "opp_id": "50a03e8a-4927-4baa-b77a-59986c7c846a",
-      "url": "https://www.avito.ru/moskva/vakansii/marketolog_8021518531?context=H4sIAAAAAAAA_wE_AMD_YToyOntzOjEzOiJsb2NhbFByaW9yaXR5IjtiOjA7czoxOiJ4IjtzOjE2OiJlVDl6dkRwcHFINGRrTVJjIjt9bal5yj8AAAA"
+      "url": "https://www.avito.ru/moskva/vakansii/marketolog_8021518531"
     }
   },
   {
@@ -3201,6 +3201,744 @@
     "meta": {
       "opp_id": "e8a97cba-e6ce-4c2f-a70e-a2139dc3f3f8",
       "url": "https://tobolsk.superjob.ru/vakansii/menedzher-korporativnyh-kommunikacij-51881480.html"
+    }
+  },
+  {
+    "ts": "13:24:15",
+    "_date": "2026-05-06",
+    "_is_today": true,
+    "level": "INFO",
+    "platform": "avito_rabota",
+    "agent": "outreach-avito",
+    "type": "send_attempt",
+    "message": "Руководитель отдела маркетинга",
+    "meta": {
+      "opp_id": null,
+      "vacancy_id": "avito_rabota:8039077850",
+      "url": "https://www.avito.ru/moskva/vakansii/rukovoditel_otdela_marketinga_8039077850"
+    }
+  },
+  {
+    "ts": "13:24:44",
+    "_date": "2026-05-06",
+    "_is_today": true,
+    "level": "OK",
+    "platform": "avito_rabota",
+    "agent": "outreach-avito",
+    "type": "send_done",
+    "lead_status": "sent_waiting",
+    "message": "ГКУ ЦЗН города Москвы — Руководитель отдела маркетинга",
+    "meta": {
+      "opp_id": "215c6e38-0008-4a0d-a8d0-2cc8d775dcd6",
+      "url": "https://www.avito.ru/moskva/vakansii/rukovoditel_otdela_marketinga_8039077850"
+    }
+  },
+  {
+    "ts": "13:24:44",
+    "_date": "2026-05-06",
+    "_is_today": true,
+    "level": "OK",
+    "platform": "avito_rabota",
+    "agent": "outreach-avito",
+    "type": "send_ok",
+    "message": "Руководитель отдела маркетинга",
+    "meta": {
+      "opp_id": "215c6e38-0008-4a0d-a8d0-2cc8d775dcd6",
+      "vacancy_id": "avito_rabota:8039077850",
+      "url": "https://www.avito.ru/moskva/vakansii/rukovoditel_otdela_marketinga_8039077850"
+    }
+  },
+  {
+    "ts": "13:24:44",
+    "_date": "2026-05-06",
+    "_is_today": true,
+    "level": "INFO",
+    "platform": "avito_rabota",
+    "agent": "outreach-avito",
+    "type": "twenty_sync_ok",
+    "message": "Руководитель отдела маркетинга",
+    "meta": {
+      "opp_id": "215c6e38-0008-4a0d-a8d0-2cc8d775dcd6",
+      "vacancy_id": "avito_rabota:8039077850",
+      "url": "https://www.avito.ru/moskva/vakansii/rukovoditel_otdela_marketinga_8039077850"
+    }
+  },
+  {
+    "ts": "13:26:53",
+    "_date": "2026-05-06",
+    "_is_today": true,
+    "level": "INFO",
+    "platform": "avito_rabota",
+    "agent": "outreach-avito",
+    "type": "send_attempt",
+    "message": "Руководитель по росту (Head of Growth)",
+    "meta": {
+      "opp_id": null,
+      "vacancy_id": "avito_rabota:8088670872",
+      "url": "https://www.avito.ru/moskva/vakansii/rukovoditel_po_rostu_head_of_growth_8088670872"
+    }
+  },
+  {
+    "ts": "13:27:21",
+    "_date": "2026-05-06",
+    "_is_today": true,
+    "level": "OK",
+    "platform": "avito_rabota",
+    "agent": "outreach-avito",
+    "type": "send_done",
+    "lead_status": "sent_waiting",
+    "message": "Aleksandra — Руководитель по росту (Head of Growth)",
+    "meta": {
+      "opp_id": "9ed94ff1-a99e-4cc1-9b3e-20bffc4dc115",
+      "url": "https://www.avito.ru/moskva/vakansii/rukovoditel_po_rostu_head_of_growth_8088670872"
+    }
+  },
+  {
+    "ts": "13:27:21",
+    "_date": "2026-05-06",
+    "_is_today": true,
+    "level": "OK",
+    "platform": "avito_rabota",
+    "agent": "outreach-avito",
+    "type": "send_ok",
+    "message": "Руководитель по росту (Head of Growth)",
+    "meta": {
+      "opp_id": "9ed94ff1-a99e-4cc1-9b3e-20bffc4dc115",
+      "vacancy_id": "avito_rabota:8088670872",
+      "url": "https://www.avito.ru/moskva/vakansii/rukovoditel_po_rostu_head_of_growth_8088670872"
+    }
+  },
+  {
+    "ts": "13:27:22",
+    "_date": "2026-05-06",
+    "_is_today": true,
+    "level": "INFO",
+    "platform": "avito_rabota",
+    "agent": "outreach-avito",
+    "type": "twenty_sync_ok",
+    "message": "Руководитель по росту (Head of Growth)",
+    "meta": {
+      "opp_id": "9ed94ff1-a99e-4cc1-9b3e-20bffc4dc115",
+      "vacancy_id": "avito_rabota:8088670872",
+      "url": "https://www.avito.ru/moskva/vakansii/rukovoditel_po_rostu_head_of_growth_8088670872"
+    }
+  },
+  {
+    "ts": "13:29:14",
+    "_date": "2026-05-06",
+    "_is_today": true,
+    "level": "INFO",
+    "platform": "avito_rabota",
+    "agent": "outreach-avito",
+    "type": "send_attempt",
+    "message": "Руководитель отдела маркетинга",
+    "meta": {
+      "opp_id": null,
+      "vacancy_id": "avito_rabota:8089077519",
+      "url": "https://www.avito.ru/moskva/vakansii/rukovoditel_otdela_marketinga_8089077519"
+    }
+  },
+  {
+    "ts": "13:29:43",
+    "_date": "2026-05-06",
+    "_is_today": true,
+    "level": "OK",
+    "platform": "avito_rabota",
+    "agent": "outreach-avito",
+    "type": "send_ok",
+    "message": "Руководитель отдела маркетинга",
+    "meta": {
+      "opp_id": "2c9c3696-8c86-422e-9d48-1d831a140c69",
+      "vacancy_id": "avito_rabota:8089077519",
+      "url": "https://www.avito.ru/moskva/vakansii/rukovoditel_otdela_marketinga_8089077519"
+    }
+  },
+  {
+    "ts": "13:29:43",
+    "_date": "2026-05-06",
+    "_is_today": true,
+    "level": "INFO",
+    "platform": "avito_rabota",
+    "agent": "outreach-avito",
+    "type": "twenty_sync_ok",
+    "message": "Руководитель отдела маркетинга",
+    "meta": {
+      "opp_id": "2c9c3696-8c86-422e-9d48-1d831a140c69",
+      "vacancy_id": "avito_rabota:8089077519",
+      "url": "https://www.avito.ru/moskva/vakansii/rukovoditel_otdela_marketinga_8089077519"
+    }
+  },
+  {
+    "ts": "13:31:28",
+    "_date": "2026-05-06",
+    "_is_today": true,
+    "level": "INFO",
+    "platform": "avito_rabota",
+    "agent": "outreach-avito",
+    "type": "send_attempt",
+    "message": "Руководитель отдела маркетинга",
+    "meta": {
+      "opp_id": null,
+      "vacancy_id": "avito_rabota:8089162205",
+      "url": "https://www.avito.ru/moskva/vakansii/rukovoditel_otdela_marketinga_8089162205"
+    }
+  },
+  {
+    "ts": "13:31:58",
+    "_date": "2026-05-06",
+    "_is_today": true,
+    "level": "OK",
+    "platform": "avito_rabota",
+    "agent": "outreach-avito",
+    "type": "send_ok",
+    "message": "Руководитель отдела маркетинга",
+    "meta": {
+      "opp_id": "2fd5813d-9477-4c7a-88c0-68beebd6ca92",
+      "vacancy_id": "avito_rabota:8089162205",
+      "url": "https://www.avito.ru/moskva/vakansii/rukovoditel_otdela_marketinga_8089162205"
+    }
+  },
+  {
+    "ts": "13:31:58",
+    "_date": "2026-05-06",
+    "_is_today": true,
+    "level": "INFO",
+    "platform": "avito_rabota",
+    "agent": "outreach-avito",
+    "type": "twenty_sync_ok",
+    "message": "Руководитель отдела маркетинга",
+    "meta": {
+      "opp_id": "2fd5813d-9477-4c7a-88c0-68beebd6ca92",
+      "vacancy_id": "avito_rabota:8089162205",
+      "url": "https://www.avito.ru/moskva/vakansii/rukovoditel_otdela_marketinga_8089162205"
+    }
+  },
+  {
+    "ts": "13:33:59",
+    "_date": "2026-05-06",
+    "_is_today": true,
+    "level": "INFO",
+    "platform": "avito_rabota",
+    "agent": "outreach-avito",
+    "type": "send_attempt",
+    "message": "Маркетолог",
+    "meta": {
+      "opp_id": null,
+      "vacancy_id": "avito_rabota:8021518531",
+      "url": "https://www.avito.ru/moskva/vakansii/marketolog_8021518531"
+    }
+  },
+  {
+    "ts": "13:34:28",
+    "_date": "2026-05-06",
+    "_is_today": true,
+    "level": "OK",
+    "platform": "avito_rabota",
+    "agent": "outreach-avito",
+    "type": "send_ok",
+    "message": "Маркетолог",
+    "meta": {
+      "opp_id": "50a03e8a-4927-4baa-b77a-59986c7c846a",
+      "vacancy_id": "avito_rabota:8021518531",
+      "url": "https://www.avito.ru/moskva/vakansii/marketolog_8021518531"
+    }
+  },
+  {
+    "ts": "13:34:29",
+    "_date": "2026-05-06",
+    "_is_today": true,
+    "level": "INFO",
+    "platform": "avito_rabota",
+    "agent": "outreach-avito",
+    "type": "twenty_sync_ok",
+    "message": "Маркетолог",
+    "meta": {
+      "opp_id": "50a03e8a-4927-4baa-b77a-59986c7c846a",
+      "vacancy_id": "avito_rabota:8021518531",
+      "url": "https://www.avito.ru/moskva/vakansii/marketolog_8021518531"
+    }
+  },
+  {
+    "ts": "13:36:16",
+    "_date": "2026-05-06",
+    "_is_today": true,
+    "level": "INFO",
+    "platform": "avito_rabota",
+    "agent": "outreach-avito",
+    "type": "send_attempt",
+    "message": "Маркетолог / Руководитель маркетинга удаленно",
+    "meta": {
+      "opp_id": null,
+      "vacancy_id": "avito_rabota:8016731378",
+      "url": "https://www.avito.ru/moskva/vakansii/marketolog_rukovoditel_marketinga_udalenno_8016731378"
+    }
+  },
+  {
+    "ts": "13:36:47",
+    "_date": "2026-05-06",
+    "_is_today": true,
+    "level": "OK",
+    "platform": "avito_rabota",
+    "agent": "outreach-avito",
+    "type": "send_done",
+    "lead_status": "sent_waiting",
+    "message": "Avito employer — Маркетолог / Руководитель маркетинга удаленно",
+    "meta": {
+      "opp_id": "0ec100b9-738d-4eb1-9661-24c4316152c6",
+      "url": "https://www.avito.ru/moskva/vakansii/marketolog_rukovoditel_marketinga_udalenno_8016731378"
+    }
+  },
+  {
+    "ts": "13:36:47",
+    "_date": "2026-05-06",
+    "_is_today": true,
+    "level": "OK",
+    "platform": "avito_rabota",
+    "agent": "outreach-avito",
+    "type": "send_ok",
+    "message": "Маркетолог / Руководитель маркетинга удаленно",
+    "meta": {
+      "opp_id": "0ec100b9-738d-4eb1-9661-24c4316152c6",
+      "vacancy_id": "avito_rabota:8016731378",
+      "url": "https://www.avito.ru/moskva/vakansii/marketolog_rukovoditel_marketinga_udalenno_8016731378"
+    }
+  },
+  {
+    "ts": "13:36:48",
+    "_date": "2026-05-06",
+    "_is_today": true,
+    "level": "INFO",
+    "platform": "avito_rabota",
+    "agent": "outreach-avito",
+    "type": "twenty_sync_ok",
+    "message": "Маркетолог / Руководитель маркетинга удаленно",
+    "meta": {
+      "opp_id": "0ec100b9-738d-4eb1-9661-24c4316152c6",
+      "vacancy_id": "avito_rabota:8016731378",
+      "url": "https://www.avito.ru/moskva/vakansii/marketolog_rukovoditel_marketinga_udalenno_8016731378"
+    }
+  },
+  {
+    "ts": "13:38:57",
+    "_date": "2026-05-06",
+    "_is_today": true,
+    "level": "INFO",
+    "platform": "avito_rabota",
+    "agent": "outreach-avito",
+    "type": "send_attempt",
+    "message": "Маркетолог",
+    "meta": {
+      "opp_id": null,
+      "vacancy_id": "avito_rabota:8173666102",
+      "url": "https://www.avito.ru/moskva/vakansii/marketolog_8173666102"
+    }
+  },
+  {
+    "ts": "13:39:28",
+    "_date": "2026-05-06",
+    "_is_today": true,
+    "level": "OK",
+    "platform": "avito_rabota",
+    "agent": "outreach-avito",
+    "type": "send_ok",
+    "message": "Маркетолог",
+    "meta": {
+      "opp_id": "d4e6911b-4ae3-48bb-80bd-52753bdf9476",
+      "vacancy_id": "avito_rabota:8173666102",
+      "url": "https://www.avito.ru/moskva/vakansii/marketolog_8173666102"
+    }
+  },
+  {
+    "ts": "13:39:29",
+    "_date": "2026-05-06",
+    "_is_today": true,
+    "level": "INFO",
+    "platform": "avito_rabota",
+    "agent": "outreach-avito",
+    "type": "twenty_sync_ok",
+    "message": "Маркетолог",
+    "meta": {
+      "opp_id": "d4e6911b-4ae3-48bb-80bd-52753bdf9476",
+      "vacancy_id": "avito_rabota:8173666102",
+      "url": "https://www.avito.ru/moskva/vakansii/marketolog_8173666102"
+    }
+  },
+  {
+    "ts": "13:41:29",
+    "_date": "2026-05-06",
+    "_is_today": true,
+    "level": "INFO",
+    "platform": "avito_rabota",
+    "agent": "outreach-avito",
+    "type": "send_attempt",
+    "message": "Продюсер образовательного проекта / маркетолог",
+    "meta": {
+      "opp_id": null,
+      "vacancy_id": "avito_rabota:8127636417",
+      "url": "https://www.avito.ru/moskva/vakansii/prodyuser_obrazovatelnogo_proekta_marketolog_8127636417"
+    }
+  },
+  {
+    "ts": "13:41:56",
+    "_date": "2026-05-06",
+    "_is_today": true,
+    "level": "OK",
+    "platform": "avito_rabota",
+    "agent": "outreach-avito",
+    "type": "send_ok",
+    "message": "Продюсер образовательного проекта / маркетолог",
+    "meta": {
+      "opp_id": "bc35d28f-9818-49bc-b71c-a000f1b46f76",
+      "vacancy_id": "avito_rabota:8127636417",
+      "url": "https://www.avito.ru/moskva/vakansii/prodyuser_obrazovatelnogo_proekta_marketolog_8127636417"
+    }
+  },
+  {
+    "ts": "13:41:56",
+    "_date": "2026-05-06",
+    "_is_today": true,
+    "level": "OK",
+    "platform": "avito_rabota",
+    "agent": "outreach-avito",
+    "type": "send_done",
+    "lead_status": "sent_waiting",
+    "message": "Avito employer — Продюсер образовательного проекта / маркетолог",
+    "meta": {
+      "opp_id": "bc35d28f-9818-49bc-b71c-a000f1b46f76",
+      "url": "https://www.avito.ru/moskva/vakansii/prodyuser_obrazovatelnogo_proekta_marketolog_8127636417"
+    }
+  },
+  {
+    "ts": "13:41:57",
+    "_date": "2026-05-06",
+    "_is_today": true,
+    "level": "INFO",
+    "platform": "avito_rabota",
+    "agent": "outreach-avito",
+    "type": "twenty_sync_ok",
+    "message": "Продюсер образовательного проекта / маркетолог",
+    "meta": {
+      "opp_id": "bc35d28f-9818-49bc-b71c-a000f1b46f76",
+      "vacancy_id": "avito_rabota:8127636417",
+      "url": "https://www.avito.ru/moskva/vakansii/prodyuser_obrazovatelnogo_proekta_marketolog_8127636417"
+    }
+  },
+  {
+    "ts": "13:42:27",
+    "_date": "2026-05-06",
+    "_is_today": true,
+    "level": "OK",
+    "platform": "gulftalent",
+    "agent": "outreach-gulftalent",
+    "type": "send_ok",
+    "message": "Michael Page",
+    "meta": {
+      "opp_id": null,
+      "vacancy_id": "gulftalent:568641",
+      "url": "https://www.gulftalent.com/uae/jobs/568641"
+    }
+  },
+  {
+    "ts": "13:42:27",
+    "_date": "2026-05-06",
+    "_is_today": true,
+    "level": "OK",
+    "platform": "gulftalent",
+    "agent": "outreach-gulftalent",
+    "type": "send_ok",
+    "message": "Black Pearl",
+    "meta": {
+      "opp_id": null,
+      "vacancy_id": "gulftalent:575036",
+      "url": "https://www.gulftalent.com/qatar/jobs/575036"
+    }
+  },
+  {
+    "ts": "13:42:27",
+    "_date": "2026-05-06",
+    "_is_today": true,
+    "level": "OK",
+    "platform": "gulftalent",
+    "agent": "outreach-gulftalent",
+    "type": "send_ok",
+    "message": "RTC-1 Employment Services",
+    "meta": {
+      "opp_id": null,
+      "vacancy_id": "gulftalent:580816",
+      "url": "https://www.gulftalent.com/uae/jobs/580816"
+    }
+  },
+  {
+    "ts": "13:42:27",
+    "_date": "2026-05-06",
+    "_is_today": true,
+    "level": "OK",
+    "platform": "gulftalent",
+    "agent": "outreach-gulftalent",
+    "type": "send_ok",
+    "message": "RTC-1 Employment Services",
+    "meta": {
+      "opp_id": null,
+      "vacancy_id": "gulftalent:580817",
+      "url": "https://www.gulftalent.com/uae/jobs/580817"
+    }
+  },
+  {
+    "ts": "13:42:27",
+    "_date": "2026-05-06",
+    "_is_today": true,
+    "level": "OK",
+    "platform": "gulftalent",
+    "agent": "outreach-gulftalent",
+    "type": "send_ok",
+    "message": "RTC-1 Employment Services",
+    "meta": {
+      "opp_id": null,
+      "vacancy_id": "gulftalent:580823",
+      "url": "https://www.gulftalent.com/uae/jobs/580823"
+    }
+  },
+  {
+    "ts": "13:42:27",
+    "_date": "2026-05-06",
+    "_is_today": true,
+    "level": "OK",
+    "platform": "gulftalent",
+    "agent": "outreach-gulftalent",
+    "type": "send_ok",
+    "message": "RTC-1 Employment Services",
+    "meta": {
+      "opp_id": null,
+      "vacancy_id": "gulftalent:580824",
+      "url": "https://www.gulftalent.com/uae/jobs/580824"
+    }
+  },
+  {
+    "ts": "13:42:27",
+    "_date": "2026-05-06",
+    "_is_today": true,
+    "level": "OK",
+    "platform": "gulftalent",
+    "agent": "outreach-gulftalent",
+    "type": "send_ok",
+    "message": "A Leading Company In The UAE",
+    "meta": {
+      "opp_id": null,
+      "vacancy_id": "gulftalent:581072",
+      "url": "https://www.gulftalent.com/uae/jobs/581072"
+    }
+  },
+  {
+    "ts": "13:43:43",
+    "_date": "2026-05-06",
+    "_is_today": true,
+    "level": "INFO",
+    "platform": "avito_rabota",
+    "agent": "outreach-avito",
+    "type": "send_attempt",
+    "message": "Менеджер по маркетингу / PR-специалист / Удалёнка",
+    "meta": {
+      "opp_id": null,
+      "vacancy_id": "avito_rabota:8027879301",
+      "url": "https://www.avito.ru/moskva/vakansii/menedzher_po_marketingu_pr-spetsialist_udalenka_8027879301"
+    }
+  },
+  {
+    "ts": "13:44:11",
+    "_date": "2026-05-06",
+    "_is_today": true,
+    "level": "OK",
+    "platform": "avito_rabota",
+    "agent": "outreach-avito",
+    "type": "send_ok",
+    "message": "Менеджер по маркетингу / PR-специалист / Удалёнка",
+    "meta": {
+      "opp_id": "01bb6a09-c8fd-4bf5-895b-b57e9476848d",
+      "vacancy_id": "avito_rabota:8027879301",
+      "url": "https://www.avito.ru/moskva/vakansii/menedzher_po_marketingu_pr-spetsialist_udalenka_8027879301"
+    }
+  },
+  {
+    "ts": "13:44:11",
+    "_date": "2026-05-06",
+    "_is_today": true,
+    "level": "OK",
+    "platform": "avito_rabota",
+    "agent": "outreach-avito",
+    "type": "send_done",
+    "lead_status": "sent_waiting",
+    "message": "Avito employer — Менеджер по маркетингу / PR-специалист / Удалёнка",
+    "meta": {
+      "opp_id": "01bb6a09-c8fd-4bf5-895b-b57e9476848d",
+      "url": "https://www.avito.ru/moskva/vakansii/menedzher_po_marketingu_pr-spetsialist_udalenka_8027879301"
+    }
+  },
+  {
+    "ts": "13:44:12",
+    "_date": "2026-05-06",
+    "_is_today": true,
+    "level": "INFO",
+    "platform": "avito_rabota",
+    "agent": "outreach-avito",
+    "type": "twenty_sync_ok",
+    "message": "Менеджер по маркетингу / PR-специалист / Удалёнка",
+    "meta": {
+      "opp_id": "01bb6a09-c8fd-4bf5-895b-b57e9476848d",
+      "vacancy_id": "avito_rabota:8027879301",
+      "url": "https://www.avito.ru/moskva/vakansii/menedzher_po_marketingu_pr-spetsialist_udalenka_8027879301"
+    }
+  },
+  {
+    "ts": "13:45:28",
+    "_date": "2026-05-06",
+    "_is_today": true,
+    "level": "OK",
+    "platform": "gulftalent",
+    "agent": "outreach-gulftalent",
+    "type": "send_ok",
+    "message": "Lodmann Global Logistics",
+    "meta": {
+      "opp_id": null,
+      "vacancy_id": "gulftalent:579442",
+      "url": "https://www.gulftalent.com/saudi-arabia/jobs/579442"
+    }
+  },
+  {
+    "ts": "13:46:04",
+    "_date": "2026-05-06",
+    "_is_today": true,
+    "level": "INFO",
+    "platform": "avito_rabota",
+    "agent": "outreach-avito",
+    "type": "send_attempt",
+    "message": "Руководитель отдела маркетинга",
+    "meta": {
+      "opp_id": null,
+      "vacancy_id": "avito_rabota:8089335827",
+      "url": "https://www.avito.ru/moskva/vakansii/rukovoditel_otdela_marketinga_8089335827"
+    }
+  },
+  {
+    "ts": "13:46:32",
+    "_date": "2026-05-06",
+    "_is_today": true,
+    "level": "OK",
+    "platform": "avito_rabota",
+    "agent": "outreach-avito",
+    "type": "send_done",
+    "lead_status": "sent_waiting",
+    "message": "Бани с Чехова ПРОИЗВОДСТВО — Руководитель отдела маркетинга",
+    "meta": {
+      "opp_id": "00974447-8645-4dc0-8cdc-cc26877b251b",
+      "url": "https://www.avito.ru/moskva/vakansii/rukovoditel_otdela_marketinga_8089335827"
+    }
+  },
+  {
+    "ts": "13:46:32",
+    "_date": "2026-05-06",
+    "_is_today": true,
+    "level": "OK",
+    "platform": "avito_rabota",
+    "agent": "outreach-avito",
+    "type": "send_ok",
+    "message": "Руководитель отдела маркетинга",
+    "meta": {
+      "opp_id": "00974447-8645-4dc0-8cdc-cc26877b251b",
+      "vacancy_id": "avito_rabota:8089335827",
+      "url": "https://www.avito.ru/moskva/vakansii/rukovoditel_otdela_marketinga_8089335827"
+    }
+  },
+  {
+    "ts": "13:46:33",
+    "_date": "2026-05-06",
+    "_is_today": true,
+    "level": "INFO",
+    "platform": "avito_rabota",
+    "agent": "outreach-avito",
+    "type": "twenty_sync_ok",
+    "message": "Руководитель отдела маркетинга",
+    "meta": {
+      "opp_id": "00974447-8645-4dc0-8cdc-cc26877b251b",
+      "vacancy_id": "avito_rabota:8089335827",
+      "url": "https://www.avito.ru/moskva/vakansii/rukovoditel_otdela_marketinga_8089335827"
+    }
+  },
+  {
+    "ts": "13:50:29",
+    "_date": "2026-05-06",
+    "_is_today": true,
+    "level": "OK",
+    "platform": "gulftalent",
+    "agent": "outreach-gulftalent",
+    "type": "send_ok",
+    "message": "Grit Hub",
+    "meta": {
+      "opp_id": null,
+      "vacancy_id": "gulftalent:559884",
+      "url": "https://www.gulftalent.com/uae/jobs/559884"
+    }
+  },
+  {
+    "ts": "13:50:29",
+    "_date": "2026-05-06",
+    "_is_today": true,
+    "level": "INFO",
+    "platform": "gulftalent",
+    "agent": "outreach-gulftalent",
+    "type": "reply_received",
+    "message": "[unclear] ",
+    "meta": {
+      "opp_id": null,
+      "vacancy_id": null,
+      "url": null,
+      "intent": "unclear"
+    }
+  },
+  {
+    "ts": "13:50:29",
+    "_date": "2026-05-06",
+    "_is_today": true,
+    "level": "INFO",
+    "platform": "gulftalent",
+    "agent": "outreach-gulftalent",
+    "type": "reply_received",
+    "message": "[unclear] ",
+    "meta": {
+      "opp_id": null,
+      "vacancy_id": null,
+      "url": null,
+      "intent": "unclear"
+    }
+  },
+  {
+    "ts": "13:51:29",
+    "_date": "2026-05-06",
+    "_is_today": true,
+    "level": "OK",
+    "platform": "gulftalent",
+    "agent": "outreach-gulftalent",
+    "type": "send_ok",
+    "message": "RTC-1 Employment Services",
+    "meta": {
+      "opp_id": null,
+      "vacancy_id": "gulftalent:557439",
+      "url": "https://www.gulftalent.com/uae/jobs/557439"
+    }
+  },
+  {
+    "ts": "22:08:06",
+    "_date": "2026-05-06",
+    "_is_today": true,
+    "level": "INFO",
+    "platform": "gulftalent",
+    "agent": "outreach-gulftalent",
+    "type": "reply_received",
+    "message": "[unclear] ",
+    "meta": {
+      "opp_id": null,
+      "vacancy_id": null,
+      "url": null,
+      "intent": "unclear"
     }
   }
 ]
