@@ -37,6 +37,7 @@ PLATFORM_LABELS = {
     "AVITO_RABOTA": ("avito_rabota", "Avito Работа", "avito", 20),
     "SUPERJOB":     ("superjob",     "SuperJob",     "sj",    30),
     "GULFTALENT":   ("gulftalent",   "GulfTalent",   "gt",    15),
+    "BAYT":         ("bayt",         "Bayt",         "by",    10),
     "HH":           ("hh",           "HeadHunter",   "hh",    50),
     "KARIYER":      ("kariyer",      "Kariyer.net",  "kar",   30),
     "HABR":         ("habr",         "Habr Career",  "habr",  20),
@@ -498,6 +499,7 @@ def _agent_to_platform_key(agent: str, board: str) -> str:
     if "avito" in (a + b): return "avito_rabota" if "uslugi" not in b else "avito_uslugi"
     if "superjob" in (a + b): return "superjob"
     if "gulftalent" in (a + b): return "gulftalent"
+    if "bayt" in (a + b): return "bayt"
     if "habr" in (a + b): return "habr"
     if "kariyer" in (a + b): return "kariyer"
     if "hh" in (a + b): return "hh"

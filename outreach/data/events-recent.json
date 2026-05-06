@@ -140,7 +140,7 @@
     }
   },
   {
-    "ts": "01:32:08",
+    "ts": "May 05 01:32",
     "_date": "2026-05-04",
     "_is_today": false,
     "level": "OK",
@@ -155,7 +155,7 @@
     }
   },
   {
-    "ts": "01:32:39",
+    "ts": "May 05 01:32",
     "_date": "2026-05-04",
     "_is_today": false,
     "level": "OK",
@@ -170,7 +170,7 @@
     }
   },
   {
-    "ts": "01:32:39",
+    "ts": "May 05 01:32",
     "_date": "2026-05-04",
     "_is_today": false,
     "level": "OK",
@@ -185,7 +185,7 @@
     }
   },
   {
-    "ts": "01:32:39",
+    "ts": "May 05 01:32",
     "_date": "2026-05-04",
     "_is_today": false,
     "level": "OK",
@@ -200,9 +200,9 @@
     }
   },
   {
-    "ts": "12:47:04",
+    "ts": "May 05 12:47",
     "_date": "2026-05-05",
-    "_is_today": true,
+    "_is_today": false,
     "level": "OK",
     "platform": "superjob",
     "agent": "outreach-superjob",
@@ -215,9 +215,9 @@
     }
   },
   {
-    "ts": "12:47:04",
+    "ts": "May 05 12:47",
     "_date": "2026-05-05",
-    "_is_today": true,
+    "_is_today": false,
     "level": "OK",
     "platform": "superjob",
     "agent": "outreach-superjob",
@@ -230,9 +230,9 @@
     }
   },
   {
-    "ts": "12:47:05",
+    "ts": "May 05 12:47",
     "_date": "2026-05-05",
-    "_is_today": true,
+    "_is_today": false,
     "level": "OK",
     "platform": "superjob",
     "agent": "outreach-superjob",
@@ -245,9 +245,9 @@
     }
   },
   {
-    "ts": "12:47:05",
+    "ts": "May 05 12:47",
     "_date": "2026-05-05",
-    "_is_today": true,
+    "_is_today": false,
     "level": "OK",
     "platform": "superjob",
     "agent": "outreach-superjob",
@@ -260,9 +260,9 @@
     }
   },
   {
-    "ts": "13:12:00",
+    "ts": "May 05 13:12",
     "_date": "2026-05-05",
-    "_is_today": true,
+    "_is_today": false,
     "level": "HOT",
     "platform": "avito_rabota",
     "agent": "system",
@@ -275,9 +275,9 @@
     }
   },
   {
-    "ts": "13:52:34",
+    "ts": "May 05 13:52",
     "_date": "2026-05-05",
-    "_is_today": true,
+    "_is_today": false,
     "level": "OK",
     "platform": "avito_rabota",
     "agent": "outreach-avito",
@@ -290,9 +290,9 @@
     }
   },
   {
-    "ts": "13:52:35",
+    "ts": "May 05 13:52",
     "_date": "2026-05-05",
-    "_is_today": true,
+    "_is_today": false,
     "level": "OK",
     "platform": "avito_rabota",
     "agent": "outreach-avito",
@@ -305,9 +305,9 @@
     }
   },
   {
-    "ts": "13:52:36",
+    "ts": "May 05 13:52",
     "_date": "2026-05-05",
-    "_is_today": true,
+    "_is_today": false,
     "level": "OK",
     "platform": "avito_rabota",
     "agent": "outreach-avito",
@@ -320,9 +320,9 @@
     }
   },
   {
-    "ts": "13:52:37",
+    "ts": "May 05 13:52",
     "_date": "2026-05-05",
-    "_is_today": true,
+    "_is_today": false,
     "level": "OK",
     "platform": "avito_rabota",
     "agent": "outreach-avito",
@@ -335,9 +335,9 @@
     }
   },
   {
-    "ts": "13:52:38",
+    "ts": "May 05 13:52",
     "_date": "2026-05-05",
-    "_is_today": true,
+    "_is_today": false,
     "level": "OK",
     "platform": "avito_rabota",
     "agent": "outreach-avito",
@@ -350,9 +350,9 @@
     }
   },
   {
-    "ts": "13:52:39",
+    "ts": "May 05 13:52",
     "_date": "2026-05-05",
-    "_is_today": true,
+    "_is_today": false,
     "level": "OK",
     "platform": "avito_rabota",
     "agent": "outreach-avito",
@@ -365,9 +365,9 @@
     }
   },
   {
-    "ts": "13:52:40",
+    "ts": "May 05 13:52",
     "_date": "2026-05-05",
-    "_is_today": true,
+    "_is_today": false,
     "level": "OK",
     "platform": "avito_rabota",
     "agent": "outreach-avito",
@@ -380,9 +380,9 @@
     }
   },
   {
-    "ts": "13:52:41",
+    "ts": "May 05 13:52",
     "_date": "2026-05-05",
-    "_is_today": true,
+    "_is_today": false,
     "level": "OK",
     "platform": "avito_rabota",
     "agent": "outreach-avito",
@@ -395,9 +395,9 @@
     }
   },
   {
-    "ts": "13:52:42",
+    "ts": "May 05 13:52",
     "_date": "2026-05-05",
-    "_is_today": true,
+    "_is_today": false,
     "level": "OK",
     "platform": "avito_rabota",
     "agent": "outreach-avito",
@@ -410,9 +410,9 @@
     }
   },
   {
-    "ts": "13:53:29",
+    "ts": "May 05 13:53",
     "_date": "2026-05-05",
-    "_is_today": true,
+    "_is_today": false,
     "level": "OK",
     "platform": "superjob",
     "agent": "outreach-superjob",
@@ -425,9 +425,9 @@
     }
   },
   {
-    "ts": "14:13:36",
+    "ts": "May 05 14:13",
     "_date": "2026-05-05",
-    "_is_today": true,
+    "_is_today": false,
     "level": "OK",
     "platform": "superjob",
     "agent": "outreach-superjob",
@@ -440,9 +440,9 @@
     }
   },
   {
-    "ts": "14:13:50",
+    "ts": "May 05 14:13",
     "_date": "2026-05-05",
-    "_is_today": true,
+    "_is_today": false,
     "level": "OK",
     "platform": "superjob",
     "agent": "outreach-superjob",
@@ -455,9 +455,9 @@
     }
   },
   {
-    "ts": "15:45:35",
+    "ts": "May 05 15:45",
     "_date": "2026-05-05",
-    "_is_today": true,
+    "_is_today": false,
     "level": "OK",
     "platform": "superjob",
     "agent": "outreach-superjob",
@@ -470,9 +470,9 @@
     }
   },
   {
-    "ts": "15:45:52",
+    "ts": "May 05 15:45",
     "_date": "2026-05-05",
-    "_is_today": true,
+    "_is_today": false,
     "level": "OK",
     "platform": "superjob",
     "agent": "outreach-superjob",
@@ -485,9 +485,9 @@
     }
   },
   {
-    "ts": "15:46:08",
+    "ts": "May 05 15:46",
     "_date": "2026-05-05",
-    "_is_today": true,
+    "_is_today": false,
     "level": "OK",
     "platform": "superjob",
     "agent": "outreach-superjob",
@@ -500,9 +500,9 @@
     }
   },
   {
-    "ts": "20:42:12",
+    "ts": "May 05 20:42",
     "_date": "2026-05-05",
-    "_is_today": true,
+    "_is_today": false,
     "level": "OK",
     "platform": "gulftalent",
     "agent": "outreach-gulftalent",
@@ -515,9 +515,9 @@
     }
   },
   {
-    "ts": "20:42:12",
+    "ts": "May 05 20:42",
     "_date": "2026-05-05",
-    "_is_today": true,
+    "_is_today": false,
     "level": "OK",
     "platform": "gulftalent",
     "agent": "outreach-gulftalent",
@@ -530,9 +530,9 @@
     }
   },
   {
-    "ts": "20:42:12",
+    "ts": "May 05 20:42",
     "_date": "2026-05-05",
-    "_is_today": true,
+    "_is_today": false,
     "level": "OK",
     "platform": "gulftalent",
     "agent": "outreach-gulftalent",
@@ -545,9 +545,9 @@
     }
   },
   {
-    "ts": "20:42:12",
+    "ts": "May 05 20:42",
     "_date": "2026-05-05",
-    "_is_today": true,
+    "_is_today": false,
     "level": "OK",
     "platform": "gulftalent",
     "agent": "outreach-gulftalent",
@@ -560,9 +560,9 @@
     }
   },
   {
-    "ts": "20:42:12",
+    "ts": "May 05 20:42",
     "_date": "2026-05-05",
-    "_is_today": true,
+    "_is_today": false,
     "level": "OK",
     "platform": "gulftalent",
     "agent": "outreach-gulftalent",
@@ -575,9 +575,9 @@
     }
   },
   {
-    "ts": "20:42:12",
+    "ts": "May 05 20:42",
     "_date": "2026-05-05",
-    "_is_today": true,
+    "_is_today": false,
     "level": "OK",
     "platform": "gulftalent",
     "agent": "outreach-gulftalent",
@@ -590,9 +590,9 @@
     }
   },
   {
-    "ts": "20:42:12",
+    "ts": "May 05 20:42",
     "_date": "2026-05-05",
-    "_is_today": true,
+    "_is_today": false,
     "level": "OK",
     "platform": "gulftalent",
     "agent": "outreach-gulftalent",
@@ -605,9 +605,9 @@
     }
   },
   {
-    "ts": "20:42:12",
+    "ts": "May 05 20:42",
     "_date": "2026-05-05",
-    "_is_today": true,
+    "_is_today": false,
     "level": "OK",
     "platform": "gulftalent",
     "agent": "outreach-gulftalent",
@@ -620,9 +620,9 @@
     }
   },
   {
-    "ts": "20:42:12",
+    "ts": "May 05 20:42",
     "_date": "2026-05-05",
-    "_is_today": true,
+    "_is_today": false,
     "level": "OK",
     "platform": "gulftalent",
     "agent": "outreach-gulftalent",
@@ -635,9 +635,9 @@
     }
   },
   {
-    "ts": "20:42:12",
+    "ts": "May 05 20:42",
     "_date": "2026-05-05",
-    "_is_today": true,
+    "_is_today": false,
     "level": "OK",
     "platform": "gulftalent",
     "agent": "outreach-gulftalent",
@@ -650,9 +650,9 @@
     }
   },
   {
-    "ts": "20:42:12",
+    "ts": "May 05 20:42",
     "_date": "2026-05-05",
-    "_is_today": true,
+    "_is_today": false,
     "level": "OK",
     "platform": "gulftalent",
     "agent": "outreach-gulftalent",
@@ -665,9 +665,9 @@
     }
   },
   {
-    "ts": "20:42:12",
+    "ts": "May 05 20:42",
     "_date": "2026-05-05",
-    "_is_today": true,
+    "_is_today": false,
     "level": "OK",
     "platform": "gulftalent",
     "agent": "outreach-gulftalent",
@@ -680,9 +680,9 @@
     }
   },
   {
-    "ts": "20:42:12",
+    "ts": "May 05 20:42",
     "_date": "2026-05-05",
-    "_is_today": true,
+    "_is_today": false,
     "level": "OK",
     "platform": "gulftalent",
     "agent": "outreach-gulftalent",
@@ -695,9 +695,9 @@
     }
   },
   {
-    "ts": "20:42:12",
+    "ts": "May 05 20:42",
     "_date": "2026-05-05",
-    "_is_today": true,
+    "_is_today": false,
     "level": "OK",
     "platform": "gulftalent",
     "agent": "outreach-gulftalent",
@@ -710,9 +710,9 @@
     }
   },
   {
-    "ts": "20:42:12",
+    "ts": "May 05 20:42",
     "_date": "2026-05-05",
-    "_is_today": true,
+    "_is_today": false,
     "level": "OK",
     "platform": "gulftalent",
     "agent": "outreach-gulftalent",
@@ -725,9 +725,9 @@
     }
   },
   {
-    "ts": "20:42:12",
+    "ts": "May 05 20:42",
     "_date": "2026-05-05",
-    "_is_today": true,
+    "_is_today": false,
     "level": "INFO",
     "platform": "gulftalent",
     "agent": "outreach-gulftalent",
@@ -741,9 +741,9 @@
     }
   },
   {
-    "ts": "20:42:12",
+    "ts": "May 05 20:42",
     "_date": "2026-05-05",
-    "_is_today": true,
+    "_is_today": false,
     "level": "INFO",
     "platform": "gulftalent",
     "agent": "outreach-gulftalent",
@@ -757,9 +757,9 @@
     }
   },
   {
-    "ts": "20:42:12",
+    "ts": "May 05 20:42",
     "_date": "2026-05-05",
-    "_is_today": true,
+    "_is_today": false,
     "level": "INFO",
     "platform": "gulftalent",
     "agent": "outreach-gulftalent",
@@ -773,9 +773,9 @@
     }
   },
   {
-    "ts": "20:42:12",
+    "ts": "May 05 20:42",
     "_date": "2026-05-05",
-    "_is_today": true,
+    "_is_today": false,
     "level": "INFO",
     "platform": "gulftalent",
     "agent": "outreach-gulftalent",
@@ -789,9 +789,9 @@
     }
   },
   {
-    "ts": "20:42:12",
+    "ts": "May 05 20:42",
     "_date": "2026-05-05",
-    "_is_today": true,
+    "_is_today": false,
     "level": "INFO",
     "platform": "gulftalent",
     "agent": "outreach-gulftalent",
@@ -805,9 +805,9 @@
     }
   },
   {
-    "ts": "20:42:12",
+    "ts": "May 05 20:42",
     "_date": "2026-05-05",
-    "_is_today": true,
+    "_is_today": false,
     "level": "INFO",
     "platform": "gulftalent",
     "agent": "outreach-gulftalent",
@@ -821,9 +821,9 @@
     }
   },
   {
-    "ts": "20:42:12",
+    "ts": "May 05 20:42",
     "_date": "2026-05-05",
-    "_is_today": true,
+    "_is_today": false,
     "level": "INFO",
     "platform": "gulftalent",
     "agent": "outreach-gulftalent",
@@ -837,9 +837,9 @@
     }
   },
   {
-    "ts": "20:42:12",
+    "ts": "May 05 20:42",
     "_date": "2026-05-05",
-    "_is_today": true,
+    "_is_today": false,
     "level": "INFO",
     "platform": "gulftalent",
     "agent": "outreach-gulftalent",
@@ -853,9 +853,9 @@
     }
   },
   {
-    "ts": "20:42:12",
+    "ts": "May 05 20:42",
     "_date": "2026-05-05",
-    "_is_today": true,
+    "_is_today": false,
     "level": "INFO",
     "platform": "gulftalent",
     "agent": "outreach-gulftalent",
@@ -869,9 +869,9 @@
     }
   },
   {
-    "ts": "20:42:12",
+    "ts": "May 05 20:42",
     "_date": "2026-05-05",
-    "_is_today": true,
+    "_is_today": false,
     "level": "INFO",
     "platform": "gulftalent",
     "agent": "outreach-gulftalent",
@@ -885,9 +885,9 @@
     }
   },
   {
-    "ts": "20:42:12",
+    "ts": "May 05 20:42",
     "_date": "2026-05-05",
-    "_is_today": true,
+    "_is_today": false,
     "level": "INFO",
     "platform": "gulftalent",
     "agent": "outreach-gulftalent",
@@ -901,9 +901,9 @@
     }
   },
   {
-    "ts": "20:42:12",
+    "ts": "May 05 20:42",
     "_date": "2026-05-05",
-    "_is_today": true,
+    "_is_today": false,
     "level": "INFO",
     "platform": "gulftalent",
     "agent": "outreach-gulftalent",
@@ -917,9 +917,9 @@
     }
   },
   {
-    "ts": "20:42:12",
+    "ts": "May 05 20:42",
     "_date": "2026-05-05",
-    "_is_today": true,
+    "_is_today": false,
     "level": "INFO",
     "platform": "gulftalent",
     "agent": "outreach-gulftalent",
@@ -933,9 +933,9 @@
     }
   },
   {
-    "ts": "20:42:12",
+    "ts": "May 05 20:42",
     "_date": "2026-05-05",
-    "_is_today": true,
+    "_is_today": false,
     "level": "INFO",
     "platform": "gulftalent",
     "agent": "outreach-gulftalent",
@@ -949,9 +949,9 @@
     }
   },
   {
-    "ts": "20:42:12",
+    "ts": "May 05 20:42",
     "_date": "2026-05-05",
-    "_is_today": true,
+    "_is_today": false,
     "level": "INFO",
     "platform": "gulftalent",
     "agent": "outreach-gulftalent",
@@ -965,9 +965,9 @@
     }
   },
   {
-    "ts": "20:55:11",
+    "ts": "May 05 20:55",
     "_date": "2026-05-05",
-    "_is_today": true,
+    "_is_today": false,
     "level": "HOT",
     "platform": "superjob",
     "agent": "outreach-superjob",
@@ -981,9 +981,9 @@
     }
   },
   {
-    "ts": "20:55:11",
+    "ts": "May 05 20:55",
     "_date": "2026-05-05",
-    "_is_today": true,
+    "_is_today": false,
     "level": "HOT",
     "platform": "superjob",
     "agent": "outreach-superjob",
@@ -997,9 +997,9 @@
     }
   },
   {
-    "ts": "20:55:12",
+    "ts": "May 05 20:55",
     "_date": "2026-05-05",
-    "_is_today": true,
+    "_is_today": false,
     "level": "HOT",
     "platform": "superjob",
     "agent": "outreach-superjob",
@@ -1013,9 +1013,9 @@
     }
   },
   {
-    "ts": "20:55:12",
+    "ts": "May 05 20:55",
     "_date": "2026-05-05",
-    "_is_today": true,
+    "_is_today": false,
     "level": "WARN",
     "platform": "superjob",
     "agent": "outreach-superjob",
@@ -1029,9 +1029,9 @@
     }
   },
   {
-    "ts": "20:55:12",
+    "ts": "May 05 20:55",
     "_date": "2026-05-05",
-    "_is_today": true,
+    "_is_today": false,
     "level": "HOT",
     "platform": "superjob",
     "agent": "outreach-superjob",
@@ -1045,9 +1045,9 @@
     }
   },
   {
-    "ts": "20:55:12",
+    "ts": "May 05 20:55",
     "_date": "2026-05-05",
-    "_is_today": true,
+    "_is_today": false,
     "level": "HOT",
     "platform": "superjob",
     "agent": "outreach-superjob",
@@ -1061,9 +1061,9 @@
     }
   },
   {
-    "ts": "20:55:13",
+    "ts": "May 05 20:55",
     "_date": "2026-05-05",
-    "_is_today": true,
+    "_is_today": false,
     "level": "WARN",
     "platform": "superjob",
     "agent": "outreach-superjob",
@@ -1077,9 +1077,9 @@
     }
   },
   {
-    "ts": "20:58:25",
+    "ts": "May 05 20:58",
     "_date": "2026-05-05",
-    "_is_today": true,
+    "_is_today": false,
     "level": "HOT",
     "platform": "superjob",
     "agent": "outreach-superjob",
@@ -1093,9 +1093,9 @@
     }
   },
   {
-    "ts": "20:58:25",
+    "ts": "May 05 20:58",
     "_date": "2026-05-05",
-    "_is_today": true,
+    "_is_today": false,
     "level": "HOT",
     "platform": "superjob",
     "agent": "outreach-superjob",
@@ -1109,9 +1109,9 @@
     }
   },
   {
-    "ts": "20:58:26",
+    "ts": "May 05 20:58",
     "_date": "2026-05-05",
-    "_is_today": true,
+    "_is_today": false,
     "level": "HOT",
     "platform": "superjob",
     "agent": "outreach-superjob",
@@ -1125,9 +1125,9 @@
     }
   },
   {
-    "ts": "20:58:26",
+    "ts": "May 05 20:58",
     "_date": "2026-05-05",
-    "_is_today": true,
+    "_is_today": false,
     "level": "WARN",
     "platform": "superjob",
     "agent": "outreach-superjob",
@@ -1141,9 +1141,9 @@
     }
   },
   {
-    "ts": "20:58:26",
+    "ts": "May 05 20:58",
     "_date": "2026-05-05",
-    "_is_today": true,
+    "_is_today": false,
     "level": "HOT",
     "platform": "superjob",
     "agent": "outreach-superjob",
@@ -1157,9 +1157,9 @@
     }
   },
   {
-    "ts": "20:58:27",
+    "ts": "May 05 20:58",
     "_date": "2026-05-05",
-    "_is_today": true,
+    "_is_today": false,
     "level": "HOT",
     "platform": "superjob",
     "agent": "outreach-superjob",
@@ -1173,9 +1173,9 @@
     }
   },
   {
-    "ts": "20:58:27",
+    "ts": "May 05 20:58",
     "_date": "2026-05-05",
-    "_is_today": true,
+    "_is_today": false,
     "level": "WARN",
     "platform": "superjob",
     "agent": "outreach-superjob",
@@ -1189,9 +1189,9 @@
     }
   },
   {
-    "ts": "21:04:06",
+    "ts": "May 05 21:04",
     "_date": "2026-05-05",
-    "_is_today": true,
+    "_is_today": false,
     "level": "OK",
     "platform": "superjob",
     "agent": "outreach-superjob",
@@ -1204,9 +1204,9 @@
     }
   },
   {
-    "ts": "21:04:06",
+    "ts": "May 05 21:04",
     "_date": "2026-05-05",
-    "_is_today": true,
+    "_is_today": false,
     "level": "OK",
     "platform": "superjob",
     "agent": "outreach-superjob",
@@ -1219,9 +1219,9 @@
     }
   },
   {
-    "ts": "21:04:07",
+    "ts": "May 05 21:04",
     "_date": "2026-05-05",
-    "_is_today": true,
+    "_is_today": false,
     "level": "OK",
     "platform": "superjob",
     "agent": "outreach-superjob",
@@ -1234,9 +1234,9 @@
     }
   },
   {
-    "ts": "21:04:25",
+    "ts": "May 05 21:04",
     "_date": "2026-05-05",
-    "_is_today": true,
+    "_is_today": false,
     "level": "HOT",
     "platform": "superjob",
     "agent": "system",
@@ -1249,9 +1249,9 @@
     }
   },
   {
-    "ts": "21:04:25",
+    "ts": "May 05 21:04",
     "_date": "2026-05-05",
-    "_is_today": true,
+    "_is_today": false,
     "level": "HOT",
     "platform": "superjob",
     "agent": "system",
@@ -1264,9 +1264,9 @@
     }
   },
   {
-    "ts": "21:04:25",
+    "ts": "May 05 21:04",
     "_date": "2026-05-05",
-    "_is_today": true,
+    "_is_today": false,
     "level": "HOT",
     "platform": "superjob",
     "agent": "system",
@@ -1279,9 +1279,9 @@
     }
   },
   {
-    "ts": "21:04:25",
+    "ts": "May 05 21:04",
     "_date": "2026-05-05",
-    "_is_today": true,
+    "_is_today": false,
     "level": "HOT",
     "platform": "superjob",
     "agent": "system",
@@ -1294,9 +1294,9 @@
     }
   },
   {
-    "ts": "21:28:56",
+    "ts": "May 05 21:28",
     "_date": "2026-05-05",
-    "_is_today": true,
+    "_is_today": false,
     "level": "ERR",
     "platform": "superjob",
     "agent": "outreach-superjob",
@@ -1309,9 +1309,9 @@
     }
   },
   {
-    "ts": "22:37:58",
+    "ts": "May 05 22:37",
     "_date": "2026-05-05",
-    "_is_today": true,
+    "_is_today": false,
     "level": "INFO",
     "platform": "superjob",
     "agent": "outreach-superjob",
@@ -1321,6 +1321,1886 @@
       "opp_id": null,
       "vacancy_id": null,
       "url": null
+    }
+  },
+  {
+    "ts": "May 05 23:26",
+    "_date": "2026-05-05",
+    "_is_today": false,
+    "level": "OK",
+    "platform": "superjob",
+    "agent": "outreach-superjob",
+    "type": "send_ok",
+    "message": "DAS GROUP PLUS · Рекрутер-фрилансер (с опытом работы)",
+    "meta": {
+      "opp_id": null,
+      "vacancy_id": "sj:51860708",
+      "url": "https://www.superjob.ru/vakansii/rekruter-frilanser-51860708.html"
+    }
+  },
+  {
+    "ts": "May 05 23:26",
+    "_date": "2026-05-05",
+    "_is_today": false,
+    "level": "OK",
+    "platform": "superjob",
+    "agent": "outreach-superjob",
+    "type": "send_done",
+    "lead_status": "sent_waiting",
+    "message": "DAS GROUP PLUS — Рекрутер-фрилансер (с опытом работы)",
+    "meta": {
+      "opp_id": "59db8dfe-60d0-4f6c-b99d-8f273b65a6be",
+      "url": "https://www.superjob.ru/vakansii/rekruter-frilanser-51860708.html"
+    }
+  },
+  {
+    "ts": "May 05 23:26",
+    "_date": "2026-05-05",
+    "_is_today": false,
+    "level": "OK",
+    "platform": "superjob",
+    "agent": "outreach-superjob",
+    "type": "send_ok",
+    "message": "Образовательный холдинг СИНЕРГИЯ · Координатор со знанием французского языка",
+    "meta": {
+      "opp_id": null,
+      "vacancy_id": "sj:51866690",
+      "url": "https://www.superjob.ru/vakansii/koordinator-so-znaniem-francuzskogo-yazyka-51866690.html"
+    }
+  },
+  {
+    "ts": "May 05 23:26",
+    "_date": "2026-05-05",
+    "_is_today": false,
+    "level": "OK",
+    "platform": "superjob",
+    "agent": "outreach-superjob",
+    "type": "send_done",
+    "lead_status": "sent_waiting",
+    "message": "Образовательный холдинг СИНЕРГИЯ — Координатор со знанием французского языка",
+    "meta": {
+      "opp_id": "167bae47-d4a2-432b-a05d-f67e46943a18",
+      "url": "https://www.superjob.ru/vakansii/koordinator-so-znaniem-francuzskogo-yazyka-51866690.html"
+    }
+  },
+  {
+    "ts": "May 05 23:26",
+    "_date": "2026-05-05",
+    "_is_today": false,
+    "level": "OK",
+    "platform": "superjob",
+    "agent": "outreach-superjob",
+    "type": "send_ok",
+    "message": "Дворец \"Восточный\" · Специалист по кадрам",
+    "meta": {
+      "opp_id": null,
+      "vacancy_id": "sj:51889345",
+      "url": "https://www.superjob.ru/vakansii/specialist-po-kadram-51889345.html"
+    }
+  },
+  {
+    "ts": "May 05 23:26",
+    "_date": "2026-05-05",
+    "_is_today": false,
+    "level": "OK",
+    "platform": "superjob",
+    "agent": "outreach-superjob",
+    "type": "send_done",
+    "lead_status": "sent_waiting",
+    "message": "Дворец \"Восточный\" — Специалист по кадрам",
+    "meta": {
+      "opp_id": "bf11adb8-e77a-42f7-8ac3-778337ef3211",
+      "url": "https://www.superjob.ru/vakansii/specialist-po-kadram-51889345.html"
+    }
+  },
+  {
+    "ts": "May 05 23:27",
+    "_date": "2026-05-05",
+    "_is_today": false,
+    "level": "OK",
+    "platform": "superjob",
+    "agent": "outreach-superjob",
+    "type": "send_ok",
+    "message": "KStar · Head of Growth / Revenue (B2B AI)",
+    "meta": {
+      "opp_id": null,
+      "vacancy_id": "sj:51921951",
+      "url": "https://www.superjob.ru/vakansii/head-of-growth-51921951.html"
+    }
+  },
+  {
+    "ts": "May 05 23:27",
+    "_date": "2026-05-05",
+    "_is_today": false,
+    "level": "OK",
+    "platform": "superjob",
+    "agent": "outreach-superjob",
+    "type": "send_done",
+    "lead_status": "sent_waiting",
+    "message": "KStar — Head of Growth / Revenue (B2B AI)",
+    "meta": {
+      "opp_id": "347f074a-165e-44c7-aaa4-1d78d3e26e7a",
+      "url": "https://www.superjob.ru/vakansii/head-of-growth-51921951.html"
+    }
+  },
+  {
+    "ts": "May 05 23:27",
+    "_date": "2026-05-05",
+    "_is_today": false,
+    "level": "OK",
+    "platform": "superjob",
+    "agent": "outreach-superjob",
+    "type": "send_ok",
+    "message": "ИП Старцева Оксана Александровна · HR-специалист по подбору персонала (удаленно)",
+    "meta": {
+      "opp_id": null,
+      "vacancy_id": "sj:51869179",
+      "url": "https://www.superjob.ru/vakansii/hr-specialist-po-podboru-personala-51869179.html"
+    }
+  },
+  {
+    "ts": "May 05 23:27",
+    "_date": "2026-05-05",
+    "_is_today": false,
+    "level": "OK",
+    "platform": "superjob",
+    "agent": "outreach-superjob",
+    "type": "send_done",
+    "lead_status": "sent_waiting",
+    "message": "ИП Старцева Оксана Александровна — HR-специалист по подбору персонала (удаленно)",
+    "meta": {
+      "opp_id": "aaa92f03-6e1a-4d61-a5b5-69505c2b3ebd",
+      "url": "https://www.superjob.ru/vakansii/hr-specialist-po-podboru-personala-51869179.html"
+    }
+  },
+  {
+    "ts": "May 05 23:27",
+    "_date": "2026-05-05",
+    "_is_today": false,
+    "level": "OK",
+    "platform": "superjob",
+    "agent": "outreach-superjob",
+    "type": "send_ok",
+    "message": "Duolingo · Директор по педагогическому дизайну (языковые курсы)",
+    "meta": {
+      "opp_id": null,
+      "vacancy_id": "sj:51546083",
+      "url": "https://www.superjob.ru/vakansii/direktor-po-pedagogicheskomu-dizajnu-51546083.html"
+    }
+  },
+  {
+    "ts": "May 05 23:27",
+    "_date": "2026-05-05",
+    "_is_today": false,
+    "level": "OK",
+    "platform": "superjob",
+    "agent": "outreach-superjob",
+    "type": "send_done",
+    "lead_status": "sent_waiting",
+    "message": "Duolingo — Директор по педагогическому дизайну (языковые курсы)",
+    "meta": {
+      "opp_id": "f8dae3e2-5952-45ee-9096-6341bb9120ea",
+      "url": "https://www.superjob.ru/vakansii/direktor-po-pedagogicheskomu-dizajnu-51546083.html"
+    }
+  },
+  {
+    "ts": "May 05 23:27",
+    "_date": "2026-05-05",
+    "_is_today": false,
+    "level": "OK",
+    "platform": "superjob",
+    "agent": "outreach-superjob",
+    "type": "send_ok",
+    "message": "М.Видео-Эльдорадо · Менеджер по развитию партнёрских программ (коллабораций)",
+    "meta": {
+      "opp_id": null,
+      "vacancy_id": "sj:51869645",
+      "url": "https://www.superjob.ru/vakansii/menedzher-po-razvitiyu-partnjorskih-programm-51869645.html"
+    }
+  },
+  {
+    "ts": "May 05 23:27",
+    "_date": "2026-05-05",
+    "_is_today": false,
+    "level": "OK",
+    "platform": "superjob",
+    "agent": "outreach-superjob",
+    "type": "send_done",
+    "lead_status": "sent_waiting",
+    "message": "М.Видео-Эльдорадо — Менеджер по развитию партнёрских программ (коллабораций)",
+    "meta": {
+      "opp_id": "794fbdd8-4c90-411b-bebc-1127244cce1b",
+      "url": "https://www.superjob.ru/vakansii/menedzher-po-razvitiyu-partnjorskih-programm-51869645.html"
+    }
+  },
+  {
+    "ts": "May 05 23:28",
+    "_date": "2026-05-05",
+    "_is_today": false,
+    "level": "OK",
+    "platform": "superjob",
+    "agent": "outreach-superjob",
+    "type": "send_ok",
+    "message": "Точка банк · Специалист по подбору менеджеров по продажам",
+    "meta": {
+      "opp_id": null,
+      "vacancy_id": "sj:51922015",
+      "url": "https://www.superjob.ru/vakansii/specialist-po-podboru-menedzherov-po-prodazham-51922015.html"
+    }
+  },
+  {
+    "ts": "May 05 23:28",
+    "_date": "2026-05-05",
+    "_is_today": false,
+    "level": "OK",
+    "platform": "superjob",
+    "agent": "outreach-superjob",
+    "type": "send_done",
+    "lead_status": "sent_waiting",
+    "message": "Точка банк — Специалист по подбору менеджеров по продажам",
+    "meta": {
+      "opp_id": "02d81fda-eb39-445e-be54-c4d41175e2a2",
+      "url": "https://www.superjob.ru/vakansii/specialist-po-podboru-menedzherov-po-prodazham-51922015.html"
+    }
+  },
+  {
+    "ts": "May 05 23:28",
+    "_date": "2026-05-05",
+    "_is_today": false,
+    "level": "OK",
+    "platform": "superjob",
+    "agent": "outreach-superjob",
+    "type": "send_ok",
+    "message": "Forbes · Продюсер и редактор видеоконтента для социальных сетей",
+    "meta": {
+      "opp_id": null,
+      "vacancy_id": "sj:51935789",
+      "url": "https://www.superjob.ru/vakansii/prodyuser-i-redaktor-videokontenta-dlya-socialnyh-setej-51935789.html"
+    }
+  },
+  {
+    "ts": "May 05 23:28",
+    "_date": "2026-05-05",
+    "_is_today": false,
+    "level": "OK",
+    "platform": "superjob",
+    "agent": "outreach-superjob",
+    "type": "send_done",
+    "lead_status": "sent_waiting",
+    "message": "Forbes — Продюсер и редактор видеоконтента для социальных сетей",
+    "meta": {
+      "opp_id": "039ed3fd-ed64-491a-a9d8-0ed394433a58",
+      "url": "https://www.superjob.ru/vakansii/prodyuser-i-redaktor-videokontenta-dlya-socialnyh-setej-51935789.html"
+    }
+  },
+  {
+    "ts": "00:29:54",
+    "_date": "2026-05-05",
+    "_is_today": false,
+    "level": "OK",
+    "platform": "superjob",
+    "agent": "outreach-superjob",
+    "type": "send_ok",
+    "message": "ЗЕНИТ, банк · Бизнес-аналитик",
+    "meta": {
+      "opp_id": null,
+      "vacancy_id": "sj:51901806",
+      "url": "https://www.superjob.ru/vakansii/biznes-analitik-51901806.html"
+    }
+  },
+  {
+    "ts": "00:29:55",
+    "_date": "2026-05-05",
+    "_is_today": false,
+    "level": "OK",
+    "platform": "superjob",
+    "agent": "outreach-superjob",
+    "type": "send_done",
+    "lead_status": "sent_waiting",
+    "message": "ЗЕНИТ, банк — Бизнес-аналитик",
+    "meta": {
+      "opp_id": "f0f53122-810f-45cb-be7e-12f648d346f3",
+      "url": "https://www.superjob.ru/vakansii/51901806.html"
+    }
+  },
+  {
+    "ts": "00:30:07",
+    "_date": "2026-05-05",
+    "_is_today": false,
+    "level": "OK",
+    "platform": "superjob",
+    "agent": "outreach-superjob",
+    "type": "send_ok",
+    "message": "Туту · Системный / бизнес-аналитик",
+    "meta": {
+      "opp_id": null,
+      "vacancy_id": "sj:51921848",
+      "url": "https://www.superjob.ru/vakansii/sistemnyj-51921848.html"
+    }
+  },
+  {
+    "ts": "00:30:08",
+    "_date": "2026-05-05",
+    "_is_today": false,
+    "level": "OK",
+    "platform": "superjob",
+    "agent": "outreach-superjob",
+    "type": "send_done",
+    "lead_status": "sent_waiting",
+    "message": "Туту — Системный / бизнес-аналитик",
+    "meta": {
+      "opp_id": "b1c39b38-5b90-4980-801c-fdf11a5c4025",
+      "url": "https://www.superjob.ru/vakansii/51921848.html"
+    }
+  },
+  {
+    "ts": "09:30:11",
+    "_date": "2026-05-06",
+    "_is_today": true,
+    "level": "OK",
+    "platform": "superjob",
+    "agent": "outreach-superjob",
+    "type": "send_done",
+    "lead_status": "sent_waiting",
+    "message": "Tesla — Сотрудник отдела Тесла Оптимус",
+    "meta": {
+      "opp_id": "b2290524-6820-4d84-b2af-66990d1e4326",
+      "url": "https://www.superjob.ru/vakansii/sotrudnik-otdela-tesla-optimus-51778930.html"
+    }
+  },
+  {
+    "ts": "09:30:11",
+    "_date": "2026-05-06",
+    "_is_today": true,
+    "level": "OK",
+    "platform": "superjob",
+    "agent": "outreach-superjob",
+    "type": "send_done",
+    "lead_status": "sent_waiting",
+    "message": "Tesla — Сотрудник отдела FSD Chip",
+    "meta": {
+      "opp_id": "937320a7-2313-4726-b8b4-f7108caa4878",
+      "url": "https://www.superjob.ru/vakansii/sotrudnik-otdela-fsd-chip-51778931.html"
+    }
+  },
+  {
+    "ts": "09:30:11",
+    "_date": "2026-05-06",
+    "_is_today": true,
+    "level": "OK",
+    "platform": "superjob",
+    "agent": "outreach-superjob",
+    "type": "send_done",
+    "lead_status": "sent_waiting",
+    "message": "Tesla — Сотрудник отдела по работе с нейронными сетями",
+    "meta": {
+      "opp_id": "1bb43780-2154-496d-8acb-be9c58c44ddd",
+      "url": "https://www.superjob.ru/vakansii/sotrudnik-otdela-po-rabote-s-nejronnymi-setyami-51778935.html"
+    }
+  },
+  {
+    "ts": "09:30:12",
+    "_date": "2026-05-06",
+    "_is_today": true,
+    "level": "OK",
+    "platform": "superjob",
+    "agent": "outreach-superjob",
+    "type": "send_done",
+    "lead_status": "sent_waiting",
+    "message": "Tesla — Сотрудник отдела по работе с алгоритмами автономности",
+    "meta": {
+      "opp_id": "9d8547b3-9303-43c2-ade2-7dfa95a770bb",
+      "url": "https://www.superjob.ru/vakansii/sotrudnik-otdela-po-rabote-s-algoritmami-avtonomnosti-51778965.html"
+    }
+  },
+  {
+    "ts": "09:30:12",
+    "_date": "2026-05-06",
+    "_is_today": true,
+    "level": "OK",
+    "platform": "superjob",
+    "agent": "outreach-superjob",
+    "type": "send_done",
+    "lead_status": "sent_waiting",
+    "message": "Tesla — Сотрудник отдела по фундаментальной разработке",
+    "meta": {
+      "opp_id": "d52db015-9617-4cc7-96f4-f109bb81c261",
+      "url": "https://www.superjob.ru/vakansii/sotrudnik-otdela-po-fundamentalnoj-razrabotke-51778966.html"
+    }
+  },
+  {
+    "ts": "09:30:13",
+    "_date": "2026-05-06",
+    "_is_today": true,
+    "level": "OK",
+    "platform": "superjob",
+    "agent": "outreach-superjob",
+    "type": "send_done",
+    "lead_status": "sent_waiting",
+    "message": "Tesla — Сотрудник отдела Evaluation Infrastructure",
+    "meta": {
+      "opp_id": "4a012a60-c328-43f6-9308-9897246cb81e",
+      "url": "https://www.superjob.ru/vakansii/sotrudnik-otdela-evaluation-infrastructure-51778967.html"
+    }
+  },
+  {
+    "ts": "09:30:13",
+    "_date": "2026-05-06",
+    "_is_today": true,
+    "level": "OK",
+    "platform": "superjob",
+    "agent": "outreach-superjob",
+    "type": "send_done",
+    "lead_status": "sent_waiting",
+    "message": "DreamWorks — Инженер по искусственному интеллекту",
+    "meta": {
+      "opp_id": "3273b959-3a32-474f-8f50-5afaedc5e739",
+      "url": "https://www.superjob.ru/vakansii/inzhener-po-iskusstvennomu-intellektu-51824510.html"
+    }
+  },
+  {
+    "ts": "09:30:13",
+    "_date": "2026-05-06",
+    "_is_today": true,
+    "level": "OK",
+    "platform": "superjob",
+    "agent": "outreach-superjob",
+    "type": "send_done",
+    "lead_status": "sent_waiting",
+    "message": "Народный доверительный банк — IT-специалист по сопровождению банковских систем",
+    "meta": {
+      "opp_id": "152d4bd7-edeb-414b-a589-9f0b02403ae7",
+      "url": "https://www.superjob.ru/vakansii/it-specialist-po-soprovozhdeniyu-bankovskih-sistem-51913650.html"
+    }
+  },
+  {
+    "ts": "12:27:27",
+    "_date": "2026-05-06",
+    "_is_today": true,
+    "level": "OK",
+    "platform": "avito_rabota",
+    "agent": "outreach-avito",
+    "type": "send_done",
+    "lead_status": "sent_waiting",
+    "message": "Avito employer — Менеджер по сопровождению сделок",
+    "meta": {
+      "opp_id": "b8aecee8-dd0e-41a6-95b0-fa1db12cee2d",
+      "url": "https://www.avito.ru/nizhniy_novgorod/vakansii/menedzher_po_soprovozhdeniyu_sdelok_8039869716?context=H4sIAAAAAAAA_wE_AMD_YToyOntzOjEzOiJsb2NhbFByaW9yaXR5IjtiOjA7czoxOiJ4IjtzOjE2OiJzZjZRdTlkZXVKU3ByZXFmIjt9rgGEyT8AAAA"
+    }
+  },
+  {
+    "ts": "12:27:27",
+    "_date": "2026-05-06",
+    "_is_today": true,
+    "level": "OK",
+    "platform": "avito_rabota",
+    "agent": "outreach-avito",
+    "type": "send_done",
+    "lead_status": "sent_waiting",
+    "message": "Avito employer — Курьер на своём авто с 18 лет",
+    "meta": {
+      "opp_id": "cd44a988-dd37-4243-b2c1-0f62fbb29d71",
+      "url": "https://www.avito.ru/nalchik/vakansii/kurer_na_svoem_avto_s_18_let_8060762708?context=H4sIAAAAAAAA_wE_AMD_YToyOntzOjEzOiJsb2NhbFByaW9yaXR5IjtiOjA7czoxOiJ4IjtzOjE2OiJzZjZRdTlkZXVKU3ByZXFmIjt9rgGEyT8AAAA"
+    }
+  },
+  {
+    "ts": "12:27:27",
+    "_date": "2026-05-06",
+    "_is_today": true,
+    "level": "OK",
+    "platform": "avito_rabota",
+    "agent": "outreach-avito",
+    "type": "send_done",
+    "lead_status": "sent_waiting",
+    "message": "Avito employer — Курьер на своём авто с 18 лет",
+    "meta": {
+      "opp_id": "2471c13b-7d22-4b03-92fa-c1e17c6502f2",
+      "url": "https://www.avito.ru/sergiev_posad/vakansii/kurer_na_svoem_avto_s_18_let_8060193453?context=H4sIAAAAAAAA_wE_AMD_YToyOntzOjEzOiJsb2NhbFByaW9yaXR5IjtiOjA7czoxOiJ4IjtzOjE2OiJzZjZRdTlkZXVKU3ByZXFmIjt9rgGEyT8AAAA"
+    }
+  },
+  {
+    "ts": "12:27:28",
+    "_date": "2026-05-06",
+    "_is_today": true,
+    "level": "OK",
+    "platform": "avito_rabota",
+    "agent": "outreach-avito",
+    "type": "send_done",
+    "lead_status": "sent_waiting",
+    "message": "Avito employer — Курьер на своём авто с 18 лет",
+    "meta": {
+      "opp_id": "f67814a8-1a7c-442d-ab3c-4b74d475358a",
+      "url": "https://www.avito.ru/vladikavkaz/vakansii/kurer_na_svoem_avto_s_18_let_8060146006?context=H4sIAAAAAAAA_wE_AMD_YToyOntzOjEzOiJsb2NhbFByaW9yaXR5IjtiOjA7czoxOiJ4IjtzOjE2OiJzZjZRdTlkZXVKU3ByZXFmIjt9rgGEyT8AAAA"
+    }
+  },
+  {
+    "ts": "12:27:28",
+    "_date": "2026-05-06",
+    "_is_today": true,
+    "level": "OK",
+    "platform": "avito_rabota",
+    "agent": "outreach-avito",
+    "type": "send_done",
+    "lead_status": "sent_waiting",
+    "message": "Avito employer — Курьер на своём авто с 18 лет",
+    "meta": {
+      "opp_id": "cee68a51-ad86-4f4a-8b60-78ab89b59a8f",
+      "url": "https://www.avito.ru/dzerzhinskiy/vakansii/kurer_na_svoem_avto_s_18_let_8059953493?context=H4sIAAAAAAAA_wE_AMD_YToyOntzOjEzOiJsb2NhbFByaW9yaXR5IjtiOjA7czoxOiJ4IjtzOjE2OiJzZjZRdTlkZXVKU3ByZXFmIjt9rgGEyT8AAAA"
+    }
+  },
+  {
+    "ts": "12:27:28",
+    "_date": "2026-05-06",
+    "_is_today": true,
+    "level": "OK",
+    "platform": "avito_rabota",
+    "agent": "outreach-avito",
+    "type": "send_done",
+    "lead_status": "sent_waiting",
+    "message": "Avito employer — Курьер на своём авто с 18 лет",
+    "meta": {
+      "opp_id": "6c2ded33-2e46-4fea-88e9-af36a21c9455",
+      "url": "https://www.avito.ru/irkutsk/vakansii/kurer_na_svoem_avto_s_18_let_8060381438?context=H4sIAAAAAAAA_wE_AMD_YToyOntzOjEzOiJsb2NhbFByaW9yaXR5IjtiOjA7czoxOiJ4IjtzOjE2OiJzZjZRdTlkZXVKU3ByZXFmIjt9rgGEyT8AAAA"
+    }
+  },
+  {
+    "ts": "12:27:29",
+    "_date": "2026-05-06",
+    "_is_today": true,
+    "level": "OK",
+    "platform": "avito_rabota",
+    "agent": "outreach-avito",
+    "type": "send_done",
+    "lead_status": "sent_waiting",
+    "message": "Avito employer — Курьер на своём авто с 18 лет",
+    "meta": {
+      "opp_id": "db157d18-0749-4891-bf78-2d5515fdb8b1",
+      "url": "https://www.avito.ru/tomsk/vakansii/kurer_na_svoem_avto_s_18_let_8060419525?context=H4sIAAAAAAAA_wE_AMD_YToyOntzOjEzOiJsb2NhbFByaW9yaXR5IjtiOjA7czoxOiJ4IjtzOjE2OiJzZjZRdTlkZXVKU3ByZXFmIjt9rgGEyT8AAAA"
+    }
+  },
+  {
+    "ts": "12:27:29",
+    "_date": "2026-05-06",
+    "_is_today": true,
+    "level": "OK",
+    "platform": "avito_rabota",
+    "agent": "outreach-avito",
+    "type": "send_done",
+    "lead_status": "sent_waiting",
+    "message": "Avito employer — Курьер на своём авто с 18 лет",
+    "meta": {
+      "opp_id": "dca3c09f-23cd-4e3e-9962-202ff8c8f434",
+      "url": "https://www.avito.ru/kazan/vakansii/kurer_na_svoem_avto_s_18_let_8060878423?context=H4sIAAAAAAAA_wE_AMD_YToyOntzOjEzOiJsb2NhbFByaW9yaXR5IjtiOjA7czoxOiJ4IjtzOjE2OiJzZjZRdTlkZXVKU3ByZXFmIjt9rgGEyT8AAAA"
+    }
+  },
+  {
+    "ts": "12:27:29",
+    "_date": "2026-05-06",
+    "_is_today": true,
+    "level": "OK",
+    "platform": "avito_rabota",
+    "agent": "outreach-avito",
+    "type": "send_done",
+    "lead_status": "sent_waiting",
+    "message": "Avito employer — Курьер на своём авто с 18 лет",
+    "meta": {
+      "opp_id": "62c0478f-573a-4803-85c1-a0e681a48336",
+      "url": "https://www.avito.ru/fryazino/vakansii/kurer_na_svoem_avto_s_18_let_8060274934?context=H4sIAAAAAAAA_wE_AMD_YToyOntzOjEzOiJsb2NhbFByaW9yaXR5IjtiOjA7czoxOiJ4IjtzOjE2OiJzZjZRdTlkZXVKU3ByZXFmIjt9rgGEyT8AAAA"
+    }
+  },
+  {
+    "ts": "12:27:30",
+    "_date": "2026-05-06",
+    "_is_today": true,
+    "level": "OK",
+    "platform": "avito_rabota",
+    "agent": "outreach-avito",
+    "type": "send_done",
+    "lead_status": "sent_waiting",
+    "message": "Avito employer — Курьер на своём авто с 18 лет",
+    "meta": {
+      "opp_id": "6eaa7c63-d2db-4aa8-9d08-435003801af2",
+      "url": "https://www.avito.ru/sochi/vakansii/kurer_na_svoem_avto_s_18_let_8060780130?context=H4sIAAAAAAAA_wE_AMD_YToyOntzOjEzOiJsb2NhbFByaW9yaXR5IjtiOjA7czoxOiJ4IjtzOjE2OiJzZjZRdTlkZXVKU3ByZXFmIjt9rgGEyT8AAAA"
+    }
+  },
+  {
+    "ts": "12:27:30",
+    "_date": "2026-05-06",
+    "_is_today": true,
+    "level": "OK",
+    "platform": "avito_rabota",
+    "agent": "outreach-avito",
+    "type": "send_done",
+    "lead_status": "sent_waiting",
+    "message": "Avito employer — Курьер на своём авто с 18 лет",
+    "meta": {
+      "opp_id": "39056090-fe84-417c-9de9-f581acaf3c65",
+      "url": "https://www.avito.ru/cheboksary/vakansii/kurer_na_svoem_avto_s_18_let_8060664044?context=H4sIAAAAAAAA_wE_AMD_YToyOntzOjEzOiJsb2NhbFByaW9yaXR5IjtiOjA7czoxOiJ4IjtzOjE2OiJzZjZRdTlkZXVKU3ByZXFmIjt9rgGEyT8AAAA"
+    }
+  },
+  {
+    "ts": "12:27:30",
+    "_date": "2026-05-06",
+    "_is_today": true,
+    "level": "OK",
+    "platform": "avito_rabota",
+    "agent": "outreach-avito",
+    "type": "send_done",
+    "lead_status": "sent_waiting",
+    "message": "Avito employer — Курьер на своём авто с 18 лет",
+    "meta": {
+      "opp_id": "b30b8af6-e6f7-44b4-9788-0a507c09bb38",
+      "url": "https://www.avito.ru/amurskaya_oblast_blagoveschensk/vakansii/kurer_na_svoem_avto_s_18_let_8060001695?context=H4sIAAAAAAAA_wE_AMD_YToyOntzOjEzOiJsb2NhbFByaW9yaXR5IjtiOjA7czoxOiJ4IjtzOjE2OiJzZjZRdTlkZXVKU3ByZXFmIjt9rgGEyT8AAAA"
+    }
+  },
+  {
+    "ts": "12:27:30",
+    "_date": "2026-05-06",
+    "_is_today": true,
+    "level": "OK",
+    "platform": "avito_rabota",
+    "agent": "outreach-avito",
+    "type": "send_done",
+    "lead_status": "sent_waiting",
+    "message": "Avito employer — Курьер на своём авто с 18 лет",
+    "meta": {
+      "opp_id": "47e58038-54cc-418c-bccd-efb6356f04bc",
+      "url": "https://www.avito.ru/gatchina/vakansii/kurer_na_svoem_avto_s_18_let_8060422039?context=H4sIAAAAAAAA_wE_AMD_YToyOntzOjEzOiJsb2NhbFByaW9yaXR5IjtiOjA7czoxOiJ4IjtzOjE2OiJzZjZRdTlkZXVKU3ByZXFmIjt9rgGEyT8AAAA"
+    }
+  },
+  {
+    "ts": "12:27:31",
+    "_date": "2026-05-06",
+    "_is_today": true,
+    "level": "OK",
+    "platform": "avito_rabota",
+    "agent": "outreach-avito",
+    "type": "send_done",
+    "lead_status": "sent_waiting",
+    "message": "Avito employer — Курьер на своём авто с 18 лет",
+    "meta": {
+      "opp_id": "9740be6a-8865-40ed-9850-c42e026acb76",
+      "url": "https://www.avito.ru/sankt-peterburg_kolpino/vakansii/kurer_na_svoem_avto_s_18_let_8060399120?context=H4sIAAAAAAAA_wE_AMD_YToyOntzOjEzOiJsb2NhbFByaW9yaXR5IjtiOjA7czoxOiJ4IjtzOjE2OiJzZjZRdTlkZXVKU3ByZXFmIjt9rgGEyT8AAAA"
+    }
+  },
+  {
+    "ts": "12:27:31",
+    "_date": "2026-05-06",
+    "_is_today": true,
+    "level": "OK",
+    "platform": "avito_rabota",
+    "agent": "outreach-avito",
+    "type": "send_done",
+    "lead_status": "sent_waiting",
+    "message": "Avito employer — Курьер на своём авто с 18 лет",
+    "meta": {
+      "opp_id": "2b2901a4-1a91-4277-87e5-89626d674fe7",
+      "url": "https://www.avito.ru/novorossiysk/vakansii/kurer_na_svoem_avto_s_18_let_8060698642?context=H4sIAAAAAAAA_wE_AMD_YToyOntzOjEzOiJsb2NhbFByaW9yaXR5IjtiOjA7czoxOiJ4IjtzOjE2OiJzZjZRdTlkZXVKU3ByZXFmIjt9rgGEyT8AAAA"
+    }
+  },
+  {
+    "ts": "12:27:31",
+    "_date": "2026-05-06",
+    "_is_today": true,
+    "level": "OK",
+    "platform": "avito_rabota",
+    "agent": "outreach-avito",
+    "type": "send_done",
+    "lead_status": "sent_waiting",
+    "message": "Avito employer — Курьер на своём авто с 18 лет",
+    "meta": {
+      "opp_id": "834ca4d9-8f2a-48b6-a303-4f678ec99119",
+      "url": "https://www.avito.ru/novosibirsk/vakansii/kurer_na_svoem_avto_s_18_let_8060757463?context=H4sIAAAAAAAA_wE_AMD_YToyOntzOjEzOiJsb2NhbFByaW9yaXR5IjtiOjA7czoxOiJ4IjtzOjE2OiJzZjZRdTlkZXVKU3ByZXFmIjt9rgGEyT8AAAA"
+    }
+  },
+  {
+    "ts": "12:27:32",
+    "_date": "2026-05-06",
+    "_is_today": true,
+    "level": "OK",
+    "platform": "avito_rabota",
+    "agent": "outreach-avito",
+    "type": "send_done",
+    "lead_status": "sent_waiting",
+    "message": "Avito employer — Курьер на своём авто с 18 лет",
+    "meta": {
+      "opp_id": "c29a0973-920d-4735-a0bd-c82ba61d7d9a",
+      "url": "https://www.avito.ru/sankt-peterburg_pushkin/vakansii/kurer_na_svoem_avto_s_18_let_8060211068?context=H4sIAAAAAAAA_wE_AMD_YToyOntzOjEzOiJsb2NhbFByaW9yaXR5IjtiOjA7czoxOiJ4IjtzOjE2OiJzZjZRdTlkZXVKU3ByZXFmIjt9rgGEyT8AAAA"
+    }
+  },
+  {
+    "ts": "12:27:32",
+    "_date": "2026-05-06",
+    "_is_today": true,
+    "level": "OK",
+    "platform": "avito_rabota",
+    "agent": "outreach-avito",
+    "type": "send_done",
+    "lead_status": "sent_waiting",
+    "message": "Avito employer — Курьер на своём авто с 18 лет",
+    "meta": {
+      "opp_id": "fa752a4a-e216-45c4-a294-3beee9cdb524",
+      "url": "https://www.avito.ru/vologda/vakansii/kurer_na_svoem_avto_s_18_let_8060259633?context=H4sIAAAAAAAA_wE_AMD_YToyOntzOjEzOiJsb2NhbFByaW9yaXR5IjtiOjA7czoxOiJ4IjtzOjE2OiJPVzJjSEdzOFFNUVlxRzFFIjt9x9ffcj8AAAA"
+    }
+  },
+  {
+    "ts": "12:30:48",
+    "_date": "2026-05-06",
+    "_is_today": true,
+    "level": "OK",
+    "platform": "avito_rabota",
+    "agent": "outreach-avito",
+    "type": "send_done",
+    "lead_status": "sent_waiting",
+    "message": "Avito employer — Директор торгового комплекса Лента",
+    "meta": {
+      "opp_id": "a7d44d79-849a-4677-868b-03a0191b6443",
+      "url": "https://www.avito.ru/perm/vakansii/direktor_torgovogo_kompleksa_lenta_8048710288?context=H4sIAAAAAAAA_wE_AMD_YToyOntzOjEzOiJsb2NhbFByaW9yaXR5IjtiOjA7czoxOiJ4IjtzOjE2OiIwbkNHSzJ5OHdueEpxNVpaIjt9b63NET8AAAA"
+    }
+  },
+  {
+    "ts": "12:30:48",
+    "_date": "2026-05-06",
+    "_is_today": true,
+    "level": "OK",
+    "platform": "avito_rabota",
+    "agent": "outreach-avito",
+    "type": "send_done",
+    "lead_status": "sent_waiting",
+    "message": "Avito employer — Менеджер по развитию направления металлопроката",
+    "meta": {
+      "opp_id": "25539c06-bd91-4ee4-b88d-11875c08cc8e",
+      "url": "https://www.avito.ru/nizhniy_novgorod/vakansii/menedzher_po_razvitiyu_napravleniya_metalloprokata_8099177621?context=H4sIAAAAAAAA_wE_AMD_YToyOntzOjEzOiJsb2NhbFByaW9yaXR5IjtiOjA7czoxOiJ4IjtzOjE2OiJhbmJOUWhlT1NCN1F0aVVkIjt9v4grvD8AAAA"
+    }
+  },
+  {
+    "ts": "12:30:49",
+    "_date": "2026-05-06",
+    "_is_today": true,
+    "level": "OK",
+    "platform": "avito_rabota",
+    "agent": "outreach-avito",
+    "type": "send_done",
+    "lead_status": "sent_waiting",
+    "message": "Avito employer — Помощник руководителя",
+    "meta": {
+      "opp_id": "0c421139-96fc-4398-a4e2-0de2fe8c5d90",
+      "url": "https://www.avito.ru/teykovo/vakansii/pomoschnik_rukovoditelya_8121016310?context=H4sIAAAAAAAA_wE_AMD_YToyOntzOjEzOiJsb2NhbFByaW9yaXR5IjtiOjA7czoxOiJ4IjtzOjE2OiIwbkNHSzJ5OHdueEpxNVpaIjt9b63NET8AAAA"
+    }
+  },
+  {
+    "ts": "12:30:49",
+    "_date": "2026-05-06",
+    "_is_today": true,
+    "level": "OK",
+    "platform": "avito_rabota",
+    "agent": "outreach-avito",
+    "type": "send_done",
+    "lead_status": "sent_waiting",
+    "message": "Avito employer — Управляющая / Управляющий сектором магазина",
+    "meta": {
+      "opp_id": "dfd34603-b89d-4af8-975e-9a4cf45d71db",
+      "url": "https://www.avito.ru/kirovskaya_oblast_kirov/vakansii/upravlyayuschaya_upravlyayuschiy_sektorom_magazina_8020252047?context=H4sIAAAAAAAA_wE_AMD_YToyOntzOjEzOiJsb2NhbFByaW9yaXR5IjtiOjA7czoxOiJ4IjtzOjE2OiIwbkNHSzJ5OHdueEpxNVpaIjt9b63NET8AAAA"
+    }
+  },
+  {
+    "ts": "12:30:49",
+    "_date": "2026-05-06",
+    "_is_today": true,
+    "level": "OK",
+    "platform": "superjob",
+    "agent": "outreach-superjob",
+    "type": "send_ok",
+    "message": "Spirit Age Technology Limited · Marketing Specialist",
+    "meta": {
+      "opp_id": null,
+      "vacancy_id": "sj:51936521",
+      "url": "https://www.superjob.ru/vakansii/marketing-specialist-51936521.html"
+    }
+  },
+  {
+    "ts": "12:30:49",
+    "_date": "2026-05-06",
+    "_is_today": true,
+    "level": "OK",
+    "platform": "avito_rabota",
+    "agent": "outreach-avito",
+    "type": "send_done",
+    "lead_status": "sent_waiting",
+    "message": "Avito employer — Операционный директор",
+    "meta": {
+      "opp_id": "501e9bd2-f623-4c30-a0f2-4101004d36b3",
+      "url": "https://www.avito.ru/kirovskaya_oblast_kirov/vakansii/operatsionnyy_direktor_8038789938?context=H4sIAAAAAAAA_wE_AMD_YToyOntzOjEzOiJsb2NhbFByaW9yaXR5IjtiOjA7czoxOiJ4IjtzOjE2OiIwbkNHSzJ5OHdueEpxNVpaIjt9b63NET8AAAA"
+    }
+  },
+  {
+    "ts": "12:30:50",
+    "_date": "2026-05-06",
+    "_is_today": true,
+    "level": "OK",
+    "platform": "avito_rabota",
+    "agent": "outreach-avito",
+    "type": "send_done",
+    "lead_status": "sent_waiting",
+    "message": "Avito employer — Коммерческий директор",
+    "meta": {
+      "opp_id": "4c166979-1971-4334-8aec-0ebfb4131611",
+      "url": "https://www.avito.ru/mozdok/vakansii/kommercheskiy_direktor_8118678358?context=H4sIAAAAAAAA_wE_AMD_YToyOntzOjEzOiJsb2NhbFByaW9yaXR5IjtiOjA7czoxOiJ4IjtzOjE2OiIwbkNHSzJ5OHdueEpxNVpaIjt9b63NET8AAAA"
+    }
+  },
+  {
+    "ts": "12:30:50",
+    "_date": "2026-05-06",
+    "_is_today": true,
+    "level": "OK",
+    "platform": "avito_rabota",
+    "agent": "outreach-avito",
+    "type": "send_done",
+    "lead_status": "sent_waiting",
+    "message": "Avito employer — Директор Гипермаркета",
+    "meta": {
+      "opp_id": "86cdd75d-0212-45b6-99f8-859446527fb3",
+      "url": "https://www.avito.ru/volgograd/vakansii/direktor_gipermarketa_8096434349?context=H4sIAAAAAAAA_wE_AMD_YToyOntzOjEzOiJsb2NhbFByaW9yaXR5IjtiOjA7czoxOiJ4IjtzOjE2OiIwbkNHSzJ5OHdueEpxNVpaIjt9b63NET8AAAA"
+    }
+  },
+  {
+    "ts": "12:30:50",
+    "_date": "2026-05-06",
+    "_is_today": true,
+    "level": "OK",
+    "platform": "superjob",
+    "agent": "outreach-superjob",
+    "type": "send_done",
+    "lead_status": "sent_waiting",
+    "message": "Spirit Age Technology Limited — Marketing Specialist",
+    "meta": {
+      "opp_id": "40602141-d691-4404-8df9-ae4f44a7804f",
+      "url": "https://www.superjob.ru/vakansii/marketing-specialist-51936521.html"
+    }
+  },
+  {
+    "ts": "12:30:50",
+    "_date": "2026-05-06",
+    "_is_today": true,
+    "level": "OK",
+    "platform": "avito_rabota",
+    "agent": "outreach-avito",
+    "type": "send_done",
+    "lead_status": "sent_waiting",
+    "message": "Avito employer — Директор Гипермаркета",
+    "meta": {
+      "opp_id": "47940a48-354c-421c-b808-59b0de4eecf5",
+      "url": "https://www.avito.ru/astrahan/vakansii/direktor_gipermarketa_8096006999?context=H4sIAAAAAAAA_wE_AMD_YToyOntzOjEzOiJsb2NhbFByaW9yaXR5IjtiOjA7czoxOiJ4IjtzOjE2OiIwbkNHSzJ5OHdueEpxNVpaIjt9b63NET8AAAA"
+    }
+  },
+  {
+    "ts": "12:30:51",
+    "_date": "2026-05-06",
+    "_is_today": true,
+    "level": "OK",
+    "platform": "avito_rabota",
+    "agent": "outreach-avito",
+    "type": "send_done",
+    "lead_status": "sent_waiting",
+    "message": "Avito employer — Руководитель отдела продаж",
+    "meta": {
+      "opp_id": "d0356f1c-08a1-4c85-81ad-781772311d57",
+      "url": "https://www.avito.ru/vologda/vakansii/rukovoditel_otdela_prodazh_8020994997?context=H4sIAAAAAAAA_wE_AMD_YToyOntzOjEzOiJsb2NhbFByaW9yaXR5IjtiOjA7czoxOiJ4IjtzOjE2OiJhbmJOUWhlT1NCN1F0aVVkIjt9v4grvD8AAAA"
+    }
+  },
+  {
+    "ts": "12:30:51",
+    "_date": "2026-05-06",
+    "_is_today": true,
+    "level": "OK",
+    "platform": "avito_rabota",
+    "agent": "outreach-avito",
+    "type": "send_done",
+    "lead_status": "sent_waiting",
+    "message": "Avito employer — Маркетолог в производственно-торговую компанию",
+    "meta": {
+      "opp_id": "f3a8edb2-7320-4c85-bb1f-091693ec9fc9",
+      "url": "https://www.avito.ru/sankt-peterburg/vakansii/marketolog_v_proizvodstvenno-torgovuyu_kompaniyu_8018669014?context=H4sIAAAAAAAA_wE_AMD_YToyOntzOjEzOiJsb2NhbFByaW9yaXR5IjtiOjA7czoxOiJ4IjtzOjE2OiJlVDl6dkRwcHFINGRrTVJjIjt9bal5yj8AAAA"
+    }
+  },
+  {
+    "ts": "12:30:51",
+    "_date": "2026-05-06",
+    "_is_today": true,
+    "level": "OK",
+    "platform": "avito_rabota",
+    "agent": "outreach-avito",
+    "type": "send_done",
+    "lead_status": "sent_waiting",
+    "message": "Avito employer — Заместитель директора торгового комплекса",
+    "meta": {
+      "opp_id": "8151aaf2-b4bd-46f2-ae58-6f074586398c",
+      "url": "https://www.avito.ru/moskva/vakansii/zamestitel_direktora_torgovogo_kompleksa_8046295114?context=H4sIAAAAAAAA_wE_AMD_YToyOntzOjEzOiJsb2NhbFByaW9yaXR5IjtiOjA7czoxOiJ4IjtzOjE2OiIwbkNHSzJ5OHdueEpxNVpaIjt9b63NET8AAAA"
+    }
+  },
+  {
+    "ts": "12:30:51",
+    "_date": "2026-05-06",
+    "_is_today": true,
+    "level": "OK",
+    "platform": "avito_rabota",
+    "agent": "outreach-avito",
+    "type": "send_done",
+    "lead_status": "sent_waiting",
+    "message": "Avito employer — Управляющий директор гастромаркета",
+    "meta": {
+      "opp_id": "dadcb833-cff3-4179-ac97-08754c79647e",
+      "url": "https://www.avito.ru/ufa/vakansii/upravlyayuschiy_direktor_gastromarketa_8119022611?context=H4sIAAAAAAAA_wE_AMD_YToyOntzOjEzOiJsb2NhbFByaW9yaXR5IjtiOjA7czoxOiJ4IjtzOjE2OiIwbkNHSzJ5OHdueEpxNVpaIjt9b63NET8AAAA"
+    }
+  },
+  {
+    "ts": "12:30:52",
+    "_date": "2026-05-06",
+    "_is_today": true,
+    "level": "OK",
+    "platform": "avito_rabota",
+    "agent": "outreach-avito",
+    "type": "send_done",
+    "lead_status": "sent_waiting",
+    "message": "Avito employer — Заместитель директора Гипермаркета",
+    "meta": {
+      "opp_id": "d697604e-d362-46ba-ba61-ca49be2341bc",
+      "url": "https://www.avito.ru/kingisepp/vakansii/zamestitel_direktora_gipermarketa_8096765180?context=H4sIAAAAAAAA_wE_AMD_YToyOntzOjEzOiJsb2NhbFByaW9yaXR5IjtiOjA7czoxOiJ4IjtzOjE2OiIwbkNHSzJ5OHdueEpxNVpaIjt9b63NET8AAAA"
+    }
+  },
+  {
+    "ts": "12:30:52",
+    "_date": "2026-05-06",
+    "_is_today": true,
+    "level": "OK",
+    "platform": "avito_rabota",
+    "agent": "outreach-avito",
+    "type": "send_done",
+    "lead_status": "sent_waiting",
+    "message": "Avito employer — Менеджер по продажам",
+    "meta": {
+      "opp_id": "b5d3273b-3e47-469d-ac0e-667a2e37545d",
+      "url": "https://www.avito.ru/moskva/vakansii/menedzher_po_prodazham_8047748722?context=H4sIAAAAAAAA_wE_AMD_YToyOntzOjEzOiJsb2NhbFByaW9yaXR5IjtiOjA7czoxOiJ4IjtzOjE2OiIwbkNHSzJ5OHdueEpxNVpaIjt9b63NET8AAAA"
+    }
+  },
+  {
+    "ts": "12:30:52",
+    "_date": "2026-05-06",
+    "_is_today": true,
+    "level": "OK",
+    "platform": "avito_rabota",
+    "agent": "outreach-avito",
+    "type": "send_done",
+    "lead_status": "sent_waiting",
+    "message": "Avito employer — Менеджер по маркетингу (диджитал/интернет)",
+    "meta": {
+      "opp_id": "2b05071e-4612-418f-b841-7e999c8e5adb",
+      "url": "https://www.avito.ru/tulskaya_oblast_donskoy/vakansii/menedzher_po_marketingu_didzhitalinternet_7998575279?context=H4sIAAAAAAAA_wE_AMD_YToyOntzOjEzOiJsb2NhbFByaW9yaXR5IjtiOjA7czoxOiJ4IjtzOjE2OiJlVDl6dkRwcHFINGRrTVJjIjt9bal5yj8AAAA"
+    }
+  },
+  {
+    "ts": "12:30:53",
+    "_date": "2026-05-06",
+    "_is_today": true,
+    "level": "OK",
+    "platform": "avito_rabota",
+    "agent": "outreach-avito",
+    "type": "send_done",
+    "lead_status": "sent_waiting",
+    "message": "Avito employer — Менеджер по маркетингу (диджитал/интернет)",
+    "meta": {
+      "opp_id": "878f03e6-2f7c-401f-90ae-f4853eee55d1",
+      "url": "https://www.avito.ru/moskva/vakansii/menedzher_po_marketingu_didzhitalinternet_7998764818?context=H4sIAAAAAAAA_wE_AMD_YToyOntzOjEzOiJsb2NhbFByaW9yaXR5IjtiOjA7czoxOiJ4IjtzOjE2OiIwbkNHSzJ5OHdueEpxNVpaIjt9b63NET8AAAA"
+    }
+  },
+  {
+    "ts": "12:35:04",
+    "_date": "2026-05-06",
+    "_is_today": true,
+    "level": "OK",
+    "platform": "avito_rabota",
+    "agent": "outreach-avito",
+    "type": "send_done",
+    "lead_status": "sent_waiting",
+    "message": "Avito employer — Менеджер по продажам электродвигателей (B2B)",
+    "meta": {
+      "opp_id": "63dd722b-1dad-4465-9d25-adeefa4d0497",
+      "url": "https://www.avito.ru/kultaevo/vakansii/menedzher_po_prodazham_elektrodvigateley_b2b_8121088965?context=H4sIAAAAAAAA_wE_AMD_YToyOntzOjEzOiJsb2NhbFByaW9yaXR5IjtiOjA7czoxOiJ4IjtzOjE2OiJsUnFvRkRrajBEUFlmN05lIjt9fyaAHT8AAAA"
+    }
+  },
+  {
+    "ts": "12:35:06",
+    "_date": "2026-05-06",
+    "_is_today": true,
+    "level": "OK",
+    "platform": "avito_rabota",
+    "agent": "outreach-avito",
+    "type": "send_done",
+    "lead_status": "sent_waiting",
+    "message": "Avito employer — Руководитель отдела продаж",
+    "meta": {
+      "opp_id": "d4e6911b-4ae3-48bb-80bd-52753bdf9476",
+      "url": "https://www.avito.ru/aprelevka/vakansii/rukovoditel_otdela_prodazh_8173666102?context=H4sIAAAAAAAA_wE_AMD_YToyOntzOjEzOiJsb2NhbFByaW9yaXR5IjtiOjA7czoxOiJ4IjtzOjE2OiJhbmJOUWhlT1NCN1F0aVVkIjt9v4grvD8AAAA"
+    }
+  },
+  {
+    "ts": "12:35:06",
+    "_date": "2026-05-06",
+    "_is_today": true,
+    "level": "OK",
+    "platform": "avito_rabota",
+    "agent": "outreach-avito",
+    "type": "send_done",
+    "lead_status": "sent_waiting",
+    "message": "Avito employer — Руководитель отдела продаж",
+    "meta": {
+      "opp_id": "6d7f5410-d07e-4d96-8858-60394b138e43",
+      "url": "https://www.avito.ru/novocherkassk/vakansii/rukovoditel_otdela_prodazh_8036698750?context=H4sIAAAAAAAA_wE_AMD_YToyOntzOjEzOiJsb2NhbFByaW9yaXR5IjtiOjA7czoxOiJ4IjtzOjE2OiJhbmJOUWhlT1NCN1F0aVVkIjt9v4grvD8AAAA"
+    }
+  },
+  {
+    "ts": "12:35:06",
+    "_date": "2026-05-06",
+    "_is_today": true,
+    "level": "OK",
+    "platform": "avito_rabota",
+    "agent": "outreach-avito",
+    "type": "send_done",
+    "lead_status": "sent_waiting",
+    "message": "Avito employer — Руководитель отдела маркетинга",
+    "meta": {
+      "opp_id": "2c9c3696-8c86-422e-9d48-1d831a140c69",
+      "url": "https://www.avito.ru/moskva/vakansii/rukovoditel_otdela_marketinga_8089077519?context=H4sIAAAAAAAA_wE_AMD_YToyOntzOjEzOiJsb2NhbFByaW9yaXR5IjtiOjA7czoxOiJ4IjtzOjE2OiJhbmJOUWhlT1NCN1F0aVVkIjt9v4grvD8AAAA"
+    }
+  },
+  {
+    "ts": "12:35:07",
+    "_date": "2026-05-06",
+    "_is_today": true,
+    "level": "OK",
+    "platform": "avito_rabota",
+    "agent": "outreach-avito",
+    "type": "send_done",
+    "lead_status": "sent_waiting",
+    "message": "Avito employer — Руководитель отдела маркетинга",
+    "meta": {
+      "opp_id": "2fd5813d-9477-4c7a-88c0-68beebd6ca92",
+      "url": "https://www.avito.ru/moskva/vakansii/rukovoditel_otdela_marketinga_8089162205?context=H4sIAAAAAAAA_wE_AMD_YToyOntzOjEzOiJsb2NhbFByaW9yaXR5IjtiOjA7czoxOiJ4IjtzOjE2OiJhbmJOUWhlT1NCN1F0aVVkIjt9v4grvD8AAAA"
+    }
+  },
+  {
+    "ts": "12:35:07",
+    "_date": "2026-05-06",
+    "_is_today": true,
+    "level": "OK",
+    "platform": "avito_rabota",
+    "agent": "outreach-avito",
+    "type": "send_done",
+    "lead_status": "sent_waiting",
+    "message": "Avito employer — Маркетолог",
+    "meta": {
+      "opp_id": "80bdea27-5a0f-42af-b930-a78eeeabdf97",
+      "url": "https://www.avito.ru/stavropolskiy_kray_mihaylovsk/vakansii/marketolog_8018599862?context=H4sIAAAAAAAA_wE_AMD_YToyOntzOjEzOiJsb2NhbFByaW9yaXR5IjtiOjA7czoxOiJ4IjtzOjE2OiJhbmJOUWhlT1NCN1F0aVVkIjt9v4grvD8AAAA"
+    }
+  },
+  {
+    "ts": "12:35:08",
+    "_date": "2026-05-06",
+    "_is_today": true,
+    "level": "OK",
+    "platform": "avito_rabota",
+    "agent": "outreach-avito",
+    "type": "send_done",
+    "lead_status": "sent_waiting",
+    "message": "Avito employer — Руководитель склада (Начальник склада)",
+    "meta": {
+      "opp_id": "abab3d03-27a6-4f82-9c89-3ae7d61b95b7",
+      "url": "https://www.avito.ru/pushkino/vakansii/rukovoditel_sklada_nachalnik_sklada_8038180742?context=H4sIAAAAAAAA_wE_AMD_YToyOntzOjEzOiJsb2NhbFByaW9yaXR5IjtiOjA7czoxOiJ4IjtzOjE2OiJhbmJOUWhlT1NCN1F0aVVkIjt9v4grvD8AAAA"
+    }
+  },
+  {
+    "ts": "12:35:08",
+    "_date": "2026-05-06",
+    "_is_today": true,
+    "level": "OK",
+    "platform": "avito_rabota",
+    "agent": "outreach-avito",
+    "type": "send_done",
+    "lead_status": "sent_waiting",
+    "message": "Avito employer — Топ-менеджер по продажам (B2B)",
+    "meta": {
+      "opp_id": "aeff5356-c13a-4a28-a93a-f7c2620691ee",
+      "url": "https://www.avito.ru/kemerovo/vakansii/top-menedzher_po_prodazham_b2b_7944575162?context=H4sIAAAAAAAA_wE_AMD_YToyOntzOjEzOiJsb2NhbFByaW9yaXR5IjtiOjA7czoxOiJ4IjtzOjE2OiJhbmJOUWhlT1NCN1F0aVVkIjt9v4grvD8AAAA"
+    }
+  },
+  {
+    "ts": "12:35:08",
+    "_date": "2026-05-06",
+    "_is_today": true,
+    "level": "OK",
+    "platform": "avito_rabota",
+    "agent": "outreach-avito",
+    "type": "send_done",
+    "lead_status": "sent_waiting",
+    "message": "Avito employer — Агент по продаже вторичной недвижимости",
+    "meta": {
+      "opp_id": "704ab4f0-0d3d-4261-9683-0c2fbb8fae29",
+      "url": "https://www.avito.ru/kaluga/vakansii/agent_po_prodazhe_vtorichnoy_nedvizhimosti_8118549055?context=H4sIAAAAAAAA_wE_AMD_YToyOntzOjEzOiJsb2NhbFByaW9yaXR5IjtiOjA7czoxOiJ4IjtzOjE2OiJhbmJOUWhlT1NCN1F0aVVkIjt9v4grvD8AAAA"
+    }
+  },
+  {
+    "ts": "12:35:09",
+    "_date": "2026-05-06",
+    "_is_today": true,
+    "level": "OK",
+    "platform": "avito_rabota",
+    "agent": "outreach-avito",
+    "type": "send_done",
+    "lead_status": "sent_waiting",
+    "message": "Avito employer — Маркетолог",
+    "meta": {
+      "opp_id": "34fbffa6-f019-447f-a528-dbf7b671e76c",
+      "url": "https://www.avito.ru/ufa/vakansii/marketolog_8099612692?context=H4sIAAAAAAAA_wE_AMD_YToyOntzOjEzOiJsb2NhbFByaW9yaXR5IjtiOjA7czoxOiJ4IjtzOjE2OiJhbmJOUWhlT1NCN1F0aVVkIjt9v4grvD8AAAA"
+    }
+  },
+  {
+    "ts": "12:35:09",
+    "_date": "2026-05-06",
+    "_is_today": true,
+    "level": "OK",
+    "platform": "avito_rabota",
+    "agent": "outreach-avito",
+    "type": "send_done",
+    "lead_status": "sent_waiting",
+    "message": "Avito employer — Агент по работе с клиентами",
+    "meta": {
+      "opp_id": "51cc1f11-6742-4ed8-9ce1-d8edb86c1f06",
+      "url": "https://www.avito.ru/sochi/vakansii/agent_po_rabote_s_klientami_7980268584?context=H4sIAAAAAAAA_wE_AMD_YToyOntzOjEzOiJsb2NhbFByaW9yaXR5IjtiOjA7czoxOiJ4IjtzOjE2OiJhbmJOUWhlT1NCN1F0aVVkIjt9v4grvD8AAAA"
+    }
+  },
+  {
+    "ts": "12:35:09",
+    "_date": "2026-05-06",
+    "_is_today": true,
+    "level": "OK",
+    "platform": "avito_rabota",
+    "agent": "outreach-avito",
+    "type": "send_done",
+    "lead_status": "sent_waiting",
+    "message": "Avito employer — Специалист по недвижимости",
+    "meta": {
+      "opp_id": "8320d78a-bb4b-4080-8ac0-8cca366cbfe8",
+      "url": "https://www.avito.ru/habarovsk/vakansii/spetsialist_po_nedvizhimosti_8099734861?context=H4sIAAAAAAAA_wE_AMD_YToyOntzOjEzOiJsb2NhbFByaW9yaXR5IjtiOjA7czoxOiJ4IjtzOjE2OiJhbmJOUWhlT1NCN1F0aVVkIjt9v4grvD8AAAA"
+    }
+  },
+  {
+    "ts": "12:35:10",
+    "_date": "2026-05-06",
+    "_is_today": true,
+    "level": "OK",
+    "platform": "avito_rabota",
+    "agent": "outreach-avito",
+    "type": "send_done",
+    "lead_status": "sent_waiting",
+    "message": "Avito employer — Менеджер по продажам",
+    "meta": {
+      "opp_id": "b5a8fd27-a13d-4be8-9c63-3593f0cd60f1",
+      "url": "https://www.avito.ru/kazan/vakansii/menedzher_po_prodazham_8027314303?context=H4sIAAAAAAAA_wE_AMD_YToyOntzOjEzOiJsb2NhbFByaW9yaXR5IjtiOjA7czoxOiJ4IjtzOjE2OiIzZ1lJdVJNOFVHeGU4Nk42Ijt9m2fX2z8AAAA"
+    }
+  },
+  {
+    "ts": "12:39:22",
+    "_date": "2026-05-06",
+    "_is_today": true,
+    "level": "OK",
+    "platform": "avito_rabota",
+    "agent": "outreach-avito",
+    "type": "send_done",
+    "lead_status": "sent_waiting",
+    "message": "Avito employer — Менеджер по работе с блогерами",
+    "meta": {
+      "opp_id": "189e2b62-cdb7-4ee7-9499-0efdf2eb0281",
+      "url": "https://www.avito.ru/barnaul/vakansii/menedzher_po_rabote_s_blogerami_8020754061?context=H4sIAAAAAAAA_wE_AMD_YToyOntzOjEzOiJsb2NhbFByaW9yaXR5IjtiOjA7czoxOiJ4IjtzOjE2OiJsUnFvRkRrajBEUFlmN05lIjt9fyaAHT8AAAA"
+    }
+  },
+  {
+    "ts": "12:39:22",
+    "_date": "2026-05-06",
+    "_is_today": true,
+    "level": "OK",
+    "platform": "avito_rabota",
+    "agent": "outreach-avito",
+    "type": "send_done",
+    "lead_status": "sent_waiting",
+    "message": "Avito employer — Ассистент руководителя",
+    "meta": {
+      "opp_id": "e1b0aa09-e0ec-4374-927b-819c3ca1ea04",
+      "url": "https://www.avito.ru/krasnodar/vakansii/assistent_rukovoditelya_8053607529?context=H4sIAAAAAAAA_wE_AMD_YToyOntzOjEzOiJsb2NhbFByaW9yaXR5IjtiOjA7czoxOiJ4IjtzOjE2OiJlVDl6dkRwcHFINGRrTVJjIjt9bal5yj8AAAA"
+    }
+  },
+  {
+    "ts": "12:39:23",
+    "_date": "2026-05-06",
+    "_is_today": true,
+    "level": "OK",
+    "platform": "avito_rabota",
+    "agent": "outreach-avito",
+    "type": "send_done",
+    "lead_status": "sent_waiting",
+    "message": "Avito employer — Маркетолог",
+    "meta": {
+      "opp_id": "50a03e8a-4927-4baa-b77a-59986c7c846a",
+      "url": "https://www.avito.ru/moskva/vakansii/marketolog_8021518531?context=H4sIAAAAAAAA_wE_AMD_YToyOntzOjEzOiJsb2NhbFByaW9yaXR5IjtiOjA7czoxOiJ4IjtzOjE2OiJlVDl6dkRwcHFINGRrTVJjIjt9bal5yj8AAAA"
+    }
+  },
+  {
+    "ts": "12:39:24",
+    "_date": "2026-05-06",
+    "_is_today": true,
+    "level": "OK",
+    "platform": "avito_rabota",
+    "agent": "outreach-avito",
+    "type": "send_done",
+    "lead_status": "sent_waiting",
+    "message": "Avito employer — Трейд-маркетолог",
+    "meta": {
+      "opp_id": "3e586af3-0ad6-443c-86c7-31e8cec7e47d",
+      "url": "https://www.avito.ru/simferopol/vakansii/treyd-marketolog_8073914001?context=H4sIAAAAAAAA_wE_AMD_YToyOntzOjEzOiJsb2NhbFByaW9yaXR5IjtiOjA7czoxOiJ4IjtzOjE2OiJlVDl6dkRwcHFINGRrTVJjIjt9bal5yj8AAAA"
+    }
+  },
+  {
+    "ts": "12:39:24",
+    "_date": "2026-05-06",
+    "_is_today": true,
+    "level": "OK",
+    "platform": "avito_rabota",
+    "agent": "outreach-avito",
+    "type": "send_done",
+    "lead_status": "sent_waiting",
+    "message": "Avito employer — Маркетолог / Бренд-менеджер",
+    "meta": {
+      "opp_id": "1b42d036-465d-4ddd-8a91-7cae74e1b284",
+      "url": "https://www.avito.ru/bryansk/vakansii/marketolog_brend-menedzher_8127735106?context=H4sIAAAAAAAA_wE_AMD_YToyOntzOjEzOiJsb2NhbFByaW9yaXR5IjtiOjA7czoxOiJ4IjtzOjE2OiJlVDl6dkRwcHFINGRrTVJjIjt9bal5yj8AAAA"
+    }
+  },
+  {
+    "ts": "12:39:25",
+    "_date": "2026-05-06",
+    "_is_today": true,
+    "level": "OK",
+    "platform": "avito_rabota",
+    "agent": "outreach-avito",
+    "type": "send_done",
+    "lead_status": "sent_waiting",
+    "message": "Avito employer — Смм маркетолог",
+    "meta": {
+      "opp_id": "2613f1b5-8a93-4749-abf3-d74e5ceddceb",
+      "url": "https://www.avito.ru/amurskaya_oblast_blagoveschensk/vakansii/smm_marketolog_8119299198?context=H4sIAAAAAAAA_wE_AMD_YToyOntzOjEzOiJsb2NhbFByaW9yaXR5IjtiOjA7czoxOiJ4IjtzOjE2OiJlVDl6dkRwcHFINGRrTVJjIjt9bal5yj8AAAA"
+    }
+  },
+  {
+    "ts": "12:39:25",
+    "_date": "2026-05-06",
+    "_is_today": true,
+    "level": "OK",
+    "platform": "avito_rabota",
+    "agent": "outreach-avito",
+    "type": "send_done",
+    "lead_status": "sent_waiting",
+    "message": "Avito employer — Маркетолог бренда, 5/2",
+    "meta": {
+      "opp_id": "703af409-0c1d-4978-982f-fc3412086703",
+      "url": "https://www.avito.ru/kostroma/vakansii/marketolog_brenda_52_7998300362?context=H4sIAAAAAAAA_wE_AMD_YToyOntzOjEzOiJsb2NhbFByaW9yaXR5IjtiOjA7czoxOiJ4IjtzOjE2OiJlVDl6dkRwcHFINGRrTVJjIjt9bal5yj8AAAA"
+    }
+  },
+  {
+    "ts": "12:39:25",
+    "_date": "2026-05-06",
+    "_is_today": true,
+    "level": "OK",
+    "platform": "avito_rabota",
+    "agent": "outreach-avito",
+    "type": "send_done",
+    "lead_status": "sent_waiting",
+    "message": "Avito employer — Закупщик рекламы у блогеров Telegram TikTok",
+    "meta": {
+      "opp_id": "011a2b74-2085-48aa-be51-545bd142207f",
+      "url": "https://www.avito.ru/volgograd/vakansii/zakupschik_reklamy_u_blogerov_telegram_tiktok_8028090911?context=H4sIAAAAAAAA_wE_AMD_YToyOntzOjEzOiJsb2NhbFByaW9yaXR5IjtiOjA7czoxOiJ4IjtzOjE2OiJlVDl6dkRwcHFINGRrTVJjIjt9bal5yj8AAAA"
+    }
+  },
+  {
+    "ts": "12:39:26",
+    "_date": "2026-05-06",
+    "_is_today": true,
+    "level": "OK",
+    "platform": "avito_rabota",
+    "agent": "outreach-avito",
+    "type": "send_done",
+    "lead_status": "sent_waiting",
+    "message": "Avito employer — Маркетолог сушиселл в городе Томск",
+    "meta": {
+      "opp_id": "97bc4495-bec4-42c4-ae8d-ad054015527d",
+      "url": "https://www.avito.ru/tomsk/vakansii/marketolog_sushisell_v_gorode_tomsk_7998849586?context=H4sIAAAAAAAA_wE_AMD_YToyOntzOjEzOiJsb2NhbFByaW9yaXR5IjtiOjA7czoxOiJ4IjtzOjE2OiJlVDl6dkRwcHFINGRrTVJjIjt9bal5yj8AAAA"
+    }
+  },
+  {
+    "ts": "12:39:26",
+    "_date": "2026-05-06",
+    "_is_today": true,
+    "level": "OK",
+    "platform": "avito_rabota",
+    "agent": "outreach-avito",
+    "type": "send_done",
+    "lead_status": "sent_waiting",
+    "message": "Avito employer — Маркетолог в сушиsell (г. Томск)",
+    "meta": {
+      "opp_id": "8565ca40-b1df-4395-8f96-aea8a411a46e",
+      "url": "https://www.avito.ru/tomsk/vakansii/marketolog_v_sushisell_g._tomsk_7998310492?context=H4sIAAAAAAAA_wE_AMD_YToyOntzOjEzOiJsb2NhbFByaW9yaXR5IjtiOjA7czoxOiJ4IjtzOjE2OiJlVDl6dkRwcHFINGRrTVJjIjt9bal5yj8AAAA"
+    }
+  },
+  {
+    "ts": "12:39:26",
+    "_date": "2026-05-06",
+    "_is_today": true,
+    "level": "OK",
+    "platform": "avito_rabota",
+    "agent": "outreach-avito",
+    "type": "send_done",
+    "lead_status": "sent_waiting",
+    "message": "Avito employer — Главный специалист по рекламе и маркетингу",
+    "meta": {
+      "opp_id": "1e6e52a1-658c-4aaf-ba71-cae6abb5171d",
+      "url": "https://www.avito.ru/tolyatti/vakansii/glavnyy_spetsialist_po_reklame_i_marketingu_7944657751?context=H4sIAAAAAAAA_wE_AMD_YToyOntzOjEzOiJsb2NhbFByaW9yaXR5IjtiOjA7czoxOiJ4IjtzOjE2OiJlVDl6dkRwcHFINGRrTVJjIjt9bal5yj8AAAA"
+    }
+  },
+  {
+    "ts": "12:44:56",
+    "_date": "2026-05-06",
+    "_is_today": true,
+    "level": "OK",
+    "platform": "avito_rabota",
+    "agent": "outreach-avito",
+    "type": "send_done",
+    "lead_status": "sent_waiting",
+    "message": "Avito employer — Курьер на своём авто с 18 лет",
+    "meta": {
+      "opp_id": "caf31d00-fe9a-4042-8056-2d1f18a5e75e",
+      "url": "https://www.avito.ru/vladivostok/vakansii/kurer_na_svoem_avto_s_18_let_8060045632?context=H4sIAAAAAAAA_wE_AMD_YToyOntzOjEzOiJsb2NhbFByaW9yaXR5IjtiOjA7czoxOiJ4IjtzOjE2OiJzZjZRdTlkZXVKU3ByZXFmIjt9rgGEyT8AAAA"
+    }
+  },
+  {
+    "ts": "12:48:50",
+    "_date": "2026-05-06",
+    "_is_today": true,
+    "level": "OK",
+    "platform": "avito_rabota",
+    "agent": "outreach-avito",
+    "type": "send_done",
+    "lead_status": "sent_waiting",
+    "message": "Avito employer — SMM менеджер",
+    "meta": {
+      "opp_id": "07e232c3-0a76-47c2-98c4-b98d14f47f74",
+      "url": "https://www.avito.ru/evpatoriya/vakansii/smm_menedzher_8047230962?context=H4sIAAAAAAAA_wE_AMD_YToyOntzOjEzOiJsb2NhbFByaW9yaXR5IjtiOjA7czoxOiJ4IjtzOjE2OiJuZXNlMHZxbUJ4MDdrNkhCIjt99ikDGj8AAAA"
+    }
+  },
+  {
+    "ts": "12:48:50",
+    "_date": "2026-05-06",
+    "_is_today": true,
+    "level": "OK",
+    "platform": "avito_rabota",
+    "agent": "outreach-avito",
+    "type": "send_done",
+    "lead_status": "sent_waiting",
+    "message": "Avito employer — Офис Менеджер 5/2",
+    "meta": {
+      "opp_id": "cf56e974-93e8-482d-82aa-69b5f2a6a2ea",
+      "url": "https://www.avito.ru/balashiha/vakansii/ofis_menedzher_52_8027042246?context=H4sIAAAAAAAA_wE_AMD_YToyOntzOjEzOiJsb2NhbFByaW9yaXR5IjtiOjA7czoxOiJ4IjtzOjE2OiJuZXNlMHZxbUJ4MDdrNkhCIjt99ikDGj8AAAA"
+    }
+  },
+  {
+    "ts": "12:48:50",
+    "_date": "2026-05-06",
+    "_is_today": true,
+    "level": "OK",
+    "platform": "avito_rabota",
+    "agent": "outreach-avito",
+    "type": "send_done",
+    "lead_status": "sent_waiting",
+    "message": "Avito employer — Менеджер по первичным контактам с клиентами",
+    "meta": {
+      "opp_id": "020a1c60-d629-401b-9738-7cb4d1856cb7",
+      "url": "https://www.avito.ru/stavropol/vakansii/menedzher_po_pervichnym_kontaktam_s_klientami_8106001809?context=H4sIAAAAAAAA_wE_AMD_YToyOntzOjEzOiJsb2NhbFByaW9yaXR5IjtiOjA7czoxOiJ4IjtzOjE2OiJuZXNlMHZxbUJ4MDdrNkhCIjt99ikDGj8AAAA"
+    }
+  },
+  {
+    "ts": "12:48:51",
+    "_date": "2026-05-06",
+    "_is_today": true,
+    "level": "OK",
+    "platform": "avito_rabota",
+    "agent": "outreach-avito",
+    "type": "send_done",
+    "lead_status": "sent_waiting",
+    "message": "Avito employer — Требуется Начинающий Смм-специалист",
+    "meta": {
+      "opp_id": "3cb1d69d-ebfc-4816-80ef-bfb5194a1996",
+      "url": "https://www.avito.ru/nizhniy_novgorod/vakansii/trebuetsya_nachinayuschiy_smm-spetsialist_8020469742?context=H4sIAAAAAAAA_wE_AMD_YToyOntzOjEzOiJsb2NhbFByaW9yaXR5IjtiOjA7czoxOiJ4IjtzOjE2OiJuZXNlMHZxbUJ4MDdrNkhCIjt99ikDGj8AAAA"
+    }
+  },
+  {
+    "ts": "12:51:42",
+    "_date": "2026-05-06",
+    "_is_today": true,
+    "level": "OK",
+    "platform": "avito_rabota",
+    "agent": "outreach-avito",
+    "type": "send_done",
+    "lead_status": "sent_waiting",
+    "message": "Avito employer — HR менеджер",
+    "meta": {
+      "opp_id": "cb2a8634-906f-42e3-a6df-db30f83a39c9",
+      "url": "https://www.avito.ru/krasnodar/vakansii/hr_menedzher_8017938448?context=H4sIAAAAAAAA_wE_AMD_YToyOntzOjEzOiJsb2NhbFByaW9yaXR5IjtiOjA7czoxOiJ4IjtzOjE2OiJsUnFvRkRrajBEUFlmN05lIjt9fyaAHT8AAAA"
+    }
+  },
+  {
+    "ts": "12:51:43",
+    "_date": "2026-05-06",
+    "_is_today": true,
+    "level": "OK",
+    "platform": "avito_rabota",
+    "agent": "outreach-avito",
+    "type": "send_done",
+    "lead_status": "sent_waiting",
+    "message": "Avito employer — Бренд-амбассадор",
+    "meta": {
+      "opp_id": "c68ea50a-813f-4d1c-a119-2ce9a41c96b4",
+      "url": "https://www.avito.ru/kemerovo/vakansii/brend-ambassador_8087951206?context=H4sIAAAAAAAA_wE_AMD_YToyOntzOjEzOiJsb2NhbFByaW9yaXR5IjtiOjA7czoxOiJ4IjtzOjE2OiJsUnFvRkRrajBEUFlmN05lIjt9fyaAHT8AAAA"
+    }
+  },
+  {
+    "ts": "12:51:43",
+    "_date": "2026-05-06",
+    "_is_today": true,
+    "level": "OK",
+    "platform": "avito_rabota",
+    "agent": "outreach-avito",
+    "type": "send_done",
+    "lead_status": "sent_waiting",
+    "message": "Avito employer — Бренд-амбассадор",
+    "meta": {
+      "opp_id": "1349784f-ea1c-432b-b644-75e18e763528",
+      "url": "https://www.avito.ru/tula/vakansii/brend-ambassador_8088678073?context=H4sIAAAAAAAA_wE_AMD_YToyOntzOjEzOiJsb2NhbFByaW9yaXR5IjtiOjA7czoxOiJ4IjtzOjE2OiJsUnFvRkRrajBEUFlmN05lIjt9fyaAHT8AAAA"
+    }
+  },
+  {
+    "ts": "12:51:43",
+    "_date": "2026-05-06",
+    "_is_today": true,
+    "level": "OK",
+    "platform": "avito_rabota",
+    "agent": "outreach-avito",
+    "type": "send_done",
+    "lead_status": "sent_waiting",
+    "message": "Avito employer — PR-менеджер",
+    "meta": {
+      "opp_id": "a54b2c7e-ce46-4acc-a27b-b64f3afb2d20",
+      "url": "https://www.avito.ru/moskva/vakansii/pr-menedzher_8039474308?context=H4sIAAAAAAAA_wE_AMD_YToyOntzOjEzOiJsb2NhbFByaW9yaXR5IjtiOjA7czoxOiJ4IjtzOjE2OiJsUnFvRkRrajBEUFlmN05lIjt9fyaAHT8AAAA"
+    }
+  },
+  {
+    "ts": "12:51:43",
+    "_date": "2026-05-06",
+    "_is_today": true,
+    "level": "OK",
+    "platform": "avito_rabota",
+    "agent": "outreach-avito",
+    "type": "send_done",
+    "lead_status": "sent_waiting",
+    "message": "Avito employer — Мерчендайзер Пcкoв",
+    "meta": {
+      "opp_id": "4113be29-1bdb-44f6-910f-92db9a475f55",
+      "url": "https://www.avito.ru/pskov/vakansii/merchendayzer_pckov_8038323617?context=H4sIAAAAAAAA_wE_AMD_YToyOntzOjEzOiJsb2NhbFByaW9yaXR5IjtiOjA7czoxOiJ4IjtzOjE2OiJsUnFvRkRrajBEUFlmN05lIjt9fyaAHT8AAAA"
+    }
+  },
+  {
+    "ts": "12:51:44",
+    "_date": "2026-05-06",
+    "_is_today": true,
+    "level": "OK",
+    "platform": "avito_rabota",
+    "agent": "outreach-avito",
+    "type": "send_done",
+    "lead_status": "sent_waiting",
+    "message": "Avito employer — Мерчендайзер Видное",
+    "meta": {
+      "opp_id": "741c4f5a-59ee-4bbb-914b-5dcb3d38164b",
+      "url": "https://www.avito.ru/vidnoe/vakansii/merchendayzer_vidnoe_8038898781?context=H4sIAAAAAAAA_wE_AMD_YToyOntzOjEzOiJsb2NhbFByaW9yaXR5IjtiOjA7czoxOiJ4IjtzOjE2OiJsUnFvRkRrajBEUFlmN05lIjt9fyaAHT8AAAA"
+    }
+  },
+  {
+    "ts": "12:51:44",
+    "_date": "2026-05-06",
+    "_is_today": true,
+    "level": "OK",
+    "platform": "avito_rabota",
+    "agent": "outreach-avito",
+    "type": "send_done",
+    "lead_status": "sent_waiting",
+    "message": "Avito employer — Мерчендайзер Мурманск",
+    "meta": {
+      "opp_id": "60e56aba-59e8-4130-ad4a-848221acf732",
+      "url": "https://www.avito.ru/murmansk/vakansii/merchendayzer_murmansk_8038299511?context=H4sIAAAAAAAA_wE_AMD_YToyOntzOjEzOiJsb2NhbFByaW9yaXR5IjtiOjA7czoxOiJ4IjtzOjE2OiJsUnFvRkRrajBEUFlmN05lIjt9fyaAHT8AAAA"
+    }
+  },
+  {
+    "ts": "12:51:44",
+    "_date": "2026-05-06",
+    "_is_today": true,
+    "level": "OK",
+    "platform": "avito_rabota",
+    "agent": "outreach-avito",
+    "type": "send_done",
+    "lead_status": "sent_waiting",
+    "message": "Avito employer — Мерчендайзер Екатеринбург",
+    "meta": {
+      "opp_id": "a7774945-de3b-4b54-a5a9-8f61a978d6d2",
+      "url": "https://www.avito.ru/ekaterinburg/vakansii/merchendayzer_ekaterinburg_8038005849?context=H4sIAAAAAAAA_wE_AMD_YToyOntzOjEzOiJsb2NhbFByaW9yaXR5IjtiOjA7czoxOiJ4IjtzOjE2OiJsUnFvRkRrajBEUFlmN05lIjt9fyaAHT8AAAA"
+    }
+  },
+  {
+    "ts": "12:51:45",
+    "_date": "2026-05-06",
+    "_is_today": true,
+    "level": "OK",
+    "platform": "avito_rabota",
+    "agent": "outreach-avito",
+    "type": "send_done",
+    "lead_status": "sent_waiting",
+    "message": "Avito employer — Специалист спортивного отдела",
+    "meta": {
+      "opp_id": "59499bb6-06aa-4c21-921e-2f8b547c4166",
+      "url": "https://www.avito.ru/zelenodolsk/vakansii/spetsialist_sportivnogo_otdela_8149966328?context=H4sIAAAAAAAA_wE_AMD_YToyOntzOjEzOiJsb2NhbFByaW9yaXR5IjtiOjA7czoxOiJ4IjtzOjE2OiJsUnFvRkRrajBEUFlmN05lIjt9fyaAHT8AAAA"
+    }
+  },
+  {
+    "ts": "12:51:45",
+    "_date": "2026-05-06",
+    "_is_today": true,
+    "level": "OK",
+    "platform": "avito_rabota",
+    "agent": "outreach-avito",
+    "type": "send_done",
+    "lead_status": "sent_waiting",
+    "message": "Avito employer — Менеджер по развитию продукта (В2В+соц сети+AI)",
+    "meta": {
+      "opp_id": "d92eb29a-4f35-4188-aaca-ae333d5e54d5",
+      "url": "https://www.avito.ru/kazan/vakansii/menedzher_po_razvitiyu_produkta_v2vsots_setiai_8036050130?context=H4sIAAAAAAAA_wE_AMD_YToyOntzOjEzOiJsb2NhbFByaW9yaXR5IjtiOjA7czoxOiJ4IjtzOjE2OiJsUnFvRkRrajBEUFlmN05lIjt9fyaAHT8AAAA"
+    }
+  },
+  {
+    "ts": "12:51:46",
+    "_date": "2026-05-06",
+    "_is_today": true,
+    "level": "OK",
+    "platform": "avito_rabota",
+    "agent": "outreach-avito",
+    "type": "send_done",
+    "lead_status": "sent_waiting",
+    "message": "Avito employer — Мерчендайзер Санкт-Петербург подработка",
+    "meta": {
+      "opp_id": "40f850c5-a920-487b-9dfa-5cc8d1f3d60c",
+      "url": "https://www.avito.ru/sankt-peterburg/vakansii/merchendayzer_sankt-peterburg_podrabotka_8038063233?context=H4sIAAAAAAAA_wE_AMD_YToyOntzOjEzOiJsb2NhbFByaW9yaXR5IjtiOjA7czoxOiJ4IjtzOjE2OiJsUnFvRkRrajBEUFlmN05lIjt9fyaAHT8AAAA"
+    }
+  },
+  {
+    "ts": "12:51:47",
+    "_date": "2026-05-06",
+    "_is_today": true,
+    "level": "OK",
+    "platform": "avito_rabota",
+    "agent": "outreach-avito",
+    "type": "send_done",
+    "lead_status": "sent_waiting",
+    "message": "Avito employer — Мастер приемщик в автосервис",
+    "meta": {
+      "opp_id": "0140e920-6558-4ffe-862a-0047394127e7",
+      "url": "https://www.avito.ru/moskva/vakansii/master_priemschik_v_avtoservis_8048324921?context=H4sIAAAAAAAA_wE_AMD_YToyOntzOjEzOiJsb2NhbFByaW9yaXR5IjtiOjA7czoxOiJ4IjtzOjE2OiJsUnFvRkRrajBEUFlmN05lIjt9fyaAHT8AAAA"
+    }
+  },
+  {
+    "ts": "12:55:11",
+    "_date": "2026-05-06",
+    "_is_today": true,
+    "level": "OK",
+    "platform": "avito_rabota",
+    "agent": "outreach-avito",
+    "type": "send_done",
+    "lead_status": "sent_waiting",
+    "message": "Avito employer — Опытный агент по недвижимости",
+    "meta": {
+      "opp_id": "688e58bd-c17e-475e-8070-b8e1b86e67bc",
+      "url": "https://www.avito.ru/sterlitamak/vakansii/opytnyy_agent_po_nedvizhimosti_8017685721?context=H4sIAAAAAAAA_wE_AMD_YToyOntzOjEzOiJsb2NhbFByaW9yaXR5IjtiOjA7czoxOiJ4IjtzOjE2OiJhbmJOUWhlT1NCN1F0aVVkIjt9v4grvD8AAAA"
+    }
+  },
+  {
+    "ts": "12:56:34",
+    "_date": "2026-05-06",
+    "_is_today": true,
+    "level": "INFO",
+    "platform": "avito_rabota",
+    "agent": "outreach-avito",
+    "type": "send_attempt",
+    "message": "Агент по продаже вторичной недвижимости",
+    "meta": {
+      "opp_id": null,
+      "vacancy_id": "avito_rabota:8118549055",
+      "url": "https://www.avito.ru/kaluga/vakansii/agent_po_prodazhe_vtorichnoy_nedvizhimosti_8118549055?context=H4sIAAAAAAAA_wE_AMD_YToyOntzOjEzOiJsb2NhbFByaW9yaXR5IjtiOjA7czoxOiJ4IjtzOjE2OiJhbmJOUWhlT1NCN1F0aVVkIjt9v4grvD8AAAA"
+    }
+  },
+  {
+    "ts": "12:57:00",
+    "_date": "2026-05-06",
+    "_is_today": true,
+    "level": "ERR",
+    "platform": "avito_rabota",
+    "agent": "outreach-avito",
+    "type": "send_fail",
+    "message": "Агент по продаже вторичной недвижимости · open-chat: messenger-panel-timeout",
+    "meta": {
+      "opp_id": null,
+      "vacancy_id": "avito_rabota:8118549055",
+      "url": "https://www.avito.ru/kaluga/vakansii/agent_po_prodazhe_vtorichnoy_nedvizhimosti_8118549055?context=H4sIAAAAAAAA_wE_AMD_YToyOntzOjEzOiJsb2NhbFByaW9yaXR5IjtiOjA7czoxOiJ4IjtzOjE2OiJhbmJOUWhlT1NCN1F0aVVkIjt9v4grvD8AAAA"
+    }
+  },
+  {
+    "ts": "13:08:31",
+    "_date": "2026-05-06",
+    "_is_today": true,
+    "level": "INFO",
+    "platform": "avito_rabota",
+    "agent": "outreach-avito",
+    "type": "reply_received",
+    "message": "[unclear] : Работодатель получил ваше резюме AI-инженер, автоматизация маркетинга и контента",
+    "meta": {
+      "opp_id": null,
+      "vacancy_id": null,
+      "url": null,
+      "intent": "unclear"
+    }
+  },
+  {
+    "ts": "13:08:44",
+    "_date": "2026-05-06",
+    "_is_today": true,
+    "level": "INFO",
+    "platform": "avito_rabota",
+    "agent": "outreach-avito",
+    "type": "reply_received",
+    "message": "[unclear] : Работодатель получил ваше резюме AI-инженер, автоматизация маркетинга и контента",
+    "meta": {
+      "opp_id": null,
+      "vacancy_id": null,
+      "url": null,
+      "intent": "unclear"
+    }
+  },
+  {
+    "ts": "13:09:27",
+    "_date": "2026-05-06",
+    "_is_today": true,
+    "level": "INFO",
+    "platform": "avito_rabota",
+    "agent": "outreach-avito",
+    "type": "reply_received",
+    "message": "[unclear] : Работодатель получил ваше резюме AI-инженер, автоматизация маркетинга и контента",
+    "meta": {
+      "opp_id": null,
+      "vacancy_id": null,
+      "url": null,
+      "intent": "unclear"
+    }
+  },
+  {
+    "ts": "13:09:40",
+    "_date": "2026-05-06",
+    "_is_today": true,
+    "level": "INFO",
+    "platform": "avito_rabota",
+    "agent": "outreach-avito",
+    "type": "reply_received",
+    "message": "[unclear] : Работодатель получил ваше резюме AI-инженер, автоматизация маркетинга и контента",
+    "meta": {
+      "opp_id": null,
+      "vacancy_id": null,
+      "url": null,
+      "intent": "unclear"
+    }
+  },
+  {
+    "ts": "13:09:53",
+    "_date": "2026-05-06",
+    "_is_today": true,
+    "level": "INFO",
+    "platform": "avito_rabota",
+    "agent": "outreach-avito",
+    "type": "reply_received",
+    "message": "[unclear] : Работодатель получил ваше резюме AI-инженер, автоматизация маркетинга и контента",
+    "meta": {
+      "opp_id": null,
+      "vacancy_id": null,
+      "url": null,
+      "intent": "unclear"
+    }
+  },
+  {
+    "ts": "13:18:43",
+    "_date": "2026-05-06",
+    "_is_today": true,
+    "level": "OK",
+    "platform": "superjob",
+    "agent": "outreach-superjob",
+    "type": "send_ok",
+    "message": "Магнит: Старт Карьеры · Коммуникационный дизайнер",
+    "meta": {
+      "opp_id": null,
+      "vacancy_id": "sj:51720163",
+      "url": "https://www.superjob.ru/vakansii/kommunikacionnyj-dizajner-51720163.html"
+    }
+  },
+  {
+    "ts": "13:18:44",
+    "_date": "2026-05-06",
+    "_is_today": true,
+    "level": "OK",
+    "platform": "superjob",
+    "agent": "outreach-superjob",
+    "type": "send_done",
+    "lead_status": "sent_waiting",
+    "message": "Магнит: Старт Карьеры — Коммуникационный дизайнер",
+    "meta": {
+      "opp_id": "d32af235-e316-4c30-ad17-fe62d53ce849",
+      "url": "https://www.superjob.ru/vakansii/kommunikacionnyj-dizajner-51720163.html"
+    }
+  },
+  {
+    "ts": "13:18:57",
+    "_date": "2026-05-06",
+    "_is_today": true,
+    "level": "OK",
+    "platform": "superjob",
+    "agent": "outreach-superjob",
+    "type": "send_ok",
+    "message": "Сибур: Старт карьеры · Главный эксперт (внешние коммуникации)",
+    "meta": {
+      "opp_id": null,
+      "vacancy_id": "sj:51886525",
+      "url": "https://www.superjob.ru/vakansii/glavnyj-ekspert-51886525.html"
+    }
+  },
+  {
+    "ts": "13:18:58",
+    "_date": "2026-05-06",
+    "_is_today": true,
+    "level": "OK",
+    "platform": "superjob",
+    "agent": "outreach-superjob",
+    "type": "send_done",
+    "lead_status": "sent_waiting",
+    "message": "Сибур: Старт карьеры — Главный эксперт (внешние коммуникации)",
+    "meta": {
+      "opp_id": "da5dde1a-4967-4a98-981a-a42ec78dea15",
+      "url": "https://www.superjob.ru/vakansii/glavnyj-ekspert-51886525.html"
+    }
+  },
+  {
+    "ts": "13:19:13",
+    "_date": "2026-05-06",
+    "_is_today": true,
+    "level": "OK",
+    "platform": "superjob",
+    "agent": "outreach-superjob",
+    "type": "send_ok",
+    "message": "Мегафон: Старт Карьеры · Старший менеджер по маркетингу корпоративного бизнеса",
+    "meta": {
+      "opp_id": null,
+      "vacancy_id": "sj:51938095",
+      "url": "https://www.superjob.ru/vakansii/starshij-menedzher-po-marketingu-korporativnogo-biznesa-51938095.html"
+    }
+  },
+  {
+    "ts": "13:19:13",
+    "_date": "2026-05-06",
+    "_is_today": true,
+    "level": "OK",
+    "platform": "superjob",
+    "agent": "outreach-superjob",
+    "type": "send_done",
+    "lead_status": "sent_waiting",
+    "message": "Мегафон: Старт Карьеры — Старший менеджер по маркетингу корпоративного бизнеса",
+    "meta": {
+      "opp_id": "b264a8e1-0b8b-439e-8b45-370175af4ba8",
+      "url": "https://www.superjob.ru/vakansii/starshij-menedzher-po-marketingu-korporativnogo-biznesa-51938095.html"
+    }
+  },
+  {
+    "ts": "13:19:26",
+    "_date": "2026-05-06",
+    "_is_today": true,
+    "level": "OK",
+    "platform": "superjob",
+    "agent": "outreach-superjob",
+    "type": "send_ok",
+    "message": "Хабаровский краевой театр драмы · Менеджер по маркетингу и рекламе",
+    "meta": {
+      "opp_id": null,
+      "vacancy_id": "sj:34302252",
+      "url": "https://habarovsk.superjob.ru/vakansii/menedzher-po-marketingu-i-reklame-34302252.html"
+    }
+  },
+  {
+    "ts": "13:19:27",
+    "_date": "2026-05-06",
+    "_is_today": true,
+    "level": "OK",
+    "platform": "superjob",
+    "agent": "outreach-superjob",
+    "type": "send_done",
+    "lead_status": "sent_waiting",
+    "message": "Хабаровский краевой театр драмы — Менеджер по маркетингу и рекламе",
+    "meta": {
+      "opp_id": "9170a203-c2d1-4ec6-983f-d83e549e010a",
+      "url": "https://habarovsk.superjob.ru/vakansii/menedzher-po-marketingu-i-reklame-34302252.html"
+    }
+  },
+  {
+    "ts": "13:19:43",
+    "_date": "2026-05-06",
+    "_is_today": true,
+    "level": "OK",
+    "platform": "superjob",
+    "agent": "outreach-superjob",
+    "type": "send_ok",
+    "message": "Сибур: Старт карьеры · Менеджер корпоративных коммуникаций",
+    "meta": {
+      "opp_id": null,
+      "vacancy_id": "sj:51881480",
+      "url": "https://tobolsk.superjob.ru/vakansii/menedzher-korporativnyh-kommunikacij-51881480.html"
+    }
+  },
+  {
+    "ts": "13:19:44",
+    "_date": "2026-05-06",
+    "_is_today": true,
+    "level": "OK",
+    "platform": "superjob",
+    "agent": "outreach-superjob",
+    "type": "send_done",
+    "lead_status": "sent_waiting",
+    "message": "Сибур: Старт карьеры — Менеджер корпоративных коммуникаций",
+    "meta": {
+      "opp_id": "e8a97cba-e6ce-4c2f-a70e-a2139dc3f3f8",
+      "url": "https://tobolsk.superjob.ru/vakansii/menedzher-korporativnyh-kommunikacij-51881480.html"
     }
   }
 ]

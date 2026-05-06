@@ -1,9 +1,9 @@
 [
   {
-    "ts": "20:42:12",
+    "ts": "May 05 20:42",
     "_sort": "2026-05-05T17:42:12.739Z",
     "_date": "2026-05-05",
-    "_is_today": true,
+    "_is_today": false,
     "level": "INFO",
     "platform": "gulftalent",
     "agent": "outreach-gulftalent",
@@ -17,10 +17,10 @@
     }
   },
   {
-    "ts": "20:42:12",
+    "ts": "May 05 20:42",
     "_sort": "2026-05-05T17:42:12.739Z",
     "_date": "2026-05-05",
-    "_is_today": true,
+    "_is_today": false,
     "level": "INFO",
     "platform": "gulftalent",
     "agent": "outreach-gulftalent",
@@ -34,10 +34,10 @@
     }
   },
   {
-    "ts": "20:42:12",
+    "ts": "May 05 20:42",
     "_sort": "2026-05-05T17:42:12.739Z",
     "_date": "2026-05-05",
-    "_is_today": true,
+    "_is_today": false,
     "level": "INFO",
     "platform": "gulftalent",
     "agent": "outreach-gulftalent",
@@ -51,10 +51,10 @@
     }
   },
   {
-    "ts": "20:42:12",
+    "ts": "May 05 20:42",
     "_sort": "2026-05-05T17:42:12.739Z",
     "_date": "2026-05-05",
-    "_is_today": true,
+    "_is_today": false,
     "level": "INFO",
     "platform": "gulftalent",
     "agent": "outreach-gulftalent",
@@ -68,10 +68,10 @@
     }
   },
   {
-    "ts": "20:42:12",
+    "ts": "May 05 20:42",
     "_sort": "2026-05-05T17:42:12.739Z",
     "_date": "2026-05-05",
-    "_is_today": true,
+    "_is_today": false,
     "level": "INFO",
     "platform": "gulftalent",
     "agent": "outreach-gulftalent",
@@ -85,10 +85,10 @@
     }
   },
   {
-    "ts": "20:42:12",
+    "ts": "May 05 20:42",
     "_sort": "2026-05-05T17:42:12.739Z",
     "_date": "2026-05-05",
-    "_is_today": true,
+    "_is_today": false,
     "level": "INFO",
     "platform": "gulftalent",
     "agent": "outreach-gulftalent",
@@ -102,95 +102,10 @@
     }
   },
   {
-    "ts": "20:42:12",
-    "_sort": "2026-05-05T17:42:12.739Z",
-    "_date": "2026-05-05",
-    "_is_today": true,
-    "level": "INFO",
-    "platform": "gulftalent",
-    "agent": "outreach-gulftalent",
-    "type": "reply_received",
-    "message": "[unclear] ",
-    "meta": {
-      "opp_id": null,
-      "vacancy_id": null,
-      "url": null,
-      "intent": "unclear"
-    }
-  },
-  {
-    "ts": "20:42:12",
-    "_sort": "2026-05-05T17:42:12.739Z",
-    "_date": "2026-05-05",
-    "_is_today": true,
-    "level": "INFO",
-    "platform": "gulftalent",
-    "agent": "outreach-gulftalent",
-    "type": "reply_received",
-    "message": "[unclear] ",
-    "meta": {
-      "opp_id": null,
-      "vacancy_id": null,
-      "url": null,
-      "intent": "unclear"
-    }
-  },
-  {
-    "ts": "20:42:12",
-    "_sort": "2026-05-05T17:42:12.739Z",
-    "_date": "2026-05-05",
-    "_is_today": true,
-    "level": "INFO",
-    "platform": "gulftalent",
-    "agent": "outreach-gulftalent",
-    "type": "reply_received",
-    "message": "[unclear] ",
-    "meta": {
-      "opp_id": null,
-      "vacancy_id": null,
-      "url": null,
-      "intent": "unclear"
-    }
-  },
-  {
-    "ts": "20:42:12",
-    "_sort": "2026-05-05T17:42:12.739Z",
-    "_date": "2026-05-05",
-    "_is_today": true,
-    "level": "INFO",
-    "platform": "gulftalent",
-    "agent": "outreach-gulftalent",
-    "type": "reply_received",
-    "message": "[unclear] ",
-    "meta": {
-      "opp_id": null,
-      "vacancy_id": null,
-      "url": null,
-      "intent": "unclear"
-    }
-  },
-  {
-    "ts": "20:42:12",
-    "_sort": "2026-05-05T17:42:12.739Z",
-    "_date": "2026-05-05",
-    "_is_today": true,
-    "level": "INFO",
-    "platform": "gulftalent",
-    "agent": "outreach-gulftalent",
-    "type": "reply_received",
-    "message": "[unclear] ",
-    "meta": {
-      "opp_id": null,
-      "vacancy_id": null,
-      "url": null,
-      "intent": "unclear"
-    }
-  },
-  {
-    "ts": "20:55:11",
+    "ts": "May 05 20:55",
     "_sort": "2026-05-05T17:55:11.157Z",
     "_date": "2026-05-05",
-    "_is_today": true,
+    "_is_today": false,
     "level": "HOT",
     "platform": "superjob",
     "agent": "outreach-superjob",
@@ -204,10 +119,10 @@
     }
   },
   {
-    "ts": "20:55:11",
+    "ts": "May 05 20:55",
     "_sort": "2026-05-05T17:55:11.734Z",
     "_date": "2026-05-05",
-    "_is_today": true,
+    "_is_today": false,
     "level": "HOT",
     "platform": "superjob",
     "agent": "outreach-superjob",
@@ -221,10 +136,10 @@
     }
   },
   {
-    "ts": "20:55:12",
+    "ts": "May 05 20:55",
     "_sort": "2026-05-05T17:55:12.115Z",
     "_date": "2026-05-05",
-    "_is_today": true,
+    "_is_today": false,
     "level": "HOT",
     "platform": "superjob",
     "agent": "outreach-superjob",
@@ -238,10 +153,10 @@
     }
   },
   {
-    "ts": "20:55:12",
+    "ts": "May 05 20:55",
     "_sort": "2026-05-05T17:55:12.470Z",
     "_date": "2026-05-05",
-    "_is_today": true,
+    "_is_today": false,
     "level": "WARN",
     "platform": "superjob",
     "agent": "outreach-superjob",
@@ -255,10 +170,10 @@
     }
   },
   {
-    "ts": "20:55:12",
+    "ts": "May 05 20:55",
     "_sort": "2026-05-05T17:55:12.471Z",
     "_date": "2026-05-05",
-    "_is_today": true,
+    "_is_today": false,
     "level": "HOT",
     "platform": "superjob",
     "agent": "outreach-superjob",
@@ -272,10 +187,10 @@
     }
   },
   {
-    "ts": "20:55:12",
+    "ts": "May 05 20:55",
     "_sort": "2026-05-05T17:55:12.768Z",
     "_date": "2026-05-05",
-    "_is_today": true,
+    "_is_today": false,
     "level": "HOT",
     "platform": "superjob",
     "agent": "outreach-superjob",
@@ -289,10 +204,10 @@
     }
   },
   {
-    "ts": "20:55:13",
+    "ts": "May 05 20:55",
     "_sort": "2026-05-05T17:55:13.123Z",
     "_date": "2026-05-05",
-    "_is_today": true,
+    "_is_today": false,
     "level": "WARN",
     "platform": "superjob",
     "agent": "outreach-superjob",
@@ -306,10 +221,10 @@
     }
   },
   {
-    "ts": "20:58:25",
+    "ts": "May 05 20:58",
     "_sort": "2026-05-05T17:58:25.349Z",
     "_date": "2026-05-05",
-    "_is_today": true,
+    "_is_today": false,
     "level": "HOT",
     "platform": "superjob",
     "agent": "outreach-superjob",
@@ -323,10 +238,10 @@
     }
   },
   {
-    "ts": "20:58:25",
+    "ts": "May 05 20:58",
     "_sort": "2026-05-05T17:58:25.802Z",
     "_date": "2026-05-05",
-    "_is_today": true,
+    "_is_today": false,
     "level": "HOT",
     "platform": "superjob",
     "agent": "outreach-superjob",
@@ -340,10 +255,10 @@
     }
   },
   {
-    "ts": "20:58:26",
+    "ts": "May 05 20:58",
     "_sort": "2026-05-05T17:58:26.172Z",
     "_date": "2026-05-05",
-    "_is_today": true,
+    "_is_today": false,
     "level": "HOT",
     "platform": "superjob",
     "agent": "outreach-superjob",
@@ -357,10 +272,10 @@
     }
   },
   {
-    "ts": "20:58:26",
+    "ts": "May 05 20:58",
     "_sort": "2026-05-05T17:58:26.736Z",
     "_date": "2026-05-05",
-    "_is_today": true,
+    "_is_today": false,
     "level": "WARN",
     "platform": "superjob",
     "agent": "outreach-superjob",
@@ -374,10 +289,10 @@
     }
   },
   {
-    "ts": "20:58:26",
+    "ts": "May 05 20:58",
     "_sort": "2026-05-05T17:58:26.737Z",
     "_date": "2026-05-05",
-    "_is_today": true,
+    "_is_today": false,
     "level": "HOT",
     "platform": "superjob",
     "agent": "outreach-superjob",
@@ -391,10 +306,10 @@
     }
   },
   {
-    "ts": "20:58:27",
+    "ts": "May 05 20:58",
     "_sort": "2026-05-05T17:58:27.042Z",
     "_date": "2026-05-05",
-    "_is_today": true,
+    "_is_today": false,
     "level": "HOT",
     "platform": "superjob",
     "agent": "outreach-superjob",
@@ -408,10 +323,10 @@
     }
   },
   {
-    "ts": "20:58:27",
+    "ts": "May 05 20:58",
     "_sort": "2026-05-05T17:58:27.394Z",
     "_date": "2026-05-05",
-    "_is_today": true,
+    "_is_today": false,
     "level": "WARN",
     "platform": "superjob",
     "agent": "outreach-superjob",
@@ -425,10 +340,10 @@
     }
   },
   {
-    "ts": "21:04:25",
+    "ts": "May 05 21:04",
     "_sort": "2026-05-05T18:04:25.000Z",
     "_date": "2026-05-05",
-    "_is_today": true,
+    "_is_today": false,
     "level": "HOT",
     "platform": "superjob",
     "agent": "system",
@@ -441,10 +356,10 @@
     }
   },
   {
-    "ts": "21:04:25",
+    "ts": "May 05 21:04",
     "_sort": "2026-05-05T18:04:25.000Z",
     "_date": "2026-05-05",
-    "_is_today": true,
+    "_is_today": false,
     "level": "HOT",
     "platform": "superjob",
     "agent": "system",
@@ -457,10 +372,10 @@
     }
   },
   {
-    "ts": "21:04:25",
+    "ts": "May 05 21:04",
     "_sort": "2026-05-05T18:04:25.000Z",
     "_date": "2026-05-05",
-    "_is_today": true,
+    "_is_today": false,
     "level": "HOT",
     "platform": "superjob",
     "agent": "system",
@@ -473,10 +388,10 @@
     }
   },
   {
-    "ts": "21:04:25",
+    "ts": "May 05 21:04",
     "_sort": "2026-05-05T18:04:25.000Z",
     "_date": "2026-05-05",
-    "_is_today": true,
+    "_is_today": false,
     "level": "HOT",
     "platform": "superjob",
     "agent": "system",
@@ -489,10 +404,10 @@
     }
   },
   {
-    "ts": "22:37:58",
+    "ts": "May 05 22:37",
     "_sort": "2026-05-05T19:37:58.372Z",
     "_date": "2026-05-05",
-    "_is_today": true,
+    "_is_today": false,
     "level": "INFO",
     "platform": "superjob",
     "agent": "outreach-superjob",
@@ -502,6 +417,91 @@
       "opp_id": null,
       "vacancy_id": null,
       "url": null
+    }
+  },
+  {
+    "ts": "13:08:31",
+    "_sort": "2026-05-06T10:08:31.495Z",
+    "_date": "2026-05-06",
+    "_is_today": true,
+    "level": "INFO",
+    "platform": "avito_rabota",
+    "agent": "outreach-avito",
+    "type": "reply_received",
+    "message": "[unclear] : Работодатель получил ваше резюме AI-инженер, автоматизация маркетинга и контента",
+    "meta": {
+      "opp_id": null,
+      "vacancy_id": null,
+      "url": null,
+      "intent": "unclear"
+    }
+  },
+  {
+    "ts": "13:08:44",
+    "_sort": "2026-05-06T10:08:44.376Z",
+    "_date": "2026-05-06",
+    "_is_today": true,
+    "level": "INFO",
+    "platform": "avito_rabota",
+    "agent": "outreach-avito",
+    "type": "reply_received",
+    "message": "[unclear] : Работодатель получил ваше резюме AI-инженер, автоматизация маркетинга и контента",
+    "meta": {
+      "opp_id": null,
+      "vacancy_id": null,
+      "url": null,
+      "intent": "unclear"
+    }
+  },
+  {
+    "ts": "13:09:27",
+    "_sort": "2026-05-06T10:09:27.065Z",
+    "_date": "2026-05-06",
+    "_is_today": true,
+    "level": "INFO",
+    "platform": "avito_rabota",
+    "agent": "outreach-avito",
+    "type": "reply_received",
+    "message": "[unclear] : Работодатель получил ваше резюме AI-инженер, автоматизация маркетинга и контента",
+    "meta": {
+      "opp_id": null,
+      "vacancy_id": null,
+      "url": null,
+      "intent": "unclear"
+    }
+  },
+  {
+    "ts": "13:09:40",
+    "_sort": "2026-05-06T10:09:40.057Z",
+    "_date": "2026-05-06",
+    "_is_today": true,
+    "level": "INFO",
+    "platform": "avito_rabota",
+    "agent": "outreach-avito",
+    "type": "reply_received",
+    "message": "[unclear] : Работодатель получил ваше резюме AI-инженер, автоматизация маркетинга и контента",
+    "meta": {
+      "opp_id": null,
+      "vacancy_id": null,
+      "url": null,
+      "intent": "unclear"
+    }
+  },
+  {
+    "ts": "13:09:53",
+    "_sort": "2026-05-06T10:09:53.082Z",
+    "_date": "2026-05-06",
+    "_is_today": true,
+    "level": "INFO",
+    "platform": "avito_rabota",
+    "agent": "outreach-avito",
+    "type": "reply_received",
+    "message": "[unclear] : Работодатель получил ваше резюме AI-инженер, автоматизация маркетинга и контента",
+    "meta": {
+      "opp_id": null,
+      "vacancy_id": null,
+      "url": null,
+      "intent": "unclear"
     }
   }
 ]
