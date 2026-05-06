@@ -41,6 +41,9 @@ PLATFORM_LABELS = {
     "HH":           ("hh",           "HeadHunter",   "hh",    50),
     "KARIYER":      ("kariyer",      "Kariyer.net",  "kar",   30),
     "HABR":         ("habr",         "Habr Career",  "habr",  20),
+    "WANTEDLY":     ("wantedly",     "Wantedly",     "wt",    10),
+    "SEEK":         ("seek",         "SEEK (AU/NZ)", "sk",    10),
+    "NOMADLIST":    ("nomadlist",    "NomadList",    "nl",     2),
 }
 
 # ─── Twenty client ────────────────────────────────────────────────────────────
@@ -502,6 +505,9 @@ def _agent_to_platform_key(agent: str, board: str) -> str:
     if "bayt" in (a + b): return "bayt"
     if "habr" in (a + b): return "habr"
     if "kariyer" in (a + b): return "kariyer"
+    if "wantedly" in (a + b): return "wantedly"
+    if "seek" in (a + b): return "seek"
+    if "nomadlist" in (a + b): return "nomadlist"
     if "hh" in (a + b): return "hh"
     return a or "unknown"
 
