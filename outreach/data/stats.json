@@ -1,84 +1,81 @@
 {
-  "date": "2026-05-06",
-  "generated_at": "20:18:11 UTC",
+  "date": "2026-05-12",
+  "generated_at": "08:58:41 UTC",
   "totals_today": {
-    "sent": 96,
-    "replies": 5,
-    "hot": 5,
+    "sent": 0,
+    "replies": 2,
+    "hot": 1,
     "errors": 0
   },
   "by_platform": {
     "avito_rabota": {
       "label": "Avito Работа",
       "short": "avito",
-      "sent": 92,
+      "sent": 0,
       "sent_total": 100,
-      "replies": 5,
+      "replies": 2,
       "hot": 1,
-      "errors": 1,
-      "daily_quota_used": 82,
+      "errors": 0,
+      "daily_quota_used": 0,
       "daily_quota_max": 20,
-      "last_action_ts": "13:46:33",
+      "last_action_ts": "07:53:12",
       "status": "idle",
       "lead_pipeline": {
-        "sent_waiting": 90,
-        "no_reaction": 5,
+        "sent_waiting": 17,
+        "no_reaction": 81,
         "replied_neutral": 0,
         "hr_invite": 0,
         "interested": 1,
         "proposal_sent": 0,
-        "declined": 4,
+        "declined": 1,
         "won": 0
-      },
-      "last_action_ts_iso": "2026-05-06T10:46:33.137Z"
+      }
     },
     "superjob": {
       "label": "SuperJob",
       "short": "sj",
-      "sent": 20,
-      "sent_total": 38,
-      "replies": 4,
-      "hot": 4,
-      "errors": 0,
-      "daily_quota_used": 14,
-      "daily_quota_max": 30,
-      "last_action_ts": "13:19:44",
-      "status": "idle",
-      "lead_pipeline": {
-        "sent_waiting": 34,
-        "no_reaction": 0,
-        "replied_neutral": 0,
-        "hr_invite": 0,
-        "interested": 4,
-        "proposal_sent": 0,
-        "declined": 0,
-        "won": 0
-      },
-      "last_action_ts_iso": "2026-05-06T10:19:44.104Z"
-    },
-    "gulftalent": {
-      "label": "GulfTalent",
-      "short": "gt",
-      "sent": 10,
-      "sent_total": 0,
-      "replies": 3,
+      "sent": 0,
+      "sent_total": 100,
+      "replies": 0,
       "hot": 0,
       "errors": 0,
       "daily_quota_used": 0,
-      "daily_quota_max": 15,
-      "last_action_ts": "22:08:06",
+      "daily_quota_max": 30,
+      "last_action_ts": "06:39:40",
       "status": "idle",
       "lead_pipeline": {
-        "sent_waiting": 0,
-        "no_reaction": 0,
+        "sent_waiting": 44,
+        "no_reaction": 56,
         "replied_neutral": 0,
         "hr_invite": 0,
         "interested": 0,
         "proposal_sent": 0,
         "declined": 0,
         "won": 0
-      },
-      "last_action_ts_iso": "2026-05-06T19:08:06.499Z"
+      }
+    },
+    "gulftalent": {
+      "label": "GulfTalent",
+      "short": "gt",
+      "sent": 0,
+      "sent_total": 9,
+      "replies": 0,
+      "hot": 0,
+      "errors": 0,
+      "daily_quota_used": 0,
+      "daily_quota_max": 15,
+      "last_action_ts": "13:54:53",
+      "status": "idle",
+      "lead_pipeline": {
+        "sent_waiting": 0,
+        "no_reaction": 9,
+        "replied_neutral": 0,
+        "hr_invite": 0,
+        "interested": 0,
+        "proposal_sent": 0,
+        "declined": 0,
+        "won": 0
+      }
     },
     "bayt": {
       "label": "Bayt",
@@ -171,15 +168,84 @@
         "declined": 0,
         "won": 0
       }
+    },
+    "wantedly": {
+      "label": "Wantedly",
+      "short": "wt",
+      "sent": 0,
+      "sent_total": 62,
+      "replies": 0,
+      "hot": 0,
+      "errors": 0,
+      "daily_quota_used": 0,
+      "daily_quota_max": 10,
+      "last_action_ts": "07:28:27",
+      "status": "idle",
+      "lead_pipeline": {
+        "sent_waiting": 34,
+        "no_reaction": 25,
+        "replied_neutral": 0,
+        "hr_invite": 0,
+        "interested": 0,
+        "proposal_sent": 1,
+        "declined": 2,
+        "won": 0
+      }
+    },
+    "seek": {
+      "label": "SEEK (AU/NZ)",
+      "short": "sk",
+      "sent": 0,
+      "sent_total": 30,
+      "replies": 0,
+      "hot": 0,
+      "errors": 0,
+      "daily_quota_used": 0,
+      "daily_quota_max": 10,
+      "last_action_ts": "11:05:41",
+      "status": "idle",
+      "lead_pipeline": {
+        "sent_waiting": 8,
+        "no_reaction": 22,
+        "replied_neutral": 0,
+        "hr_invite": 0,
+        "interested": 0,
+        "proposal_sent": 0,
+        "declined": 0,
+        "won": 0
+      }
+    },
+    "nomadlist": {
+      "label": "NomadList",
+      "short": "nl",
+      "sent": 0,
+      "sent_total": 0,
+      "replies": 0,
+      "hot": 0,
+      "errors": 0,
+      "daily_quota_used": 0,
+      "daily_quota_max": 2,
+      "last_action_ts": "",
+      "status": "idle",
+      "lead_pipeline": {
+        "sent_waiting": 0,
+        "no_reaction": 0,
+        "replied_neutral": 0,
+        "hr_invite": 0,
+        "interested": 0,
+        "proposal_sent": 0,
+        "declined": 0,
+        "won": 0
+      }
     }
   },
   "twenty": {
-    "opportunities_total": 138,
+    "opportunities_total": 301,
     "by_stage": {
-      "SCREENING": 129,
-      "MEETING": 5,
-      "PROPOSAL": 0,
-      "NOT_NOW": 4,
+      "SCREENING": 296,
+      "MEETING": 1,
+      "PROPOSAL": 1,
+      "NOT_NOW": 3,
       "CUSTOMER": 0,
       "REMIND": 0
     }
@@ -187,19 +253,19 @@
   "funnel": {
     "scanned": 0,
     "filtered": 0,
-    "sent": 96,
-    "replied": 5,
-    "hot": 5,
-    "meeting": 5
+    "sent": 0,
+    "replied": 2,
+    "hot": 1,
+    "meeting": 2
   },
   "lead_pipeline": {
-    "sent_waiting": 124,
-    "no_reaction": 5,
+    "sent_waiting": 103,
+    "no_reaction": 193,
     "replied_neutral": 0,
     "hr_invite": 0,
-    "interested": 5,
-    "proposal_sent": 0,
-    "declined": 4,
+    "interested": 1,
+    "proposal_sent": 1,
+    "declined": 3,
     "won": 0
   }
 }

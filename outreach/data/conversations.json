@@ -1,8 +1,8 @@
 [
   {
-    "ts": "May 05 20:42",
-    "_sort": "2026-05-05T17:42:12.739Z",
-    "_date": "2026-05-05",
+    "ts": "May 11 12:11",
+    "_sort": "2026-05-11T09:11:10.981Z",
+    "_date": "2026-05-11",
     "_is_today": false,
     "level": "INFO",
     "platform": "gulftalent",
@@ -17,9 +17,9 @@
     }
   },
   {
-    "ts": "May 05 20:42",
-    "_sort": "2026-05-05T17:42:12.739Z",
-    "_date": "2026-05-05",
+    "ts": "May 11 12:11",
+    "_sort": "2026-05-11T09:11:10.982Z",
+    "_date": "2026-05-11",
     "_is_today": false,
     "level": "INFO",
     "platform": "gulftalent",
@@ -34,9 +34,9 @@
     }
   },
   {
-    "ts": "May 05 20:42",
-    "_sort": "2026-05-05T17:42:12.739Z",
-    "_date": "2026-05-05",
+    "ts": "May 11 12:41",
+    "_sort": "2026-05-11T09:41:16.772Z",
+    "_date": "2026-05-11",
     "_is_today": false,
     "level": "INFO",
     "platform": "gulftalent",
@@ -51,9 +51,145 @@
     }
   },
   {
-    "ts": "May 05 20:55",
-    "_sort": "2026-05-05T17:55:11.157Z",
-    "_date": "2026-05-05",
+    "ts": "May 11 12:41",
+    "_sort": "2026-05-11T09:41:16.772Z",
+    "_date": "2026-05-11",
+    "_is_today": false,
+    "level": "INFO",
+    "platform": "gulftalent",
+    "agent": "outreach-gulftalent",
+    "type": "reply_received",
+    "message": "[unclear] ",
+    "meta": {
+      "opp_id": null,
+      "vacancy_id": null,
+      "url": null,
+      "intent": "unclear"
+    }
+  },
+  {
+    "ts": "May 11 12:41",
+    "_sort": "2026-05-11T09:41:16.772Z",
+    "_date": "2026-05-11",
+    "_is_today": false,
+    "level": "INFO",
+    "platform": "gulftalent",
+    "agent": "outreach-gulftalent",
+    "type": "reply_received",
+    "message": "[unclear] ",
+    "meta": {
+      "opp_id": null,
+      "vacancy_id": null,
+      "url": null,
+      "intent": "unclear"
+    }
+  },
+  {
+    "ts": "May 11 12:41",
+    "_sort": "2026-05-11T09:41:16.772Z",
+    "_date": "2026-05-11",
+    "_is_today": false,
+    "level": "INFO",
+    "platform": "gulftalent",
+    "agent": "outreach-gulftalent",
+    "type": "reply_received",
+    "message": "[unclear] ",
+    "meta": {
+      "opp_id": null,
+      "vacancy_id": null,
+      "url": null,
+      "intent": "unclear"
+    }
+  },
+  {
+    "ts": "May 11 13:15",
+    "_sort": "2026-05-11T10:15:27.604Z",
+    "_date": "2026-05-11",
+    "_is_today": false,
+    "level": "HOT",
+    "platform": "superjob",
+    "agent": "outreach-superjob",
+    "type": "reply_received",
+    "message": "[interest] Major Auto (Мэйджор Авто): просмотрено 08 мая в 09:28, резюме отклонено 08 мая в 15:36",
+    "meta": {
+      "opp_id": null,
+      "vacancy_id": "sj:51921895",
+      "url": null,
+      "intent": "interest"
+    }
+  },
+  {
+    "ts": "May 11 13:15",
+    "_sort": "2026-05-11T10:15:27.605Z",
+    "_date": "2026-05-11",
+    "_is_today": false,
+    "level": "HOT",
+    "platform": "superjob",
+    "agent": "outreach-superjob",
+    "type": "reply_received",
+    "message": "[interest] Холдинг Major: просмотрено 08 мая в 09:28",
+    "meta": {
+      "opp_id": null,
+      "vacancy_id": "sj:51887096",
+      "url": null,
+      "intent": "interest"
+    }
+  },
+  {
+    "ts": "May 11 13:15",
+    "_sort": "2026-05-11T10:15:27.606Z",
+    "_date": "2026-05-11",
+    "_is_today": false,
+    "level": "HOT",
+    "platform": "superjob",
+    "agent": "outreach-superjob",
+    "type": "reply_received",
+    "message": "[interest] М.Видео-Эльдорадо: просмотрено 07 мая в 16:11",
+    "meta": {
+      "opp_id": null,
+      "vacancy_id": "sj:51942016",
+      "url": null,
+      "intent": "interest"
+    }
+  },
+  {
+    "ts": "May 11 13:15",
+    "_sort": "2026-05-11T10:15:27.606Z",
+    "_date": "2026-05-11",
+    "_is_today": false,
+    "level": "HOT",
+    "platform": "superjob",
+    "agent": "outreach-superjob",
+    "type": "reply_received",
+    "message": "[interest] М.Видео-Эльдорадо: просмотрено 07 мая в 16:11",
+    "meta": {
+      "opp_id": null,
+      "vacancy_id": "sj:51941521",
+      "url": null,
+      "intent": "interest"
+    }
+  },
+  {
+    "ts": "May 11 13:15",
+    "_sort": "2026-05-11T10:15:27.606Z",
+    "_date": "2026-05-11",
+    "_is_today": false,
+    "level": "HOT",
+    "platform": "superjob",
+    "agent": "outreach-superjob",
+    "type": "reply_received",
+    "message": "[interest] Центр Новых Технологий: просмотрено 07 мая в 16:13, резюме отклонено 07 мая в 16:13",
+    "meta": {
+      "opp_id": null,
+      "vacancy_id": "sj:51938833",
+      "url": null,
+      "intent": "interest"
+    }
+  },
+  {
+    "ts": "May 11 13:15",
+    "_sort": "2026-05-11T10:15:27.606Z",
+    "_date": "2026-05-11",
     "_is_today": false,
     "level": "HOT",
     "platform": "superjob",
@@ -68,9 +204,9 @@
     }
   },
   {
-    "ts": "May 05 20:55",
-    "_sort": "2026-05-05T17:55:11.734Z",
-    "_date": "2026-05-05",
+    "ts": "May 11 13:15",
+    "_sort": "2026-05-11T10:15:27.606Z",
+    "_date": "2026-05-11",
     "_is_today": false,
     "level": "HOT",
     "platform": "superjob",
@@ -85,9 +221,9 @@
     }
   },
   {
-    "ts": "May 05 20:55",
-    "_sort": "2026-05-05T17:55:12.115Z",
-    "_date": "2026-05-05",
+    "ts": "May 11 13:15",
+    "_sort": "2026-05-11T10:15:27.607Z",
+    "_date": "2026-05-11",
     "_is_today": false,
     "level": "HOT",
     "platform": "superjob",
@@ -102,9 +238,9 @@
     }
   },
   {
-    "ts": "May 05 20:55",
-    "_sort": "2026-05-05T17:55:12.470Z",
-    "_date": "2026-05-05",
+    "ts": "May 11 13:15",
+    "_sort": "2026-05-11T10:15:27.607Z",
+    "_date": "2026-05-11",
     "_is_today": false,
     "level": "WARN",
     "platform": "superjob",
@@ -119,9 +255,9 @@
     }
   },
   {
-    "ts": "May 05 20:55",
-    "_sort": "2026-05-05T17:55:12.471Z",
-    "_date": "2026-05-05",
+    "ts": "May 11 13:15",
+    "_sort": "2026-05-11T10:15:27.607Z",
+    "_date": "2026-05-11",
     "_is_today": false,
     "level": "HOT",
     "platform": "superjob",
@@ -136,9 +272,9 @@
     }
   },
   {
-    "ts": "May 05 20:55",
-    "_sort": "2026-05-05T17:55:12.768Z",
-    "_date": "2026-05-05",
+    "ts": "May 11 13:15",
+    "_sort": "2026-05-11T10:15:27.607Z",
+    "_date": "2026-05-11",
     "_is_today": false,
     "level": "HOT",
     "platform": "superjob",
@@ -153,9 +289,9 @@
     }
   },
   {
-    "ts": "May 05 20:55",
-    "_sort": "2026-05-05T17:55:13.123Z",
-    "_date": "2026-05-05",
+    "ts": "May 11 13:15",
+    "_sort": "2026-05-11T10:15:27.607Z",
+    "_date": "2026-05-11",
     "_is_today": false,
     "level": "WARN",
     "platform": "superjob",
@@ -170,9 +306,94 @@
     }
   },
   {
-    "ts": "May 05 20:58",
-    "_sort": "2026-05-05T17:58:25.349Z",
-    "_date": "2026-05-05",
+    "ts": "May 11 15:17",
+    "_sort": "2026-05-11T12:17:48.805Z",
+    "_date": "2026-05-11",
+    "_is_today": false,
+    "level": "HOT",
+    "platform": "superjob",
+    "agent": "outreach-superjob",
+    "type": "reply_received",
+    "message": "[interest] Major Auto (Мэйджор Авто): просмотрено 08 мая в 09:28, резюме отклонено 08 мая в 15:36",
+    "meta": {
+      "opp_id": null,
+      "vacancy_id": "sj:51921895",
+      "url": null,
+      "intent": "interest"
+    }
+  },
+  {
+    "ts": "May 11 15:17",
+    "_sort": "2026-05-11T12:17:48.806Z",
+    "_date": "2026-05-11",
+    "_is_today": false,
+    "level": "HOT",
+    "platform": "superjob",
+    "agent": "outreach-superjob",
+    "type": "reply_received",
+    "message": "[interest] Холдинг Major: просмотрено 08 мая в 09:28",
+    "meta": {
+      "opp_id": null,
+      "vacancy_id": "sj:51887096",
+      "url": null,
+      "intent": "interest"
+    }
+  },
+  {
+    "ts": "May 11 15:17",
+    "_sort": "2026-05-11T12:17:48.806Z",
+    "_date": "2026-05-11",
+    "_is_today": false,
+    "level": "HOT",
+    "platform": "superjob",
+    "agent": "outreach-superjob",
+    "type": "reply_received",
+    "message": "[interest] М.Видео-Эльдорадо: просмотрено 07 мая в 16:11",
+    "meta": {
+      "opp_id": null,
+      "vacancy_id": "sj:51942016",
+      "url": null,
+      "intent": "interest"
+    }
+  },
+  {
+    "ts": "May 11 15:17",
+    "_sort": "2026-05-11T12:17:48.806Z",
+    "_date": "2026-05-11",
+    "_is_today": false,
+    "level": "HOT",
+    "platform": "superjob",
+    "agent": "outreach-superjob",
+    "type": "reply_received",
+    "message": "[interest] М.Видео-Эльдорадо: просмотрено 07 мая в 16:11",
+    "meta": {
+      "opp_id": null,
+      "vacancy_id": "sj:51941521",
+      "url": null,
+      "intent": "interest"
+    }
+  },
+  {
+    "ts": "May 11 15:17",
+    "_sort": "2026-05-11T12:17:48.806Z",
+    "_date": "2026-05-11",
+    "_is_today": false,
+    "level": "HOT",
+    "platform": "superjob",
+    "agent": "outreach-superjob",
+    "type": "reply_received",
+    "message": "[interest] Центр Новых Технологий: просмотрено 07 мая в 16:13, резюме отклонено 07 мая в 16:13",
+    "meta": {
+      "opp_id": null,
+      "vacancy_id": "sj:51938833",
+      "url": null,
+      "intent": "interest"
+    }
+  },
+  {
+    "ts": "May 11 15:17",
+    "_sort": "2026-05-11T12:17:48.806Z",
+    "_date": "2026-05-11",
     "_is_today": false,
     "level": "HOT",
     "platform": "superjob",
@@ -187,9 +408,9 @@
     }
   },
   {
-    "ts": "May 05 20:58",
-    "_sort": "2026-05-05T17:58:25.802Z",
-    "_date": "2026-05-05",
+    "ts": "May 11 15:17",
+    "_sort": "2026-05-11T12:17:48.807Z",
+    "_date": "2026-05-11",
     "_is_today": false,
     "level": "HOT",
     "platform": "superjob",
@@ -204,9 +425,9 @@
     }
   },
   {
-    "ts": "May 05 20:58",
-    "_sort": "2026-05-05T17:58:26.172Z",
-    "_date": "2026-05-05",
+    "ts": "May 11 15:17",
+    "_sort": "2026-05-11T12:17:48.807Z",
+    "_date": "2026-05-11",
     "_is_today": false,
     "level": "HOT",
     "platform": "superjob",
@@ -221,9 +442,9 @@
     }
   },
   {
-    "ts": "May 05 20:58",
-    "_sort": "2026-05-05T17:58:26.736Z",
-    "_date": "2026-05-05",
+    "ts": "May 11 15:17",
+    "_sort": "2026-05-11T12:17:48.807Z",
+    "_date": "2026-05-11",
     "_is_today": false,
     "level": "WARN",
     "platform": "superjob",
@@ -238,9 +459,9 @@
     }
   },
   {
-    "ts": "May 05 20:58",
-    "_sort": "2026-05-05T17:58:26.737Z",
-    "_date": "2026-05-05",
+    "ts": "May 11 15:17",
+    "_sort": "2026-05-11T12:17:48.807Z",
+    "_date": "2026-05-11",
     "_is_today": false,
     "level": "HOT",
     "platform": "superjob",
@@ -255,9 +476,9 @@
     }
   },
   {
-    "ts": "May 05 20:58",
-    "_sort": "2026-05-05T17:58:27.042Z",
-    "_date": "2026-05-05",
+    "ts": "May 11 15:17",
+    "_sort": "2026-05-11T12:17:48.807Z",
+    "_date": "2026-05-11",
     "_is_today": false,
     "level": "HOT",
     "platform": "superjob",
@@ -272,9 +493,9 @@
     }
   },
   {
-    "ts": "May 05 20:58",
-    "_sort": "2026-05-05T17:58:27.394Z",
-    "_date": "2026-05-05",
+    "ts": "May 11 15:17",
+    "_sort": "2026-05-11T12:17:48.807Z",
+    "_date": "2026-05-11",
     "_is_today": false,
     "level": "WARN",
     "platform": "superjob",
@@ -286,222 +507,6 @@
       "vacancy_id": "sj:51876249",
       "url": null,
       "intent": "decline"
-    }
-  },
-  {
-    "ts": "May 05 21:04",
-    "_sort": "2026-05-05T18:04:25.000Z",
-    "_date": "2026-05-05",
-    "_is_today": false,
-    "level": "HOT",
-    "platform": "superjob",
-    "agent": "system",
-    "type": "reply_received",
-    "lead_status": "interested",
-    "message": "Invited / interest · Вегас — Менеджер по работе с маркетплейсами",
-    "meta": {
-      "opp_id": "b8715091-6c5d-4aac-9414-23b9a23f416f",
-      "stage": "MEETING"
-    }
-  },
-  {
-    "ts": "May 05 21:04",
-    "_sort": "2026-05-05T18:04:25.000Z",
-    "_date": "2026-05-05",
-    "_is_today": false,
-    "level": "HOT",
-    "platform": "superjob",
-    "agent": "system",
-    "type": "reply_received",
-    "lead_status": "interested",
-    "message": "Invited / interest · ООО «ПК Техномикс» — Менеджер маркетплейсов",
-    "meta": {
-      "opp_id": "1f7a0be1-551c-4ab7-9402-4f70d1c2306f",
-      "stage": "MEETING"
-    }
-  },
-  {
-    "ts": "May 05 21:04",
-    "_sort": "2026-05-05T18:04:25.000Z",
-    "_date": "2026-05-05",
-    "_is_today": false,
-    "level": "HOT",
-    "platform": "superjob",
-    "agent": "system",
-    "type": "reply_received",
-    "lead_status": "interested",
-    "message": "Invited / interest · Инновационные технологии — Маркетолог / медицинское направление",
-    "meta": {
-      "opp_id": "ba14a787-2ceb-44c3-8efc-a7b98f5db9ed",
-      "stage": "MEETING"
-    }
-  },
-  {
-    "ts": "May 05 21:04",
-    "_sort": "2026-05-05T18:04:25.000Z",
-    "_date": "2026-05-05",
-    "_is_today": false,
-    "level": "HOT",
-    "platform": "superjob",
-    "agent": "system",
-    "type": "reply_received",
-    "lead_status": "interested",
-    "message": "Invited / interest · АВС Рус — Менеджер по работе с маркетплейсами",
-    "meta": {
-      "opp_id": "c0631136-618e-4ff2-a91c-22a2f8920fc5",
-      "stage": "MEETING"
-    }
-  },
-  {
-    "ts": "May 05 22:37",
-    "_sort": "2026-05-05T19:37:58.372Z",
-    "_date": "2026-05-05",
-    "_is_today": false,
-    "level": "INFO",
-    "platform": "superjob",
-    "agent": "outreach-superjob",
-    "type": "reply_sent",
-    "message": "Инновационные технологии",
-    "meta": {
-      "opp_id": null,
-      "vacancy_id": null,
-      "url": null
-    }
-  },
-  {
-    "ts": "13:08:31",
-    "_sort": "2026-05-06T10:08:31.495Z",
-    "_date": "2026-05-06",
-    "_is_today": true,
-    "level": "INFO",
-    "platform": "avito_rabota",
-    "agent": "outreach-avito",
-    "type": "reply_received",
-    "message": "[unclear] : Работодатель получил ваше резюме AI-инженер, автоматизация маркетинга и контента",
-    "meta": {
-      "opp_id": null,
-      "vacancy_id": null,
-      "url": null,
-      "intent": "unclear"
-    }
-  },
-  {
-    "ts": "13:08:44",
-    "_sort": "2026-05-06T10:08:44.376Z",
-    "_date": "2026-05-06",
-    "_is_today": true,
-    "level": "INFO",
-    "platform": "avito_rabota",
-    "agent": "outreach-avito",
-    "type": "reply_received",
-    "message": "[unclear] : Работодатель получил ваше резюме AI-инженер, автоматизация маркетинга и контента",
-    "meta": {
-      "opp_id": null,
-      "vacancy_id": null,
-      "url": null,
-      "intent": "unclear"
-    }
-  },
-  {
-    "ts": "13:09:27",
-    "_sort": "2026-05-06T10:09:27.065Z",
-    "_date": "2026-05-06",
-    "_is_today": true,
-    "level": "INFO",
-    "platform": "avito_rabota",
-    "agent": "outreach-avito",
-    "type": "reply_received",
-    "message": "[unclear] : Работодатель получил ваше резюме AI-инженер, автоматизация маркетинга и контента",
-    "meta": {
-      "opp_id": null,
-      "vacancy_id": null,
-      "url": null,
-      "intent": "unclear"
-    }
-  },
-  {
-    "ts": "13:09:40",
-    "_sort": "2026-05-06T10:09:40.057Z",
-    "_date": "2026-05-06",
-    "_is_today": true,
-    "level": "INFO",
-    "platform": "avito_rabota",
-    "agent": "outreach-avito",
-    "type": "reply_received",
-    "message": "[unclear] : Работодатель получил ваше резюме AI-инженер, автоматизация маркетинга и контента",
-    "meta": {
-      "opp_id": null,
-      "vacancy_id": null,
-      "url": null,
-      "intent": "unclear"
-    }
-  },
-  {
-    "ts": "13:09:53",
-    "_sort": "2026-05-06T10:09:53.082Z",
-    "_date": "2026-05-06",
-    "_is_today": true,
-    "level": "INFO",
-    "platform": "avito_rabota",
-    "agent": "outreach-avito",
-    "type": "reply_received",
-    "message": "[unclear] : Работодатель получил ваше резюме AI-инженер, автоматизация маркетинга и контента",
-    "meta": {
-      "opp_id": null,
-      "vacancy_id": null,
-      "url": null,
-      "intent": "unclear"
-    }
-  },
-  {
-    "ts": "13:50:29",
-    "_sort": "2026-05-06T10:50:29.623Z",
-    "_date": "2026-05-06",
-    "_is_today": true,
-    "level": "INFO",
-    "platform": "gulftalent",
-    "agent": "outreach-gulftalent",
-    "type": "reply_received",
-    "message": "[unclear] ",
-    "meta": {
-      "opp_id": null,
-      "vacancy_id": null,
-      "url": null,
-      "intent": "unclear"
-    }
-  },
-  {
-    "ts": "13:50:29",
-    "_sort": "2026-05-06T10:50:29.623Z",
-    "_date": "2026-05-06",
-    "_is_today": true,
-    "level": "INFO",
-    "platform": "gulftalent",
-    "agent": "outreach-gulftalent",
-    "type": "reply_received",
-    "message": "[unclear] ",
-    "meta": {
-      "opp_id": null,
-      "vacancy_id": null,
-      "url": null,
-      "intent": "unclear"
-    }
-  },
-  {
-    "ts": "22:08:06",
-    "_sort": "2026-05-06T19:08:06.499Z",
-    "_date": "2026-05-06",
-    "_is_today": true,
-    "level": "INFO",
-    "platform": "gulftalent",
-    "agent": "outreach-gulftalent",
-    "type": "reply_received",
-    "message": "[unclear] ",
-    "meta": {
-      "opp_id": null,
-      "vacancy_id": null,
-      "url": null,
-      "intent": "unclear"
     }
   }
 ]
