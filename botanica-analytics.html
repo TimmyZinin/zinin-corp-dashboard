@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Botanica School Analytics | Zinin Corp</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  background: #0a0a0a;
+  color: #e5e5e5;
+  padding: 20px;
+}
+a { color: inherit; text-decoration: none; }
+.container { max-width: 1100px; margin: 0 auto; }
+
+.nav { display: flex; gap: 0; margin-bottom: 24px; border-bottom: 1px solid #222; flex-wrap: wrap; }
+.nav-brand { font-weight: 700; font-size: 14px; color: #555; padding: 10px 16px 10px 0; margin-right: 8px; }
+.nav a { padding: 10px 16px; font-size: 13px; color: #666; border-bottom: 2px solid transparent; transition: all .15s; }
+.nav a:hover { color: #ccc; }
+.nav a.active { color: #fff; border-bottom-color: #fff; }
+
+h1 { font-size: 24px; font-weight: 700; color: #fff; margin-bottom: 4px; }
+.subtitle { color: #666; font-size: 13px; margin-bottom: 24px; display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.header-row { display: flex; align-items: flex-start; justify-content: space-between; flex-wrap: wrap; gap: 8px; margin-bottom: 6px; }
+
+.dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+.dot-green  { background: #10B981; }
+.dot-red    { background: #EF4444; }
+.dot-gray   { background: #6B7280; }
+.dot-pulse  { background: #6B7280; animation: pulse 1.4s ease-in-out infinite; }
+@keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.25; } }
+
+.live-status {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-size: 12px; color: #888;
+  background: #141414; border: 1px solid #222; border-radius: 6px;
+  padding: 4px 10px; margin-top: 2px;
+}
+
+.section-label {
+  font-size: 11px; text-transform: uppercase; letter-spacing: 0.8px;
+  color: #555; margin-bottom: 10px; margin-top: 28px;
+}
+
+/* Pages status grid */
+.pages-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 10px; margin-bottom: 4px; }
+.page-card {
+  background: #141414; border: 1px solid #222; border-radius: 10px;
+  padding: 14px 16px;
+  display: flex; align-items: center; justify-content: space-between; gap: 12px;
+}
+.page-info { min-width: 0; flex: 1; }
+.page-name { font-size: 13px; font-weight: 600; color: #fff; margin-bottom: 3px; }
+.page-url { font-size: 11px; color: #666; }
+.page-status { display: flex; align-items: center; gap: 6px; flex-shrink: 0; }
+.page-status-text { font-size: 12px; }
+.page-ok   { color: #10B981; }
+.page-err  { color: #EF4444; }
+.page-loading { color: #555; }
+.resp-time { font-size: 10px; color: #555; }
+
+/* Umami section */
+.umami-card {
+  background: #141414; border: 1px solid #222; border-radius: 10px;
+  overflow: hidden; margin-bottom: 4px;
+}
+.umami-header {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 12px 16px; border-bottom: 1px solid #222; gap: 8px; flex-wrap: wrap;
+}
+.umami-title { font-size: 13px; font-weight: 600; color: #fff; }
+.umami-note { font-size: 11px; color: #555; max-width: 480px; }
+.umami-frame { display: block; width: 100%; height: 720px; border: none; background: #141414; }
+
+/* Quick links */
+.links { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 4px; }
+.link-btn {
+  display: inline-flex; align-items: center; gap: 6px;
+  background: #141414; border: 1px solid #222; border-radius: 8px;
+  padding: 8px 14px; font-size: 13px; color: #ccc;
+  transition: all .15s; cursor: pointer;
+}
+.link-btn:hover { border-color: #444; color: #fff; background: #1a1a1a; }
+
+.refresh-bar {
+  display: flex; align-items: center; gap: 10px; justify-content: flex-end;
+  font-size: 11px; color: #444; margin-top: 6px; margin-bottom: 28px;
+}
+.refresh-progress {
+  width: 80px; height: 2px; background: #1a1a1a; border-radius: 1px; overflow: hidden;
+}
+.refresh-fill {
+  height: 100%; background: #333; border-radius: 1px;
+  transition: width 1s linear;
+}
+
+@media (max-width: 700px) {
+  body { padding: 12px; }
+  h1 { font-size: 18px; }
+  .umami-frame { height: 480px; }
+  .links { gap: 6px; }
+  .link-btn { font-size: 12px; padding: 7px 10px; }
+}
+</style>
+</head>
+<body>
+<div class="container">
+
+  <div class="nav">
+    <span class="nav-brand">Zinin Corp</span>
+    <a href="overview.html">Обзор</a>
+    <a href="analytics.html">Аналитика</a>
+    <a href="connectors.html">Коннекторы</a>
+    <a href="mcphire-analytics.html">MCPHire</a>
+    <a href="botanica-analytics.html" class="active">Botanica</a>
+    <a href="mentalstab-crm.html">MentalStab</a>
+  </div>
+
+  <div class="header-row">
+    <div>
+      <h1>Botanica School &mdash; Web Analytics</h1>
+      <p class="subtitle">
+        Трафик, посещения, события — школа технологий с 2022 года
+        <span id="last-updated"></span>
+      </p>
+    </div>
+    <div class="live-status" id="live-status">
+      <span class="dot dot-pulse" id="live-dot"></span>
+      <span id="live-text">Проверка...</span>
+    </div>
+  </div>
+
+  <!-- Pages status -->
+  <div class="section-label">Состояние страниц</div>
+  <div class="pages-grid" id="pages-row">
+    <div class="page-card">
+      <div class="page-info">
+        <div class="page-name">Главная</div>
+        <div class="page-url">botanicaschool.com</div>
+      </div>
+      <div class="page-status">
+        <span class="dot dot-pulse" data-ping="https://botanicaschool.com/" data-dot></span>
+        <span class="page-status-text page-loading" data-ping-status>...</span>
+        <span class="resp-time" data-ping-time></span>
+      </div>
+    </div>
+    <div class="page-card">
+      <div class="page-info">
+        <div class="page-name">Конференция</div>
+        <div class="page-url">/conference/</div>
+      </div>
+      <div class="page-status">
+        <span class="dot dot-pulse" data-ping="https://botanicaschool.com/conference/" data-dot></span>
+        <span class="page-status-text page-loading" data-ping-status>...</span>
+        <span class="resp-time" data-ping-time></span>
+      </div>
+    </div>
+    <div class="page-card">
+      <div class="page-info">
+        <div class="page-name">Клуб</div>
+        <div class="page-url">/club/</div>
+      </div>
+      <div class="page-status">
+        <span class="dot dot-pulse" data-ping="https://botanicaschool.com/club/" data-dot></span>
+        <span class="page-status-text page-loading" data-ping-status>...</span>
+        <span class="resp-time" data-ping-time></span>
+      </div>
+    </div>
+    <div class="page-card">
+      <div class="page-info">
+        <div class="page-name">Календарь</div>
+        <div class="page-url">/calendar/</div>
+      </div>
+      <div class="page-status">
+        <span class="dot dot-pulse" data-ping="https://botanicaschool.com/calendar/" data-dot></span>
+        <span class="page-status-text page-loading" data-ping-status>...</span>
+        <span class="resp-time" data-ping-time></span>
+      </div>
+    </div>
+    <div class="page-card">
+      <div class="page-info">
+        <div class="page-name">Корп. обучение</div>
+        <div class="page-url">/retainer/</div>
+      </div>
+      <div class="page-status">
+        <span class="dot dot-pulse" data-ping="https://botanicaschool.com/retainer/" data-dot></span>
+        <span class="page-status-text page-loading" data-ping-status>...</span>
+        <span class="resp-time" data-ping-time></span>
+      </div>
+    </div>
+    <div class="page-card">
+      <div class="page-info">
+        <div class="page-name">Tracking script</div>
+        <div class="page-url">sborka.work/stats/script.js</div>
+      </div>
+      <div class="page-status">
+        <span class="dot dot-pulse" data-ping="https://sborka.work/stats/script.js" data-dot></span>
+        <span class="page-status-text page-loading" data-ping-status>...</span>
+        <span class="resp-time" data-ping-time></span>
+      </div>
+    </div>
+  </div>
+  <div class="refresh-bar">
+    <span>Страницы обновляются каждые 60 с</span>
+    <div class="refresh-progress"><div class="refresh-fill" id="ping-progress" style="width:100%"></div></div>
+  </div>
+
+  <!-- Umami iframe -->
+  <div class="section-label">Web Analytics (Umami)</div>
+  <div class="umami-card">
+    <div class="umami-header">
+      <span class="umami-title">Umami &mdash; botanicaschool.com</span>
+      <span class="umami-note">Share-link публичный. Tracking script — <code>sborka.work/stats/script.js</code> (общий Umami endpoint).</span>
+    </div>
+    <iframe
+      class="umami-frame"
+      src="https://sborka.work/stats/share/b7f35d89dd724fee"
+      title="Umami Analytics — botanicaschool.com"
+      loading="lazy"
+      allowfullscreen
+    ></iframe>
+  </div>
+
+  <!-- Quick Links -->
+  <div class="section-label">Быстрые ссылки</div>
+  <div class="links">
+    <a class="link-btn" href="https://botanicaschool.com" target="_blank" rel="noopener">
+      <span>↗</span> botanicaschool.com
+    </a>
+    <a class="link-btn" href="https://sborka.work/stats/share/b7f35d89dd724fee" target="_blank" rel="noopener">
+      <span>📊</span> Umami в новой вкладке
+    </a>
+    <a class="link-btn" href="https://github.com/TimmyZinin/botanica-school-v3" target="_blank" rel="noopener">
+      <span>🐙</span> GitHub repo
+    </a>
+    <a class="link-btn" href="https://t.me/botanica_conference_bot" target="_blank" rel="noopener">
+      <span>🤖</span> Conference bot
+    </a>
+    <a class="link-btn" href="https://t.me/botanicaschool" target="_blank" rel="noopener">
+      <span>💬</span> Telegram канал
+    </a>
+  </div>
+
+  <div style="height:32px"></div>
+</div>
+
+<script>
+'use strict';
+
+function fmtTs() {
+  return new Date().toLocaleTimeString('ru-RU', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+}
+
+function setDot(el, state) { el.className = 'dot dot-' + state; }
+function setProgress(fillEl, pct) { fillEl.style.width = pct + '%'; }
+
+var liveDot  = document.getElementById('live-dot');
+var liveText = document.getElementById('live-text');
+var lastUpdatedEl = document.getElementById('last-updated');
+
+function updateLive(ok, ms) {
+  if (ok) {
+    setDot(liveDot, 'green');
+    liveText.textContent = 'Сайт онлайн' + (ms != null ? ' (' + ms + ' ms)' : '');
+  } else {
+    setDot(liveDot, 'red');
+    liveText.textContent = 'Сайт недоступен';
+  }
+}
+
+function checkPage(cardEl) {
+  var dotEl    = cardEl.querySelector('[data-dot]');
+  var statusEl = cardEl.querySelector('[data-ping-status]');
+  var timeEl   = cardEl.querySelector('[data-ping-time]');
+  var url      = dotEl.getAttribute('data-ping');
+  if (!url) return Promise.resolve();
+  var t0 = Date.now();
+  setDot(dotEl, 'pulse');
+  statusEl.textContent = '...';
+  statusEl.className = 'page-status-text page-loading';
+  timeEl.textContent = '';
+  return fetch(url, { method: 'GET', mode: 'no-cors', signal: AbortSignal.timeout(8000) })
+    .then(function(r) {
+      var ms = Date.now() - t0;
+      var reachable = (r.status === 0 && r.type === 'opaque') || (r.status >= 200 && r.status < 400);
+      if (reachable) {
+        setDot(dotEl, 'green');
+        statusEl.textContent = 'OK';
+        statusEl.className = 'page-status-text page-ok';
+        timeEl.textContent = ms + ' ms';
+        return { ok: true, ms: ms };
+      } else {
+        setDot(dotEl, 'red');
+        statusEl.textContent = 'HTTP ' + r.status;
+        statusEl.className = 'page-status-text page-err';
+        timeEl.textContent = '';
+        return { ok: false };
+      }
+    })
+    .catch(function() {
+      setDot(dotEl, 'red');
+      statusEl.textContent = 'Недоступен';
+      statusEl.className = 'page-status-text page-err';
+      timeEl.textContent = '';
+      return { ok: false };
+    });
+}
+
+function checkAll() {
+  var cards = document.querySelectorAll('.page-card');
+  Promise.all([].map.call(cards, checkPage)).then(function(results) {
+    var anyOk = results.some(function(r) { return r && r.ok; });
+    var avgMs = results.filter(function(r){return r&&r.ok;}).map(function(r){return r.ms;});
+    var avg = avgMs.length ? Math.round(avgMs.reduce(function(a,b){return a+b;}, 0) / avgMs.length) : null;
+    updateLive(anyOk, avg);
+    lastUpdatedEl.textContent = '· обновлено ' + fmtTs();
+  });
+}
+
+var pingProgressEl = document.getElementById('ping-progress');
+var PING_INTERVAL = 60;
+var pingTimer = PING_INTERVAL;
+setInterval(function() {
+  pingTimer--;
+  if (pingTimer <= 0) {
+    pingTimer = PING_INTERVAL;
+    checkAll();
+  }
+  setProgress(pingProgressEl, (pingTimer / PING_INTERVAL) * 100);
+}, 1000);
+
+checkAll();
+setProgress(pingProgressEl, 100);
+
+document.addEventListener('visibilitychange', function() {
+  if (document.visibilityState === 'visible') checkAll();
+});
+</script>
+</body>
+</html>
